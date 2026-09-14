@@ -1,4 +1,4 @@
-/**
+api/**
  * عتبة — /api/interest (Vercel Serverless Function, Node 20)
  * يستقبل نموذج الاهتمام من الموقع الساكن، يتحقّق، ثم:
  *  - يرسله موقَّعاً (HMAC) إلى مستقبِل التسجيلات داخل المملكة (LEADS_ENDPOINT على Oracle الرياض) — لا يُحفظ شيء على Vercel.
