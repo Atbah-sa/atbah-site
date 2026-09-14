@@ -1,1 +1,8 @@
-{ "name": "atbah-live", "private": true, "version": "1.0.0", "type": "module" }
+{
+  "name": "atbah-lead-receiver",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "start": "node server.mjs", "test": "node --test test.mjs" },
+  "dependencies": { "pg": "^8.13.0" }
+}

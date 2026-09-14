@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: atbah_leads
+      POSTGRES_USER: atbah
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck: { test: ["CMD-SHELL", "pg_isready -U atbah -d atbah_leads"], interval: 10s, retries: 10 }
+
+  receiver:
+    build: .
+    restart: unless-stopped
+    depends_on: { db: { condition: service_healthy } }
+    environment:
+      PORT: 8787
+      LEADS_SECRET: ${LEADS_SECRET}
+      DATABASE_URL: postgres://atbah:${PG_PASSWORD}@db:5432/atbah_leads
+    ports: ["127.0.0.1:8787:8787"]   # Caddy أمامه يوفّر TLS على leads.atbah.sa
+
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    ports: ["80:80", "443:443"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+    depends_on: [receiver]
+
+  backup:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    depends_on: [db]
+    environment: { PGPASSWORD: ${PG_PASSWORD} }
+    volumes: [ "./backups:/backups" ]
+    entrypoint: ["/bin/sh", "-c", "while true; do pg_dump -h db -U atbah atbah_leads | gzip > /backups/leads-$(date +%F).sql.gz; find /backups -mtime +30 -delete; sleep 86400; done"]
+
+volumes:
+  pgdata:
+  caddy_data:
