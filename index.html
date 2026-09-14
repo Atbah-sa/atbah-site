@@ -1,0 +1,947 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="حلول عقارية مخصّصة — قريباً. حاسبة القدرة الشرائية و١٧ حاسبة تعمل الآن. اعرف سقفك أولاً.">
+<meta property="og:title" content="عتبة — اعرف سقفك أولاً"><meta property="og:description" content="سوق العقار يحتاج صراحة، لا إعلاناً إضافياً. اعرف سقفك الحقيقي في دقيقة."><meta property="og:type" content="website"><meta property="og:url" content="https://atbah.sa/"><meta property="og:image" content="https://atbah.sa/og.png"><meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="canonical" href="https://atbah.sa/">
+<style>body{margin:0}</style></head><body>
+<title>عتبة — اعرف سقفك أولاً</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Archivo:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --ground:#F1ECE3; --surface:#FFFFFF; --surface2:#FAF7F1;
+  --ink:#10322D; --ink2:#2C4A44; --muted:#5C7570; --faint:#8A9B96;
+  --line:#DFD7C8; --line2:#EDE7DC;
+  --green:#10322D; --green2:#2E5A52; --rail:#10322D; --rail2:#0B2521; --railline:#2B4C46; --railtext:#B3C8C2; --railfaint:#7E9A93;
+  --gold:#C9964A; --goldink:#8A6420; --goldsoft:#F5EAD6;
+  --clay:#B4522B; --clayink:#9C4322; --claysoft:#F7E5DC;
+  --sand:#DCD2C1; --ok:#2E7D5B; --oksoft:#E2F0E8;
+  --oncta:#10322D;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --ground:#0B2622; --surface:#12332E; --surface2:#0E2C27;
+  --ink:#F1ECE3; --ink2:#D5E2DF; --muted:#9CB6AF; --faint:#6E8A83;
+  --line:#26443E; --line2:#1C3B35;
+  --green:#F1ECE3; --green2:#9CB6AF; --rail:#081E1B; --rail2:#061715; --railline:#1E3A35;
+  --goldink:#E3B571; --goldsoft:#2A2416; --clayink:#E29070; --claysoft:#2E1C15; --sand:#2E5A52; --ok:#5FB68C; --oksoft:#122E22;
+}}
+:root[data-theme="dark"]{
+  --ground:#0B2622; --surface:#12332E; --surface2:#0E2C27;
+  --ink:#F1ECE3; --ink2:#D5E2DF; --muted:#9CB6AF; --faint:#6E8A83;
+  --line:#26443E; --line2:#1C3B35;
+  --green:#F1ECE3; --green2:#9CB6AF; --rail:#081E1B; --rail2:#061715; --railline:#1E3A35;
+  --goldink:#E3B571; --goldsoft:#2A2416; --clayink:#E29070; --claysoft:#2E1C15; --sand:#2E5A52; --ok:#5FB68C; --oksoft:#122E22;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:'IBM Plex Sans Arabic',Tahoma,'Segoe UI',system-ui,sans-serif;font-size:16px;line-height:1.8;-webkit-font-smoothing:antialiased;direction:rtl}
+body[data-lang="en"]{font-family:'Archivo','Segoe UI',system-ui,sans-serif;direction:ltr;line-height:1.6}
+h1,h2,h3,h4{font-family:'Reem Kufi',Tahoma,system-ui,sans-serif;font-weight:600;margin:0;text-wrap:balance;line-height:1.4}
+body[data-lang="en"] h1,body[data-lang="en"] h2,body[data-lang="en"] h3,body[data-lang="en"] h4{font-family:'Archivo',system-ui,sans-serif;font-weight:600;letter-spacing:-.01em}
+h1{font-size:clamp(28px,4.2vw,44px)} h2{font-size:clamp(22px,3vw,28px)} h3{font-size:19px} h4{font-size:16px}
+p{margin:0 0 12px;color:var(--ink2)}
+a{color:inherit}
+.num{font-family:'Archivo',system-ui,sans-serif;font-variant-numeric:tabular-nums;unicode-bidi:isolate;direction:ltr;display:inline-block}
+.lab{font-family:'Archivo',sans-serif;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:20px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+button{font-family:inherit;font-size:inherit;cursor:pointer}
+[hidden]{display:none!important}
+.sm{font-size:13.5px;color:var(--muted);line-height:1.75}
+.hint{font-size:12px;color:var(--faint);line-height:1.6;margin:-6px 0 12px}
+hr.sep{border:0;border-top:1px solid var(--line2);margin:14px 0}
+
+/* nav */
+nav.top{position:sticky;top:0;z-index:40;background:var(--rail);border-bottom:1px solid var(--railline);color:#F1ECE3}
+nav.top .wrap{display:flex;align-items:center;gap:18px;padding-block:10px}
+nav.top .brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#F1ECE3}
+nav.top .brand b{font-family:'Reem Kufi',Tahoma,sans-serif;font-size:36px;font-weight:700;line-height:1}
+body[data-lang="en"] nav.top .brand b{font-family:'Archivo',sans-serif;font-size:28px;letter-spacing:.1em}
+nav.top .brand svg{filter:drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+@media(max-width:560px){nav.top .brand b{font-size:28px}nav.top .brand svg{width:40px;height:auto}}
+nav.top .links{display:flex;gap:18px;margin-inline-start:auto;flex-wrap:wrap}
+nav.top .links a{color:#B3C8C2;text-decoration:none;font-size:14px;padding:6px 2px;border-bottom:2px solid transparent}
+nav.top .links a:hover,nav.top .links a[aria-current="page"]{color:#F1ECE3;border-bottom-color:#C9964A}
+nav.top .lang{background:transparent;border:1px solid #2E5A52;color:#F1ECE3;padding:6px 10px;border-radius:4px;font-size:13px;font-family:'Archivo',sans-serif}
+nav.top .lang:hover{border-color:#C9964A}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--gold);color:#10322D;font-weight:600;padding:12px 22px;border:0;border-radius:4px;text-decoration:none;min-height:44px;font-size:15px}
+.btn:hover{background:#D9A85C}
+.btn.ghost{background:transparent;color:inherit;border:1.5px solid var(--railline)}
+.btn.ghost:hover{border-color:var(--gold);background:transparent}
+.btn.quiet{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.btn.quiet:hover{border-color:var(--gold);background:var(--surface)}
+@media(max-width:760px){nav.top .links{display:none}}
+
+/* hero */
+.hero{background:var(--rail);color:#F1ECE3;padding-block:52px 60px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:auto 0 0 0;height:260px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1400' height='260' viewBox='0 0 1400 260' fill='none' stroke='#F1ECE3' stroke-width='1.2'%3E %3Cg opacity='.9'%3E %3Crect x='20' y='150' width='90' height='110'/%3E%3Crect x='40' y='120' width='50' height='30'/%3E%3Cpath d='M40 120 L65 95 L90 120'/%3E %3Crect x='140' y='90' width='70' height='170'/%3E%3Crect x='155' y='60' width='40' height='30'/%3E %3Crect x='240' y='170' width='120' height='90'/%3E%3Cpath d='M240 170 A60 60 0 0 1 360 170'/%3E %3Crect x='390' y='40' width='80' height='220'/%3E%3Crect x='410' y='20' width='40' height='20'/%3E %3Crect x='500' y='130' width='100' height='130'/%3E%3Crect x='520' y='105' width='60' height='25'/%3E %3Crect x='630' y='180' width='140' height='80'/%3E%3Crect x='660' y='140' width='80' height='40'/%3E%3Cpath d='M660 140 L700 110 L740 140'/%3E %3Crect x='800' y='70' width='60' height='190'/%3E%3Crect x='870' y='110' width='60' height='150'/%3E %3Crect x='960' y='160' width='110' height='100'/%3E%3Cpath d='M975 160 A40 40 0 0 1 1055 160'/%3E %3Crect x='1100' y='30' width='90' height='230'/%3E%3Crect x='1120' y='10' width='50' height='20'/%3E %3Crect x='1220' y='140' width='80' height='120'/%3E%3Crect x='1310' y='190' width='70' height='70'/%3E %3C/g%3E %3Cg opacity='.55' stroke-width='1'%3E %3Cpath d='M35 170h60M35 190h60M35 210h60M35 230h60'/%3E%3Cpath d='M155 110h40M155 130h40M155 150h40M155 170h40M155 190h40M155 210h40M155 230h40'/%3E %3Cpath d='M405 60h50M405 80h50M405 100h50M405 120h50M405 140h50M405 160h50M405 180h50M405 200h50M405 220h50M405 240h50'/%3E %3Cpath d='M515 150h70M515 170h70M515 190h70M515 210h70M515 230h70'/%3E%3Cpath d='M810 90h40M810 110h40M810 130h40M810 150h40M810 170h40M810 190h40M810 210h40M810 230h40'/%3E %3Cpath d='M880 130h40M880 150h40M880 170h40M880 190h40M880 210h40M880 230h40'/%3E%3Cpath d='M1115 50h60M1115 70h60M1115 90h60M1115 110h60M1115 130h60M1115 150h60M1115 170h60M1115 190h60M1115 210h60M1115 230h60'/%3E %3Cpath d='M1235 160h50M1235 180h50M1235 200h50M1235 220h50M1235 240h50'/%3E %3C/g%3E %3Cpath d='M0 260 H1400' stroke='#C9964A' stroke-width='2' opacity='.8'/%3E %3C/svg%3E") center bottom/1400px 260px repeat-x;opacity:.22;pointer-events:none}
+.hero .wrap{position:relative}
+section.alt{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath d='M48 0H0V48' fill='none' stroke='#10322D' stroke-opacity='.07'/%3E%3Ccircle cx='0' cy='0' r='1' fill='#10322D' fill-opacity='.12'/%3E%3C/svg%3E")}
+.hero .grid{display:grid;grid-template-columns:1fr 1.05fr;gap:40px;align-items:start}
+@media(max-width:900px){.hero .grid{grid-template-columns:1fr;gap:28px}}
+.hero .eyebrow{font-family:'Archivo',sans-serif;font-size:11px;letter-spacing:.2em;color:#7E9A93;text-transform:uppercase}
+.hero h1{color:#F1ECE3;margin-top:14px;max-width:18ch}
+.hero .sub{font-size:17px;line-height:1.9;color:#B3C8C2;max-width:50ch;margin-top:14px}
+.hero .rule{width:64px;height:5px;background:#C9964A;margin:24px 0}
+.hero .no{font-size:15px;color:#B3C8C2;max-width:46ch}
+.hero .no em{color:#C9964A;font-style:normal}
+.hero .gate{margin-top:26px;display:grid;gap:10px;font-size:14px;color:#9CB6AF}
+.hero .gate div{display:flex;gap:10px;align-items:flex-start}
+.hero .gate svg{flex:0 0 auto;margin-top:6px}
+
+/* coming-soon landing */
+.hero.cs .soon{display:inline-flex;align-items:center;gap:12px;font-family:'Reem Kufi','IBM Plex Sans Arabic',Tahoma,sans-serif;font-size:19px;font-weight:600;color:#F1ECE3;border:1px solid #C9964A;border-radius:4px;padding:10px 18px;background:rgba(201,150,74,.12)}
+body[data-lang="en"] .hero.cs .soon{font-family:'Archivo',sans-serif;letter-spacing:.04em}
+.hero.cs .soon .dot{width:8px;height:8px;border-radius:50%;background:#C9964A;flex:0 0 auto}
+.hero.cs h1{margin-top:18px}
+.card.st{border-inline-start:3px solid var(--ok)}
+.card.st.soon{border-inline-start-color:var(--line);opacity:.85}
+.card.st .pill{font-family:'Archivo',sans-serif;letter-spacing:.08em;text-transform:uppercase;font-size:10.5px}
+footer .modesw a{color:#6E8A83}footer .modesw a.on{color:#C9964A}
+
+/* charter · story · index · report */
+.charter{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:760px){.charter{grid-template-columns:1fr}}
+.charter .card{border-top:3px solid var(--gold)}
+.charter .card .no2{font-family:'Archivo',sans-serif;font-size:11px;letter-spacing:.14em;color:var(--goldink);text-transform:uppercase;margin-bottom:8px}
+.story{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:start}
+@media(max-width:860px){.story{grid-template-columns:1fr}}
+.story .quote{border-inline-start:5px solid var(--gold);padding:22px 26px;background:var(--surface);border-radius:4px;font-family:'Reem Kufi',Tahoma,sans-serif;font-size:clamp(24px,3vw,32px);line-height:1.6;color:var(--ink);font-weight:600;text-wrap:balance}
+body[data-lang="en"] .story .quote{font-family:'Archivo',sans-serif;font-size:clamp(22px,2.6vw,28px)}
+.story .art{margin-top:18px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--surface2)}
+.story .art svg{display:block;width:100%;height:auto}
+.types{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:900px){.types{grid-template-columns:1fr 1fr}}
+.types .tp{background:var(--surface);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.types .tp svg{display:block;width:100%;height:auto;background:var(--rail)}
+.types .tp .cap{padding:12px 14px}
+.types .tp h3{font-size:16px}
+.types .tp .sm{margin:4px 0 0}
+.index{background:var(--rail);color:#F1ECE3;border-radius:6px;overflow:hidden;border:1px solid var(--railline)}
+.index .ih{padding:16px 20px;border-bottom:1px solid var(--railline);display:flex;gap:12px;align-items:baseline;flex-wrap:wrap}
+.index .ih h3{color:#F1ECE3;font-size:18px}
+.index .ih .lab{margin-inline-start:auto;color:#7E9A93}
+.index table{font-size:14px}
+.index td{color:#C3D5D0}
+.index td.n{font-size:16px;color:#F1ECE3}
+.index .foot{padding:12px 20px;font-size:12.5px;color:#8FA8A1;line-height:1.7;border-top:1px solid var(--railline)}
+.report{max-width:800px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:32px}
+.report .rh{display:flex;align-items:center;gap:14px;justify-content:space-between;border-bottom:2px solid var(--ink);padding-bottom:14px;margin-bottom:22px;flex-wrap:wrap}
+.report .rh .brand{display:flex;align-items:center;gap:10px;font-family:'Reem Kufi',Tahoma,sans-serif;font-size:24px;font-weight:600}
+.report .big{font-family:'Archivo',sans-serif;font-size:44px;font-weight:600;color:var(--goldink);direction:ltr;text-align:end;line-height:1.1}
+body[data-lang="en"] .report .big{text-align:start}
+.report .kv{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin:16px 0}
+@media(max-width:520px){.report .kv{grid-template-columns:1fr}}
+.report .kv div{background:var(--surface);padding:10px 13px;font-size:13.5px;display:flex;justify-content:space-between;gap:10px}
+.report .kv b{font-family:'Archivo',sans-serif;direction:ltr}
+.report ol{padding-inline-start:22px;line-height:1.9;margin:8px 0 0}
+.report .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+@media print{nav.top,footer,.report .actions,.modesw{display:none!important}body{background:#fff}.report{border:0;padding:0;max-width:none}.hero,.band{display:none}}
+
+/* calculator card */
+.calc{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;overflow:hidden;box-shadow:0 22px 50px -30px rgba(0,0,0,.45)}
+.calc-h{padding:16px 20px 12px;border-bottom:1px solid var(--line2);display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.calc-h h3{font-size:18px}
+.calc-h .lab{margin-inline-start:auto}
+.calc-b{padding:18px 20px 20px}
+.steps{display:flex;gap:6px;margin-bottom:16px}
+.steps span{flex:1;height:4px;background:var(--line2);border-radius:2px}
+.steps span.on{background:var(--gold)}
+.steps span.done{background:var(--green2)}
+.stepnav{display:flex;gap:10px;margin-top:8px;flex-wrap:wrap}
+.stepnav .btn{flex:1}
+.f{margin-bottom:14px}
+.f label{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:13.5px;color:var(--muted);margin-bottom:6px}
+.f label .v{font-family:'Archivo',sans-serif;font-size:14px;color:var(--ink);font-weight:600;direction:ltr}
+.f input[type=number],.f input[type=text],.f input[type=tel],.f input[type=email],.f select,.f textarea{width:100%;padding:11px 13px;font-family:'Archivo',system-ui,sans-serif;font-size:15px;background:var(--surface2);border:1px solid var(--line);color:var(--ink);border-radius:4px;min-height:44px}
+.f input[type=number]{direction:ltr;text-align:end}
+.f input[type=text],.f textarea,.f select{font-family:inherit}
+.f select{direction:inherit}
+input[type=range]{width:100%;accent-color:#C9964A;height:28px;margin:0}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:520px){.row2{grid-template-columns:1fr}}
+.seg{display:flex;border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.seg button{flex:1;background:var(--surface2);border:0;padding:10px 8px;color:var(--muted);font-size:13.5px;min-height:44px}
+.seg button[aria-pressed="true"]{background:var(--green);color:var(--ground)}
+.sup{border:1px solid var(--line);border-inline-start:3px solid var(--gold);background:var(--surface2);padding:12px 14px;border-radius:4px;margin:4px 0 14px}
+.sup .t{font-size:13.5px;font-weight:600;color:var(--ink);margin-bottom:8px}
+
+/* result rail */
+.res{background:var(--rail);color:#F1ECE3;padding:20px 22px}
+.res .lab{color:#7E9A93}
+.res .big{font-family:'Archivo',sans-serif;font-size:clamp(32px,5vw,44px);font-weight:600;line-height:1.1;margin-top:6px;direction:ltr;text-align:end;color:#F1ECE3}
+body[data-lang="en"] .res .big{text-align:start}
+.res .big small{font-size:15px;font-weight:400;color:#8FA8A1;font-family:inherit}
+.res .big.gold{color:#C9964A}
+.res .split{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--railline);margin-top:18px;border:1px solid var(--railline)}
+.res .split.c3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:520px){.res .split.c3{grid-template-columns:repeat(2,1fr)}}
+.res .cell{background:var(--rail);padding:11px 13px}
+.res .cell .k{font-size:12px;color:#8FA8A1;line-height:1.5}
+.res .cell .n{font-family:'Archivo',sans-serif;font-size:19px;font-weight:600;margin-top:3px;direction:ltr;text-align:end}
+body[data-lang="en"] .res .cell .n{text-align:start}
+.res .cell .n.bad{color:#E29070}.res .cell .n.good{color:#5FB68C}
+.verdict{margin-top:14px;padding:12px 15px;background:var(--rail2);border-inline-start:3px solid #C9964A;font-size:14px;line-height:1.8;color:#C3D5D0;border-radius:3px}
+.verdict b{color:#F1ECE3;font-weight:600}
+.verdict.warn{border-inline-start-color:#E29070}
+.uplift{background:var(--rail2);border-inline-start:3px solid #2E7D5B;padding:11px 14px;margin-top:12px;font-size:13.5px;line-height:1.75;color:#C3D5D0;border-radius:3px}
+.uplift b{color:#F1ECE3}
+.res .note{font-size:12px;line-height:1.7;color:#8FA8A1;margin-top:14px;padding-top:12px;border-top:1px solid var(--railline)}
+.bar{height:10px;background:#1E4139;margin-top:12px;display:flex;overflow:hidden;border-radius:2px}
+.bar i{display:block;height:10px}
+.res .cta{margin-top:16px;display:flex;gap:10px;flex-wrap:wrap}
+
+/* sections */
+section{padding-block:64px}
+section.alt{background:var(--surface2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.shead{display:flex;align-items:baseline;gap:14px;padding-bottom:12px;border-bottom:2px solid var(--ink);margin-bottom:26px}
+.shead .lab{margin-inline-start:auto}
+.lead{font-size:17px;line-height:1.9;max-width:62ch}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.grid3,.grid4{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.grid3,.grid4,.grid2{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);padding:20px 22px;border-radius:4px}
+.card h3{margin-bottom:6px}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step .n2{font-family:'Archivo',sans-serif;font-size:13px;font-weight:600;color:var(--goldink);padding-top:4px;flex:0 0 auto}
+.arm{border:1px solid var(--line);border-inline-start:4px solid var(--green);padding:18px 20px;background:var(--surface);border-radius:4px}
+.arm.g{border-inline-start-color:var(--gold)} .arm.c{border-inline-start-color:var(--clay)} .arm.s{border-inline-start-color:var(--green2)}
+.warn{background:var(--surface);border:1px solid var(--line);border-inline-start:3px solid var(--clay);padding:14px 18px;font-size:13.5px;line-height:1.85;color:var(--ink2);border-radius:4px}
+.warn b{color:var(--clayink)}
+.band{background:var(--rail);color:#F1ECE3;padding-block:52px}
+.band h2{color:#F1ECE3}
+.band p{color:#B3C8C2}
+.band .grid{display:grid;grid-template-columns:1.2fr 1fr;gap:30px;align-items:center}
+@media(max-width:760px){.band .grid{grid-template-columns:1fr}}
+
+/* tools index */
+.group{margin-bottom:38px}
+.group .gh{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.group .gh .tag{font-size:12px;padding:3px 10px;border-radius:3px;background:var(--goldsoft);color:var(--goldink);border:1px solid var(--gold)}
+.tool{display:block;background:var(--surface);border:1px solid var(--line);padding:18px 20px;border-radius:4px;text-decoration:none;color:inherit;height:100%}
+.tool:hover{border-color:var(--gold)}
+.tool h3{font-size:17px;margin-bottom:6px}
+.tool .q{font-size:13.5px;color:var(--muted);line-height:1.7}
+.tool .lab{display:block;margin-top:10px}
+
+/* calculator page */
+.cpage{padding-block:34px 70px}
+.crumb{font-size:13px;color:var(--muted);margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.crumb a{color:var(--muted);text-decoration:none}.crumb a:hover{color:var(--ink)}
+.cpage h1{font-size:clamp(24px,3.4vw,34px)}
+.cpage .q{font-size:16px;color:var(--muted);max-width:70ch;margin-top:6px}
+.cgrid{display:grid;grid-template-columns:1fr 1.15fr;gap:0;border:1px solid var(--line);margin-top:24px;border-radius:6px;overflow:hidden}
+@media(max-width:860px){.cgrid{grid-template-columns:1fr}}
+.cgrid>.in{background:var(--surface);padding:22px}
+.cgrid>.res{padding:22px}
+.formula{font-family:'Archivo',sans-serif;direction:ltr;text-align:left;background:var(--surface2);border:1px solid var(--line);border-radius:4px;padding:8px 11px;font-size:12.5px;color:var(--ink2);margin:10px 0 14px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:start;font-family:'Archivo',sans-serif;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--railfaint);font-weight:500;padding:8px 9px;border-bottom:1px solid var(--railline);white-space:nowrap}
+td{padding:7px 9px;border-bottom:1px solid var(--railline);color:#C3D5D0;line-height:1.5}
+tbody tr:last-child td{border-bottom:none}
+td.n,th.n{text-align:end;font-family:'Archivo',sans-serif;font-variant-numeric:tabular-nums;direction:ltr}
+td.hi{background:rgba(201,150,74,.18);color:#F1ECE3;font-weight:600}
+td.bad{color:#E29070}td.good{color:#5FB68C}
+.scroll{overflow-x:auto;margin-top:14px}
+.assume{margin-top:26px;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+.assume summary{padding:14px 18px;cursor:pointer;font-weight:600;font-size:14.5px;list-style:none;display:flex;gap:10px;align-items:center}
+.assume summary::-webkit-details-marker{display:none}
+.assume summary .lab{margin-inline-start:auto}
+.assume .body{padding:0 18px 16px;font-size:13px}
+.assume table th,.assume table td{color:var(--ink2);border-color:var(--line2)}
+.assume table th{color:var(--faint)}
+.pill{display:inline-block;font-size:11px;padding:1px 8px;border-radius:3px;border:1px solid var(--line);color:var(--muted)}
+.pill.reg{background:var(--oksoft);color:var(--ok);border-color:transparent}
+
+/* interest form */
+.form{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:24px;max-width:640px}
+.consent{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;line-height:1.75;color:var(--ink2);background:var(--surface2);border:1px solid var(--line);padding:14px;border-radius:4px;margin:8px 0 16px}
+.consent input{margin-top:6px;width:18px;height:18px;flex:0 0 auto;accent-color:#10322D}
+.err{color:var(--clayink);font-size:12.5px;margin-top:-8px;margin-bottom:10px}
+.ok-box{background:var(--oksoft);border:1px solid var(--ok);color:var(--ink);padding:18px;border-radius:4px;line-height:1.8}
+.preview-flag{background:var(--claysoft);color:var(--clayink);border:1px solid var(--clay);font-size:12.5px;padding:8px 12px;border-radius:4px;margin-bottom:14px;line-height:1.6}
+
+/* footer */
+footer{background:var(--rail2);color:#9CB6AF;padding-block:44px 30px;font-size:13.5px;line-height:1.9}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:28px}
+@media(max-width:760px){footer .cols{grid-template-columns:1fr}}
+footer b{color:#F1ECE3;font-weight:600}
+footer .legal{margin-top:26px;padding-top:18px;border-top:1px solid #1E4139;font-size:12px;color:#6E8A83}
+footer a{color:#B3C8C2;text-decoration:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+</style>
+<nav class="top" id="nav"></nav>
+<main id="app"></main>
+<footer id="foot"></footer>
+<script>
+var Atbah=(()=>{var O=Object.defineProperty;var j=Object.getOwnPropertyDescriptor;var J=Object.getOwnPropertyNames;var Q=Object.prototype.hasOwnProperty;var X=(e,t)=>{for(var o in t)O(e,o,{get:t[o],enumerable:!0})},Z=(e,t,o,n)=>{if(t&&typeof t=="object"||typeof t=="function")for(let r of J(t))!Q.call(e,r)&&r!==o&&O(e,r,{get:()=>t[r],enumerable:!(n=j(t,r))||n.enumerable});return e};var $=e=>Z(O({},"__esModule",{value:!0}),e);var ge={};X(ge,{ASSUMPTIONS:()=>z,CALCULATORS:()=>fe,V:()=>s,adminFee:()=>N,balance:()=>V,blendedScheme:()=>le,capRate:()=>se,cashOnDay:()=>oe,clamp:()=>I,dcf:()=>ie,dcfRun:()=>B,dtiCap:()=>D,grossVsNet:()=>de,incomeStrip:()=>he,installment:()=>ne,irr:()=>F,leverage:()=>me,loanForBudget:()=>L,maxTermByAge:()=>H,npv:()=>K,operatorMaxRent:()=>be,pmt:()=>C,pmtSubsidised:()=>_,purchasingPower:()=>re,realRate:()=>U,rentVsBuy:()=>ce,rentalYield:()=>ue,residualLand:()=>pe,rettForBuyer:()=>q,savingsTimeline:()=>ae,suggestGrant:()=>te,suggestSubsidyPct:()=>ee,turnoverRent:()=>Pe});var p=(e,t,o,n,r,a=!1)=>({value:e,ar:t,en:o,source:n,checked:r,regulatory:a}),z={dtiDefault:p(45,"\u0646\u0633\u0628\u0629 \u0627\u0644\u0627\u0633\u062A\u0642\u0637\u0627\u0639 \u0627\u0644\u0627\u0641\u062A\u0631\u0627\u0636\u064A\u0629 (\u0645\u062A\u062D\u0641\u0651\u0638\u0629)","Default deduction ratio (conservative)","\u0642\u0631\u0627\u0631 \u062A\u062D\u0631\u064A\u0631\u064A \u0644\u0639\u062A\u0628\u0629 \u2014 \u0623\u0642\u0644 \u0645\u0646 \u0627\u0644\u062D\u062F\u0651 \u0627\u0644\u0646\u0638\u0627\u0645\u064A \u0639\u0645\u062F\u0627\u064B","2026-09-10"),dtiCapUnder15k:p(55,"\u0627\u0644\u062D\u062F\u0651 \u0627\u0644\u0623\u0642\u0635\u0649 \u0644\u0644\u0627\u0633\u062A\u0642\u0637\u0627\u0639 \u0644\u0645\u0646 \u062F\u062E\u0644\u0647 \u0623\u0642\u0644 \u0645\u0646 \u0661\u0665 \u0623\u0644\u0641\u0627\u064B","Max deduction, income < 15k","\u0627\u0644\u0628\u0646\u0648\u0643 \u0627\u0644\u0633\u0639\u0648\u062F\u064A\u0629 \u2014 \u0623\u0631\u0642\u0627\u0645 2025-09-28","2026-09-10",!0),dtiCapAbove15k:p(65,"\u0627\u0644\u062D\u062F\u0651 \u0627\u0644\u0623\u0642\u0635\u0649 \u0644\u0644\u0627\u0633\u062A\u0642\u0637\u0627\u0639 \u0644\u0645\u0646 \u062F\u062E\u0644\u0647 \u0661\u0665 \u0623\u0644\u0641\u0627\u064B \u0641\u0623\u0643\u062B\u0631","Max deduction, income \u2265 15k","\u0627\u0644\u0628\u0646\u0648\u0643 \u0627\u0644\u0633\u0639\u0648\u062F\u064A\u0629 \u2014 \u0623\u0631\u0642\u0627\u0645 2025-09-28","2026-09-10",!0),dtiCapSubsidised:p(65,"\u0627\u0644\u062D\u062F\u0651 \u0627\u0644\u0623\u0642\u0635\u0649 \u0644\u0645\u0633\u062A\u0641\u064A\u062F\u064A \u0627\u0644\u062F\u0639\u0645 \u0627\u0644\u0633\u0643\u0646\u064A","Max deduction, housing-support beneficiaries","\u0627\u0644\u0628\u0646\u0648\u0643 \u0627\u0644\u0633\u0639\u0648\u062F\u064A\u0629 \u2014 \u0623\u0631\u0642\u0627\u0645 2025-09-28","2026-09-10",!0),dtiIncomeThreshold:p(15e3,"\u062D\u062F\u0651 \u0627\u0644\u062F\u062E\u0644 \u0628\u064A\u0646 \u0627\u0644\u0634\u0631\u064A\u062D\u062A\u064A\u0646","Income threshold between the two brackets","\u0627\u0644\u0628\u0646\u0648\u0643 \u0627\u0644\u0633\u0639\u0648\u062F\u064A\u0629 \u2014 \u0623\u0631\u0642\u0627\u0645 2025-09-28","2026-09-10",!0),ltvFirstHome:p(90,"\u0623\u0642\u0635\u0649 \u0646\u0633\u0628\u0629 \u062A\u0645\u0648\u064A\u0644 \u2014 \u0627\u0644\u0645\u0633\u0643\u0646 \u0627\u0644\u0623\u0648\u0644 \u0644\u0644\u0645\u0648\u0627\u0637\u0646","Max LTV \u2014 citizen first home","\u062A\u0639\u0645\u064A\u0645 \u0633\u0627\u0645\u0627 2018 (\u0631\u0641\u0639 \u0627\u0644\u062D\u062F\u0651 \u0625\u0644\u0649 \u0669\u0660\u066A)","2026-09-10",!0),ltvOther:p(70,"\u0623\u0642\u0635\u0649 \u0646\u0633\u0628\u0629 \u062A\u0645\u0648\u064A\u0644 \u2014 \u063A\u064A\u0631 \u0627\u0644\u0645\u0633\u0643\u0646 \u0627\u0644\u0623\u0648\u0644","Max LTV \u2014 other","\u0627\u0644\u0644\u0627\u0626\u062D\u0629 \u0627\u0644\u062A\u0646\u0641\u064A\u0630\u064A\u0629 \u0644\u0646\u0638\u0627\u0645 \u0627\u0644\u062A\u0645\u0648\u064A\u0644 \u0627\u0644\u0639\u0642\u0627\u0631\u064A","2026-09-10",!0),maxTermYears:p(30,"\u0623\u0642\u0635\u0649 \u0645\u062F\u0651\u0629 \u062A\u0645\u0648\u064A\u0644","Max financing term (years)","\u0645\u0646\u062A\u062C\u0627\u062A \u0627\u0644\u0628\u0646\u0648\u0643 2026 (\u0662\u0665 \u0633\u0646\u0629 \u0634\u0627\u0626\u0639\u0629\u060C \u0663\u0660 \u0644\u0628\u0639\u0636 \u0627\u0644\u0645\u0646\u062A\u062C\u0627\u062A)","2026-09-10"),retireAgePublic:p(60,"\u0633\u0646\u0651 \u0646\u0647\u0627\u064A\u0629 \u0627\u0644\u062A\u0645\u0648\u064A\u0644 \u2014 \u0645\u0648\u0638\u0651\u0641 \u062D\u0643\u0648\u0645\u064A","Age at maturity \u2014 public sector","\u0633\u064A\u0627\u0633\u0627\u062A \u0627\u0644\u0628\u0646\u0648\u0643","2026-09-10"),retireAgePrivate:p(65,"\u0633\u0646\u0651 \u0646\u0647\u0627\u064A\u0629 \u0627\u0644\u062A\u0645\u0648\u064A\u0644 \u2014 \u0642\u0637\u0627\u0639 \u062E\u0627\u0635/\u0623\u0639\u0645\u0627\u0644","Age at maturity \u2014 private sector","\u0633\u064A\u0627\u0633\u0627\u062A \u0627\u0644\u0628\u0646\u0648\u0643","2026-09-10"),profitRate:p(5.5,"\u0646\u0633\u0628\u0629 \u0627\u0644\u0631\u0628\u062D \u0627\u0644\u0633\u0646\u0648\u064A\u0629 \u0627\u0644\u062A\u0642\u062F\u064A\u0631\u064A\u0629","Indicative annual profit rate","\u0645\u062A\u0648\u0633\u0651\u0637 \u0639\u0631\u0648\u0636 \u0627\u0644\u0628\u0646\u0648\u0643 \u2014 \u064A\u062A\u063A\u064A\u0651\u0631 \u0634\u0647\u0631\u064A\u0627\u064B","2026-09-10"),adminFeePct:p(1,"\u0627\u0644\u0631\u0633\u0648\u0645 \u0627\u0644\u0625\u062F\u0627\u0631\u064A\u0629 \u2014 \u0646\u0633\u0628\u0629 \u0645\u0646 \u0627\u0644\u062A\u0645\u0648\u064A\u0644","Admin fee \u2014 % of financing","\u0627\u0644\u0644\u0627\u0626\u062D\u0629 \u0627\u0644\u062A\u0646\u0641\u064A\u0630\u064A\u0629 \u0644\u0646\u0638\u0627\u0645 \u0627\u0644\u062A\u0645\u0648\u064A\u0644 \u0627\u0644\u0639\u0642\u0627\u0631\u064A\u060C \u0627\u0644\u0645\u0627\u062F\u0629 \u0661\u0661","2026-09-10",!0),adminFeeCap:p(5e3,"\u0627\u0644\u0631\u0633\u0648\u0645 \u0627\u0644\u0625\u062F\u0627\u0631\u064A\u0629 \u2014 \u0627\u0644\u0633\u0642\u0641 \u0628\u0627\u0644\u0631\u064A\u0627\u0644","Admin fee \u2014 SAR cap","\u0627\u0644\u0644\u0627\u0626\u062D\u0629 \u0627\u0644\u062A\u0646\u0641\u064A\u0630\u064A\u0629 \u0644\u0646\u0638\u0627\u0645 \u0627\u0644\u062A\u0645\u0648\u064A\u0644 \u0627\u0644\u0639\u0642\u0627\u0631\u064A\u060C \u0627\u0644\u0645\u0627\u062F\u0629 \u0661\u0661","2026-09-10",!0),valuationFee:p(2e3,"\u0631\u0633\u0648\u0645 \u0627\u0644\u062A\u0642\u064A\u064A\u0645 \u0627\u0644\u0639\u0642\u0627\u0631\u064A","Valuation fee","\u0645\u062A\u0648\u0633\u0651\u0637 \u0633\u0648\u0642\u064A (\u062A\u0642\u064A\u0645)","2026-09-10"),registrationFee:p(2500,"\u0631\u0633\u0648\u0645 \u0627\u0644\u0631\u0647\u0646 \u0648\u0627\u0644\u062A\u0648\u062B\u064A\u0642","Mortgage registration & notarisation","\u0645\u062A\u0648\u0633\u0651\u0637 \u0633\u0648\u0642\u064A","2026-09-10"),vat:p(15,"\u0636\u0631\u064A\u0628\u0629 \u0627\u0644\u0642\u064A\u0645\u0629 \u0627\u0644\u0645\u0636\u0627\u0641\u0629","VAT","\u0647\u064A\u0626\u0629 \u0627\u0644\u0632\u0643\u0627\u0629 \u0648\u0627\u0644\u0636\u0631\u064A\u0628\u0629 \u0648\u0627\u0644\u062C\u0645\u0627\u0631\u0643","2026-09-10",!0),rett:p(5,"\u0636\u0631\u064A\u0628\u0629 \u0627\u0644\u062A\u0635\u0631\u0651\u0641\u0627\u062A \u0627\u0644\u0639\u0642\u0627\u0631\u064A\u0629","Real estate transaction tax (RETT)","\u0647\u064A\u0626\u0629 \u0627\u0644\u0632\u0643\u0627\u0629 \u0648\u0627\u0644\u0636\u0631\u064A\u0628\u0629 \u0648\u0627\u0644\u062C\u0645\u0627\u0631\u0643 \u2014 \u0639\u0644\u0649 \u0627\u0644\u0628\u0627\u0626\u0639 \u0646\u0638\u0627\u0645\u0627\u064B","2026-09-10",!0),rettFirstHomeCap:p(1e6,"\u0633\u0642\u0641 \u062A\u062D\u0645\u0651\u0644 \u0627\u0644\u062F\u0648\u0644\u0629 \u0644\u0636\u0631\u064A\u0628\u0629 \u0627\u0644\u062A\u0635\u0631\u0651\u0641\u0627\u062A \u2014 \u0627\u0644\u0645\u0633\u0643\u0646 \u0627\u0644\u0623\u0648\u0644","State-borne RETT cap \u2014 first home","\u0628\u0631\u0646\u0627\u0645\u062C \u0633\u0643\u0646\u064A / \u0648\u0632\u0627\u0631\u0629 \u0627\u0644\u0625\u0633\u0643\u0627\u0646","2026-09-10",!0),brokerageCommission:p(2.5,"\u0639\u0645\u0648\u0644\u0629 \u0627\u0644\u0648\u0633\u0627\u0637\u0629 \u0627\u0644\u0646\u0638\u0627\u0645\u064A\u0629","Statutory brokerage commission","\u0627\u0644\u0647\u064A\u0626\u0629 \u0627\u0644\u0639\u0627\u0645\u0629 \u0644\u0644\u0639\u0642\u0627\u0631 \u2014 \u0645\u0627 \u0644\u0645 \u064A\u064F\u062A\u0651\u0641\u0642 \u0643\u062A\u0627\u0628\u0629\u064B \u0639\u0644\u0649 \u063A\u064A\u0631\u0647\u0627","2026-09-10",!0),grantLowIncome:p(15e4,"\u0628\u0627\u0642\u0629 \u0627\u0644\u062F\u0639\u0645 \u0627\u0644\u0646\u0642\u062F\u064A \u2014 \u062F\u062E\u0644 \u0623\u0642\u0644 \u0645\u0646 \u0661\u0660 \u0622\u0644\u0627\u0641","Cash grant \u2014 income < 10k","\u0633\u0643\u0646\u064A / \u0635\u0646\u062F\u0648\u0642 \u0627\u0644\u062A\u0646\u0645\u064A\u0629 \u0627\u0644\u0639\u0642\u0627\u0631\u064A\u0629 \u2014 \u0642\u0631\u0627\u0631 \u0645\u062C\u0644\u0633 \u0627\u0644\u0648\u0632\u0631\u0627\u0621 \u0668\u0665\u0660 (2025-06)","2026-09-10",!0),grantHighIncome:p(1e5,"\u0628\u0627\u0642\u0629 \u0627\u0644\u062F\u0639\u0645 \u0627\u0644\u0646\u0642\u062F\u064A \u2014 \u062F\u062E\u0644 \u0661\u0660 \u0622\u0644\u0627\u0641 \u0641\u0623\u0643\u062B\u0631","Cash grant \u2014 income \u2265 10k","\u0633\u0643\u0646\u064A / \u0635\u0646\u062F\u0648\u0642 \u0627\u0644\u062A\u0646\u0645\u064A\u0629 \u0627\u0644\u0639\u0642\u0627\u0631\u064A\u0629","2026-09-10",!0),grantIncomeThreshold:p(1e4,"\u062D\u062F\u0651 \u0627\u0644\u062F\u062E\u0644 \u0628\u064A\u0646 \u0627\u0644\u0628\u0627\u0642\u062A\u064A\u0646","Income threshold between grant tiers","\u0633\u0643\u0646\u064A","2026-09-10",!0),subsidyCap:p(5e5,"\u0633\u0642\u0641 \u0627\u0644\u062A\u0645\u0648\u064A\u0644 \u0627\u0644\u0645\u062F\u0639\u0648\u0645 (\u0647\u0627\u0645\u0634 \u0627\u0644\u0631\u0628\u062D)","Subsidised financing cap (profit margin)","\u0633\u0643\u0646\u064A / \u0635\u0646\u062F\u0648\u0642 \u0627\u0644\u062A\u0646\u0645\u064A\u0629 \u0627\u0644\u0639\u0642\u0627\u0631\u064A\u0629","2026-09-10",!0),subsidyFullUpTo:p(14e3,"\u062F\u0639\u0645 \u0661\u0660\u0660\u066A \u0644\u0645\u0646 \u062F\u062E\u0644\u0647 \u062D\u062A\u0649","Full (100%) subsidy up to income","\u0645\u0635\u0641\u0648\u0641\u0629 \u0627\u0644\u062F\u0639\u0645 \u0627\u0644\u0633\u0643\u0646\u064A","2026-09-10",!0),subsidyMinPct:p(35,"\u0623\u062F\u0646\u0649 \u0646\u0633\u0628\u0629 \u062F\u0639\u0645 \u0641\u064A \u0627\u0644\u0645\u0635\u0641\u0648\u0641\u0629","Lowest subsidy % in the matrix","\u0645\u0635\u0641\u0648\u0641\u0629 \u0627\u0644\u062F\u0639\u0645 \u0627\u0644\u0633\u0643\u0646\u064A","2026-09-10",!0),subsidyMinAtIncome:p(3e4,"\u0627\u0644\u062F\u062E\u0644 \u0627\u0644\u0630\u064A \u062A\u0635\u0644 \u0639\u0646\u062F\u0647 \u0627\u0644\u0645\u0635\u0641\u0648\u0641\u0629 \u0625\u0644\u0649 \u0623\u062F\u0646\u0649 \u0646\u0633\u0628\u0629","Income at which the matrix reaches its floor","\u062A\u0642\u0631\u064A\u0628 \u062E\u0637\u0651\u064A \u0644\u0645\u0635\u0641\u0648\u0641\u0629 \u0627\u0644\u062F\u0639\u0645 \u2014 \u064A\u064F\u0633\u062A\u0628\u062F\u0644 \u0628\u0627\u0644\u0645\u0635\u0641\u0648\u0641\u0629 \u0627\u0644\u0631\u0633\u0645\u064A\u0629","2026-09-10"),rentGrowth:p(4,"\u0646\u0645\u0648\u0651 \u0627\u0644\u0625\u064A\u062C\u0627\u0631 \u0627\u0644\u0633\u0646\u0648\u064A","Annual rent growth","\u0627\u0641\u062A\u0631\u0627\u0636 \u062A\u062E\u0637\u064A\u0637 \u2014 \u0627\u0644\u0647\u064A\u0626\u0629 \u0627\u0644\u0639\u0627\u0645\u0629 \u0644\u0644\u0625\u062D\u0635\u0627\u0621 (\u0645\u0624\u0634\u0651\u0631 \u0627\u0644\u0625\u064A\u062C\u0627\u0631\u0627\u062A)","2026-09-10"),priceGrowth:p(3,"\u0646\u0645\u0648\u0651 \u0623\u0633\u0639\u0627\u0631 \u0627\u0644\u0639\u0642\u0627\u0631 \u0627\u0644\u0633\u0646\u0648\u064A","Annual property price growth","\u0627\u0641\u062A\u0631\u0627\u0636 \u062A\u062E\u0637\u064A\u0637","2026-09-10"),maintenancePct:p(1,"\u0635\u064A\u0627\u0646\u0629 \u0648\u062A\u0634\u063A\u064A\u0644 \u0627\u0644\u0645\u0633\u0643\u0646 \u2014 \u066A \u0645\u0646 \u0627\u0644\u0642\u064A\u0645\u0629 \u0633\u0646\u0648\u064A\u0627\u064B","Home upkeep \u2014 % of value per year","\u0642\u0627\u0639\u062F\u0629 \u0639\u0627\u0645\u0629","2026-09-10"),altReturn:p(4,"\u0627\u0644\u0639\u0627\u0626\u062F \u0627\u0644\u0628\u062F\u064A\u0644 \u0639\u0644\u0649 \u0627\u0644\u0646\u0642\u062F (\u0635\u0643\u0648\u0643/\u0648\u062F\u0627\u0626\u0639)","Alternative return on cash","\u0627\u0641\u062A\u0631\u0627\u0636 \u062A\u062E\u0637\u064A\u0637 \u0642\u0631\u064A\u0628 \u0645\u0646 \u0639\u0648\u0627\u0626\u062F \u0627\u0644\u0635\u0643\u0648\u0643","2026-09-10"),vacancy:p(8,"\u0646\u0633\u0628\u0629 \u0627\u0644\u0634\u063A\u0648\u0631","Vacancy rate","\u0627\u0641\u062A\u0631\u0627\u0636 \u062A\u062E\u0637\u064A\u0637","2026-09-10"),opex:p(15,"\u0645\u0635\u0627\u0631\u064A\u0641 \u0627\u0644\u062A\u0634\u063A\u064A\u0644 \u0648\u0627\u0644\u0635\u064A\u0627\u0646\u0629 \u2014 \u066A \u0645\u0646 \u0627\u0644\u0625\u064A\u062C\u0627\u0631","Opex \u2014 % of rent","\u0627\u0641\u062A\u0631\u0627\u0636 \u062A\u062E\u0637\u064A\u0637","2026-09-10"),closingCostsPct:p(3.5,"\u062A\u0643\u0627\u0644\u064A\u0641 \u0627\u0644\u0625\u063A\u0644\u0627\u0642 \u0627\u0644\u062A\u0642\u0631\u064A\u0628\u064A\u0629 \u2014 \u066A \u0645\u0646 \u0627\u0644\u0633\u0639\u0631","Approx. closing costs \u2014 % of price","\u0639\u0645\u0648\u0644\u0629 \u0662\u066B\u0665\u066A + \u0636\u0631\u064A\u0628\u062A\u0647\u0627 + \u0631\u0633\u0648\u0645","2026-09-10"),riskFreeRate:p(5,"\u0627\u0644\u0639\u0627\u0626\u062F \u0627\u0644\u062E\u0627\u0644\u064A \u0645\u0646 \u0627\u0644\u0645\u062E\u0627\u0637\u0631 (\u0635\u0643\u0648\u0643 \u0661\u0660 \u0633\u0646\u0648\u0627\u062A)","Risk-free rate (10y sukuk)","\u0627\u0641\u062A\u0631\u0627\u0636 \u062A\u062E\u0637\u064A\u0637 \u2014 \u064A\u064F\u0639\u062F\u064E\u0651\u0644 \u0625\u0644\u0649 \u0639\u0627\u0626\u062F \u0627\u0644\u0635\u0643\u0648\u0643 \u0627\u0644\u0633\u0627\u0631\u064A","2026-09-10"),riskPremium:p(4,"\u0639\u0644\u0627\u0648\u0629 \u0627\u0644\u0645\u062E\u0627\u0637\u0631","Risk premium","\u0623\u0643\u0633\u0641\u0648\u0631\u062F: \u0663\u2013\u0664\u066A \u0623\u0635\u0644 \u062C\u064A\u062F\u060C \u0666\u066A \u062B\u0627\u0646\u0648\u064A","2026-09-10"),inflation:p(2,"\u0627\u0644\u062A\u0636\u062E\u0651\u0645 \u0627\u0644\u0645\u062A\u0648\u0642\u0651\u0639","Expected inflation","\u0627\u0644\u0647\u064A\u0626\u0629 \u0627\u0644\u0639\u0627\u0645\u0629 \u0644\u0644\u0625\u062D\u0635\u0627\u0621 / \u0633\u0627\u0645\u0627","2026-09-10"),depreciation:p(1,"\u0627\u0644\u0627\u0646\u062F\u062B\u0627\u0631 \u0627\u0644\u0633\u0646\u0648\u064A","Depreciation","\u0623\u0643\u0633\u0641\u0648\u0631\u062F","2026-09-10"),developerProfit:p(20,"\u0631\u0628\u062D \u0627\u0644\u0645\u0637\u0648\u0651\u0631 \u2014 \u066A \u0645\u0646 \u0627\u0644\u0643\u0644\u0641\u0629","Developer profit \u2014 % of cost","\u0623\u0643\u0633\u0641\u0648\u0631\u062F: \u0661\u0665\u2013\u0662\u0660\u066A","2026-09-10")},s=e=>z[e].value;function D(e,t){return t?s("dtiCapSubsidised"):e<s("dtiIncomeThreshold")?s("dtiCapUnder15k"):s("dtiCapAbove15k")}function ee(e){let t=s("subsidyFullUpTo"),o=s("subsidyMinPct"),n=s("subsidyMinAtIncome");if(e<=t)return 100;if(e>=n)return o;let r=95-(e-t)/(n-t)*(95-o);return Math.round(r/5)*5}function te(e){return e<s("grantIncomeThreshold")?s("grantLowIncome"):s("grantHighIncome")}function H(e,t){let o=s(t==="public"?"retireAgePublic":"retireAgePrivate");return Math.max(0,Math.min(s("maxTermYears"),o-e))}function N(e){return Math.min(e*s("adminFeePct")/100,s("adminFeeCap"))}function q(e,t,o){let n=e*s("rett")/100;if(!t)return{total:n,state:0,buyer:0};if(!o)return{total:n,state:0,buyer:n};let r=Math.min(e,s("rettFirstHomeCap"))*s("rett")/100;return{total:n,state:r,buyer:Math.max(0,n-r)}}function C(e,t,o){let n=t/100/12,r=Math.round(o*12);return e<=0||r<=0?0:n===0?e/r:e*n/(1-Math.pow(1+n,-r))}function V(e,t,o,n){let r=t/100/12,a=Math.round(o*12),c=Math.min(Math.max(0,n),a);return e<=0||a<=0?0:r===0?Math.max(0,e*(1-c/a)):e*(Math.pow(1+r,a)-Math.pow(1+r,c))/(Math.pow(1+r,a)-1)}function _(e,t,o,n,r){let a=Math.min(Math.max(0,e),Math.max(0,r)),c=Math.max(0,e)-a;return C(a,t*(1-n/100),o)+C(c,t,o)}function L(e,t,o,n=0,r=0){if(e<=0||o<=0)return 0;let a=0,c=5e7;for(let u=0;u<64;u++){let i=(a+c)/2;_(i,t,o,n,r)>e?c=i:a=i}return a}function K(e,t){let o=e/100;return t.reduce((n,r,a)=>n+r/Math.pow(1+o,a),0)}function F(e){let t=-.99,o=1,n=r=>e.reduce((a,c,u)=>a+c/Math.pow(1+r,u),0);if(!(n(t)*n(o)<0))return NaN;for(let r=0;r<200;r++){let a=(t+o)/2;n(a)>0?t=a:o=a}return(t+o)/2*100}function U(e,t){return((1+e/100)/(1+t/100)-1)*100}var I=(e,t,o)=>Math.min(o,Math.max(t,e));function re(e){let t=Math.max(0,e.income),o=Math.max(0,e.obligations),n=e.support??"none",r=D(t,n!=="none"),a=e.dtiPct??s("dtiDefault"),c=e.ratePct??s("profitRate"),u=e.termYears??25,i=e.age?H(e.age,e.sector??"private"):s("maxTermYears"),m=I(Math.min(u,i),0,s("maxTermYears")),l=u>m,d=e.firstHome===!1?s("ltvOther"):s("ltvFirstHome"),b=I(Math.max(e.downPct??100-d,100-d),0,100),P=Math.max(0,t*a/100-o),f=L(P,c,m),v=b>=100?0:f/(1-b/100),k=v*b/100,x=f,g=v,y=k,w=k,h=C(f,c,m);if(n==="grant"){let R=Math.max(0,e.grant??0);g=Math.max(v,f+R),y=g-f,w=Math.max(0,y-R)}else if(n==="margin"){let R=I(e.subsidyPct??0,0,100),T=Math.max(0,e.subsidyCap??s("subsidyCap"));x=L(P,c,m,R,T),g=b>=100?0:x/(1-b/100),y=g*b/100,w=y,h=_(x,c,m,R,T)}let Y=h*m*12+y,G=h*m*12-x,A=[];a>r&&A.push("dti_high"),l&&A.push("term_capped");let M="ok";return P<=0?M="no_budget":a>r||a>55?M="dti_high":l?M="term_capped":n!=="none"?M="support_conditional":y>g*.3&&g>0&&(M="large_down"),{budget:P,dtiPct:a,dtiCap:r,dtiAboveCap:a>r,termYears:m,termCappedByAge:l,ltvCap:d,downPct:b,loan:x,price:g,down:y,cashDown:w,monthly:h,totalPaid:Y,financeCost:G,basePrice:v,baseCashDown:k,uplift:g-v,cashSaved:k-w,verdict:M,warnings:A}}function ne(e){let t=Math.max(0,e.price)*(1-I(e.downPct,0,100)/100),o=e.price-t,n=C(t,e.ratePct,e.years),r=n*e.years*12+o,a=n*e.years*12-t,c=N(t);return{loan:t,down:o,monthly:n,totalPaid:r,financeCost:a,adminFee:c,principalShare:t+a>0?t/(t+a):0}}function oe(e){let t=Math.max(0,e.price),o=e.financed??!0,n=o?t*(1-I(e.downPct,0,100)/100):0,r=t-n,a=t*(e.commissionPct??s("brokerageCommission"))/100,c=a*s("vat")/100,u=o?N(n):0,i=o?e.valuationFee??s("valuationFee"):0,m=e.registrationFee??s("registrationFee"),l=q(t,e.buyerBearsRett,e.firstHome),d=a+c+u+i+m+l.buyer;return{loan:n,down:r,commission:a,commissionVat:c,adminFee:u,valuation:i,registration:m,rettTotal:l.total,rettState:l.state,rettBuyer:l.buyer,closing:d,cash:r+d,closingPct:t?d/t*100:0}}function ae(e){let t=e.closingPct??s("closingCostsPct"),o=e.priceGrowthPct??s("priceGrowth"),n=(e.savingsReturnPct??0)/100/12,r=e.price*(e.downPct+t)/100,a=e.saved+(e.grant??0),c=0,u=e.price,i=r,m=a>=i;for(;!m&&c<600;)c++,a=a*(1+n)+e.monthly,u=e.price*Math.pow(1+o/100,c/12),i=u*(e.downPct+t)/100,a>=i&&(m=!0);let l=NaN;if(m&&c>0){let d=e.saved+(e.grant??0),b=0,P=!1;for(;!P&&b<600;){b++,d=d*(1+n)+e.monthly+500;let f=e.price*Math.pow(1+o/100,b/12)*(e.downPct+t)/100;d>=f&&(P=!0)}l=P?b:NaN}return{needToday:r,gap:Math.max(0,r-(e.saved+(e.grant??0))),months:c,reached:m,needAtArrival:m?i:NaN,priceAtArrival:m?u:NaN,monthsWithExtra500:l,status:c===0&&m?"ready":m?"later":"never"}}function ce(e){let t=(e.rentGrowthPct??s("rentGrowth"))/100,o=(e.priceGrowthPct??s("priceGrowth"))/100,n=(e.maintenancePct??s("maintenancePct"))/100,r=(e.altReturnPct??s("altReturn"))/100,a=(e.closingPct??s("closingCostsPct"))/100,c=Math.max(1,Math.round(e.horizonYears)),u=0;for(let h=0;h<c;h++)u+=e.rent*Math.pow(1+t,h);let i=e.price*(1-e.downPct/100),m=e.price-i,l=C(i,e.ratePct,e.termYears),d=e.price*Math.pow(1+o,c),b=V(i,e.ratePct,e.termYears,c*12),P=d-b,f=0;for(let h=0;h<c;h++)f+=e.price*Math.pow(1+o,h)*n;let v=e.price*a,k=l*12*c,x=(m+v)*(Math.pow(1+r,c)-1),g=m+v+k+f+x-P,y=null;if(e.shared){let h=I(e.shared.sharePct,1,99)/100,Y=e.shared.partnerYieldPct/100,G=Math.max(0,e.price*h-m),A=C(G,e.ratePct,e.termYears),M=0;for(let S=0;S<c;S++)M+=e.price*(1-h)*Y*Math.pow(1+t,S);let R=d*h-V(G,e.ratePct,e.termYears,c*12),T=0;for(let S=0;S<c;S++)T+=e.price*Math.pow(1+o,S)*n*h;let E=e.price*h*a,W=(Math.min(m,e.price*h)+E)*(Math.pow(1+r,c)-1);y={monthly:A,rentMonthly:e.price*(1-h)*Y/12,paid:A*12*c+M,equity:R,net:Math.min(m,e.price*h)+E+A*12*c+M+T+W-R}}let w=[["rent",u],["buy",g]];return y&&w.push(["shared",y.net]),w.sort((h,Y)=>h[1]-Y[1]),{rentTotal:u,monthly:l,paid:k,upkeep:f,closing:v,opportunity:x,equity:P,value:d,buyNet:g,shared:y,best:w[0][0],margin:w.length>1?w[1][1]-w[0][1]:0,ltvTooHigh:i/e.price>s("ltvFirstHome")/100}}function ue(e){let t=e.vacancyPct??s("vacancy"),o=e.opexPct??s("opex"),n=e.annualRent*(1-t/100),r=n*(1-o/100),a=e.price?e.annualRent/e.price*100:0,c=e.price?r/e.price*100:0,u=r,i=e.price,m=0,l=0;e.financed&&(l=e.price*(1-(e.downPct??30)/100),m=C(l,e.ratePct??s("profitRate"),e.termYears??20),u=r-m*12,i=e.price-l);let d=i?u/i*100:0,b=e.propertyType==="commercial"?e.annualRent*s("vat")/100:0,P=e.financed&&u<0?"negative_cf":c<4?"low":c>9?"high_check":"ok";return{effective:n,noi:r,gross:a,net:c,loan:l,monthly:m,cashFlow:u,invested:i,cashOnCash:d,vatOnRent:b,verdict:P}}function se(e){let t=e.rfrPct??s("riskFreeRate"),o=e.riskPremiumPct??s("riskPremium"),n=e.inflationPct??s("inflation"),r=e.realGrowthPct??.5,a=e.depreciationPct??s("depreciation"),c=t+o-(r+n)+a,u=c>0?e.noi/(c/100):NaN,i=c>0?100/c:NaN,m=c>0?e.noi/((c+.25)/100)-u:NaN,l=null;if(e.askingPrice&&e.askingPrice>0&&isFinite(u)){let d=e.noi/e.askingPrice*100,b=(e.askingPrice/u-1)*100;l={impliedK:d,impliedMultiplier:e.askingPrice/e.noi,spread:d-t,diffPct:b,verdict:b>3?"above":b<-3?"below":"inline"}}return{K:c,value:u,multiplier:i,requiredReturn:t+o,sensitivity025:m,ask:l,invalid:c<=0}}function B(e){let t=Math.max(1,Math.round(e.holdYears??10)),o=e.voidMonths??0,n=e.buyCostPct??s("brokerageCommission"),r=e.sellCostPct??s("brokerageCommission"),a=[-(e.price*(1+n/100))],c=[];for(let u=1;u<=t;u++){let i=e.rentYear1*Math.pow(1+e.growthPct/100,u-1);u===1&&o>0?i*=Math.max(0,12-o)/12:u===2&&o>12&&(i*=Math.max(0,24-o)/12);let m=0;if(u===t){let d=e.rentYear1*Math.pow(1+e.growthPct/100,t);m=e.exitCapPct>0?d/(e.exitCapPct/100)*(1-r/100):0}let l=i+m;a.push(l),c.push({year:u,rent:i,sale:m,cf:l,pv:l/Math.pow(1+e.requiredPct/100,u)})}return{cfs:a,rows:c,npv:K(e.requiredPct,a),irr:F(a),entryCost:a[0]}}function ie(e){let t=B(e),o=0,n=e.price*5;for(let i=0;i<60;i++){let m=(o+n)/2;B({...e,price:m}).npv>0?o=m:n=m}let r=(o+n)/2,a=[.85,.925,1,1.075,1.15].map(i=>e.price*i),c=[-1.5,-.75,0,.75,1.5].map(i=>e.exitCapPct+i),u=a.map(i=>c.map(m=>B({...e,price:i,exitCapPct:m}).irr));return{...t,worth:r,premiumPct:(e.price/r-1)*100,initialYield:e.price?e.rentYear1/e.price*100:0,sensitivity:{prices:a,exits:c,grid:u},meets:t.npv>=0}}function me(e){let t=I(e.ltvPct,0,99)/100,o=(e.covenantLtvPct??65)/100,n=e.minIcr??1.5,r=e.price*t,a=e.price-r,c=r*e.kdPct/100,u=(e.kaPct-e.kdPct*t)/(1-t),i=a>0?(e.noi-c)/a*100:NaN,m=c>0?e.noi/c:1/0,l=r>0?e.noi/r*100:1/0,d=r>0?(1-r/(e.price*o))*100:100,b=c>0?Math.max(0,(1-n*c/e.noi)*100):100,P=(1-t)*100,f=1/(1-t),v=[.1,.2,.3,.4].map(x=>{let g=e.price*(1-x),y=g-r;return{fall:x*100,value:g,equity:Math.max(0,y),equityLossPct:Math.min(100,e.price*x/a*100),newLtv:r/g*100,breach:r/g>o}}),k=e.kaPct<=e.kdPct?"no_spread":m<n?"icr_breach":"ok";return{loan:r,equity:a,interest:c,ke:u,cashOnCash:i,icr:m,debtYield:l,fallToLtvBreach:d,noiFallToIcrBreach:b,wipeout:P,equityMultiplier:f,stress:v,verdict:k}}function pe(e){let t=i=>(i??s("developerProfit"))/100,o=e.sale.pricePerM2-e.sale.costPerM2*(1+t(e.sale.profitPct)),n=e.rent.rentPerM2*(1-e.rent.opexPct/100)/(e.rent.capPct/100),r=n-e.rent.costPerM2*(1+t(e.rent.profitPct)),a=e.affordable.rentPerM2*(1-e.affordable.opexPct/100)/(e.affordable.capPct/100),c=a-e.affordable.costPerM2*(1+t(e.affordable.profitPct)),u=[["sale",o],["rent",r],["affordable",c]].sort((i,m)=>m[1]-i[1]);return{sale:o,rent:r,affordable:c,rentCapitalValue:n,affordableCapitalValue:a,best:u[0][0],implicitSubsidy:r-c}}function le(e,t,o,n){let r=[0,10,20,25,30,35,40,50].map(u=>{let i=e*(1-u/100)+t*u/100;return{affordablePct:u,residual:i,viable:i>=o,current:u===n}}),a=0;for(let u=0;u<=100;u++)e*(1-u/100)+t*u/100>=o&&(a=u);let c=e*(1-n/100)+t*n/100;return{rows:r,maxAffordablePct:a,currentResidual:c,viable:c>=o}}function be(e){let t=e.unitsPerYear*e.unitPrice,o=e.fixedCostPerYear+e.unitsPerYear*e.unitVariableCost,n=t-o,r=o*(e.normalProfitPct??20)/100,a=n-r;return{revenue:t,cost:o,profitBeforeRent:n,normalProfit:r,maxRent:Math.max(0,a),viable:a>0,vatOnRent:Math.max(0,a)*s("vat")/100}}function de(e){let t=[];for(let n=0;n<Math.max(1,e.years);n++){let r=e.rentPerM2*Math.pow(1+e.rentGrowthPct/100,n),a=e.opexPerM2*Math.pow(1+e.opexGrowthPct/100,n);t.push({year:n+1,rent:r,opex:a,noiGross:r-a,noiNet:(e.rentPerM2-e.opexPerM2)*Math.pow(1+e.rentGrowthPct/100,n)})}let o=t[t.length-1];return{rows:t,finalGap:o.noiNet-o.noiGross,cumulativeGap:t.reduce((n,r)=>n+(r.noiNet-r.noiGross),0)}}function Pe(e){let t=(e.onlineAttributedPct??0)/100,o=e.storeSales*(1+t),n=o*e.turnoverPct/100,r=e.baseRent+n;return{turnover:o,variable:n,total:r,effectivePct:o?r/o*100:0,onlineUplift:e.storeSales*t*e.turnoverPct/100}}function he(e){let t=e.inflationPct/100,o=(e.reversionPct??0)/100,n=b=>{let P=[-e.investment];for(let f=1;f<=e.termYears;f++){let v=(e.units*e.rentPerUnit-e.units*b)*Math.pow(1+t,f-1);f===e.termYears&&(v+=e.investment*o*Math.pow(1+t,e.termYears)),P.push(v)}return F(P)},r=e.units*e.rentPerUnit/e.investment*100,a=(e.units*e.rentPerUnit-e.units*e.operatorChargePerUnit)/e.investment*100,c=n(e.operatorChargePerUnit),u=U(c,e.inflationPct),i=e.realRfrPct??1.5,m=a+e.inflationPct-i,l=u-i,d=[.6,.8,1,1.2,1.5].map(b=>{let P=e.operatorChargePerUnit*b,f=n(P);return{charge:P,net:e.units*e.rentPerUnit-e.units*P,netYield:(e.units*e.rentPerUnit-e.units*P)/e.investment*100,nominalIrr:f,realIrr:U(f,e.inflationPct),current:b===1}});return{grossYield:r,netYield:a,nominalIrr:c,realIrr:u,naivePremium:m,truePremium:l,sensitivity:d,verdict:l>3?"good":l>1?"fair":"weak"}}var fe=[{slug:"purchasing-power",group:"buyer",home:!0},{slug:"installment",group:"buyer"},{slug:"cash-on-day",group:"buyer"},{slug:"when-can-i-buy",group:"buyer"},{slug:"rent-vs-buy",group:"buyer"},{slug:"rental-yield",group:"investor"},{slug:"cap-rate",group:"investor"},{slug:"dcf",group:"investor"},{slug:"leverage",group:"investor"},{slug:"residual-land",group:"developer"},{slug:"blended-scheme",group:"developer"},{slug:"operator-rent",group:"developer"},{slug:"gross-vs-net",group:"developer"},{slug:"turnover-rent",group:"developer"},{slug:"income-strip",group:"developer"}];return $(ge);})();
+
+</script>
+<script>
+/* عتبة — مواصفات الحاسبات الـ١٥ (واجهة) — الأرقام من محرّك Atbah فقط */
+const T = (o) => (o && typeof o === 'object' && ('ar' in o)) ? o[LANG] : o;
+const sar = (n) => isFinite(n) ? Math.round(n).toLocaleString('en-US') : '—';
+const sar2 = (n) => isFinite(n) ? n.toLocaleString('en-US', { maximumFractionDigits: 2, minimumFractionDigits: 2 }) : '—';
+const pct = (n, d = 1) => isFinite(n) ? n.toFixed(d) + '%' : '—';
+const yrs = (y) => LANG === 'ar' ? (y === 1 ? 'سنة' : y === 2 ? 'سنتان' : y <= 10 ? y + ' سنوات' : y + ' سنة') : (y === 1 ? '1 year' : y + ' years');
+const mos = (m) => LANG === 'ar' ? (m === 1 ? 'شهر' : m === 2 ? 'شهران' : m <= 10 ? m + ' أشهر' : m + ' شهراً') : (m === 1 ? '1 month' : m + ' months');
+const span = (months) => { const y = Math.floor(months / 12), m = months % 12; return [y ? yrs(y) : '', m ? mos(m) : ''].filter(Boolean).join(LANG === 'ar' ? ' و' : ' and '); };
+const cell = (k, v, cls = '') => `<div class="cell"><div class="k">${T(k)}</div><div class="n ${cls}">${v}</div></div>`;
+const big = (v, unit, gold = true) => `<div class="big ${gold ? 'gold' : ''}">${v}${unit ? ` <small>${T(unit)}</small>` : ''}</div>`;
+const verdict = (html, warn = false) => `<div class="verdict ${warn ? 'warn' : ''}">${html}</div>`;
+const RIYAL = { ar: 'ريال', en: 'SAR' };
+const DISC = { ar: 'تقدير أوّلي غير ملزم، ويخضع لموافقة الجهة الممولة، ولا يُعدّ استشارة مالية.', en: 'Preliminary, non-binding estimate, subject to the financing entity’s approval. Not financial advice.' };
+const DISC_PRO = { ar: 'أداة للتعلّم واتخاذ القرار — لا تُعدّ استشارة مالية أو استثمارية. الأرقام الافتراضية افتراضات تخطيط للسوق السعودي قابلة للتعديل.', en: 'A learning and decision tool — not financial or investment advice. Defaults are editable planning assumptions for the Saudi market.' };
+const A = Atbah;
+
+const num = (id, label, def, step, extra = {}) => ({ id, type: 'num', label, def, step, ...extra });
+const rng = (id, label, def, min, max, step, fmt, extra = {}) => ({ id, type: 'range', label, def, min, max, step, fmt, ...extra });
+const sel = (id, label, opts, def, extra = {}) => ({ id, type: 'select', label, opts, def, ...extra });
+const seg = (id, label, opts, def, extra = {}) => ({ id, type: 'seg', label, opts, def, ...extra });
+
+const CALCS = [
+/* ================= A · للمشتري ================= */
+{
+  slug: 'purchasing-power', group: 'buyer', home: true,
+  title: { ar: 'حاسبة القدرة الشرائية', en: 'Purchasing power' }, eyebrow: 'PURCHASING POWER',
+  q: { ar: 'كم أقصى سعر عقار يناسبك فعلاً — لا أقصى ما يمنحك البنك؟', en: 'What is the highest property price that genuinely fits you — not the most a bank would lend?' },
+  steps: [{ ar: 'دخلك', en: 'Your income' }, { ar: 'التزاماتك والدعم', en: 'Obligations & support' }, { ar: 'شروط التمويل', en: 'Financing terms' }],
+  fields: [
+    num('income', { ar: 'صافي الدخل الشهري', en: 'Net monthly income' }, 15000, 500, { step_: 0, fmt: 'sar' }),
+    num('age', { ar: 'عمرك', en: 'Your age' }, 32, 1, { step_: 0, fmt: 'x' }),
+    seg('sector', { ar: 'جهة العمل', en: 'Employer' }, [['private', { ar: 'خاص / أعمال', en: 'Private' }], ['public', { ar: 'حكومي', en: 'Public sector' }]], 'private', { step_: 0 }),
+    seg('firstHome', { ar: 'هل هذا مسكنك الأول؟', en: 'Is this your first home?' }, [['1', { ar: 'نعم', en: 'Yes' }], ['0', { ar: 'لا', en: 'No' }]], '1', { step_: 0 }),
+    num('obligations', { ar: 'الالتزامات الشهرية الحالية (أقساط، بطاقات)', en: 'Current monthly obligations' }, 2000, 250, { step_: 1, fmt: 'sar' }),
+    sel('support', { ar: 'الدعم السكني', en: 'Housing support' }, [['none', { ar: 'لا — احسب بدون دعم', en: 'None — calculate without support' }], ['grant', { ar: 'نعم — باقة الدعم النقدي', en: 'Yes — cash grant package' }], ['margin', { ar: 'نعم — دعم هامش الربح', en: 'Yes — profit-margin subsidy' }]], 'none', { step_: 1 }),
+    num('grant', { ar: 'مبلغ الدعم النقدي', en: 'Cash grant amount' }, 100000, 10000, { step_: 1, fmt: 'sar', show: v => v.support === 'grant', auto: v => A.suggestGrant(v.income), hint: { ar: '١٥٠٬٠٠٠ لمن دخله أقل من ١٠ آلاف، و١٠٠٬٠٠٠ لمن فوقها — يُضبط مع دخلك وتستطيع تعديله. الرقم المعتمد في شهادة استحقاقك من «سكني».', en: '150,000 below 10k income, 100,000 above — auto-set from your income; the binding figure is on your Sakani certificate.' } }),
+    rng('subsidyPct', { ar: 'نسبة دعم هامش الربح', en: 'Profit-margin subsidy' }, 100, 0, 100, 5, 'pct', { step_: 1, show: v => v.support === 'margin', auto: v => A.suggestSubsidyPct(v.income), hint: { ar: '١٠٠٪ لمن دخله ١٤ ألفاً فأقل، وتتناقص بعدها. على أول ٥٠٠٬٠٠٠ ريال من التمويل.', en: '100% up to 14k income, tapering after. Applies to the first SAR 500,000 of financing.' } }),
+    rng('dtiPct', { ar: 'نسبة الاستقطاع التي تختارها', en: 'Deduction ratio you choose' }, 45, 20, 65, 1, 'pct', { step_: 2, hint: { ar: 'الحدّ النظامي ٥٥٪ لمن دخله أقل من ١٥ ألفاً و٦٥٪ لمن فوقها ولمستفيدي الدعم. ٤٥٪ افتراضنا المتحفّظ — البنك قد يمنحك أكثر، ولا يعني ذلك أنه يناسبك.', en: 'Regulatory cap: 55% below 15k income, 65% above and for support beneficiaries. 45% is our conservative default — the bank may allow more; that doesn’t mean it suits you.' } }),
+    rng('downPct', { ar: 'الدفعة الأولى', en: 'Down payment' }, 10, 5, 50, 1, 'pct', { step_: 2, hint: { ar: 'الحدّ الأدنى ١٠٪ للمسكن الأول (تمويل ٩٠٪) و٣٠٪ لغيره.', en: 'Minimum 10% for a first home (90% LTV), 30% otherwise.' } }),
+    rng('termYears', { ar: 'مدّة التمويل', en: 'Term' }, 25, 5, 30, 1, 'yr', { step_: 2, hint: { ar: 'المدّة محكومة بعمرك عند نهاية التمويل (٦٠ حكومي / ٦٥ خاص).', en: 'Capped by your age at maturity (60 public / 65 private).' } }),
+    rng('ratePct', { ar: 'نسبة الربح السنوية التقديرية', en: 'Indicative annual profit rate' }, 5.5, 1, 12, 0.1, 'pct', { step_: 2 }),
+  ],
+  compute: v => A.purchasingPower({ income: v.income, obligations: v.obligations, dtiPct: v.dtiPct, age: v.age, sector: v.sector, termYears: v.termYears, ratePct: v.ratePct, firstHome: v.firstHome === '1', downPct: v.downPct, support: v.support, grant: v.grant, subsidyPct: v.subsidyPct, subsidyCap: A.V('subsidyCap') }),
+  render: (r, v) => {
+    const V = {
+      no_budget: { ar: '<b>الالتزامات الحالية تستهلك نسبة الاستقطاع كاملة.</b> الخطوة الأولى ليست البحث عن بيت، بل تقليل الالتزام. نكتب لك خطة ونراجعها بعد ستة أشهر.', en: '<b>Your current obligations use up the whole deduction ratio.</b> The first step isn’t house-hunting; it’s reducing the obligation. We write a plan and review it in six months.' },
+      dti_high: { ar: `<b>نسبة استقطاع مرتفعة.</b> ${r.dtiAboveCap ? 'فوق الحدّ النظامي (' + r.dtiCap + '٪) — لن يمنحها البنك.' : 'البنك قد يوافق، لكن ما يبقى في جيبك آخر الشهر سيكون ضيّقاً لعشرين سنة.'} جرّب ٤٥٪ وانظر الفرق.`, en: `<b>High deduction ratio.</b> ${r.dtiAboveCap ? 'Above the regulatory cap (' + r.dtiCap + '%) — a bank won’t grant it.' : 'A bank may approve it, but what’s left at month-end will be tight for twenty years.'} Try 45% and compare.` },
+      term_capped: { ar: `<b>المدّة قُصّرت إلى ${r.termYears} سنة بسبب عمرك</b> عند نهاية التمويل. قسطك أعلى وسقفك أقلّ — وهذا هو الرقم الواقعي.`, en: `<b>Term shortened to ${r.termYears} years because of your age</b> at maturity. Higher payment, lower ceiling — and that is the realistic number.` },
+      support_conditional: { ar: '<b>هذا السقف مشروط بشهادة الاستحقاق.</b> لا توقّع على شيء قبل أن تصدر لك من «سكني» — الأرقام هنا تقديرية حتى تصدر.', en: '<b>This ceiling depends on your eligibility certificate.</b> Sign nothing before Sakani issues it — these figures are estimates until then.' },
+      large_down: { ar: '<b>دفعة أولى كبيرة.</b> تقلّل قسطك وتكلفة التمويل — لكن تأكّد أنها لا تستهلك مدّخر الطوارئ كاملاً.', en: '<b>Large down payment.</b> It lowers the payment and financing cost — make sure it doesn’t consume your whole emergency fund.' },
+      ok: { ar: '<b>هذا سقفك التقديري، لا هدفك.</b> الشراء تحته يعني هامش أمان — والشراء عنده تماماً يعني أن أي مفاجأة تصير أزمة.', en: '<b>This is your estimated ceiling, not your target.</b> Buying below it leaves a safety margin; buying exactly at it turns any surprise into a crisis.' },
+      first_home_band: { ar: '', en: '' },
+    };
+    let uplift = '';
+    if (v.support === 'grant' && r.cashSaved > 0) uplift = `<div class="uplift"><b>${T({ ar: 'الدعم يوفّر عليك', en: 'The grant saves you' })} ${sar(r.cashSaved)} ${T(RIYAL)} ${T({ ar: 'نقداً', en: 'in cash' })}</b> — ${T({ ar: 'كنت تحتاج', en: 'you needed' })} ${sar(r.baseCashDown)} ${T({ ar: 'دفعةً أولى، وصار المطلوب منك', en: 'as down payment; now you need' })} ${r.cashDown > 0 ? sar(r.cashDown) + ' ' + T(RIYAL) : T({ ar: 'صفراً', en: 'nothing' })}.${r.uplift > 1000 ? ' ' + T({ ar: 'ويرتفع سقفك', en: 'Your ceiling also rises by' }) + ' ' + sar(r.uplift) + ' ' + T(RIYAL) + '.' : ''} ${T({ ar: 'هنا فائدة الباقة الحقيقية: تعبر العتبة أبكر، لا أن تشتري أكبر.', en: 'That is the real value of the package: you cross the threshold sooner, not bigger.' })}</div>`;
+    if (v.support === 'margin' && r.uplift > 1000) uplift = `<div class="uplift"><b>${T({ ar: 'الدعم يرفع سقفك', en: 'The subsidy raises your ceiling by' })} ${sar(r.uplift)} ${T(RIYAL)}</b> — ${T({ ar: 'من', en: 'from' })} ${sar(r.basePrice)} ${T({ ar: 'إلى', en: 'to' })} ${sar(r.price)}، ${T({ ar: 'لأن الدولة تتحمّل', en: 'because the state bears' })} ${v.subsidyPct}٪ ${T({ ar: 'من هامش الربح على أول', en: 'of the profit margin on the first' })} ${sar(A.V('subsidyCap'))} ${T(RIYAL)}. ${T({ ar: 'لكن دفعتك الأولى تبقى عليك:', en: 'Your down payment is still yours:' })} ${sar(r.cashDown)} ${T(RIYAL)}.</div>`;
+    return `<div class="lab">${T({ ar: 'أقصى سعر عقار يناسبك', en: 'Highest price that fits you' })}</div>${big(sar(r.price), RIYAL)}
+    <div class="split">${cell({ ar: 'القسط الشهري', en: 'Monthly payment' }, sar(r.monthly))}${cell({ ar: 'مبلغ التمويل', en: 'Financing' }, sar(r.loan))}${cell(v.support === 'grant' ? { ar: 'المطلوب منك نقداً', en: 'Cash from you' } : { ar: 'الدفعة الأولى', en: 'Down payment' }, sar(r.cashDown))}${cell({ ar: 'الميزانية الشهرية المتاحة', en: 'Monthly budget available' }, sar(r.budget))}</div>
+    ${uplift}${verdict(T(V[r.verdict]), r.verdict === 'no_budget' || r.verdict === 'dti_high')}
+    <div class="res cta" style="padding:0"><a class="btn" href="#/interest?from=purchasing-power&price=${Math.round(r.price)}">${T({ ar: 'اطلب قراءة قدرتك الشرائية', en: 'Request a purchasing-power reading' })}</a><a class="btn ghost" href="#/report">${T({ ar: 'احفظ تقرير سقفك (PDF)', en: 'Save my ceiling report (PDF)' })}</a></div>
+    <div class="note">${T(DISC)} ${T({ ar: 'أرقام الدعم السكني تقديرية — الرقم المعتمد هو ما في شهادة استحقاقك من «سكني».', en: 'Housing-support figures are indicative — the binding figure is on your Sakani certificate.' })}</div>`;
+  },
+  assumptions: ['dtiDefault', 'dtiCapUnder15k', 'dtiCapAbove15k', 'dtiCapSubsidised', 'ltvFirstHome', 'ltvOther', 'retireAgePublic', 'retireAgePrivate', 'profitRate', 'grantLowIncome', 'grantHighIncome', 'subsidyCap', 'subsidyFullUpTo', 'subsidyMinPct'],
+},
+{
+  slug: 'installment', group: 'buyer', title: { ar: 'القسط الشهري', en: 'Monthly installment' }, eyebrow: 'INSTALLMENT',
+  q: { ar: 'كم قسط هذا البيت شهرياً — وكم يكلّفك التمويل على مدّته كلّها؟', en: 'What is this home’s monthly payment — and what does the financing cost over the whole term?' },
+  fields: [num('price', { ar: 'سعر العقار', en: 'Property price' }, 900000, 10000, { fmt: 'sar' }), rng('downPct', { ar: 'الدفعة الأولى', en: 'Down payment' }, 10, 5, 50, 1, 'pct'), rng('years', { ar: 'المدّة', en: 'Term' }, 25, 5, 30, 1, 'yr'), rng('ratePct', { ar: 'نسبة الربح السنوية', en: 'Annual profit rate' }, 5.5, 1, 12, 0.1, 'pct')],
+  formula: 'PMT = L × r ÷ (1 − (1 + r)^−n)   r = rate ÷ 12, n = years × 12',
+  compute: v => A.installment(v),
+  render: (r) => `<div class="lab">${T({ ar: 'القسط الشهري', en: 'Monthly payment' })}</div>${big(sar(r.monthly), RIYAL)}
+    <div class="split">${cell({ ar: 'مبلغ التمويل', en: 'Financing' }, sar(r.loan))}${cell({ ar: 'الدفعة الأولى', en: 'Down payment' }, sar(r.down))}${cell({ ar: 'إجمالي تكلفة التمويل', en: 'Total financing cost' }, sar(r.financeCost))}${cell({ ar: 'الرسوم الإدارية (بالسقف النظامي)', en: 'Admin fee (regulatory cap)' }, sar(r.adminFee))}</div>
+    <div class="lab" style="margin-top:16px">${T({ ar: 'الأصل مقابل تكلفة التمويل', en: 'Principal vs financing cost' })}</div><div class="bar"><i style="background:#F1ECE3;width:${(r.principalShare * 100).toFixed(1)}%"></i><i style="background:#C9964A;width:${((1 - r.principalShare) * 100).toFixed(1)}%"></i></div>
+    ${verdict(T({ ar: `<b>على مدّة التمويل تدفع ${sar(r.totalPaid)} ريال</b> مقابل بيت سعره ${sar(r.loan + r.down)}. كل سنة تقصّرها من المدّة تخفض هذا الرقم — وترفع القسط. الحساب على أساس تناقصي؛ بعض المنتجات تُحسب بطريقة مختلفة.`, en: `<b>Over the term you pay ${sar(r.totalPaid)} SAR</b> for a home priced ${sar(r.loan + r.down)}. Every year you cut from the term lowers this — and raises the payment. Reducing-balance basis; some products differ.` }))}
+    <div class="note">${T(DISC)}</div>`,
+  assumptions: ['adminFeePct', 'adminFeeCap', 'profitRate'],
+},
+{
+  slug: 'cash-on-day', group: 'buyer', title: { ar: 'الكاش المطلوب يوم الشراء', en: 'Cash needed on purchase day' }, eyebrow: 'CASH ON DAY',
+  q: { ar: 'الدفعة الأولى ليست كل ما تحتاجه — كم تحتاج نقداً فعلاً يوم الإفراغ؟', en: 'The down payment isn’t all you need — how much cash do you really need on transfer day?' },
+  fields: [num('price', { ar: 'سعر العقار', en: 'Property price' }, 900000, 10000, { fmt: 'sar' }), seg('financed', { ar: 'طريقة الشراء', en: 'Purchase' }, [['1', { ar: 'بتمويل', en: 'Financed' }], ['0', { ar: 'نقداً', en: 'Cash' }]], '1'), rng('downPct', { ar: 'الدفعة الأولى', en: 'Down payment' }, 10, 5, 50, 1, 'pct', { show: v => v.financed === '1' }), seg('firstHome', { ar: 'مسكن أول؟', en: 'First home?' }, [['1', { ar: 'نعم', en: 'Yes' }], ['0', { ar: 'لا', en: 'No' }]], '1'), seg('buyerBearsRett', { ar: 'من يدفع ضريبة التصرّفات (٥٪)؟', en: 'Who pays RETT (5%)?' }, [['0', { ar: 'البائع (النظام)', en: 'Seller (statutory)' }], ['1', { ar: 'أنا بالاتفاق', en: 'Me, by agreement' }]], '0', { hint: { ar: 'على البائع نظاماً، وكثيراً ما تُنقل إلى المشتري بالاتفاق. للمسكن الأول تتحمّلها الدولة حتى مليون ريال.', en: 'Legally on the seller, often shifted to the buyer by agreement. For a first home the state bears it up to SAR 1,000,000.' } }), rng('commissionPct', { ar: 'عمولة الوساطة', en: 'Brokerage commission' }, 2.5, 0, 5, 0.1, 'pct'), num('valuationFee', { ar: 'رسوم التقييم', en: 'Valuation fee' }, 2000, 250, { fmt: 'sar', show: v => v.financed === '1' }), num('registrationFee', { ar: 'رسوم الرهن والتوثيق', en: 'Registration & notarisation' }, 2500, 250, { fmt: 'sar' })],
+  compute: v => A.cashOnDay({ price: v.price, downPct: v.downPct, firstHome: v.firstHome === '1', buyerBearsRett: v.buyerBearsRett === '1', commissionPct: v.commissionPct, valuationFee: v.valuationFee, registrationFee: v.registrationFee, financed: v.financed === '1' }),
+  render: (r, v) => `<div class="lab">${T({ ar: 'الكاش المطلوب يوم الشراء', en: 'Cash needed on the day' })}</div>${big(sar(r.cash), RIYAL)}
+    <div class="split">${cell({ ar: 'الدفعة الأولى', en: 'Down payment' }, sar(r.down))}${cell({ ar: 'العمولة + ضريبتها ١٥٪', en: 'Commission + 15% VAT' }, sar(r.commission + r.commissionVat))}${cell({ ar: 'رسوم البنك والتقييم والتوثيق', en: 'Bank, valuation & registration' }, sar(r.adminFee + r.valuation + r.registration))}${cell({ ar: 'ضريبة التصرّفات عليك', en: 'RETT you pay' }, sar(r.rettBuyer), r.rettBuyer > 0 ? 'bad' : '')}</div>
+    ${v.buyerBearsRett === '1' && r.rettState > 0 ? `<div class="uplift"><b>${T({ ar: 'الدولة تتحمّل', en: 'The state bears' })} ${sar(r.rettState)} ${T(RIYAL)}</b> ${T({ ar: 'من ضريبة التصرّفات لأنه مسكنك الأول', en: 'of RETT because it is your first home' })}${r.rettBuyer > 0 ? ' — ' + T({ ar: 'وتدفع أنت ٥٪ على ما زاد عن المليون', en: 'and you pay 5% on the amount above one million' }) : ''}.</div>` : ''}
+    ${verdict(T({ ar: `<b>هذا ما تحتاجه نقداً يوم الشراء — لا الدفعة الأولى وحدها.</b> التكاليف ${pct(r.closingPct)} من السعر. أكثر ما يعطّل الصفقات في اللحظة الأخيرة أن المشتري حسب الدفعة ونسي التكاليف.`, en: `<b>This is the cash you need on the day — not the down payment alone.</b> Costs are ${pct(r.closingPct)} of the price. What derails deals at the last minute is a buyer who counted the down payment and forgot the costs.` }))}
+    <div class="note">${T({ ar: 'العمولة النظامية للوساطة ٢٫٥٪ ما لم يُتّفق كتابةً على غيرها، وتخضع لضريبة القيمة المضافة. الرسوم الإدارية بسقف ١٪ أو ٥٬٠٠٠ ريال أيّهما أقلّ.', en: 'Statutory brokerage commission is 2.5% unless agreed otherwise in writing, plus VAT. Admin fee capped at 1% or SAR 5,000, whichever is lower.' })} ${T(DISC)}</div>`,
+  assumptions: ['brokerageCommission', 'vat', 'rett', 'rettFirstHomeCap', 'adminFeePct', 'adminFeeCap', 'valuationFee', 'registrationFee'],
+},
+{
+  slug: 'when-can-i-buy', group: 'buyer', title: { ar: 'متى أقدر أشتري؟', en: 'When can I buy?' }, eyebrow: 'SAVINGS TIMELINE',
+  q: { ar: 'بمدّخرك وادّخارك الشهري — متى تصل إلى الدفعة والتكاليف، والأسعار تتحرّك؟', en: 'With your savings and monthly saving — when do you reach the down payment and costs, while prices move?' },
+  fields: [num('price', { ar: 'سعر البيت المستهدف', en: 'Target home price' }, 900000, 10000, { fmt: 'sar' }), num('saved', { ar: 'مدّخراتك الحالية', en: 'Current savings' }, 40000, 1000, { fmt: 'sar' }), num('monthly', { ar: 'ما تستطيع ادّخاره شهرياً', en: 'Monthly saving' }, 3000, 250, { fmt: 'sar' }), rng('downPct', { ar: 'الدفعة الأولى المطلوبة', en: 'Required down payment' }, 10, 5, 50, 1, 'pct'), rng('closingPct', { ar: 'تكاليف الإغلاق', en: 'Closing costs' }, 3.5, 0, 8, 0.1, 'pct'), rng('priceGrowthPct', { ar: 'ارتفاع أسعار العقار سنوياً', en: 'Annual price growth' }, 3, 0, 12, 0.5, 'pct'), rng('savingsReturnPct', { ar: 'عائد على مدّخراتك سنوياً', en: 'Return on your savings' }, 0, 0, 8, 0.5, 'pct'), num('grant', { ar: 'باقة الدعم السكني النقدي (إن كنت مستحقّاً)', en: 'Cash grant (if eligible)' }, 0, 10000, { fmt: 'sar' })],
+  compute: v => A.savingsTimeline(v),
+  render: (r) => {
+    const head = r.status === 'ready' ? T({ ar: 'جاهز الآن', en: 'Ready now' }) : r.status === 'never' ? `<span style="font-size:26px">${T({ ar: 'أكثر من ٥٠ سنة', en: 'Over 50 years' })}</span>` : span(r.months);
+    const vd = r.status === 'ready' ? { ar: '<b>مدّخرك يكفي الدفعة والتكاليف اليوم.</b> الخطوة التالية ليست البحث عن بيت، بل تثبيت سقفك مكتوباً.', en: '<b>Your savings cover the down payment and costs today.</b> The next step isn’t house-hunting; it’s putting your ceiling in writing.' } : r.status === 'never' ? { ar: '<b>الادّخار الحالي لا يلحق ارتفاع الأسعار.</b> الحلّان الوحيدان: رفع الادّخار الشهري، أو خفض سعر البيت المستهدف. نقولها بصراحة بدل أن نبيعك حلماً.', en: '<b>Current saving can’t keep up with price growth.</b> Only two fixes: save more monthly, or aim for a cheaper home. We say it plainly rather than sell you a dream.' } : { ar: `<b>لو رفعت ادّخارك ٥٠٠ ريال شهرياً</b> لصار الطريق ${span(r.monthsWithExtra500)} بدل ${span(r.months)}. هذه أسرع رافعة تملكها اليوم.`, en: `<b>Save SAR 500 more a month</b> and the road shortens to ${span(r.monthsWithExtra500)} instead of ${span(r.months)}. That’s the fastest lever you own today.` };
+    return `<div class="lab">${T({ ar: 'تصل إلى الدفعة خلال', en: 'You reach the down payment in' })}</div>${big(head, null)}
+    <div class="split">${cell({ ar: 'المبلغ المطلوب اليوم', en: 'Needed today' }, sar(r.needToday))}${cell({ ar: 'الناقص عليك', en: 'Shortfall' }, sar(r.gap))}${cell({ ar: 'المطلوب عند الوصول', en: 'Needed on arrival' }, sar(r.needAtArrival))}${cell({ ar: 'سعر البيت المتوقّع حينها', en: 'Expected price then' }, sar(r.priceAtArrival))}</div>
+    ${verdict(T(vd), r.status === 'never')}<div class="note">${T({ ar: 'ارتفاع الأسعار يرفع المبلغ المطلوب كل سنة — لذلك الادّخار سباق لا انتظار.', en: 'Price growth raises the target every year — saving is a race, not a wait.' })} ${T(DISC)}</div>`;
+  },
+  assumptions: ['closingCostsPct', 'priceGrowth', 'grantLowIncome', 'grantHighIncome'],
+},
+{
+  slug: 'rent-vs-buy', group: 'buyer', title: { ar: 'إيجار أم تملّك؟', en: 'Rent or buy?' }, eyebrow: 'RENT VS BUY',
+  q: { ar: 'على أفقك الزمني أنت — أيهما أقلّ كلفة صافية: الإيجار، أم التملّك، أم ملكية مشتركة؟', en: 'Over your own horizon — which costs less net: renting, buying, or shared ownership?' },
+  fields: [num('rent', { ar: 'إيجارك السنوي الحالي', en: 'Current annual rent' }, 48000, 1000, { fmt: 'sar' }), num('price', { ar: 'سعر البيت المرشّح', en: 'Candidate home price' }, 900000, 10000, { fmt: 'sar' }), rng('horizonYears', { ar: 'أفق المقارنة', en: 'Horizon' }, 7, 2, 25, 1, 'yr', { hint: { ar: 'عشرون سنة مع أطفال ← تملّك · ثلاث سنوات ← استأجر. الأفق هو نصف الجواب.', en: 'Twenty years with kids → buy · three years → rent. The horizon is half the answer.' } }), rng('downPct', { ar: 'الدفعة الأولى', en: 'Down payment' }, 10, 5, 50, 1, 'pct'), rng('ratePct', { ar: 'نسبة الربح', en: 'Profit rate' }, 5.5, 1, 12, 0.1, 'pct'), rng('termYears', { ar: 'مدّة التمويل', en: 'Term' }, 25, 5, 30, 1, 'yr'), rng('rentGrowthPct', { ar: 'ارتفاع الإيجار سنوياً', en: 'Rent growth' }, 4, 0, 12, 0.5, 'pct'), rng('priceGrowthPct', { ar: 'ارتفاع قيمة العقار سنوياً', en: 'Price growth' }, 3, -3, 12, 0.5, 'pct'), rng('maintenancePct', { ar: 'صيانة المسكن سنوياً (٪ من القيمة)', en: 'Upkeep (% of value / yr)' }, 1, 0, 3, 0.25, 'pct'), rng('altReturnPct', { ar: 'العائد البديل على دفعتك لو بقيت نقداً', en: 'Alternative return on your cash' }, 4, 0, 10, 0.5, 'pct'), seg('sharedOn', { ar: 'أضف مسار الملكية المشتركة', en: 'Add shared-ownership path' }, [['0', { ar: 'لا', en: 'No' }], ['1', { ar: 'نعم', en: 'Yes' }]], '0'), rng('sharePct', { ar: 'حصّتك في الملكية المشتركة', en: 'Your share' }, 50, 25, 75, 5, 'pct', { show: v => v.sharedOn === '1' }), rng('partnerYieldPct', { ar: 'عائد الشريك على حصّته', en: 'Partner’s yield on their share' }, 5, 3, 8, 0.25, 'pct', { show: v => v.sharedOn === '1' })],
+  compute: v => A.rentVsBuy({ ...v, shared: v.sharedOn === '1' ? { sharePct: v.sharePct, partnerYieldPct: v.partnerYieldPct } : undefined }),
+  render: (r, v) => {
+    const names = { rent: { ar: 'الإيجار أوفر', en: 'Renting costs less' }, buy: { ar: 'التملّك أوفر', en: 'Buying costs less' }, shared: { ar: 'الملكية المشتركة أوفر', en: 'Shared ownership costs less' } };
+    const rows = [[{ ar: 'إيجار', en: 'Rent' }, r.rentTotal, 0, r.rentTotal], [{ ar: 'تملّك كامل', en: 'Full ownership' }, r.paid + (r.buyNet - r.paid + r.equity - r.opportunity), r.equity, r.buyNet]];
+    if (r.shared) rows.push([{ ar: `ملكية مشتركة ${v.sharePct}٪`, en: `Shared ${v.sharePct}%` }, r.shared.paid, r.shared.equity, r.shared.net]);
+    return `<div class="lab">${T({ ar: 'النتيجة بعد', en: 'After' })} ${yrs(v.horizonYears)}</div>${big(T(names[r.best]), null, r.best !== 'rent')}
+    <div class="split">${cell({ ar: 'إجمالي الإيجار المدفوع', en: 'Total rent paid' }, sar(r.rentTotal))}${cell({ ar: 'صافي كلفة التملّك', en: 'Net cost of buying' }, sar(r.buyNet))}${cell({ ar: 'الملكية المتراكمة لك', en: 'Equity built' }, sar(r.equity))}${cell({ ar: 'قسطك الشهري', en: 'Monthly payment' }, sar(r.monthly))}</div>
+    <div class="scroll"><table><thead><tr><th>${T({ ar: 'المسار', en: 'Path' })}</th><th class="n">${T({ ar: 'مدفوع', en: 'Paid' })}</th><th class="n">${T({ ar: 'ملكية', en: 'Equity' })}</th><th class="n">${T({ ar: 'صافي الكلفة', en: 'Net cost' })}</th></tr></thead><tbody>${rows.map(x => `<tr><td>${T(x[0])}</td><td class="n">${sar(x[1])}</td><td class="n">${sar(x[2])}</td><td class="n">${sar(x[3])}</td></tr>`).join('')}</tbody></table></div>
+    ${verdict(T({ ar: `<b>الفارق بين الأفضل والثاني ${sar(r.margin)} ريال.</b> صافي كلفة التملّك يشمل الصيانة (${sar(r.upkeep)}) وما كانت دفعتك ستربحه لو بقيت نقداً (${sar(r.opportunity)}). الجواب حسّاس جداً لافتراض ارتفاع العقار (${v.priceGrowthPct}٪): غيّره وحده وقد ينقلب. ${r.best === 'rent' ? 'الإيجار جواب صحيح ومسموح — ليس كل وقت وقت شراء.' : ''}`, en: `<b>The gap between best and second is SAR ${sar(r.margin)}.</b> Net cost of buying includes upkeep (${sar(r.upkeep)}) and what your cash would have earned (${sar(r.opportunity)}). Very sensitive to price growth (${v.priceGrowthPct}%): change it alone and the answer may flip. ${r.best === 'rent' ? 'Renting is a legitimate answer — not every time is a time to buy.' : ''}` }))}
+    <div class="note">${T({ ar: 'صافي كلفة التملّك = الدفعة + تكاليف الإغلاق + الأقساط + الصيانة + تكلفة الفرصة − الملكية المتراكمة.', en: 'Net cost of buying = down payment + closing + payments + upkeep + opportunity cost − equity.' })} ${T(DISC)}</div>`;
+  },
+  assumptions: ['rentGrowth', 'priceGrowth', 'maintenancePct', 'altReturn', 'closingCostsPct'],
+},
+
+/* ================= B · للمستثمر ================= */
+{
+  slug: 'buyer-rental-yield', group: 'buyer', title: { ar: 'العائد الإيجاري', en: 'Rental yield' }, eyebrow: 'RENTAL YIELD · BUYER',
+  q: { ar: 'اشتريتَ لتؤجّر: كم يعود عليك العقار سنوياً بعد الشغور والمصاريف والإدارة — على كامل ما دفعته لا على السعر وحده؟', en: 'Buying to let: what does the property return a year after vacancy, expenses and management — on everything you paid, not the price alone?' },
+  fields: [num('price', { ar: 'سعر الشراء', en: 'Purchase price' }, 900000, 10000, { fmt: 'sar' }), num('annualRent', { ar: 'الإيجار السنوي المتوقّع', en: 'Expected annual rent' }, 55000, 1000, { fmt: 'sar', hint: { ar: 'قارنه بعقود «إيجار» المسجّلة لوحدات مشابهة في الحيّ، لا بإعلانات الطلب.', en: 'Benchmark against registered Ejar contracts for similar units, not asking adverts.' } }), seg('propertyType', { ar: 'نوع العقار', en: 'Property type' }, [['residential', { ar: 'سكني (إيجار معفى من الضريبة)', en: 'Residential (rent VAT-exempt)' }], ['commercial', { ar: 'تجاري (١٥٪ ضريبة على الإيجار)', en: 'Commercial (15% VAT on rent)' }]], 'residential'), rng('vacancyPct', { ar: 'نسبة الشغور', en: 'Vacancy' }, 8, 0, 30, 1, 'pct', { hint: { ar: 'شهر شغور في السنة ≈ ٨٪.', en: 'One vacant month a year ≈ 8%.' } }), rng('opexPct', { ar: 'الصيانة والتشغيل', en: 'Maintenance & running costs' }, 10, 0, 30, 1, 'pct'), rng('mgmtPct', { ar: 'إدارة الأملاك والتحصيل', en: 'Property management' }, 5, 0, 15, 0.5, 'pct', { hint: { ar: '٥٪ من الإيجار شائعة لدى مكاتب إدارة الأملاك؛ صفر إن أدرت بنفسك.', en: '5% of rent is common for management offices; zero if self-managed.' } }), seg('buyerBearsRett', { ar: 'ضريبة التصرّفات ٥٪', en: 'RETT 5%' }, [['0', { ar: 'على البائع (الأصل نظاماً)', en: 'Seller (statutory default)' }], ['1', { ar: 'اتُّفق أن أتحمّلها', en: 'Agreed I bear it' }]], '0')],
+  compute: v => {
+    const price = Math.max(0, v.price), rent = Math.max(0, v.annualRent);
+    const commission = price * A.V('brokerageCommission') / 100, vat = commission * A.V('vat') / 100;
+    const rett = v.buyerBearsRett === '1' ? price * A.V('rett') / 100 : 0;
+    const closing = commission + vat + rett + A.V('registrationFee');
+    const totalCost = price + closing;
+    const effective = rent * (1 - v.vacancyPct / 100);
+    const noi = effective * (1 - (v.opexPct + v.mgmtPct) / 100);
+    const gross = price ? rent / price * 100 : 0, net = totalCost ? noi / totalCost * 100 : 0;
+    const rfr = A.V('riskFreeRate');
+    const verdict = net < rfr - 1 ? 'below_rfr' : net < rfr + 1 ? 'near_rfr' : net > 9 ? 'high_check' : 'ok';
+    return { closing, totalCost, effective, noi, gross, net, monthlyNet: noi / 12, payback: noi > 0 ? totalCost / noi : Infinity, rfr, spread: net - rfr, vatOnRent: v.propertyType === 'commercial' ? rent * A.V('vat') / 100 : 0, verdict };
+  },
+  render: (r, v) => {
+    const vd = { below_rfr: { ar: `<b>العائد الصافي أدنى من الصكوك الحكومية (${pct(r.rfr)}).</b> بالسعر والإيجار هذين تحمل مخاطر عقار مقابل عائد أقلّ من البديل الآمن — إمّا سعر أقلّ، أو إيجار أعلى موثّق، أو لا تشترِ للتأجير.`, en: `<b>Net yield is below government sukuk (${pct(r.rfr)}).</b> At this price and rent you carry property risk for less than the safe alternative — lower price, documented higher rent, or don’t buy to let.` }, near_rfr: { ar: '<b>العائد قريب من الصكوك.</b> ما يبرّر الشراء هنا هو ارتفاع القيمة المتوقّع لا الإيجار — احسبه في «العائد الاستثماري» قبل القرار.', en: '<b>Yield is close to sukuk.</b> What would justify buying is expected capital growth, not rent — run “Investment return” before deciding.' }, high_check: { ar: '<b>عائد مرتفع — تحقّق.</b> افحص الإيجار المفترض في عقود «إيجار» المسجّلة، ونسبة الشغور الفعلية في الحيّ.', en: '<b>High yield — verify.</b> Check the assumed rent against registered Ejar contracts and the district’s actual vacancy.' }, ok: { ar: `<b>عائد معقول — فوق الصكوك بـ${r.spread.toFixed(1)} نقطة.</b> هذه علاوة مخاطرك مقابل الشغور والصيانة والمستأجر. الرقم التالي: مدّة بقاء المستأجر.`, en: `<b>Reasonable yield — ${r.spread.toFixed(1)}pt above sukuk.</b> That is your risk premium for vacancy, upkeep and the tenant. Next number: tenant tenure.` } };
+    return `<div class="lab">${T({ ar: 'صافي العائد على كامل التكلفة', en: 'Net yield on total cost' })}</div>${big(pct(r.net, 2), { ar: 'سنوياً', en: 'a year' })}
+    <div class="split">${cell({ ar: 'العائد الإجمالي على السعر', en: 'Gross yield on price' }, pct(r.gross, 2))}${cell({ ar: 'صافي الدخل الشهري', en: 'Net monthly income' }, sar(r.monthlyNet))}${cell({ ar: 'تكاليف الشراء (عمولة + ضريبتها + رسوم)', en: 'Purchase costs' }, sar(r.closing))}${cell({ ar: 'سنوات لاسترداد التكلفة من الإيجار', en: 'Years to recover cost from rent' }, isFinite(r.payback) ? r.payback.toFixed(1) : '—')}</div>
+    ${v.propertyType === 'commercial' ? `<div class="uplift">${T({ ar: `ضريبة القيمة المضافة على الإيجار التجاري ${sar(r.vatOnRent)} ريال سنوياً — تُحصَّل من المستأجر وتُورَّد لهيئة الزكاة والضريبة والجمارك، وليست دخلاً لك.`, en: `VAT on commercial rent is SAR ${sar(r.vatOnRent)} a year — collected from the tenant and remitted to ZATCA, not your income.` })}</div>` : ''}
+    ${verdict(T(vd[r.verdict]), r.verdict === 'below_rfr')}<div class="note">${T({ ar: 'الطريقة: صافي الدخل التشغيلي (بعد الشغور والصيانة والإدارة) ÷ (السعر + تكاليف الشراء). لا يشمل ارتفاع القيمة ولا التمويل — انظر «العائد الاستثماري».', en: 'Method: NOI (after vacancy, upkeep, management) ÷ (price + purchase costs). Excludes capital growth and financing — see “Investment return”.' })} ${T(DISC_PRO)}</div>`;
+  },
+  assumptions: ['brokerageCommission', 'vat', 'rett', 'registrationFee', 'riskFreeRate'],
+},
+{
+  slug: 'investment-return', group: 'buyer', title: { ar: 'العائد الاستثماري', en: 'Investment return' }, eyebrow: 'ROI · IRR · EQUITY MULTIPLE',
+  q: { ar: 'إيجار + ارتفاع قيمة − تكاليف الشراء والبيع والتمويل: كم يعود عليك المبلغ الذي دفعته فعلاً على مدى سنوات الاحتفاظ؟', en: 'Rent + capital growth − purchase, sale and financing costs: what does the money you actually put in return over the holding period?' },
+  fields: [num('price', { ar: 'سعر الشراء', en: 'Purchase price' }, 900000, 10000, { fmt: 'sar' }), num('annualRent', { ar: 'الإيجار السنوي — السنة الأولى', en: 'Annual rent — year 1' }, 55000, 1000, { fmt: 'sar' }), rng('vacancyPct', { ar: 'الشغور', en: 'Vacancy' }, 8, 0, 30, 1, 'pct'), rng('costsPct', { ar: 'الصيانة والإدارة (٪ من الإيجار)', en: 'Upkeep & management (% of rent)' }, 15, 0, 40, 1, 'pct'), rng('holdYears', { ar: 'سنوات الاحتفاظ', en: 'Holding period' }, 7, 2, 20, 1, 'yr'), rng('priceGrowthPct', { ar: 'نموّ سعر العقار السنوي', en: 'Annual price growth' }, 3, -3, 10, 0.5, 'pct', { hint: { ar: 'افتراض تخطيط — لا وعد. جرّب صفراً لترى إن كان الإيجار وحده يكفي.', en: 'A planning assumption, not a promise. Try zero to see whether rent alone carries it.' } }), rng('rentGrowthPct', { ar: 'نموّ الإيجار السنوي', en: 'Annual rent growth' }, 3, -3, 10, 0.5, 'pct'), seg('financed', { ar: 'طريقة الشراء', en: 'How you buy' }, [['0', { ar: 'كاش', en: 'Cash' }], ['1', { ar: 'بتمويل', en: 'Financed' }]], '1'), rng('downPct', { ar: 'الدفعة الأولى', en: 'Down payment' }, 30, 30, 70, 5, 'pct', { show: v => v.financed === '1', hint: { ar: 'الحدّ الأدنى ٣٠٪ لغير المسكن الأول (تمويل ٧٠٪).', en: 'Minimum 30% for a non-first home (70% LTV).' } }), rng('ratePct', { ar: 'نسبة الربح السنوية', en: 'Profit rate' }, 6, 1, 12, 0.1, 'pct', { show: v => v.financed === '1' }), rng('termYears', { ar: 'مدّة التمويل', en: 'Term' }, 20, 5, 30, 1, 'yr', { show: v => v.financed === '1' }), seg('buyerBearsRett', { ar: 'ضريبة التصرّفات عند شرائك', en: 'RETT when you buy' }, [['0', { ar: 'على البائع', en: 'Seller' }], ['1', { ar: 'أتحمّلها', en: 'I bear it' }]], '0')],
+  compute: v => {
+    const price = Math.max(0, v.price), N = Math.max(1, Math.round(v.holdYears)), fin = v.financed === '1';
+    const comm = A.V('brokerageCommission') / 100, vat = A.V('vat') / 100, rett = A.V('rett') / 100;
+    const closing = price * comm * (1 + vat) + (v.buyerBearsRett === '1' ? price * rett : 0) + A.V('registrationFee') + (fin ? A.adminFee(price * (1 - v.downPct / 100)) + A.V('valuationFee') : 0);
+    const loan = fin ? price * (1 - v.downPct / 100) : 0;
+    const equity = price - loan + closing;
+    const pmt = fin ? A.pmt(loan, v.ratePct, v.termYears) : 0, ds = pmt * 12;
+    const cfs = [-equity], rows = [];
+    let sumCF = 0;
+    for (let t = 1; t <= N; t++) {
+      const rent = v.annualRent * Math.pow(1 + v.rentGrowthPct / 100, t - 1);
+      const noi = rent * (1 - v.vacancyPct / 100) * (1 - v.costsPct / 100);
+      const cf = noi - ds; sumCF += cf;
+      rows.push({ year: t, noi, ds, cf });
+      cfs.push(cf);
+    }
+    const value = price * Math.pow(1 + v.priceGrowthPct / 100, N);
+    const saleCosts = value * comm * (1 + vat) + value * rett; // البائع يتحمّل ضريبة التصرّفات نظاماً
+    const balance = fin ? A.balance(loan, v.ratePct, v.termYears, N * 12) : 0;
+    const proceeds = value - saleCosts - balance;
+    cfs[N] += proceeds;
+    const irr = A.irr(cfs);
+    const profit = sumCF + proceeds - equity;
+    const multiple = equity > 0 ? (sumCF + proceeds) / equity : 0;
+    // مقارنة: الشراء كاش
+    const eqCash = price + price * comm * (1 + vat) + (v.buyerBearsRett === '1' ? price * rett : 0) + A.V('registrationFee');
+    const cashCfs = [-eqCash]; for (let t = 1; t <= N; t++) cashCfs.push(rows[t - 1].noi); cashCfs[N] += value - saleCosts;
+    const irrCash = A.irr(cashCfs);
+    const rfr = A.V('riskFreeRate');
+    const negYears = rows.filter(r => r.cf < 0).length;
+    const verdict = !isFinite(irr) || profit <= 0 ? 'loss' : irr < rfr ? 'below_rfr' : negYears === N && fin ? 'growth_bet' : 'ok';
+    return { equity, closing, loan, ds, rows, value, saleCosts, balance, proceeds, sumCF, profit, multiple, irr, irrCash, rfr, negYears, N, verdict, simpleAnnual: equity > 0 ? profit / equity / N * 100 : 0, growthShare: profit > 0 ? Math.max(0, (value - price - saleCosts) / profit * 100) : 0 };
+  },
+  render: (r, v) => {
+    const vd = { loss: { ar: '<b>الاستثمار خاسر بهذه الأرقام.</b> تكاليف الشراء والبيع (العمولتان وضريبتاهما وضريبة التصرّفات) تأكل أكثر مما يعطيه الإيجار والنموّ في هذه المدّة. مدّة أطول، أو سعر أقلّ، أو لا.', en: '<b>A loss on these numbers.</b> Purchase and sale costs (two commissions, their VAT, and RETT) eat more than rent and growth give over this period. Longer hold, lower price — or no.' }, below_rfr: { ar: `<b>العائد الداخلي أدنى من الصكوك (${pct(r.rfr)}).</b> تحمل مخاطر عقار لعائد أقلّ من البديل الآمن.`, en: `<b>IRR below sukuk (${pct(r.rfr)}).</b> Property risk for less than the safe alternative.` }, growth_bet: { ar: `<b>التدفّق النقدي سالب كل السنوات — العائد كلّه من ارتفاع القيمة.</b> تدفع من جيبك كل شهر وتراهن على النموّ المفترض (${v.priceGrowthPct}٪). جرّب نموّاً صفراً لترى ما يبقى.`, en: `<b>Negative cash flow every year — all the return is capital growth.</b> You pay out of pocket monthly and bet on the assumed ${v.priceGrowthPct}% growth. Try zero growth to see what remains.` }, ok: { ar: `<b>عائد داخلي ${pct(r.irr)} على ما دفعته فعلاً.</b> ${r.growthShare > 60 ? 'أكثر من نصفه من ارتفاع القيمة — أي من افتراضك لا من الإيجار.' : 'الإيجار يحمل معظمه — وهذا أثبت من الرهان على الأسعار.'} ${v.financed === '1' ? (r.irr > r.irrCash ? 'التمويل يرفع عائدك على النقد لأن عائد العقار يفوق كلفة التمويل.' : 'التمويل يخفض عائدك: كلفته تفوق عائد العقار — الكاش أفضل هنا.') : ''}`, en: `<b>IRR ${pct(r.irr)} on the money you actually put in.</b> ${r.growthShare > 60 ? 'More than half comes from capital growth — your assumption, not rent.' : 'Rent carries most of it — steadier than betting on prices.'} ${v.financed === '1' ? (r.irr > r.irrCash ? 'Financing lifts your cash return because the property yields more than the financing costs.' : 'Financing lowers your return: it costs more than the property yields — cash is better here.') : ''}` } };
+    const tbl = `<div class="scroll"><table><thead><tr><th>${T({ ar: 'السنة', en: 'Year' })}</th><th class="n">${T({ ar: 'صافي الإيجار', en: 'NOI' })}</th>${v.financed === '1' ? `<th class="n">${T({ ar: 'الأقساط', en: 'Debt service' })}</th>` : ''}<th class="n">${T({ ar: 'ما يبقى لك', en: 'Cash to you' })}</th></tr></thead><tbody>${r.rows.map(x => `<tr><td>${x.year}</td><td class="n">${sar(x.noi)}</td>${v.financed === '1' ? `<td class="n">${sar(x.ds)}</td>` : ''}<td class="n ${x.cf < 0 ? 'bad' : 'good'}">${sar(x.cf)}</td></tr>`).join('')}<tr><td>${T({ ar: 'البيع', en: 'Sale' })} (${r.N})</td><td class="n">${sar(r.value)}</td>${v.financed === '1' ? `<td class="n">${sar(r.balance)}</td>` : ''}<td class="n hi">${sar(r.proceeds)}</td></tr></tbody></table></div>`;
+    return `<div class="lab">${T({ ar: 'العائد الداخلي السنوي (IRR) على ما دفعته', en: 'Annual IRR on your equity' })}</div>${big(isFinite(r.irr) ? pct(r.irr, 1) : '—', null, isFinite(r.irr) && r.irr >= r.rfr)}
+    <div class="split">${cell({ ar: 'ما دفعته فعلاً (دفعة + تكاليف)', en: 'Equity in (down + costs)' }, sar(r.equity))}${cell({ ar: 'صافي الربح بعد البيع', en: 'Net profit after sale' }, sar(r.profit), r.profit < 0 ? 'bad' : 'good')}${cell({ ar: 'مضاعف رأس المال', en: 'Equity multiple' }, r.multiple.toFixed(2) + '×')}${cell({ ar: 'العائد البسيط سنوياً', en: 'Simple annual ROI' }, pct(r.simpleAnnual))}</div>
+    <div class="split c3" style="margin-top:8px">${cell({ ar: 'صافي البيع بعد التكاليف والسداد', en: 'Net sale after costs & payoff' }, sar(r.proceeds))}${cell({ ar: 'تكاليف البيع (عمولة + ضريبتها + تصرّفات ٥٪)', en: 'Sale costs (commission + VAT + RETT 5%)' }, sar(r.saleCosts))}${cell({ ar: 'لو اشتريت كاش — IRR', en: 'If bought cash — IRR' }, isFinite(r.irrCash) ? pct(r.irrCash, 1) : '—')}</div>
+    ${verdict(T(vd[r.verdict]), r.verdict !== 'ok')}<div class="lab" style="margin-top:16px">${T({ ar: 'سنة بسنة', en: 'Year by year' })}</div>${tbl}
+    <div class="note">${T({ ar: 'الطريقة المعتمدة: التدفّق النقدي لحقوق الملكية بعد التمويل، تكاليف الشراء (عمولة ٢٫٥٪ + ضريبتها ١٥٪ + رسوم + ضريبة التصرّفات إن تحمّلتها)، تكاليف البيع (عمولة + ضريبة التصرّفات ٥٪ على البائع)، ثم العائد الداخلي. الإيجار السكني معفى من ضريبة القيمة المضافة. نموّ الأسعار افتراضك أنت.', en: 'Method: levered equity cash flow, purchase costs (2.5% commission + 15% VAT + fees + RETT if you bear it), sale costs (commission + 5% RETT on the seller), then IRR. Residential rent is VAT-exempt. Price growth is your assumption.' })} ${T(DISC_PRO)}</div>`;
+  },
+  assumptions: ['brokerageCommission', 'vat', 'rett', 'registrationFee', 'adminFeePct', 'adminFeeCap', 'valuationFee', 'ltvOther', 'riskFreeRate', 'priceGrowth', 'rentGrowth'],
+},
+{
+  slug: 'rental-yield', group: 'investor', title: { ar: 'العائد الإيجاري', en: 'Rental yield' }, eyebrow: 'RENTAL YIELD',
+  q: { ar: 'كم يعود عليك هذا العقار فعلاً بعد الشغور والمصاريف — والقسط إن موّلت؟', en: 'What does this property really return after vacancy, expenses — and the payment if financed?' },
+  fields: [num('price', { ar: 'سعر الشراء', en: 'Purchase price' }, 900000, 10000, { fmt: 'sar' }), num('annualRent', { ar: 'الإيجار السنوي المتوقّع', en: 'Expected annual rent' }, 55000, 1000, { fmt: 'sar' }), seg('propertyType', { ar: 'نوع العقار', en: 'Property type' }, [['residential', { ar: 'سكني (معفى من الضريبة)', en: 'Residential (VAT-exempt)' }], ['commercial', { ar: 'تجاري (١٥٪ ضريبة)', en: 'Commercial (15% VAT)' }]], 'residential'), rng('vacancyPct', { ar: 'نسبة الشغور', en: 'Vacancy' }, 8, 0, 30, 1, 'pct'), rng('opexPct', { ar: 'مصاريف التشغيل والصيانة', en: 'Opex' }, 15, 0, 40, 1, 'pct'), seg('financed', { ar: 'هل ستموّل الشراء؟', en: 'Financed?' }, [['0', { ar: 'نقدي', en: 'Cash' }], ['1', { ar: 'بتمويل', en: 'Financed' }]], '1'), rng('downPct', { ar: 'الدفعة الأولى', en: 'Down payment' }, 30, 5, 70, 1, 'pct', { show: v => v.financed === '1' }), rng('ratePct', { ar: 'نسبة الربح', en: 'Profit rate' }, 6, 1, 12, 0.1, 'pct', { show: v => v.financed === '1' }), rng('termYears', { ar: 'مدّة التمويل', en: 'Term' }, 20, 5, 30, 1, 'yr', { show: v => v.financed === '1' })],
+  compute: v => A.rentalYield({ ...v, financed: v.financed === '1' }),
+  render: (r, v) => {
+    const vd = { negative_cf: { ar: '<b>التدفّق النقدي سالب.</b> الإيجار لا يغطّي القسط — أنت تدفع من جيبك شهرياً وتراهن على ارتفاع السعر وحده. هذا ليس استثماراً بل مضاربة.', en: '<b>Negative cash flow.</b> Rent doesn’t cover the payment — you pay monthly out of pocket and bet on price growth alone. That is speculation, not investment.' }, low: { ar: '<b>عائد صافٍ منخفض.</b> قارنه بأدوات أقلّ مخاطرة قبل أن تلتزم. العقار يستحقّ العناء حين يتفوّق على البديل بوضوح.', en: '<b>Low net yield.</b> Compare it with lower-risk instruments before committing. Property earns its trouble when it clearly beats the alternative.' }, high_check: { ar: '<b>عائد مرتفع — تحقّق منه.</b> افحص واقعية الإيجار المفترض ونسبة الشغور في الحي. العوائد الممتازة على الورق غالباً تحمل افتراضاً متفائلاً.', en: '<b>High yield — verify it.</b> Check the assumed rent and the neighbourhood vacancy. Excellent paper yields usually hide an optimistic assumption.' }, ok: { ar: '<b>عائد ضمن النطاق المعقول.</b> الرقم الحاسم بعده هو مدّة بقاء المستأجر، لا العائد في السنة الأولى.', en: '<b>Yield within a reasonable range.</b> The decisive number next is tenant tenure, not first-year yield.' } };
+    return `<div class="lab">${T({ ar: 'صافي العائد على السعر', en: 'Net yield on price' })}</div>${big(pct(r.net), { ar: 'صافي', en: 'net' })}
+    <div class="split">${cell({ ar: 'العائد الإجمالي', en: 'Gross yield' }, pct(r.gross))}${cell({ ar: 'صافي الدخل السنوي', en: 'Net operating income' }, sar(r.noi))}${cell({ ar: 'التدفّق النقدي السنوي', en: 'Annual cash flow' }, sar(r.cashFlow), r.cashFlow < 0 ? 'bad' : '')}${cell({ ar: 'العائد على النقد المستثمَر', en: 'Cash-on-cash' }, pct(r.cashOnCash))}</div>
+    ${v.propertyType === 'commercial' ? `<div class="uplift">${T({ ar: `ضريبة القيمة المضافة على الإيجار التجاري ${sar(r.vatOnRent)} ريال سنوياً — تُحصَّل من المستأجر وتُورَّد، وليست دخلاً لك.`, en: `VAT on commercial rent is SAR ${sar(r.vatOnRent)} a year — collected from the tenant and remitted, not your income.` })}</div>` : ''}
+    ${verdict(T(vd[r.verdict]), r.verdict === 'negative_cf')}<div class="note">${T({ ar: 'لا يشمل ارتفاع قيمة العقار ولا ضريبة التصرّفات عند البيع. الإيجار والشغور تقديرات منك.', en: 'Excludes capital growth and RETT on sale. Rent and vacancy are your estimates.' })} ${T(DISC_PRO)}</div>`;
+  },
+  assumptions: ['vacancy', 'opex', 'vat', 'profitRate'],
+},
+{
+  slug: 'cap-rate', group: 'investor', title: { ar: 'نموذج التسعير — المعدّل الرأسمالي', en: 'Pricing model — cap rate' }, eyebrow: 'CAP RATE · K = RFR + Rp − G + D',
+  q: { ar: 'ما القيمة العادلة لأصل مدرّ للدخل — وهل السعر المطلوب فوقها أم تحتها؟', en: 'What is an income-producing asset fairly worth — and is the asking price above or below it?' },
+  fields: [rng('rfrPct', { ar: 'العائد الخالي من المخاطر (صكوك ١٠ سنوات)', en: 'Risk-free rate (10y sukuk)' }, 5, 2, 9, 0.1, 'pct'), rng('riskPremiumPct', { ar: 'علاوة المخاطر', en: 'Risk premium' }, 4, 1, 10, 0.25, 'pct', { hint: { ar: '٣–٤٪ لأصل جيد بمستأجر قوي · ٦٪ لأصل شاغر أو ثانوي.', en: '3–4% for a good asset with a strong tenant · 6% vacant or secondary.' } }), rng('inflationPct', { ar: 'التضخّم المتوقّع', en: 'Expected inflation' }, 2, 0, 6, 0.1, 'pct'), rng('realGrowthPct', { ar: 'نمو الإيجار الحقيقي فوق التضخّم', en: 'Real rent growth' }, 0.5, -3, 5, 0.25, 'pct'), rng('depreciationPct', { ar: 'الاندثار', en: 'Depreciation' }, 1, 0, 4, 0.25, 'pct'), num('noi', { ar: 'صافي الدخل التشغيلي السنوي', en: 'Annual NOI' }, 600000, 10000, { fmt: 'sar' }), num('askingPrice', { ar: 'السعر المطلوب (اختياري)', en: 'Asking price (optional)' }, 9500000, 100000, { fmt: 'sar' })],
+  formula: 'K = RFR + Rp − (G + i) + D   ·   Value = NOI ÷ K',
+  compute: v => A.capRate(v),
+  render: (r) => {
+    const ask = r.ask ? `<div class="scroll"><table><tbody><tr><td>${T({ ar: 'العائد الضمني في السعر المطلوب', en: 'Implied yield in asking price' })}</td><td class="n">${pct(r.ask.impliedK, 2)}</td></tr><tr><td>${T({ ar: 'المضاعف الضمني', en: 'Implied multiplier' })}</td><td class="n">${sar2(r.ask.impliedMultiplier)}×</td></tr><tr><td>${T({ ar: 'الفارق عن الصكوك', en: 'Spread over sukuk' })}</td><td class="n">${r.ask.spread.toFixed(2)}</td></tr><tr><td>${T({ ar: 'السعر المطلوب مقارنة بقيمتك', en: 'Asking vs your value' })}</td><td class="n ${r.ask.diffPct > 0 ? 'bad' : 'good'}">${r.ask.diffPct > 0 ? '+' : ''}${r.ask.diffPct.toFixed(1)}%</td></tr></tbody></table></div>` : '';
+    const vd = r.invalid ? { ar: '<b>المعدّل صفر أو سالب</b> — نموّ متوقّع يفوق العائد المطلوب. راجع الافتراضات: هذا لا يحدث في سوق حقيقية.', en: '<b>Cap rate is zero or negative</b> — expected growth exceeds the required return. Revisit the assumptions; real markets don’t do this.' } : !r.ask ? { ar: `<b>المضاعف ${sar2(r.multiplier)}×</b> — المشتري يدفع ${sar2(r.multiplier)} ضعف صافي الدخل. كل ٠٫٢٥ نقطة على علاوة المخاطر تغيّر القيمة نحو ${sar(Math.abs(r.sensitivity025))} ريال.`, en: `<b>Multiplier ${sar2(r.multiplier)}×</b> — the buyer pays ${sar2(r.multiplier)} times NOI. Each 0.25pt on the risk premium moves value by about SAR ${sar(Math.abs(r.sensitivity025))}.` } : r.ask.verdict === 'above' ? { ar: `<b>السعر المطلوب فوق قيمتك بنسبة ${r.ask.diffPct.toFixed(1)}٪.</b> إمّا أن البائع يفترض علاوة مخاطر أدنى أو نموّاً أعلى — أو أنه سعر طلب لا سعر بيع. ابدأ التفاوض من قيمتك.`, en: `<b>Asking price is ${r.ask.diffPct.toFixed(1)}% above your value.</b> Either the seller assumes a lower risk premium or higher growth — or it’s an ask, not a sale price. Negotiate from your value.` } : r.ask.verdict === 'below' ? { ar: '<b>السعر المطلوب أدنى من قيمتك.</b> قبل أن تفرح: لماذا؟ مستأجر ضعيف، فترة شغور، احتياج رأسمالي، أو معلومة عن السوق لا تملكها.', en: '<b>Asking price is below your value.</b> Before celebrating: why? Weak tenant, void period, capex need, or market information you don’t have.' } : { ar: '<b>السعر متّسق مع نموذجك.</b> الفارق داخل هامش الخطأ — القرار يعتمد على ثقتك بمكوّناتك، خصوصاً الاندثار ونمو الإيجار.', en: '<b>Price is consistent with your model.</b> The gap is within error — the decision rests on your confidence in the components, especially depreciation and rent growth.' };
+    return `<div class="lab">${T({ ar: 'المعدّل الرأسمالي المشتقّ K', en: 'Derived cap rate K' })}</div>${big(pct(r.K, 2), null)}
+    <div class="split c3">${cell({ ar: 'المضاعف (1 ÷ K)', en: 'Multiplier (1 ÷ K)' }, sar2(r.multiplier) + '×')}${cell({ ar: 'القيمة = NOI ÷ K', en: 'Value = NOI ÷ K' }, sar(r.value))}${cell({ ar: 'العائد المطلوب', en: 'Required return' }, pct(r.requiredReturn))}</div>${ask}${verdict(T(vd), r.invalid)}<div class="note">${T(DISC_PRO)}</div>`;
+  },
+  assumptions: ['riskFreeRate', 'riskPremium', 'inflation', 'depreciation'],
+},
+{
+  slug: 'dcf', group: 'investor', title: { ar: 'التدفّق النقدي المخصوم', en: 'Discounted cash flow' }, eyebrow: 'DCF · 10 YEARS',
+  q: { ar: 'ابنِ التدفّق سنة بسنة، بِع بمعدّل خروج، واخصم — ما أقصى سعر يستحقّه الأصل بعائدك المطلوب؟', en: 'Build the cash flow year by year, sell at an exit yield, discount — what is the most the asset is worth at your required return?' },
+  fields: [num('price', { ar: 'سعر الشراء', en: 'Purchase price' }, 9500000, 100000, { fmt: 'sar' }), num('rentYear1', { ar: 'صافي الإيجار — السنة الأولى', en: 'Net rent — year 1' }, 600000, 10000, { fmt: 'sar' }), rng('growthPct', { ar: 'نمو الإيجار السنوي (اسمي)', en: 'Nominal rent growth' }, 2.5, -3, 8, 0.25, 'pct'), rng('exitCapPct', { ar: 'معدّل الخروج', en: 'Exit yield' }, 7, 3, 12, 0.25, 'pct', { hint: { ar: 'عادةً أعلى من معدّل الدخول لأن المبنى يكبر عشر سنوات.', en: 'Usually above the entry yield — the building is ten years older.' } }), rng('requiredPct', { ar: 'العائد المطلوب (معدّل الخصم)', en: 'Required return (discount rate)' }, 9, 4, 18, 0.25, 'pct'), rng('voidMonths', { ar: 'أشهر شغور في البداية', en: 'Initial void (months)' }, 0, 0, 24, 1, 'mo'), rng('buyCostPct', { ar: 'تكاليف الشراء', en: 'Purchase costs' }, 2.5, 0, 8, 0.5, 'pct'), rng('sellCostPct', { ar: 'تكاليف البيع', en: 'Sale costs' }, 2.5, 0, 8, 0.5, 'pct'), rng('holdYears', { ar: 'مدّة الاحتفاظ', en: 'Holding period' }, 10, 3, 20, 1, 'yr')],
+  compute: v => A.dcf(v),
+  render: (r, v) => {
+    const sens = `<div class="scroll"><table><thead><tr><th>${T({ ar: 'السعر ↓ · الخروج →', en: 'Price ↓ · Exit →' })}</th>${r.sensitivity.exits.map(x => `<th class="n">${x.toFixed(2)}%</th>`).join('')}</tr></thead><tbody>${r.sensitivity.prices.map((p, pi) => `<tr><td class="n">${sar(p)}</td>${r.sensitivity.grid[pi].map((g, xi) => `<td class="n ${pi === 2 && xi === 2 ? 'hi' : g >= v.requiredPct ? 'good' : 'bad'}">${pct(g)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+    const tbl = `<div class="scroll"><table><thead><tr><th>${T({ ar: 'السنة', en: 'Year' })}</th><th class="n">${T({ ar: 'صافي الإيجار', en: 'Net rent' })}</th><th class="n">${T({ ar: 'صافي البيع', en: 'Net sale' })}</th><th class="n">${T({ ar: 'التدفّق', en: 'Cash flow' })}</th><th class="n">${T({ ar: 'القيمة الحالية', en: 'PV' })}</th></tr></thead><tbody><tr><td>0</td><td class="n">—</td><td class="n">—</td><td class="n bad">${sar(r.entryCost)}</td><td class="n bad">${sar(r.entryCost)}</td></tr>${r.rows.map(x => `<tr><td>${x.year}</td><td class="n">${sar(x.rent)}</td><td class="n">${x.sale ? sar(x.sale) : '—'}</td><td class="n">${sar(x.cf)}</td><td class="n">${sar(x.pv)}</td></tr>`).join('')}</tbody></table></div>`;
+    const vd = r.meets ? { ar: `<b>الأصل يحقّق عائدك المطلوب ${v.requiredPct}٪ وزيادة.</b> أقصى ما يمكن دفعه مع الحفاظ على العائد ${sar(r.worth)} — هامش ${Math.abs(r.premiumPct).toFixed(1)}٪ تحت هذا السقف. العائد الداخلي ${pct(r.irr)} يفترض أن كل شيء في الجدول سيحدث.`, en: `<b>The asset meets your ${v.requiredPct}% required return and more.</b> The most you can pay and keep that return is ${sar(r.worth)} — a ${Math.abs(r.premiumPct).toFixed(1)}% margin below that cap. IRR ${pct(r.irr)} assumes everything in the table happens.` } : { ar: `<b>السعر أعلى مما يستحقّه الأصل بعائدك بنسبة ${r.premiumPct.toFixed(1)}٪.</b> إمّا تفاوض إلى ${sar(r.worth)}، أو اقبل عائداً ${pct(r.irr)}، أو راجع افتراضاتك — خصوصاً معدّل الخروج.`, en: `<b>Price is ${r.premiumPct.toFixed(1)}% above what the asset is worth at your return.</b> Negotiate to ${sar(r.worth)}, accept ${pct(r.irr)}, or revisit the assumptions — especially the exit yield.` };
+    return `<div class="lab">${T({ ar: 'صافي القيمة الحالية عند سعر الشراء', en: 'NPV at purchase price' })}</div>${big((r.npv >= 0 ? '+' : '−') + sar(Math.abs(r.npv)), RIYAL, r.npv >= 0)}
+    <div class="split c3">${cell({ ar: 'العائد الداخلي IRR', en: 'IRR' }, pct(r.irr, 2), r.irr >= v.requiredPct ? 'good' : 'bad')}${cell({ ar: 'أقصى سعر يستحقّه', en: 'Max worth (NPV = 0)' }, sar(r.worth))}${cell({ ar: 'العائد الأوّلي', en: 'Initial yield' }, pct(r.initialYield, 2))}</div>${verdict(T(vd), !r.meets)}
+    <div class="lab" style="margin-top:16px">${T({ ar: 'حساسية IRR — السعر × معدّل الخروج', en: 'IRR sensitivity — price × exit yield' })}</div>${sens}<div class="lab" style="margin-top:16px">${T({ ar: 'التدفّق سنة بسنة', en: 'Year-by-year cash flow' })}</div>${tbl}
+    <div class="note">${T({ ar: 'ما لا يظهر في الجدول: إفلاس المستأجر، إعادة التأجير، الاحتياج الرأسمالي. الجدول يبدو احترافياً — والمفاجآت خارجه.', en: 'Not in the table: tenant default, re-letting, capex. The table looks professional — the surprises live outside it.' })} ${T(DISC_PRO)}</div>`;
+  },
+  assumptions: ['brokerageCommission', 'riskFreeRate', 'riskPremium'],
+},
+{
+  slug: 'leverage', group: 'investor', title: { ar: 'الرافعة والدين', en: 'Leverage & debt' }, eyebrow: 'LEVERAGE · ke = (ka − kd·LTV) ÷ (1 − LTV)',
+  q: { ar: 'كم يرفع الدين عائدك على حقوق الملكية — وكم انخفاضاً في القيمة تحتمل قبل أن يمحوها؟', en: 'How much does debt lift your return on equity — and how far can value fall before it wipes you out?' },
+  fields: [num('price', { ar: 'قيمة الأصل', en: 'Asset value' }, 9500000, 100000, { fmt: 'sar' }), num('noi', { ar: 'صافي الدخل التشغيلي السنوي', en: 'Annual NOI' }, 600000, 10000, { fmt: 'sar' }), rng('kaPct', { ar: 'العائد المتوقّع على الأصل بلا دين', en: 'Unlevered asset return' }, 9, 3, 18, 0.25, 'pct'), rng('ltvPct', { ar: 'نسبة التمويل LTV', en: 'LTV' }, 50, 0, 85, 5, 'pct'), rng('kdPct', { ar: 'كلفة الدين', en: 'Cost of debt' }, 6, 2, 12, 0.25, 'pct'), rng('covenantLtvPct', { ar: 'تعهّد LTV الأقصى', en: 'Max LTV covenant' }, 65, 40, 90, 5, 'pct'), rng('minIcr', { ar: 'تعهّد تغطية الفائدة الأدنى', en: 'Min interest cover' }, 1.5, 1, 3, 0.1, 'x')],
+  compute: v => A.leverage(v),
+  render: (r, v) => {
+    const vd = r.verdict === 'no_spread' ? { ar: `<b>عائد الأصل ${v.kaPct}٪ لا يتجاوز كلفة الدين ${v.kdPct}٪.</b> الرافعة هنا تخفض عائدك وترفع مخاطرك معاً. لا تقترض.`, en: `<b>Asset return ${v.kaPct}% doesn’t exceed the cost of debt ${v.kdPct}%.</b> Leverage lowers your return and raises your risk at once. Don’t borrow.` } : r.verdict === 'icr_breach' ? { ar: `<b>تغطية الفائدة ${r.icr.toFixed(2)}× دون التعهّد ${v.minIcr}×.</b> البنك لن يوافق على هذا الهيكل. خفّض LTV.`, en: `<b>Interest cover ${r.icr.toFixed(2)}× is below the ${v.minIcr}× covenant.</b> The bank won’t approve this structure. Lower the LTV.` } : { ar: `<b>الرافعة ترفع عائدك من ${v.kaPct}٪ إلى ${pct(r.ke)}.</b> الثمن: انخفاض ${r.fallToLtvBreach.toFixed(1)}٪ في القيمة يخرق تعهّد LTV، وكل ١٪ انخفاض يمحو ${r.equityMultiplier.toFixed(1)}٪ من حقوقك.`, en: `<b>Leverage lifts your return from ${v.kaPct}% to ${pct(r.ke)}.</b> The price: a ${r.fallToLtvBreach.toFixed(1)}% fall in value breaches the LTV covenant, and every 1% fall erases ${r.equityMultiplier.toFixed(1)}% of your equity.` };
+    const stress = `<div class="scroll"><table><thead><tr><th>${T({ ar: 'انخفاض القيمة', en: 'Value fall' })}</th>${r.stress.map(s => `<th class="n">−${s.fall}%</th>`).join('')}</tr></thead><tbody><tr><td>${T({ ar: 'حقوق الملكية المتبقّية', en: 'Equity left' })}</td>${r.stress.map(s => `<td class="n ${s.equity <= 0 ? 'bad' : ''}">${s.equity <= 0 ? T({ ar: 'مُحيت', en: 'wiped' }) : sar(s.equity)}</td>`).join('')}</tr><tr><td>${T({ ar: 'خسارة حقوق الملكية', en: 'Equity loss' })}</td>${r.stress.map(s => `<td class="n ${s.equityLossPct >= 100 ? 'bad' : ''}">${s.equityLossPct.toFixed(0)}%</td>`).join('')}</tr><tr><td>LTV</td>${r.stress.map(s => `<td class="n ${s.breach ? 'bad' : ''}">${s.newLtv.toFixed(0)}%</td>`).join('')}</tr></tbody></table></div>`;
+    return `<div class="lab">${T({ ar: 'العائد على حقوق الملكية بالرافعة', en: 'Levered return on equity' })}</div>${big(pct(r.ke, 2), null)}
+    <div class="split c3">${cell({ ar: 'العائد النقدي السنوي', en: 'Cash-on-cash' }, pct(r.cashOnCash, 2))}${cell({ ar: 'تغطية الفائدة', en: 'Interest cover' }, isFinite(r.icr) ? r.icr.toFixed(2) + '×' : '—', r.icr < v.minIcr ? 'bad' : '')}${cell({ ar: 'عائد الدين', en: 'Debt yield' }, isFinite(r.debtYield) ? pct(r.debtYield) : '—')}</div>${verdict(T(vd), r.verdict !== 'ok')}
+    <div class="lab" style="margin-top:16px">${T({ ar: 'ماذا يحدث لحقوق الملكية إذا انخفضت القيمة', en: 'Equity under a value fall' })}</div>${stress}<div class="note">${T({ ar: 'القيم انخفضت بما يصل إلى ٤٠٪ في ٢٠٠٨–٢٠٠٩. الأبحاث: الدين الأمثل ٣٠–٤٠٪.', en: 'Values fell by up to 40% in 2008–09. Research puts optimal debt at 30–40%.' })} ${T(DISC_PRO)}</div>`;
+  },
+  assumptions: ['riskFreeRate'],
+},
+
+/* ================= C · للمطوّر والمهني ================= */
+{
+  slug: 'residual-land', group: 'developer', title: { ar: 'القيمة المتبقية للأرض', en: 'Residual land value' }, eyebrow: 'RESIDUAL · LAND = VALUE − COST − PROFIT',
+  q: { ar: 'كم تستطيع دفعه للأرض لكل متر مبنيّ — للبيع، أو التأجير، أو السكن الميسّر؟', en: 'How much can you pay for land per built m² — for sale, rental, or affordable housing?' },
+  fields: [num('s_price', { ar: 'بيع — سعر البيع للمتر', en: 'Sale — price per m²' }, 7000, 100, { fmt: 'sar' }), num('s_cost', { ar: 'بيع — كلفة البناء للمتر', en: 'Sale — build cost per m²' }, 2800, 100, { fmt: 'sar' }), rng('s_profit', { ar: 'بيع — ربح المطوّر (٪ من الكلفة)', en: 'Sale — developer profit' }, 20, 5, 40, 1, 'pct'), num('r_rent', { ar: 'تأجير — الإيجار للمتر سنوياً', en: 'Rent — rent per m²/yr' }, 420, 10, { fmt: 'sar' }), rng('r_opex', { ar: 'تأجير — مصاريف التشغيل', en: 'Rent — opex' }, 20, 5, 45, 1, 'pct'), rng('r_cap', { ar: 'تأجير — المعدّل الرأسمالي', en: 'Rent — cap rate' }, 6.5, 3, 12, 0.25, 'pct'), num('r_cost', { ar: 'تأجير — كلفة البناء للمتر', en: 'Rent — build cost per m²' }, 2800, 100, { fmt: 'sar' }), num('a_rent', { ar: 'ميسّر — الإيجار للمتر سنوياً', en: 'Affordable — rent per m²/yr' }, 250, 10, { fmt: 'sar' }), rng('a_opex', { ar: 'ميسّر — مصاريف التشغيل', en: 'Affordable — opex' }, 30, 5, 50, 1, 'pct'), rng('a_cap', { ar: 'ميسّر — المعدّل الرأسمالي', en: 'Affordable — cap rate' }, 6, 3, 12, 0.25, 'pct'), num('a_cost', { ar: 'ميسّر — كلفة البناء للمتر', en: 'Affordable — build cost per m²' }, 2400, 100, { fmt: 'sar' })],
+  compute: v => A.residualLand({ sale: { pricePerM2: v.s_price, costPerM2: v.s_cost, profitPct: v.s_profit }, rent: { rentPerM2: v.r_rent, opexPct: v.r_opex, capPct: v.r_cap, costPerM2: v.r_cost, profitPct: v.s_profit }, affordable: { rentPerM2: v.a_rent, opexPct: v.a_opex, capPct: v.a_cap, costPerM2: v.a_cost, profitPct: v.s_profit } }),
+  render: (r) => {
+    const names = { sale: { ar: 'البيع', en: 'Sale' }, rent: { ar: 'التأجير', en: 'Rental' }, affordable: { ar: 'الميسّر', en: 'Affordable' } };
+    return `<div class="lab">${T({ ar: 'القيمة المتبقية للأرض — للمتر المبنيّ', en: 'Residual land value — per built m²' })}</div>
+    <div class="split c3" style="margin-top:8px">${cell(names.sale, sar(r.sale), r.sale < 0 ? 'bad' : '')}${cell(names.rent, sar(r.rent), r.rent < 0 ? 'bad' : '')}${cell(names.affordable, sar(r.affordable), r.affordable < 0 ? 'bad' : '')}</div>
+    ${verdict(T({ ar: `<b>${T(names[r.best])} يستطيع دفع أعلى ثمن للأرض.</b> ${r.affordable <= 0 ? 'النموذج الميسّر لا يستطيع دفع شيء للأرض — السكن الميسّر لا ينافس على الأرض، ويحتاج أرضاً بلا ثمن أو دعماً.' : 'فارق الميسّر عن التأجير ' + sar(r.implicitSubsidy) + ' ريال للمتر — هذا هو الدعم الضمني الذي تتحمّله الأرض.'}`, en: `<b>${T(names[r.best])} can pay the most for land.</b> ${r.affordable <= 0 ? 'The affordable model can pay nothing for land — affordable housing doesn’t compete for land; it needs free land or a subsidy.' : 'Affordable trails rental by SAR ' + sar(r.implicitSubsidy) + ' per m² — the implicit subsidy the land bears.'}` }))}
+    <div class="res cta" style="padding:0"><a class="btn ghost" href="#/tools/blended-scheme">${T({ ar: 'كم نسبة الميسّر يحتملها المشروع؟ ←', en: 'How much affordable can the site carry? →' })}</a></div><div class="note">${T(DISC_PRO)}</div>`;
+  },
+  assumptions: ['developerProfit'],
+},
+{
+  slug: 'blended-scheme', group: 'developer', title: { ar: 'المخطّط المختلط — نسبة الميسّر', en: 'Blended scheme — affordable share' }, eyebrow: 'BLENDED SCHEME',
+  q: { ar: 'عند سعر الأرض المطلوب، ما أقصى نسبة وحدات ميسّرة يحتملها المشروع ويبقى مجدياً؟', en: 'At the asking land price, what is the highest affordable share the scheme can carry and stay viable?' },
+  fields: [num('saleResidual', { ar: 'القيمة المتبقية — البيع (للمتر)', en: 'Residual — sale (per m²)' }, 3640, 50, { fmt: 'sar' }), num('affordableResidual', { ar: 'القيمة المتبقية — الميسّر (للمتر)', en: 'Residual — affordable (per m²)' }, 37, 50, { fmt: 'sar' }), num('landAsk', { ar: 'سعر الأرض المطلوب للمتر المبنيّ', en: 'Land ask per built m²' }, 3000, 100, { fmt: 'sar', hint: { ar: 'قسّم ثمن الأرض على إجمالي الأمتار المبنية المسموح بها.', en: 'Divide the land price by the total permitted built area.' } }), rng('affordablePct', { ar: 'نسبة الوحدات الميسّرة المقترحة', en: 'Proposed affordable share' }, 20, 0, 60, 5, 'pct')],
+  compute: v => A.blendedScheme(v.saleResidual, v.affordableResidual, v.landAsk, v.affordablePct),
+  render: (r, v) => `<div class="lab">${T({ ar: 'أقصى نسبة ميسّر يحتملها المشروع', en: 'Max affordable share the scheme carries' })}</div>${big(r.maxAffordablePct + '%', null)}
+    <div class="split">${cell({ ar: 'القيمة المتبقية عند نسبتك', en: 'Residual at your share' }, sar(r.currentResidual), r.viable ? 'good' : 'bad')}${cell({ ar: 'سعر الأرض المطلوب', en: 'Land ask' }, sar(v.landAsk))}</div>
+    <div class="scroll"><table><thead><tr><th>${T({ ar: 'نسبة الميسّر', en: 'Affordable %' })}</th><th class="n">${T({ ar: 'القيمة المتبقية للمتر', en: 'Residual per m²' })}</th><th class="n">${T({ ar: 'مقابل سعر الأرض', en: 'vs land ask' })}</th></tr></thead><tbody>${r.rows.map(x => `<tr><td class="${x.current ? 'hi' : ''}">${x.affordablePct}%</td><td class="n">${sar(x.residual)}</td><td class="n ${x.viable ? 'good' : 'bad'}">${x.viable ? T({ ar: 'يحتمل', en: 'viable' }) : T({ ar: 'لا يحتمل', en: 'not viable' })}</td></tr>`).join('')}</tbody></table></div>
+    ${verdict(T({ ar: `<b>فوق ${r.maxAffordablePct}٪ يصير المشروع غير مجدٍ</b> إلا بخفض ثمن الأرض أو دعم مباشر. هذه هي الأداة التي تُدار بها مفاوضة نسبة الإسكان الميسّر مع الجهة التنظيمية بالأرقام لا بالتقدير.`, en: `<b>Above ${r.maxAffordablePct}% the scheme stops being viable</b> unless the land price falls or a direct subsidy arrives. This is how the affordable-share negotiation with the regulator is run on numbers, not guesses.` }), !r.viable)}<div class="note">${T(DISC_PRO)}</div>`,
+  assumptions: ['developerProfit'],
+},
+{
+  slug: 'operator-rent', group: 'developer', title: { ar: 'أقصى إيجار يحتمله المشغّل', en: 'Max rent an operator can bear' }, eyebrow: 'OPERATOR RENT',
+  q: { ar: 'الإيجار ليس رقماً يضعه المالك — هو ما يبقى من ربح المشغّل بعد ربحه الطبيعي. كم يحتمل هذا الموقع؟', en: 'Rent isn’t a number the owner sets — it’s what’s left of the operator’s profit after their normal profit. How much can this site bear?' },
+  fields: [num('unitsPerYear', { ar: 'الوحدات المباعة سنوياً (مثال: أكواب)', en: 'Units sold per year (e.g. cups)' }, 180000, 5000, { fmt: 'x' }), num('unitPrice', { ar: 'سعر الوحدة', en: 'Unit price' }, 14, 0.5, { fmt: 'sar2' }), num('unitVariableCost', { ar: 'الكلفة المتغيّرة للوحدة', en: 'Variable cost per unit' }, 3.5, 0.25, { fmt: 'sar2' }), num('fixedCostPerYear', { ar: 'الكلفة الثابتة سنوياً (أجور، طاقة، معدّات)', en: 'Fixed cost per year' }, 900000, 10000, { fmt: 'sar' }), rng('normalProfitPct', { ar: 'الربح الطبيعي للمشغّل (٪ من الكلفة)', en: 'Operator’s normal profit (% of cost)' }, 20, 5, 50, 1, 'pct')],
+  compute: v => A.operatorMaxRent(v),
+  render: (r) => `<div class="lab">${T({ ar: 'أقصى إيجار سنوي يحتمله هذا الموقع', en: 'Max annual rent this site can bear' })}</div>${big(sar(r.maxRent), RIYAL)}
+    <div class="split">${cell({ ar: 'الإيرادات', en: 'Revenue' }, sar(r.revenue))}${cell({ ar: 'التكاليف', en: 'Costs' }, sar(r.cost))}${cell({ ar: 'الربح قبل الإيجار', en: 'Profit before rent' }, sar(r.profitBeforeRent))}${cell({ ar: 'الربح الطبيعي', en: 'Normal profit' }, sar(r.normalProfit))}</div>
+    ${verdict(T(r.viable ? { ar: '<b>المستأجر الذي يدفع أكثر من هذا يأكل من ربحه — ولن يبقى.</b> ضريبة القيمة المضافة ١٥٪ على الإيجار التجاري تُضاف فوق الرقم.', en: '<b>A tenant paying more than this eats their own profit — and won’t stay.</b> 15% VAT on commercial rent comes on top.' } : { ar: '<b>الموقع لا يحتمل إيجاراً.</b> الربح قبل الإيجار لا يغطّي الربح الطبيعي. إمّا مبيعات أعلى أو موقع أرخص.', en: '<b>The site can’t bear rent.</b> Profit before rent doesn’t cover normal profit. Either more sales or a cheaper site.' }), !r.viable)}<div class="note">${T(DISC_PRO)}</div>`,
+  assumptions: ['vat'],
+},
+{
+  slug: 'gross-vs-net', group: 'developer', title: { ar: 'إجمالي أم صافٍ ثلاثي', en: 'Gross vs triple-net' }, eyebrow: 'GROSS VS NNN',
+  q: { ar: 'من يتحمّل تضخّم المصاريف على مدى العقد — المالك أم المستأجر؟ وكم يساوي ذلك للمتر؟', en: 'Who carries expense inflation over the lease — landlord or tenant? And what is that worth per m²?' },
+  fields: [num('rentPerM2', { ar: 'إيجار السوق للمتر سنوياً', en: 'Market rent per m²/yr' }, 420, 10, { fmt: 'sar' }), num('opexPerM2', { ar: 'مصاريف التشغيل للمتر سنوياً', en: 'Opex per m²/yr' }, 90, 5, { fmt: 'sar' }), rng('rentGrowthPct', { ar: 'نمو الإيجار السنوي', en: 'Rent growth' }, 3.5, 0, 10, 0.5, 'pct'), rng('opexGrowthPct', { ar: 'نمو المصاريف السنوي', en: 'Opex growth' }, 5, 0, 15, 0.5, 'pct'), rng('years', { ar: 'مدّة العقد', en: 'Lease term' }, 5, 1, 15, 1, 'yr')],
+  compute: v => A.grossVsNet(v),
+  render: (r, v) => `<div class="lab">${T({ ar: 'الفارق لصالح العقد الصافي بعد', en: 'Gap in favour of the net lease after' })} ${yrs(v.years)}</div>${big(sar2(r.finalGap), { ar: 'ريال/م² سنوياً', en: 'SAR/m²/yr' })}
+    <div class="split">${cell({ ar: 'الفارق التراكمي على المدّة', en: 'Cumulative gap over the term' }, sar2(r.cumulativeGap))}${cell({ ar: 'NOI صافٍ في السنة الأخيرة', en: 'Net NOI, final year' }, sar2(r.rows[r.rows.length - 1].noiNet))}</div>
+    <div class="scroll"><table><thead><tr><th>${T({ ar: 'سنة', en: 'Yr' })}</th><th class="n">${T({ ar: 'إيجار', en: 'Rent' })}</th><th class="n">${T({ ar: 'مصاريف', en: 'Opex' })}</th><th class="n">${T({ ar: 'NOI إجمالي', en: 'NOI gross' })}</th><th class="n">${T({ ar: 'NOI صافٍ ثلاثي', en: 'NOI NNN' })}</th></tr></thead><tbody>${r.rows.map(x => `<tr><td>${x.year}</td><td class="n">${sar2(x.rent)}</td><td class="n">${sar2(x.opex)}</td><td class="n">${sar2(x.noiGross)}</td><td class="n">${sar2(x.noiNet)}</td></tr>`).join('')}</tbody></table></div>
+    ${verdict(T({ ar: `في العقد الإجمالي يتحمّل المالك تضخّم المصاريف (${v.opexGrowthPct}٪) الذي يفوق نمو الإيجار (${v.rentGrowthPct}٪). في الصافي الثلاثي ينتقل هذا الخطر إلى المستأجر — ولهذا يقبل المستأجر القوي عقداً صافياً بإيجار أساسي أدنى.`, en: `In a gross lease the landlord carries expense inflation (${v.opexGrowthPct}%) that outruns rent growth (${v.rentGrowthPct}%). In a triple-net lease that risk moves to the tenant — which is why a strong tenant accepts a net lease at a lower base rent.` }))}<div class="note">${T(DISC_PRO)}</div>`,
+  assumptions: ['inflation'],
+},
+{
+  slug: 'turnover-rent', group: 'developer', title: { ar: 'إيجار المبيعات', en: 'Turnover rent' }, eyebrow: 'TURNOVER RENT · BASE + SALES × %',
+  q: { ar: 'إيجار أساسي + نسبة من المبيعات: كم الإيجار الكلّي، وماذا تفعل المبيعات الإلكترونية بالرقم؟', en: 'Base rent plus a share of sales: what is the total, and what do online sales do to the number?' },
+  fields: [num('baseRent', { ar: 'الإيجار الأساسي السنوي', en: 'Annual base rent' }, 300000, 10000, { fmt: 'sar' }), num('storeSales', { ar: 'مبيعات المتجر السنوية', en: 'Annual store sales' }, 4000000, 100000, { fmt: 'sar' }), rng('turnoverPct', { ar: 'نسبة الإيجار من المبيعات', en: 'Rent % of sales' }, 6, 0, 20, 0.5, 'pct'), rng('onlineAttributedPct', { ar: 'حصّة المبيعات الإلكترونية المنسوبة للمتجر', en: 'Online sales attributed to the store' }, 10, 0, 50, 5, 'pct', { hint: { ar: 'كيف تُحسب مبيعات «اضغط واستلم» ضمن دوران المتجر؟ نقطة الخلاف التي تُحسم كتابةً.', en: 'How do click-and-collect sales count toward store turnover? The dispute to settle in writing.' } })],
+  compute: v => A.turnoverRent(v),
+  render: (r) => `<div class="lab">${T({ ar: 'الإيجار الكلّي', en: 'Total rent' })}</div>${big(sar(r.total), RIYAL)}
+    <div class="split c3">${cell({ ar: 'الجزء المتغيّر', en: 'Variable part' }, sar(r.variable))}${cell({ ar: 'الإيجار كنسبة من المبيعات', en: 'Effective % of sales' }, pct(r.effectivePct))}${cell({ ar: 'أثر المبيعات الإلكترونية', en: 'Online uplift' }, sar(r.onlineUplift))}</div>
+    ${verdict(T({ ar: `الإيجار الأساسي يضمن للمالك حدّاً أدنى، والجزء المتغيّر يشاركه مخاطر التشغيل. إدراج المبيعات الإلكترونية يرفع الإيجار ${sar(r.onlineUplift)} ريال — وهذه نقطة الخلاف التي يجب أن تُحسم في العقد كتابةً.`, en: `Base rent guarantees the landlord a floor; the variable part shares operating risk. Counting online sales raises rent by SAR ${sar(r.onlineUplift)} — the clause to settle in writing.` }))}<div class="note">${T({ ar: 'ضريبة القيمة المضافة ١٥٪ على الإيجار التجاري تُضاف فوق الأرقام.', en: '15% VAT on commercial rent comes on top.' })} ${T(DISC_PRO)}</div>`,
+  assumptions: ['vat'],
+},
+{
+  slug: 'income-strip', group: 'developer', title: { ar: 'شريحة الدخل — عقد طويل لجهة حكومية', en: 'Income strip — long public-sector lease' }, eyebrow: 'INCOME STRIP',
+  q: { ar: 'تدفّق إيجار طويل مفهرس بلا عودة رأس المال: ما العائد الحقيقي بعد التضخّم وحصّة المشغّل؟', en: 'A long indexed rent stream with no capital back: what is the real return after inflation and the operator’s cut?' },
+  fields: [num('units', { ar: 'عدد الوحدات', en: 'Units' }, 167, 1, { fmt: 'x' }), num('rentPerUnit', { ar: 'الإيجار السنوي للوحدة', en: 'Annual rent per unit' }, 48000, 1000, { fmt: 'sar' }), num('investment', { ar: 'إجمالي الاستثمار', en: 'Total investment' }, 180000000, 1000000, { fmt: 'sar' }), num('operatorChargePerUnit', { ar: 'ما يحتفظ به المشغّل للوحدة سنوياً', en: 'Operator charge per unit/yr' }, 9000, 500, { fmt: 'sar' }), rng('termYears', { ar: 'مدّة العقد', en: 'Term' }, 30, 10, 50, 5, 'yr'), rng('inflationPct', { ar: 'التضخّم والفهرسة السنوية', en: 'Inflation / indexation' }, 2, 0, 6, 0.25, 'pct'), rng('reversionPct', { ar: 'ما يعود لك في النهاية (٪ من القيمة)', en: 'Reversion to you at the end (% of value)' }, 0, 0, 100, 10, 'pct', { hint: { ar: '٠٪ = يعود العقار للجهة الحكومية بلا مقابل · ١٠٠٪ = تحتفظ بالعقار.', en: '0% = the asset reverts to the public body · 100% = you keep it.' } }), rng('realRfrPct', { ar: 'العائد الحقيقي الخالي من المخاطر', en: 'Real risk-free rate' }, 1.5, -3, 4, 0.25, 'pct')],
+  compute: v => A.incomeStrip(v),
+  render: (r) => {
+    const vd = { good: { ar: '— ما زالت جيدة لدخل شبه مضمون.', en: '— still good for near-guaranteed income.' }, fair: { ar: '— معقولة لكن أقلّ مما يوحي به العرض.', en: '— fair, but less than the offer suggests.' }, weak: { ar: '— ضعيفة: العرض يبدو أفضل مما هو.', en: '— weak: the offer looks better than it is.' } };
+    return `<div class="lab">${T({ ar: 'معدّل العائد الداخلي الاسمي للمستثمر', en: 'Nominal IRR to the investor' })}</div>${big(pct(r.nominalIrr, 2), null)}
+    <div class="split c3">${cell({ ar: 'العائد الأوّلي الإجمالي', en: 'Gross initial yield' }, pct(r.grossYield, 2))}${cell({ ar: 'العائد الأوّلي الصافي', en: 'Net initial yield' }, pct(r.netYield, 2))}${cell({ ar: 'IRR حقيقي', en: 'Real IRR' }, pct(r.realIrr, 2), r.realIrr < 0 ? 'bad' : '')}</div>
+    ${verdict(T({ ar: `<b>الحساب الساذج</b> يوحي بعلاوة مخاطر ${r.naivePremium.toFixed(1)} نقطة. <b>الحساب الصحيح</b> بلا عودة رأس المال: IRR حقيقي ${pct(r.realIrr, 2)} أي علاوة ${r.truePremium.toFixed(1)} نقطة ${T(vd[r.verdict])}`, en: `<b>The naive sum</b> suggests a ${r.naivePremium.toFixed(1)}pt risk premium. <b>The correct sum</b>, with no capital back: real IRR ${pct(r.realIrr, 2)}, a ${r.truePremium.toFixed(1)}pt premium ${T(vd[r.verdict])}` }), r.verdict === 'weak')}
+    <div class="scroll"><table><thead><tr><th>${T({ ar: 'المشغّل يحتفظ بـ', en: 'Operator keeps' })}</th><th class="n">${T({ ar: 'عائد صافٍ', en: 'Net yield' })}</th><th class="n">IRR</th><th class="n">${T({ ar: 'IRR حقيقي', en: 'Real IRR' })}</th></tr></thead><tbody>${r.sensitivity.map(s => `<tr><td class="n ${s.current ? 'hi' : ''}">${sar(s.charge)}</td><td class="n">${pct(s.netYield, 2)}</td><td class="n">${pct(s.nominalIrr, 2)}</td><td class="n ${s.realIrr < 0 ? 'bad' : ''}">${pct(s.realIrr, 2)}</td></tr>`).join('')}</tbody></table></div>
+    <div class="note">${T({ ar: 'عقود الإيجار الطويلة للجهات الحكومية تُغري بعائد أوّلي مريح. الرقم الذي يهمّ هو IRR الحقيقي بعد التضخّم وحصّة المشغّل — وبلا عودة رأس المال.', en: 'Long public-sector leases tempt with a comfortable initial yield. The number that matters is the real IRR after inflation and the operator’s cut — with no capital back.' })} ${T(DISC_PRO)}</div>`;
+  },
+  assumptions: ['inflation'],
+},
+];
+
+const GROUPS = {
+  buyer: { title: { ar: 'للمشتري', en: 'For buyers' }, tag: { ar: 'سبع حاسبات', en: 'Seven calculators' }, desc: { ar: 'القرارات التي يقف عندها الناس فعلاً — بالترتيب الذي لا يُعكس: القدرة أولاً، ثم القسط، ثم الكاش، ثم التوقيت — ثم إن اشتريتَ لتؤجّر: العائد الإيجاري والاستثماري.', en: 'The decisions people actually stall at — capacity first, then payment, cash, timing — and if you buy to let: rental and investment return.' } },
+  investor: { title: { ar: 'للمستثمر', en: 'For investors' }, tag: { ar: 'أربع حاسبات', en: 'Four calculators' }, desc: { ar: 'من العائد الإيجاري البسيط إلى التسعير والتدفّق المخصوم والرافعة — الأدوات نفسها التي يستخدمها المستثمر المؤسسي.', en: 'From simple rental yield to pricing, DCF and leverage — the same tools an institutional investor uses.' } },
+  developer: { title: { ar: 'للمطوّر والمهني', en: 'For developers & professionals' }, tag: { ar: 'ست حاسبات · للتعلّم واتخاذ القرار', en: 'Six calculators · learning & decision' }, desc: { ar: 'الأرض، والإيجار التجاري، والعقود الطويلة — بالمنطق الذي تُدار به المفاوضات بالأرقام لا بالتقدير.', en: 'Land, commercial rent and long leases — the logic that runs negotiations on numbers, not guesses.' } },
+};
+
+/* عتبة — التطبيق: توجيه، عرض الحاسبات، تسجيل الاهتمام */
+let LANG = 'ar';
+try { LANG = localStorage.getItem('atbah.lang') === 'en' ? 'en' : 'ar'; } catch (e) {}
+/* وضع الموقع: 'coming_soon' (الافتراضي — صفحة هبوط + الحاسبات + تسجيل الاهتمام) أو 'full'. للمقارنة: #/?mode=full */
+let SITE_MODE = 'coming_soon';
+try { const m = localStorage.getItem('atbah.mode'); if (m === 'full' || m === 'coming_soon') SITE_MODE = m; } catch (e) {}
+const $ = (s, r = document) => r.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const S = {
+  nav: { tools: { ar: 'الحاسبات', en: 'Calculators' }, how: { ar: 'كيف نشتغل', en: 'How we work' }, services: { ar: 'خدماتنا', en: 'Services' }, interest: { ar: 'سجّل اهتمامك', en: 'Register interest' } },
+  cta: { ar: 'اعرف سقفك أولاً', en: 'Know your ceiling first' },
+};
+const LOGO = (size = 30, arch = '#F1ECE3') => `<svg width="${size}" height="${Math.round(size * 142 / 130)}" viewBox="0 0 130 142" fill="none" aria-hidden="true"><path d="M18.5 106 L18.5 46 A25.5 25.5 0 0 1 44 20.5 L86 20.5 A25.5 25.5 0 0 1 111.5 46 L111.5 106 L98.5 106 L98.5 46 A12.5 12.5 0 0 0 86 33.5 L44 33.5 A12.5 12.5 0 0 0 31.5 46 L31.5 106 Z" fill="${arch}"/><path d="M48 106 L48 65 A17 17 0 0 1 82 65 L82 106 Z" fill="#C9964A"/><rect x="14" y="116" width="102" height="14" rx="2" fill="#B4522B"/></svg>`;
+
+/* ---------- رسوم متجهة أصلية بألوان الهوية (بلا صور خارجية) ---------- */
+const ART = {
+  villa: () => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#10322D"/><rect x="0" y="150" width="320" height="50" fill="#0B2521"/><rect x="60" y="70" width="200" height="85" fill="#F1ECE3"/><rect x="40" y="60" width="240" height="12" fill="#DCD2C1"/><path d="M60 60 L160 22 L260 60Z" fill="#F1ECE3"/><path d="M135 155 V110 A25 25 0 0 1 185 110 V155Z" fill="#C9964A"/><rect x="80" y="90" width="30" height="34" fill="#2E5A52"/><rect x="210" y="90" width="30" height="34" fill="#2E5A52"/><rect x="82" y="92" width="26" height="30" fill="none" stroke="#F1ECE3" stroke-width="1.5"/><rect x="212" y="92" width="26" height="30" fill="none" stroke="#F1ECE3" stroke-width="1.5"/><rect x="50" y="155" width="220" height="8" fill="#B4522B"/><circle cx="290" cy="40" r="14" fill="#C9964A" opacity=".5"/><path d="M0 150 h60 M260 150 h60" stroke="#2E5A52" stroke-width="2"/><g fill="#2E5A52"><rect x="10" y="110" width="8" height="40"/><ellipse cx="14" cy="105" rx="18" ry="20"/><rect x="300" y="115" width="8" height="35"/><ellipse cx="304" cy="110" rx="16" ry="18"/></g></svg>`,
+  floor: () => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#10322D"/><rect x="0" y="160" width="320" height="40" fill="#0B2521"/><rect x="70" y="40" width="180" height="120" fill="#DCD2C1"/><rect x="70" y="40" width="180" height="60" fill="#F1ECE3"/><rect x="70" y="98" width="180" height="4" fill="#C9964A"/><rect x="60" y="34" width="200" height="8" fill="#F1ECE3"/><g fill="#2E5A52"><rect x="90" y="55" width="30" height="30"/><rect x="145" y="55" width="30" height="30"/><rect x="200" y="55" width="30" height="30"/><rect x="90" y="115" width="30" height="30" opacity=".5"/><rect x="200" y="115" width="30" height="30" opacity=".5"/></g><path d="M145 160 V118 A15 15 0 0 1 175 118 V160Z" fill="#8A6420" opacity=".8"/><rect x="60" y="160" width="200" height="8" fill="#B4522B"/><text x="255" y="78" font-family="Archivo,sans-serif" font-size="11" fill="#C9964A" transform="rotate(90 255 78)">FLOOR</text></svg>`,
+  duplex: () => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#10322D"/><rect x="0" y="160" width="320" height="40" fill="#0B2521"/><rect x="50" y="60" width="110" height="100" fill="#F1ECE3"/><rect x="160" y="60" width="110" height="100" fill="#DCD2C1"/><path d="M50 60 L105 25 L160 60Z" fill="#F1ECE3"/><path d="M160 60 L215 25 L270 60Z" fill="#DCD2C1"/><rect x="158" y="25" width="4" height="135" fill="#10322D"/><g fill="#2E5A52"><rect x="65" y="75" width="26" height="28"/><rect x="120" y="75" width="26" height="28"/><rect x="175" y="75" width="26" height="28"/><rect x="230" y="75" width="26" height="28"/></g><path d="M78 160 V125 A14 14 0 0 1 106 125 V160Z" fill="#C9964A"/><path d="M214 160 V125 A14 14 0 0 1 242 125 V160Z" fill="#C9964A"/><rect x="40" y="160" width="240" height="8" fill="#B4522B"/><rect x="65" y="120" width="26" height="22" fill="#2E5A52" opacity=".5"/><rect x="230" y="120" width="26" height="22" fill="#2E5A52" opacity=".5"/></svg>`,
+  apartment: () => `<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" fill="#10322D"/><rect x="0" y="165" width="320" height="35" fill="#0B2521"/><rect x="90" y="20" width="140" height="145" fill="#F1ECE3"/><rect x="230" y="60" width="50" height="105" fill="#DCD2C1"/><rect x="40" y="90" width="50" height="75" fill="#DCD2C1"/><g fill="#2E5A52"><rect x="105" y="35" width="22" height="20"/><rect x="149" y="35" width="22" height="20"/><rect x="193" y="35" width="22" height="20"/><rect x="105" y="70" width="22" height="20"/><rect x="149" y="70" width="22" height="20"/><rect x="193" y="70" width="22" height="20"/><rect x="105" y="105" width="22" height="20"/><rect x="149" y="105" width="22" height="20"/><rect x="193" y="105" width="22" height="20"/><rect x="240" y="75" width="14" height="14" opacity=".6"/><rect x="240" y="105" width="14" height="14" opacity=".6"/><rect x="50" y="105" width="14" height="14" opacity=".6"/><rect x="50" y="135" width="14" height="14" opacity=".6"/></g><path d="M147 165 V145 A13 13 0 0 1 173 145 V165Z" fill="#C9964A"/><rect x="80" y="165" width="200" height="8" fill="#B4522B"/><rect x="100" y="12" width="120" height="8" fill="#DCD2C1"/></svg>`,
+  city: () => `<svg viewBox="0 0 640 300" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F1ECE3"/><stop offset="1" stop-color="#DCD2C1"/></linearGradient></defs><rect width="640" height="300" fill="url(#sky)"/><circle cx="540" cy="70" r="34" fill="#C9964A" opacity=".55"/><g fill="#2E5A52" opacity=".35"><rect x="20" y="150" width="60" height="110"/><rect x="95" y="110" width="45" height="150"/><rect x="450" y="120" width="70" height="140"/><rect x="535" y="160" width="50" height="100"/><rect x="600" y="140" width="30" height="120"/></g><g fill="#10322D"><rect x="150" y="90" width="90" height="170"/><rect x="255" y="130" width="120" height="130"/><rect x="390" y="60" width="50" height="200"/><rect x="170" y="70" width="50" height="20"/><rect x="400" y="45" width="30" height="15"/></g><path d="M255 130 A60 60 0 0 1 375 130" fill="#10322D"/><path d="M290 260 V205 A25 25 0 0 1 340 205 V260Z" fill="#C9964A"/><g fill="#F1ECE3" opacity=".9"><rect x="162" y="105" width="16" height="14"/><rect x="187" y="105" width="16" height="14"/><rect x="212" y="105" width="16" height="14"/><rect x="162" y="135" width="16" height="14"/><rect x="187" y="135" width="16" height="14"/><rect x="212" y="135" width="16" height="14"/><rect x="162" y="165" width="16" height="14"/><rect x="187" y="165" width="16" height="14"/><rect x="212" y="165" width="16" height="14"/><rect x="162" y="195" width="16" height="14"/><rect x="212" y="195" width="16" height="14"/><rect x="398" y="75" width="12" height="12"/><rect x="420" y="75" width="12" height="12"/><rect x="398" y="100" width="12" height="12"/><rect x="420" y="100" width="12" height="12"/><rect x="398" y="125" width="12" height="12"/><rect x="420" y="125" width="12" height="12"/><rect x="398" y="150" width="12" height="12"/><rect x="420" y="150" width="12" height="12"/><rect x="398" y="175" width="12" height="12"/><rect x="420" y="175" width="12" height="12"/><rect x="270" y="150" width="20" height="18"/><rect x="340" y="150" width="20" height="18"/></g><rect x="0" y="260" width="640" height="40" fill="#10322D"/><rect x="0" y="256" width="640" height="6" fill="#B4522B"/><g fill="#2E5A52"><rect x="60" y="235" width="6" height="25"/><ellipse cx="63" cy="232" rx="14" ry="16"/><rect x="590" y="238" width="6" height="22"/><ellipse cx="593" cy="235" rx="12" ry="14"/></g></svg>`,
+};
+
+/* ---------- state per calculator (kept across renders) ---------- */
+const STATE = {};
+function initState(c) {
+  if (!STATE[c.slug]) { const v = {}; c.fields.forEach(f => v[f.id] = f.def); STATE[c.slug] = { v, touched: {}, step: 0 }; }
+  return STATE[c.slug];
+}
+function applyAuto(c, st) { c.fields.forEach(f => { if (f.auto && !st.touched[f.id]) st.v[f.id] = f.auto(st.v); }); }
+
+function fmtVal(f, x) {
+  if (f.fmt === 'pct') return x + '%';
+  if (f.fmt === 'yr') return yrs(x);
+  if (f.fmt === 'mo') return mos(x);
+  if (f.fmt === 'x') return String(x);
+  if (f.fmt === 'sar2') return sar2(x);
+  return sar(x);
+}
+function fieldHtml(c, f, st) {
+  const v = st.v[f.id], id = `${c.slug}__${f.id}`;
+  const hidden = f.show && !f.show(st.v) ? ' hidden' : '';
+  const hint = f.hint ? `<div class="hint">${T(f.hint)}</div>` : '';
+  if (f.type === 'num') return `<div class="f"${hidden}><label for="${id}">${T(f.label)}<span class="v" id="${id}_v">${fmtVal(f, v)}</span></label><input type="number" id="${id}" data-f="${f.id}" value="${v}" step="${f.step}" min="0" inputmode="decimal"></div>${hint}`;
+  if (f.type === 'range') return `<div class="f"${hidden}><label for="${id}">${T(f.label)}<span class="v" id="${id}_v">${fmtVal(f, v)}</span></label><input type="range" id="${id}" data-f="${f.id}" value="${v}" min="${f.min}" max="${f.max}" step="${f.step}"></div>${hint}`;
+  if (f.type === 'select') return `<div class="f"${hidden}><label for="${id}">${T(f.label)}</label><select id="${id}" data-f="${f.id}">${f.opts.map(([k, l]) => `<option value="${k}" ${k == v ? 'selected' : ''}>${T(l)}</option>`).join('')}</select></div>${hint}`;
+  if (f.type === 'seg') return `<div class="f"${hidden}><label>${T(f.label)}</label><div class="seg" role="group" data-f="${f.id}" id="${id}">${f.opts.map(([k, l]) => `<button type="button" data-k="${k}" aria-pressed="${k == v}">${T(l)}</button>`).join('')}</div></div>${hint}`;
+  return '';
+}
+function bindFields(c, root, onChange) {
+  const st = STATE[c.slug];
+  root.querySelectorAll('[data-f]').forEach(el => {
+    const fid = el.dataset.f, f = c.fields.find(x => x.id === fid);
+    if (el.classList.contains('seg')) {
+      el.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; st.v[fid] = b.dataset.k; st.touched[fid] = true; el.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b)); onChange(); });
+    } else {
+      el.addEventListener('input', () => { st.v[fid] = f.type === 'select' ? el.value : +el.value; st.touched[fid] = true; const vv = $('#' + el.id + '_v'); if (vv) vv.textContent = fmtVal(f, st.v[fid]); onChange(); });
+    }
+  });
+}
+function refreshAutoAndVisibility(c, root) {
+  const st = STATE[c.slug]; applyAuto(c, st);
+  c.fields.forEach(f => {
+    const id = `${c.slug}__${f.id}`, el = $('#' + id, root); if (!el) return;
+    const box = el.closest('.f'); if (f.show) { const on = f.show(st.v); box.hidden = !on; const h = box.nextElementSibling; if (h && h.classList.contains('hint')) h.hidden = !on; }
+    if (f.auto && !st.touched[f.id]) { el.value = st.v[f.id]; const vv = $('#' + id + '_v'); if (vv) vv.textContent = fmtVal(f, st.v[f.id]); }
+  });
+}
+function assumptionsHtml(c) {
+  if (!c.assumptions || !c.assumptions.length) return '';
+  const rows = c.assumptions.map(k => { const a = Atbah.ASSUMPTIONS[k]; return `<tr><td>${LANG === 'ar' ? a.ar : a.en}</td><td class="n">${typeof a.value === 'number' ? (a.value >= 1000 ? sar(a.value) : a.value) : a.value}</td><td>${a.regulatory ? `<span class="pill reg">${T({ ar: 'نظامي', en: 'regulatory' })}</span>` : `<span class="pill">${T({ ar: 'افتراض تخطيط', en: 'planning' })}</span>`}</td><td class="sm">${esc(a.source)} · <span class="num">${a.checked}</span></td></tr>`; }).join('');
+  return `<details class="assume"><summary>${T({ ar: 'الافتراضات ومصادرها', en: 'Assumptions & sources' })}<span class="lab">${c.assumptions.length} ${T({ ar: 'رقماً', en: 'values' })}</span></summary><div class="body"><div class="scroll"><table><thead><tr><th>${T({ ar: 'الرقم', en: 'Value' })}</th><th class="n">${T({ ar: 'القيمة', en: 'Default' })}</th><th>${T({ ar: 'النوع', en: 'Type' })}</th><th>${T({ ar: 'المصدر · آخر تحقّق', en: 'Source · checked' })}</th></tr></thead><tbody>${rows}</tbody></table><p class="sm" style="margin-top:10px">${T({ ar: 'الأرقام النظامية تتغيّر — نراجعها ونؤرّخها. الرقم المعتمد دائماً هو ما تصدره الجهة الممولة أو «سكني» أو هيئة الزكاة والضريبة.', en: 'Regulatory figures change — we review and date them. The binding figure is always what the financing entity, Sakani or ZATCA issues.' })}</p></div></details>`;
+}
+
+/* ---------- calculator block (shared by home hero and tool page) ---------- */
+function calcBlock(c, { stepped = false } = {}) {
+  const st = initState(c); applyAuto(c, st);
+  const inputs = c.fields.map(f => fieldHtml(c, f, st)).join('');
+  if (!stepped) return { html: `<div class="cgrid" id="cg_${c.slug}"><div class="in">${c.formula ? `<div class="formula">${c.formula}</div>` : ''}${inputs}</div><div class="res" id="res_${c.slug}"></div></div>` };
+  // stepped (home hero): fields grouped by step_, results as final step
+  const steps = c.steps.map((s, i) => `<div class="stepbox" data-step="${i}"${i === st.step ? '' : ' hidden'}>${c.fields.filter(f => f.step_ === i).map(f => fieldHtml(c, f, st)).join('')}</div>`).join('');
+  return { html: `<div class="calc" id="cg_${c.slug}"><div class="calc-h"><h3>${T(c.title)}</h3><span class="lab">${c.eyebrow}</span></div><div class="calc-b"><div class="steps" id="steps_${c.slug}">${c.steps.map((s, i) => `<span class="${i < st.step ? 'done' : i === st.step ? 'on' : ''}"></span>`).join('')}</div><div class="lab" id="stepname_${c.slug}">${T({ ar: 'الخطوة', en: 'Step' })} ${st.step + 1}/${c.steps.length} — ${T(c.steps[st.step])}</div>${steps}<div class="stepnav"><button class="btn quiet" id="prev_${c.slug}" type="button"${st.step === 0 ? ' hidden' : ''}>${T({ ar: 'رجوع', en: 'Back' })}</button><button class="btn" id="next_${c.slug}" type="button">${st.step < c.steps.length - 1 ? T({ ar: 'التالي', en: 'Next' }) : T({ ar: 'اعرف سقفك', en: 'See my ceiling' })}</button></div></div><div class="res" id="res_${c.slug}"${st.step < c.steps.length - 1 && !st.seen ? ' hidden' : ''}></div></div>` };
+}
+function mountCalc(c, root, { stepped = false } = {}) {
+  const st = STATE[c.slug];
+  const render = () => { refreshAutoAndVisibility(c, root); const r = c.compute(st.v); $('#res_' + c.slug, root).innerHTML = c.render(r, st.v); };
+  bindFields(c, root, render);
+  if (stepped) {
+    const go = (d) => { st.step = Math.max(0, Math.min(c.steps.length - 1, st.step + d)); if (st.step === c.steps.length - 1) st.seen = true;
+      root.querySelectorAll('.stepbox').forEach(b => b.hidden = +b.dataset.step !== st.step);
+      $('#steps_' + c.slug, root).innerHTML = c.steps.map((s, i) => `<span class="${i < st.step ? 'done' : i === st.step ? 'on' : ''}"></span>`).join('');
+      $('#stepname_' + c.slug, root).textContent = `${T({ ar: 'الخطوة', en: 'Step' })} ${st.step + 1}/${c.steps.length} — ${T(c.steps[st.step])}`;
+      $('#prev_' + c.slug, root).hidden = st.step === 0; $('#next_' + c.slug, root).textContent = st.step < c.steps.length - 1 ? T({ ar: 'التالي', en: 'Next' }) : T({ ar: 'اعرف سقفك', en: 'See my ceiling' });
+      const res = $('#res_' + c.slug, root); res.hidden = !(st.seen); if (st.seen) { render(); }
+      if (st.step === c.steps.length - 1) { res.hidden = false; render(); res.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } };
+    $('#next_' + c.slug, root).addEventListener('click', () => { if (st.step === c.steps.length - 1) { render(); $('#res_' + c.slug, root).scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } else go(1); });
+    $('#prev_' + c.slug, root).addEventListener('click', () => go(-1));
+    if (st.seen) render();
+  } else render();
+}
+
+/* ---------- pages ---------- */
+/* صفحة الهبوط — وضع «قريباً»: الحاسبة + الحاسبات الـ١٥ + تسجيل الاهتمام، ولا شيء غير مكتمل */
+function pageComingSoon() {
+  const pp = CALCS.find(c => c.home), block = calcBlock(pp, { stepped: true });
+  const live = [
+    [{ ar: 'الحاسبات السبع عشرة', en: 'Seventeen calculators' }, { ar: 'تعمل الآن — كل رقم يحمل مصدره وتاريخه.', en: 'Live now — every default carries its source and date.' }, 'on'],
+    [{ ar: 'قراءة قدرتك الشرائية', en: 'Your purchasing-power reading' }, { ar: 'سجّل اهتمامك ونتواصل مرة واحدة خلال يومي عمل.', en: 'Register and we contact you once within two working days.' }, 'on'],
+    [{ ar: 'الوحدات داخل سقفك', en: 'Units inside your ceiling' }, { ar: 'نتعاقد الآن مع أفضل المطوّرين على أفضل المشاريع — ونعرضها لك داخل سقفك فقط.', en: 'We are contracting now with the best developers on the best projects — shown to you inside your ceiling only.' }, 'soon'],
+    [{ ar: 'قائمة VIP', en: 'VIP list' }, { ar: 'من يسجّل الآن تُقرأ قدرته أولاً حين نفتح المواعيد، وتصله رسائل عتبة الدورية إن رغب.', en: 'Register now and your reading is scheduled first when slots open, with Atbah’s periodic updates if wanted.' }, 'on'],
+  ];
+  return { html: `
+  <header class="hero cs"><div class="wrap"><div class="grid"><div>
+    <div class="soon"><span class="dot"></span>${T({ ar: 'حلول عقارية مخصّصة — قريباً', en: 'Personalised real-estate solutions — coming soon' })}</div>
+    <h1>${T({ ar: 'سوق العقار يحتاج صراحة، لا إعلاناً إضافياً.', en: 'The property market needs candour, not another advert.' })}</h1>
+    <div class="sub">${T({ ar: 'نبني منصّة عتبة على مهل لنغيّر طريقة الشراء. لكن حساباتك لا تحتمل الانتظار: اعرف سقفك الحقيقي الآن في دقيقة — النتيجة على شاشتك، لا في مكالمة من مسوّق.', en: 'We are building the Atbah platform without rushing, to change how people buy. Your numbers cannot wait: know your real ceiling now, in a minute — on your screen, not in a call from a salesman.' })}</div>
+    <div class="rule"></div>
+    <div class="no">${T({ ar: 'نبدأ من قدرتك الشرائية ورغبتك الحقيقية، لا من المشاريع المتاحة. وأحياناً نقول: <em>ليست هذه السنة</em> — ونكتب لك خطة.', en: 'We start from your purchasing power and real intent, not from the projects on offer. And sometimes we say: <em>not this year</em> — and write you a plan.' })}</div>
+  </div><div id="home_calc">${block.html}</div></div></div></header>
+  <section class="alt" id="why"><div class="wrap"><div class="shead"><h2>${T({ ar: 'لماذا «عتبة»؟', en: 'Why “Atbah”?' })}</h2><span class="lab">Story</span></div>
+    <div class="story"><div>
+      <p class="lead">${T({ ar: 'العتبة ليست حجراً في مدخل الباب؛ هي الخطوة الفاصلة بين الحيرة والاستقرار. «عتبة البيت» أول ما تطؤه قدمك لتبدأ مرحلة من الأمان والاستقلال. لكن عتبة السوق اليوم صارت عالية ومربكة، ومحاطة بعشرات الاتصالات وإعلانات «العرض الأخير».', en: 'A threshold is not a stone at the door; it is the step between confusion and settling. The threshold of a home is the first thing your foot touches as a new chapter of security begins. But today’s market threshold has become high, confusing, and surrounded by dozens of calls and “last offer” adverts.' })}</p>
+      <p class="lead">${T({ ar: 'سمّينا أنفسنا «عتبة» لأننا نؤمن أن قرار التملّك لا يبدأ بصور الفلل والشقق، بل بتجاوز الارتباك المالي. نقف معك عند العتبة: نحسب قدرتك بدقّة، ونفرز الخيارات بصدق، وحين نرى أن التوقيت لا يناسبك نقولها بوضوح: «ليست هذه السنة — وهذه خطّتك للاستعداد».', en: 'We named ourselves Atbah — threshold — because we believe the decision to own does not start with pictures of villas and flats, but with getting past the financial confusion. We stand with you at the threshold: we measure your capacity precisely, sort the options candidly, and when the timing is wrong we say so: “not this year — and here is your plan”.' })}</p>
+    </div><div><div class="quote">${T({ ar: 'نقف معك على العتبة، حتى تعبرها وأنت مطمئن.', en: 'We stand with you at the threshold, until you cross it reassured.' })}</div><div class="art">${ART.city()}</div></div></div></div></section>
+  <section id="charter"><div class="wrap"><div class="shead"><h2>${T({ ar: 'عهد العتبة', en: 'The Atbah pledge' })}</h2><span class="lab">Pledge</span></div>
+    <p class="lead">${T({ ar: 'ثلاثة وعود نلتزم بها — لأنها ما يفتقده الناس في هذا السوق.', en: 'Three promises we keep — because they are what people miss in this market.' })}</p>
+    <div class="charter" style="margin-top:22px">${[
+      [{ ar: 'وساطة بدون إزعاج', en: 'Brokerage without the nagging' }, { ar: 'نتيجة الحاسبة تظهر على شاشتك فوراً وبلا بيانات. ولا يتّصل بك أحد إلا إن سجّلت اهتمامك بنفسك — مرة واحدة لتحديد موعد، ثم يبقى القرار لك.', en: 'The calculator result appears on your screen instantly, with no data required. Nobody calls unless you register yourself — once, to schedule, and the decision stays yours.' }],
+      [{ ar: 'صراحة بلا رتوش', en: 'Candour without gloss' }, { ar: 'لا عدّاد تنازلي، ولا «آخر وحدة»، ولا عائد مضمون. كل رقم عندنا يحمل معادلته ومصدره وتاريخه — لتراجعه بنفسك.', en: 'No countdown, no “last unit”, no guaranteed return. Every number carries its formula, source and date — for you to check yourself.' }],
+      [{ ar: 'شريكك في الرحلة حتى بعد الشراء', en: 'Your partner beyond the purchase' }, { ar: 'لا تنتهي علاقتنا عند الإفراغ. نتابع معك التسليم، وإدارة المرافق والصيانة بعده — فالبيت يبدأ حين ينتهي البيع.', en: 'Our relationship does not end at transfer. We stay with you through handover, then facility management and maintenance — a home begins when the sale ends.' }],
+    ].map((c, i) => `<div class="card"><div class="no2">0${i + 1}</div><h3>${T(c[0])}</h3><p class="sm" style="margin:6px 0 0">${T(c[1])}</p></div>`).join('')}</div></div></section>
+  <section id="tools"><div class="wrap"><div class="shead"><h2>${T({ ar: 'حاسبات عتبة — تعمل الآن', en: 'Atbah calculators — live now' })}</h2><span class="lab">17 tools</span></div>
+    <p class="lead">${T({ ar: 'سبع عشرة حاسبة في ثلاث مجموعات — كلها تقديرية، وكلها تُظهر لك المعادلة لا النتيجة فقط.', en: 'Seventeen calculators in three groups — all estimates, all showing the formula, not just the result.' })}</p>
+    <div class="grid3" style="margin-top:22px">${Object.entries(GROUPS).map(([g, G]) => `<a class="tool" href="#/tools#${g}"><h3>${T(G.title)}</h3><div class="q">${T(G.desc)}</div><span class="lab">${T(G.tag)}</span></a>`).join('')}</div></div></section>
+  <section class="alt" id="status"><div class="wrap"><div class="shead"><h2>${T({ ar: 'ما يعمل اليوم، وما يأتي', en: 'What works today, and what comes next' })}</h2><span class="lab">Status</span></div>
+    <div class="grid4" style="margin-top:6px">${live.map(l => `<div class="card st ${l[2]}"><span class="pill ${l[2] === 'on' ? 'reg' : ''}">${l[2] === 'on' ? T({ ar: 'يعمل', en: 'Live' }) : T({ ar: 'قريباً', en: 'Soon' })}</span><h3 style="margin-top:10px">${T(l[0])}</h3><p class="sm" style="margin:0">${T(l[1])}</p></div>`).join('')}</div></div></section>
+  <div class="band"><div class="wrap"><div class="grid"><div><h2>${T({ ar: 'انضمّ إلى قائمة VIP', en: 'Join the VIP list' })}</h2><p style="margin-top:10px;max-width:48ch">${T({ ar: 'قراءة قدرتك الشرائية في ١٥ دقيقة بلا مقابل — أعضاء القائمة تُقرأ قدرتهم أولاً. لن نرسل لك كتالوجاً، ولن نتصل بك غداً لنضغط عليك.', en: 'A purchasing-power reading in 15 minutes, free — list members are read first. No catalogue, no call tomorrow to push you.' })}</p></div><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#/interest?from=coming-soon">${T(S.nav.interest)}</a><a class="btn ghost" href="#/tools">${T(S.nav.tools)}</a></div></div></div></div>`,
+    mount: () => mountCalc(pp, $('#home_calc'), { stepped: true }) };
+}
+function pageHome() {
+  if (SITE_MODE === 'coming_soon') return pageComingSoon();
+  const pp = CALCS.find(c => c.home), block = calcBlock(pp, { stepped: true });
+  const how = [[{ ar: 'القدرة', en: 'Capacity' }, { ar: 'الدخل، والالتزامات، والدعم السكني إن وُجد. خمس عشرة دقيقة، بلا مقابل.', en: 'Income, obligations, housing support if any. Fifteen minutes, free.' }], [{ ar: 'السقف', en: 'Ceiling' }, { ar: 'رقم واحد مكتوب: كم تستطيع فعلاً، لا كم يمنحك البنك بأقصى حدّ.', en: 'One written number: what you can really carry, not the bank’s maximum.' }], [{ ar: 'الخيارات', en: 'Options' }, { ar: 'وحدات داخل سقفك فقط. ما فوقه لا نعرضه، ولو رغبت فيه.', en: 'Only units inside your ceiling. Above it we don’t show — even if you want it.' }], [{ ar: 'القرار', en: 'Decision' }, { ar: 'قرارك أنت. لن نتصل غداً لنضغط عليك، وملفك يبقى محفوظاً باسمك.', en: 'Yours. No call tomorrow to push you; your file stays under your name.' }]];
+  const arms = [['', { ar: 'عتبة العقارية', en: 'Atbah Real Estate' }, { ar: 'البيع والتأجير وإدارة مخزون المطوّرين.', en: 'Sales, leasing and developer inventory.' }], ['g', { ar: 'عتبة للتمويل', en: 'Atbah Finance' }, { ar: 'قراءة القدرة الشرائية وترتيب البنك ومتابعة الاعتماد حتى الإفراغ.', en: 'Purchasing-power reading, bank arrangement, approval through to transfer.' }], ['c', { ar: 'عتبة للتشغيل', en: 'Atbah Operations' }, { ar: 'إدارة المرافق والصيانة بعد التسليم.', en: 'Facility management and maintenance after handover.' }], ['s', { ar: 'عتبة شركاء', en: 'Atbah Partners' }, { ar: 'للمطوّرين: مشترون مؤهّلون يُكملون حتى الإفراغ.', en: 'For developers: qualified buyers who complete.' }]];
+  return { html: `
+  <header class="hero"><div class="wrap"><div class="grid"><div>
+    <div class="eyebrow">Capacity first</div>
+    <h1>${T({ ar: 'لا تدور بيت وأنت ما تعرف سقفك', en: 'Don’t hunt for a home before you know your ceiling' })}</h1>
+    <div class="sub">${T({ ar: 'نبدأ من قدرتك الشرائية ورغبتك الحقيقية، لا من الكتالوج. اعرف سقفك الواقعي هنا في دقيقة — ثم نرى معاً ما يناسبك فعلاً.', en: 'We start from your purchasing power and real intent, not the catalogue. Find your realistic ceiling here in a minute — then we look together at what truly fits.' })}</div>
+    <div class="rule"></div>
+    <div class="no">${T({ ar: 'وأحياناً نقول لك: <em>ليست هذه السنة</em> — ونكتب لك خطة تجعلها السنة القادمة.', en: 'And sometimes we say: <em>not this year</em> — and write you a plan that makes it next year.' })}</div>
+    <div class="gate">${[{ ar: 'لا كتالوج في الرسالة الأولى', en: 'No catalogue in the first message' }, { ar: 'لا «آخر وحدة» ولا عدّاد تنازلي', en: 'No “last unit”, no countdown' }, { ar: 'لا استلام نقد — حساب الضمان فقط', en: 'No cash handled — escrow only' }].map(x => `<div><svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="6" fill="none" stroke="#C9964A" stroke-width="1.5"/><path d="M4 7l2 2 4-4" stroke="#C9964A" stroke-width="1.5" fill="none"/></svg>${T(x)}</div>`).join('')}</div>
+  </div><div id="home_calc">${block.html}</div></div></div></header>
+  <section id="how"><div class="wrap"><div class="shead"><h2>${T({ ar: 'كيف نشتغل — بالترتيب المعكوس', en: 'How we work — in reverse order' })}</h2><span class="lab">Method</span></div>
+    <p class="lead">${T({ ar: 'أغلب الوسطاء يبدأون من الصور. نحن نبدأ من رقمك، ولهذا نعرف ما نستبعده قبل أن نعرف ما نعرضه.', en: 'Most brokers start from pictures. We start from your number — so we know what to rule out before we know what to show.' })}</p>
+    <div class="grid4" style="margin-top:22px">${how.map((h, i) => `<div class="card"><div class="step"><div class="n2">0${i + 1}</div><div><h3>${T(h[0])}</h3><p class="sm" style="margin:0">${T(h[1])}</p></div></div></div>`).join('')}</div></div></section>
+  <section class="alt" id="tools"><div class="wrap"><div class="shead"><h2>${T({ ar: 'حاسبات عتبة', en: 'Atbah calculators' })}</h2><span class="lab">17 tools</span></div>
+    <p class="lead">${T({ ar: 'سبع عشرة حاسبة في ثلاث مجموعات — كلها تقديرية، وكلها تُظهر لك المعادلة لا النتيجة فقط، وكل رقم افتراضي فيها يحمل مصدره وتاريخه.', en: 'Seventeen calculators in three groups — all estimates, all showing the formula, every default carrying its source and date.' })}</p>
+    <div class="grid3" style="margin-top:22px">${Object.entries(GROUPS).map(([g, G]) => `<a class="tool" href="#/tools#${g}"><h3>${T(G.title)}</h3><div class="q">${T(G.desc)}</div><span class="lab">${T(G.tag)}</span></a>`).join('')}</div></div></section>
+  <section id="services"><div class="wrap"><div class="shead"><h2>${T({ ar: 'خدماتنا', en: 'Services' })}</h2><span class="lab">Services</span></div>
+    <p class="lead">${T({ ar: 'رمز واحد وأربعة أذرع. كل ذراع تصنع عملاً للأخرى — ولهذا الصدق عندنا نموذج ربح لا شعار.', en: 'One mark, four arms. Each arm makes work for the next — which is why honesty here is a business model, not a slogan.' })}</p>
+    <div class="grid4" style="margin-top:22px">${arms.map(a => `<div class="arm ${a[0]}"><h3>${T(a[1])}</h3><p class="sm" style="margin:6px 0 0">${T(a[2])}</p></div>`).join('')}</div></div></section>
+  <div class="band"><div class="wrap"><div class="grid"><div><h2>${T({ ar: 'خذ وقتك — وسجّل اهتمامك', en: 'Take your time — and register your interest' })}</h2><p style="margin-top:10px;max-width:48ch">${T({ ar: 'قراءة قدرتك الشرائية في ١٥ دقيقة بلا مقابل. لن نرسل لك كتالوجاً، ولن نتصل بك غداً لنضغط عليك.', en: 'A purchasing-power reading in 15 minutes, free. No catalogue, no call tomorrow to push you.' })}</p></div><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#/interest">${T(S.nav.interest)}</a><a class="btn ghost" href="#/tools">${T(S.nav.tools)}</a></div></div></div></div>`,
+    mount: () => mountCalc(pp, $('#home_calc'), { stepped: true }) };
+}
+function pageTools() {
+  return { html: `<div class="wrap cpage"><h1>${T({ ar: 'حاسبات عتبة', en: 'Atbah calculators' })}</h1><p class="q">${T({ ar: 'كلها تقديرية، وكلها تُظهر المعادلة. اختر مجموعتك.', en: 'All estimates, all showing the formula. Pick your group.' })}</p>
+  ${Object.entries(GROUPS).map(([g, G]) => `<div class="group" id="${g}" style="margin-top:30px"><div class="gh"><h2>${T(G.title)}</h2><span class="tag">${T(G.tag)}</span></div><p class="sm" style="max-width:70ch">${T(G.desc)}</p><div class="grid3" style="margin-top:14px">${CALCS.filter(c => c.group === g).map(c => `<a class="tool" href="#/tools/${c.slug}"><h3>${T(c.title)}</h3><div class="q">${T(c.q)}</div><span class="lab">${c.eyebrow.split('·')[0].trim()}</span></a>`).join('')}</div></div>`).join('')}
+  <div class="warn" style="margin-top:30px"><b>${T({ ar: 'عن كل الأرقام في هذه الصفحات:', en: 'About every number on these pages:' })}</b> ${T({ ar: 'تقديرات أوّلية غير ملزمة، ولا تُغني عن عرض رسمي من جهة ممولة. نُظهر لك المعادلة كاملة لأن ما لا تفهمه لا يجب أن توقّع عليه — لكن القرار يبقى قرارك.', en: 'Preliminary, non-binding estimates, no substitute for a formal offer from a financing entity. We show the whole formula because you should never sign what you don’t understand — but the decision stays yours.' })}</div></div>` };
+}
+function pageCalc(slug) {
+  const c = CALCS.find(x => x.slug === slug); if (!c) return pageTools();
+  const block = calcBlock(c), G = GROUPS[c.group];
+  const idx = CALCS.filter(x => x.group === c.group), i = idx.indexOf(c), next = idx[i + 1], prev = idx[i - 1];
+  return { html: `<div class="wrap cpage"><div class="crumb"><a href="#/tools">${T({ ar: 'الحاسبات', en: 'Calculators' })}</a> › <a href="#/tools#${c.group}">${T(G.title)}</a> › <span>${T(c.title)}</span></div>
+    <div class="lab">${c.eyebrow}</div><h1>${T(c.title)}</h1><p class="q">${T(c.q)}</p>${block.html}${assumptionsHtml(c)}
+    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">${prev ? `<a class="btn quiet" href="#/tools/${prev.slug}">${T({ ar: '← السابقة:', en: '← Previous:' })} ${T(prev.title)}</a>` : ''}${next ? `<a class="btn quiet" href="#/tools/${next.slug}">${T({ ar: 'التالية:', en: 'Next:' })} ${T(next.title)} →</a>` : ''}</div></div>`,
+    mount: () => mountCalc(c, $('#cg_' + c.slug).parentElement) };
+}
+
+/* ---------- interest registration ---------- */
+const INTEREST = { ar: {
+  title: 'سجّل اهتمامك', sub: 'نتواصل معك مرة واحدة لتحديد موعد قراءة قدرتك الشرائية — بلا كتالوج، وبلا اتصال ثانٍ إن لم ترغب.',
+  name: 'الاسم', phone: 'رقم الجوّال', email: 'البريد الإلكتروني (اختياري)', role: 'أنا', city: 'المدينة', budget: 'سقفي التقديري من الحاسبة (إن حسبته)', note: 'ما الذي يوقفك اليوم؟ (اختياري)',
+  roles: [['buyer', 'مشترٍ لأول مرة'], ['buyer2', 'مشترٍ سبق له التملّك'], ['investor', 'مستثمر'], ['developer', 'مطوّر'], ['owner', 'مالك يبحث عن إدارة مرافق'], ['other', 'أخرى']],
+  cities: ['الرياض', 'جدة', 'الدمام / الخبر', 'مكة', 'المدينة', 'أخرى'],
+  wishTitle: 'رغبتك (اختياري — يساعدنا أن نأتي إلى الموعد بخيارات داخل سقفك)',
+  pay: 'طريقة الشراء', pays: [['undecided', 'لم أقرّر بعد'], ['loan', 'تمويل عقاري'], ['cash', 'كاش']],
+  district: 'الحيّ المفضّل (أو أكثر)', districtPh: 'مثال: الملقا، النرجس، اليرموك',
+  ptype: 'نوع العقار', ptypes: [['any', 'لا فرق'], ['apartment', 'شقة'], ['floor', 'دور'], ['duplex', 'دوبلكس'], ['villa', 'فيلا'], ['townhouse', 'تاون هاوس'], ['land', 'أرض']],
+  rooms: 'عدد الغرف', roomsOpts: [['any', 'لا فرق'], ['1', 'غرفة'], ['2', 'غرفتان'], ['3', '٣ غرف'], ['4', '٤ غرف'], ['5+', '٥ فأكثر']],
+  purpose: 'الغرض', purposes: [['live', 'سكن'], ['invest', 'استثمار'], ['both', 'الاثنان']],
+  when: 'متى تريد الانتقال؟', whens: [['3m', 'خلال ٣ أشهر'], ['6m', 'خلال ٦ أشهر'], ['12m', 'خلال سنة'], ['explore', 'أستكشف فقط']],
+  status: 'حالة العقار', statuses: [['any', 'لا فرق'], ['ready', 'جاهز'], ['offplan', 'على الخارطة']],
+  consent: 'أوافق على معالجة بياناتي أعلاه لغرض التواصل معي بشأن قراءة قدرتي الشرائية وخدمات عتبة، وفق <a href="#/privacy">سياسة الخصوصية</a>. أعلم أن بإمكاني سحب موافقتي وطلب حذف بياناتي في أي وقت عبر privacy@atbah.sa.',
+  marketing: 'أرغب أيضاً في استلام رسائل عتبة الدورية (اختياري — يمكن الإلغاء في أي وقت).',
+  submit: 'سجّل اهتمامي', sending: 'جارٍ الإرسال…', ok: 'وصلنا اهتمامك.', okSub: 'رقمك المرجعي {ref}. سنتواصل مرة واحدة خلال يومي عمل لتحديد الموعد. لن نرسل كتالوجاً.',
+  errName: 'اكتب اسمك', errPhone: 'رقم جوّال سعودي صحيح (05xxxxxxxx)', errEmail: 'بريد إلكتروني غير صحيح', errConsent: 'لا نستطيع حفظ بياناتك بلا موافقتك', errSave: 'تعذّر الحفظ الآن — حاول مرة أخرى أو راسلنا على info@atbah.sa',
+  errNotOpen: 'التسجيل يُفتح خلال أيام — إلى حينها راسلنا على info@atbah.sa وسنعود إليك مرة واحدة.',
+}, en: {
+  title: 'Register your interest', sub: 'We contact you once to schedule your purchasing-power reading — no catalogue, and no second call if you don’t want one.',
+  name: 'Name', phone: 'Mobile number', email: 'Email (optional)', role: 'I am', city: 'City', budget: 'My estimated ceiling from the calculator (if computed)', note: 'What is stopping you today? (optional)',
+  roles: [['buyer', 'First-time buyer'], ['buyer2', 'Buyer who has owned before'], ['investor', 'Investor'], ['developer', 'Developer'], ['owner', 'Owner seeking facility management'], ['other', 'Other']],
+  cities: ['Riyadh', 'Jeddah', 'Dammam / Khobar', 'Makkah', 'Madinah', 'Other'],
+  wishTitle: 'Your intent (optional — helps us bring options inside your ceiling to the meeting)',
+  pay: 'How you would buy', pays: [['undecided', 'Not decided yet'], ['loan', 'Mortgage'], ['cash', 'Cash']],
+  district: 'Preferred district(s)', districtPh: 'e.g. Al Malqa, Al Narjis, Al Yarmuk',
+  ptype: 'Property type', ptypes: [['any', 'No preference'], ['apartment', 'Apartment'], ['floor', 'Floor'], ['duplex', 'Duplex'], ['villa', 'Villa'], ['townhouse', 'Townhouse'], ['land', 'Land']],
+  rooms: 'Bedrooms', roomsOpts: [['any', 'No preference'], ['1', '1'], ['2', '2'], ['3', '3'], ['4', '4'], ['5+', '5+']],
+  purpose: 'Purpose', purposes: [['live', 'To live in'], ['invest', 'Investment'], ['both', 'Both']],
+  when: 'When do you want to move?', whens: [['3m', 'Within 3 months'], ['6m', 'Within 6 months'], ['12m', 'Within a year'], ['explore', 'Just exploring']],
+  status: 'Property status', statuses: [['any', 'No preference'], ['ready', 'Ready'], ['offplan', 'Off-plan']],
+  consent: 'I agree to the processing of the data above to contact me about my purchasing-power reading and Atbah services, per the <a href="#/privacy">privacy policy</a>. I know I can withdraw consent and request deletion at any time via privacy@atbah.sa.',
+  marketing: 'I also want Atbah’s periodic messages (optional — unsubscribe anytime).',
+  submit: 'Register my interest', sending: 'Sending…', ok: 'We received your interest.', okSub: 'Your reference is {ref}. We will contact you once within two working days to schedule. No catalogue will be sent.',
+  errName: 'Enter your name', errPhone: 'A valid Saudi mobile (05xxxxxxxx)', errEmail: 'Invalid email', errConsent: 'We cannot store your data without your consent', errSave: 'Could not save right now — try again or email info@atbah.sa',
+  errNotOpen: 'Registration opens in a few days — until then email info@atbah.sa and we will get back to you once.',
+} };
+function pageInterest(params) {
+  const I = INTEREST[LANG], budget = params.get('price') || '';
+  const opt = (arr) => arr.map(x => Array.isArray(x) ? `<option value="${x[0]}">${x[1]}</option>` : `<option>${x}</option>`).join('');
+  return { html: `<div class="wrap cpage"><h1>${I.title}</h1><p class="q">${I.sub}</p>
+  <form class="form" id="ifrm" novalidate style="margin-top:22px">
+    <div class="row2"><div class="f"><label for="i_name">${I.name}</label><input type="text" id="i_name" autocomplete="name" required></div><div class="f"><label for="i_phone">${I.phone}</label><input type="tel" id="i_phone" inputmode="tel" placeholder="05xxxxxxxx" autocomplete="tel" required></div></div>
+    <div class="row2"><div class="f"><label for="i_email">${I.email}</label><input type="email" id="i_email" autocomplete="email"></div><div class="f"><label for="i_role">${I.role}</label><select id="i_role">${opt(I.roles)}</select></div></div>
+    <div class="row2"><div class="f"><label for="i_city">${I.city}</label><select id="i_city">${opt(I.cities)}</select></div><div class="f"><label for="i_budget">${I.budget}</label><input type="number" id="i_budget" value="${esc(budget)}" step="10000" min="0"></div></div>
+    <hr class="sep"><div class="lab" style="margin-bottom:12px">${I.wishTitle}</div>
+    <div class="row2"><div class="f"><label for="w_pay">${I.pay}</label><select id="w_pay">${opt(I.pays)}</select></div><div class="f"><label for="w_purpose">${I.purpose}</label><select id="w_purpose">${opt(I.purposes)}</select></div></div>
+    <div class="row2"><div class="f"><label for="w_ptype">${I.ptype}</label><select id="w_ptype">${opt(I.ptypes)}</select></div><div class="f"><label for="w_rooms">${I.rooms}</label><select id="w_rooms">${opt(I.roomsOpts)}</select></div></div>
+    <div class="row2"><div class="f"><label for="w_district">${I.district}</label><input type="text" id="w_district" placeholder="${I.districtPh}"></div><div class="f"><label for="w_status">${I.status}</label><select id="w_status">${opt(I.statuses)}</select></div></div>
+    <div class="f"><label for="w_when">${I.when}</label><select id="w_when">${opt(I.whens)}</select></div>
+    <div class="f"><label for="i_note">${I.note}</label><textarea id="i_note" rows="3"></textarea></div>
+    <label class="consent"><input type="checkbox" id="i_consent"><span>${I.consent}</span></label>
+    <label class="consent" style="margin-top:-6px"><input type="checkbox" id="i_marketing"><span>${I.marketing}</span></label>
+    <div class="err" id="i_err" hidden></div>
+    <button class="btn" type="submit" id="i_submit">${I.submit}</button>
+  </form><div class="ok-box" id="i_ok" hidden style="max-width:640px;margin-top:16px"></div></div>`,
+    mount: () => {
+      const f = $('#ifrm'), err = $('#i_err');
+      f.addEventListener('submit', async (e) => {
+        e.preventDefault(); err.hidden = true;
+        const name = $('#i_name').value.trim(), phone = $('#i_phone').value.replace(/\s|-/g, ''), email = $('#i_email').value.trim();
+        const fail = (m) => { err.textContent = m; err.hidden = false; };
+        if (name.length < 2) return fail(I.errName);
+        if (!/^(05\d{8}|\+9665\d{8}|9665\d{8})$/.test(phone)) return fail(I.errPhone);
+        if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fail(I.errEmail);
+        if (!$('#i_consent').checked) return fail(I.errConsent);
+        const btn = $('#i_submit'); btn.disabled = true; btn.textContent = I.sending;
+        const rec = { name, phone: phone.replace(/^(\+?966)/, '0'), email: email || null, role: $('#i_role').value, city: $('#i_city').value, budget: +$('#i_budget').value || null, note: $('#i_note').value.trim() || null,
+          wishes: { pay: $('#w_pay').value, purpose: $('#w_purpose').value, ptype: $('#w_ptype').value, rooms: $('#w_rooms').value, district: $('#w_district').value.trim() || null, status: $('#w_status').value, when: $('#w_when').value },
+          consent_text_ver: 'phase0-v1', consent_lang: LANG, marketing_consent: $('#i_marketing').checked, source: params.get('from') || 'site' };
+        try {
+          const res = await fetch('/api/interest', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(rec) });
+          const j = await res.json().catch(() => ({}));
+          if (res.status === 503 && j.error === 'not_configured') { fail(I.errNotOpen); btn.disabled = false; btn.textContent = I.submit; return; }
+          if (!res.ok || !j.ref) throw new Error(j.error || 'save');
+          f.hidden = true; const ok = $('#i_ok'); ok.hidden = false; ok.innerHTML = `<b>${I.ok}</b><br>${I.okSub.replace('{ref}', '<span class="num">' + j.ref + '</span>')}`;
+        } catch (ex) { fail(I.errSave); btn.disabled = false; btn.textContent = I.submit; }
+      });
+    } };
+}
+/* تقرير سقفك — يُولَّد من حالة حاسبة القدرة الشرائية؛ الحفظ كـ PDF عبر الطباعة */
+function pageReport() {
+  const c = CALCS.find(x => x.home), st = STATE[c.slug];
+  if (!st || !st.seen) { location.hash = '#/'; return { html: '' }; }
+  applyAuto(c, st); const v = st.v, r = c.compute(v);
+  const d = new Date(), date = d.toLocaleDateString(LANG === 'ar' ? 'ar-SA-u-ca-gregory-nu-latn' : 'en-GB', { year: 'numeric', month: 'long', day: 'numeric' });
+  const steps = {
+    no_budget: [{ ar: 'اجمع التزاماتك الشهرية في ورقة واحدة وحدّد أيّها ينتهي أولاً.', en: 'List your monthly obligations on one page and find which ends first.' }, { ar: 'أعد الحساب بعد سداد أصغر التزام — سترى سقفاً يظهر.', en: 'Recalculate after clearing the smallest obligation — a ceiling will appear.' }, { ar: 'حدّد موعد مراجعة بعد ستة أشهر.', en: 'Set a review date in six months.' }],
+    dti_high: [{ ar: 'أعد الحساب على استقطاع ٤٥٪ — هذا الرقم الذي يترك لك هامشاً.', en: 'Recalculate at 45% deduction — the number that leaves you a margin.' }, { ar: 'قارن القسطين: الفرق هو ما يبقى في جيبك عشرين سنة.', en: 'Compare the two payments: the difference is what stays in your pocket for twenty years.' }, { ar: 'لا توقّع على أيّ عرض قبل قراءة كاملة.', en: 'Sign no offer before a full reading.' }],
+    term_capped: [{ ar: 'المدّة قصيرة بسبب العمر — فكّر في دفعة أولى أكبر أو مشاركة الملكية.', en: 'Term is short because of age — consider a larger down payment or shared ownership.' }, { ar: 'جرّب حاسبة «إيجار أم تملّك» لترى إن كان الشراء أصلاً هو الأفضل الآن.', en: 'Try the rent-vs-buy calculator to see whether buying is best right now.' }, { ar: 'اطلب قراءة كاملة قبل أي بحث.', en: 'Request a full reading before searching.' }],
+    support_conditional: [{ ar: 'استخرج شهادة الاستحقاق من «سكني» — الرقم المعتمد فيها لا هنا.', en: 'Get your eligibility certificate from Sakani — the binding figure is there, not here.' }, { ar: 'احسب الكاش المطلوب يوم الشراء بحاسبة «الكاش يوم الشراء».', en: 'Compute the cash needed on purchase day with that calculator.' }, { ar: 'ابحث تحت السقف بـ١٠٪ لا عنده.', en: 'Search 10% below the ceiling, not at it.' }],
+    large_down: [{ ar: 'تأكّد أن الدفعة لا تستهلك مدّخر الطوارئ (٣–٦ أشهر مصاريف).', en: 'Make sure the down payment leaves an emergency fund (3–6 months of expenses).' }, { ar: 'احسب الكاش الكامل يوم الشراء (العمولة والرسوم).', en: 'Compute the full cash on purchase day (commission and fees).' }, { ar: 'اطلب قراءة كاملة قبل الحجز.', en: 'Request a full reading before booking.' }],
+    ok: [{ ar: 'احسب الكاش الكامل يوم الشراء (دفعة + عمولة + رسوم) بحاسبة «الكاش يوم الشراء».', en: 'Compute the full cash on purchase day (down payment + commission + fees).' }, { ar: 'ابحث تحت سقفك بـ١٠٪ — الهامش هو أمانك.', en: 'Search 10% below your ceiling — the margin is your safety.' }, { ar: 'اطلب قراءة قدرتك الشرائية لنثبّت الرقم قبل أي حجز.', en: 'Request a purchasing-power reading so the number is confirmed before any booking.' }],
+  }[r.verdict] || [];
+  const kv = (k, val) => `<div><span>${T(k)}</span><b>${val}</b></div>`;
+  return { html: `<div class="wrap cpage"><div class="report">
+    <div class="rh"><div class="brand">${LOGO(34, '#10322D')}<span>${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</span></div><div class="sm">${T({ ar: 'تقرير سقفك العقاري', en: 'Your property-ceiling report' })} · <span class="num">${date}</span></div></div>
+    <div class="lab">${T({ ar: 'أقصى سعر عقار يناسبك (تقديري)', en: 'Highest property price that fits you (estimate)' })}</div><div class="big">${sar(r.price)} <span style="font-size:16px;color:var(--muted);font-family:inherit">${T(RIYAL)}</span></div>
+    <div class="kv">${kv({ ar: 'صافي الدخل الشهري', en: 'Net monthly income' }, sar(v.income))}${kv({ ar: 'الالتزامات الشهرية', en: 'Monthly obligations' }, sar(v.obligations))}${kv({ ar: 'نسبة الاستقطاع المختارة', en: 'Chosen deduction ratio' }, v.dtiPct + '%')}${kv({ ar: 'مدّة التمويل', en: 'Term' }, yrs(r.termYears))}${kv({ ar: 'الدفعة الأولى', en: 'Down payment' }, r.downPct + '%')}${kv({ ar: 'نسبة الربح التقديرية', en: 'Indicative profit rate' }, v.ratePct + '%')}${kv({ ar: 'القسط الشهري', en: 'Monthly payment' }, sar(r.monthly))}${kv({ ar: 'مبلغ التمويل', en: 'Financing' }, sar(r.loan))}${kv({ ar: 'المطلوب منك نقداً', en: 'Cash from you' }, sar(r.cashDown))}${kv({ ar: 'إجمالي ما تدفعه', en: 'Total paid' }, sar(r.totalPaid))}</div>
+    <h3>${T({ ar: 'خطواتك الثلاث القادمة', en: 'Your next three steps' })}</h3><ol>${steps.map(x => `<li>${T(x)}</li>`).join('')}</ol>
+    <p class="sm" style="margin-top:16px">${T({ ar: 'نطاقات الأسعار بحسب الحيّ تُضاف إلى التقرير عند اعتماد مصدر بيانات رسمي — لا ننشر رقماً لا نستطيع إثباته.', en: 'Price ranges by district will be added once an official data source is adopted — we publish no figure we cannot prove.' })}</p>
+    <div class="actions"><button class="btn" type="button" onclick="window.print()">${T({ ar: 'احفظ كملف PDF', en: 'Save as PDF' })}</button><a class="btn quiet" href="#/interest?from=report&price=${Math.round(r.price)}">${T({ ar: 'انضمّ إلى قائمة VIP', en: 'Join the VIP list' })}</a><a class="btn quiet" href="#/">${T({ ar: 'عدّل الأرقام', en: 'Edit the numbers' })}</a></div>
+    <div class="note sm" style="margin-top:18px;border-top:1px solid var(--line2);padding-top:12px">${T(DISC)} ${T({ ar: 'شركة عتبة بداية العقارية — س.ت 7055177823 — رخصة فال 1200050979.', en: 'Atabat Bidaya Real Estate Co. — CR 7055177823 — FAL 1200050979.' })}</div>
+  </div></div>` };
+}
+function pagePrivacy() {
+  return { html: `<div class="wrap cpage" style="max-width:760px"><h1>${T({ ar: 'سياسة الخصوصية — مسوّدة', en: 'Privacy policy — draft' })}</h1><p class="q">${T({ ar: 'مسوّدة للمراجعة القانونية قبل الإطلاق. تُستكمل بأسماء مسؤول حماية البيانات والمنشأة.', en: 'Draft for legal review before launch. To be completed with the data-protection officer and entity names.' })}</p>
+  <div class="card" style="margin-top:20px;line-height:2">${T({ ar: `<b>ما نجمعه:</b> الاسم، الجوّال، البريد (اختياري)، دورك، مدينتك، وسقفك التقديري إن أدخلته. <br><b>لماذا:</b> للتواصل معك مرة واحدة لتحديد موعد قراءة قدرتك الشرائية، وللرسائل الدورية إن وافقت عليها صراحةً.<br><b>الأساس النظامي:</b> موافقتك الصريحة، وفق نظام حماية البيانات الشخصية ولائحته.<br><b>أين تُحفظ:</b> على خوادم داخل المملكة العربية السعودية .<br><b>كم تبقى:</b> ١٢ شهراً من آخر تواصل ما لم تفتح ملفاً معنا، ثم تُحذف.<br><b>حقوقك:</b> الاطّلاع، التصحيح، الحذف، سحب الموافقة، الاعتراض — عبر privacy@atbah.sa، ونردّ خلال ٣٠ يوماً.<br><b>مع من نشاركها:</b> لا أحد، إلا الجهة الممولة التي تختارها أنت عند فتح ملف.<br><b>المنشأة المسؤولة عن المعالجة:</b> شركة عتبة بداية العقارية — س.ت 7055177823 — الرياض، حي الملز.<br><b>مسؤول حماية البيانات:</b> privacy@atbah.sa.`, en: `<b>What we collect:</b> name, mobile, email (optional), your role, city and your estimated ceiling if entered.<br><b>Why:</b> to contact you once to schedule your purchasing-power reading, and for periodic messages only with your explicit consent.<br><b>Legal basis:</b> your explicit consent under the Saudi Personal Data Protection Law.<br><b>Where it is stored:</b> on servers inside Saudi Arabia.<br><b>How long:</b> 12 months from last contact unless you open a file with us, then deleted.<br><b>Your rights:</b> access, correction, deletion, withdrawal of consent, objection — via privacy@atbah.sa, answered within 30 days.<br><b>Who we share with:</b> no one, except the financing entity you choose when opening a file.<br><b>Controller:</b> Atabat Bidaya Real Estate Co. — CR 7055177823 — Riyadh, Al Malaz.<br><b>Data protection officer:</b> privacy@atbah.sa.` })}</div></div>` };
+}
+
+/* ---------- shell ---------- */
+function navHtml(route) {
+  const cur = (r) => route.startsWith(r) ? ' aria-current="page"' : '';
+  return `<div class="wrap"><a class="brand" href="#/">${LOGO(54)}<b>${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</b></a>
+  <div class="links"><a href="#/tools"${cur('/tools')}>${T(S.nav.tools)}</a>${SITE_MODE === 'full' ? `<a href="#/#how">${T(S.nav.how)}</a><a href="#/#services">${T(S.nav.services)}</a>` : ''}<a href="#/interest"${cur('/interest')}>${T(S.nav.interest)}</a></div>
+  <button class="lang" id="langbtn" type="button" aria-label="Switch language">${LANG === 'ar' ? 'EN' : 'عربي'}</button>
+  <a class="btn" href="#/" style="padding:9px 16px;min-height:40px;font-size:14px">${T(S.cta)}</a></div>`;
+}
+function footerHtml() {
+  return `<div class="wrap"><div class="cols"><div><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">${LOGO(38)}<b style="font-family:'Reem Kufi',Tahoma,sans-serif;font-size:24px">${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</b></div><div>${T({ ar: 'خدمات وساطة عقارية', en: 'Real-estate brokerage services' })}</div></div>
+  <div><b>${T({ ar: 'بيانات الترخيص', en: 'Licence details' })}</b><br>${T({ ar: 'شركة عتبة بداية العقارية', en: 'Atabat Bidaya Real Estate Co. (LLC)' })}<br>${T({ ar: 'رخصة فال:', en: 'FAL licence:' })} <span class="num">1200050979</span> ${T({ ar: '(سارية حتى', en: '(valid to' })} <span class="num">2027-09-10</span>)<br>${T({ ar: 'السجل التجاري:', en: 'CR:' })} <span class="num">7055177823</span><br>${T({ ar: 'الرقم الضريبي:', en: 'VAT no.:' })} <span class="num">315016844100003</span></div>
+  <div><b>${T({ ar: 'تواصل', en: 'Contact' })}</b><br>info@atbah.sa<br><a href="#/privacy">${T({ ar: 'سياسة الخصوصية', en: 'Privacy policy' })}</a></div></div>
+  <div class="legal">${T({ ar: 'جميع الأرقام والحاسبات في هذا الموقع تقديرية أوّلية غير ملزمة، وتخضع لموافقة الجهة الممولة. لا تُعدّ استشارة مالية ولا عرضاً تمويلياً. أي إعلان عن عقار مُعيَّن يحمل رقم ترخيص الإعلان. العمولة النظامية للوساطة ٢٫٥٪ ما لم يُتّفق كتابةً على غيرها. أرقام الدعم السكني استرشادية والمرجع هو «سكني» وشهادة استحقاقك.', en: 'All figures and calculators on this site are preliminary, non-binding estimates subject to the financing entity’s approval; not financial advice or a financing offer. Any listing carries its advertising-licence number. Statutory brokerage commission is 2.5% unless agreed otherwise in writing. Housing-support figures are indicative; Sakani and your eligibility certificate are the reference.' })}<br>© <span class="num">2026</span> ${T({ ar: 'شركة عتبة بداية العقارية — س.ت 7055177823 — رخصة فال 1200050979. جميع الحقوق محفوظة.', en: 'Atabat Bidaya Real Estate Co. — CR 7055177823 — FAL 1200050979. All rights reserved.' })}</div></div>`;
+}
+function route() {
+  const raw = location.hash.replace(/^#/, '') || '/';
+  const [pathPart, anchor] = raw.split('#');
+  const [path, qs] = pathPart.split('?'); const params = new URLSearchParams(qs || '');
+  const m = params.get('mode'); if (m === 'full' || m === 'coming_soon') { SITE_MODE = m; try { localStorage.setItem('atbah.mode', m); } catch (e) {} }
+  let page;
+  if (path === '/' || path === '') page = pageHome();
+  else if (path === '/tools') page = pageTools();
+  else if (path.startsWith('/tools/')) page = pageCalc(path.slice(7));
+  else if (path === '/interest') page = pageInterest(params);
+  else if (path === '/privacy') page = pagePrivacy();
+  else if (path === '/report') page = pageReport();
+  else page = pageHome();
+  document.documentElement.lang = LANG; document.documentElement.dir = LANG === 'ar' ? 'rtl' : 'ltr'; document.body.dataset.lang = LANG;
+  $('#nav').innerHTML = navHtml(path); $('#app').innerHTML = page.html; $('#foot').innerHTML = footerHtml();
+  if (page.mount) page.mount();
+  $('#langbtn').addEventListener('click', () => { LANG = LANG === 'ar' ? 'en' : 'ar'; try { localStorage.setItem('atbah.lang', LANG); } catch (e) {} route(); });
+  if (anchor) { const el = document.getElementById(anchor); if (el) el.scrollIntoView({ block: 'start' }); } else window.scrollTo(0, 0);
+}
+window.addEventListener('hashchange', route);
+route();
+
+</script>
+
+
+</body></html>
