@@ -1,1 +1,9 @@
-{ "name": "atbah-live", "private": true, "version": "1.0.0", "type": "module" }
+{
+  "name": "atbah-live",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "@vercel/analytics": "^1.4.1"
+  }
+}
