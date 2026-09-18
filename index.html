@@ -81,7 +81,21 @@ nav.top .lang:hover{border-color:#C9964A}
 .btn.ghost:hover{border-color:var(--gold);background:transparent}
 .btn.quiet{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
 .btn.quiet:hover{border-color:var(--gold);background:var(--surface)}
-@media(max-width:760px){nav.top .links{display:none}}
+nav.top .menu{display:none;background:transparent;border:1px solid #2E5A52;color:#F1ECE3;width:42px;height:40px;border-radius:4px;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto}
+nav.top .menu svg{width:22px;height:22px}
+@media(max-width:760px){
+  nav.top .wrap{flex-wrap:wrap}
+  nav.top .menu{display:inline-flex;margin-inline-start:auto}
+  nav.top .links{display:none;flex-basis:100%;flex-direction:column;gap:0;margin:8px 0 4px;border-top:1px solid var(--railline);padding-top:6px}
+  nav.top.open .links{display:flex}
+  nav.top .links a{font-size:16px;padding:12px 4px;border-bottom:1px solid var(--railline)}
+  nav.top .links a:last-child{border-bottom:0}
+  nav.top .links a[aria-current="page"]{border-bottom-color:var(--railline);color:#C9964A}
+  nav.top .cta-top{display:none}
+  nav.top .lang{order:1}
+  nav.top .menu{order:2}
+  nav.top .links{order:3}
+}
 
 /* hero */
 .hero{background:var(--rail);color:#F1ECE3;padding-block:52px 60px;position:relative;overflow:hidden}
@@ -1244,7 +1258,8 @@ function navHtml(route) {
   return `<div class="wrap"><a class="brand" href="#/">${LOGO(54)}<b>${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</b></a>
   <div class="links"><a href="#/about"${cur('/about')}>${T(S.nav.about)}</a><a href="#/projects"${cur('/projects')}>${T(S.nav.projects)}</a><a href="#/tools"${cur('/tools')}>${T(S.nav.tools)}</a>${SITE_MODE === 'full' ? `<a href="#/#how">${T(S.nav.how)}</a><a href="#/#services">${T(S.nav.services)}</a>` : ''}<a href="#/interest"${cur('/interest')}>${T(S.nav.interest)}</a></div>
   <button class="lang" id="langbtn" type="button" aria-label="Switch language">${LANG === 'ar' ? 'EN' : 'عربي'}</button>
-  <a class="btn" href="#/" style="padding:9px 16px;min-height:40px;font-size:14px">${T(S.cta)}</a></div>`;
+  <button class="menu" id="menubtn" type="button" aria-label="${T({ ar: 'القائمة', en: 'Menu' })}" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <a class="btn cta-top" href="#/" style="padding:9px 16px;min-height:40px;font-size:14px">${T(S.cta)}</a></div>`;
 }
 function footerHtml() {
   return `<div class="wrap"><div class="cols"><div><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">${LOGO(38)}<b style="font-family:'Reem Kufi',Tahoma,sans-serif;font-size:24px">${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</b></div><div>${T({ ar: 'خدمات وساطة عقارية', en: 'Real-estate brokerage services' })}</div></div>
@@ -1270,6 +1285,7 @@ function route() {
   document.documentElement.lang = LANG; document.documentElement.dir = LANG === 'ar' ? 'rtl' : 'ltr'; document.body.dataset.lang = LANG;
   $('#nav').innerHTML = navHtml(path); $('#app').innerHTML = page.html; $('#foot').innerHTML = footerHtml();
   if (page.mount) page.mount();
+  const mb = $('#menubtn'), navEl = $('#nav'); if (mb) { mb.addEventListener('click', () => { const open = !navEl.classList.contains('open'); navEl.classList.toggle('open', open); mb.setAttribute('aria-expanded', String(open)); }); navEl.querySelectorAll('.links a').forEach(a => a.addEventListener('click', () => { navEl.classList.remove('open'); mb.setAttribute('aria-expanded', 'false'); })); }
   $('#langbtn').addEventListener('click', () => { LANG = LANG === 'ar' ? 'en' : 'ar'; try { localStorage.setItem('atbah.lang', LANG); } catch (e) {} route(); });
   if (anchor) { const el = document.getElementById(anchor); if (el) el.scrollIntoView({ block: 'start' }); } else window.scrollTo(0, 0);
 }
