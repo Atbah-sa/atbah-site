@@ -27,7 +27,8 @@ export default async function handler(req, res) {
   const name = clean(b.name, 120), rawPhone = clean(b.phone, 20).replace(/\s|-/g, ''), email = clean(b.email, 160) || null;
   if (name.length < 2 || !PHONE.test(rawPhone)) return res.status(400).json({ error: 'invalid' });
   if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ error: 'invalid_email' });
-  if (b.consent_text_ver !== 'phase0-v1') return res.status(400).json({ error: 'consent' });
+  const consentVer = ['phase0-v1', 'phase0-v2'].includes(b.consent_text_ver) ? b.consent_text_ver : null; // v2 (2026-09-17): adds budget/ceiling + preferences and showing matching properties
+  if (!consentVer) return res.status(400).json({ error: 'consent' });
   const phone = rawPhone.replace(/^(\+?966)/, '0');
   const wishes = {}; const w = b.wishes && typeof b.wishes === 'object' ? b.wishes : {};
   for (const k of Object.keys(WISH)) if (WISH[k].includes(w[k])) wishes[k] = w[k];
@@ -36,7 +37,7 @@ export default async function handler(req, res) {
   const rec = {
     name, phone, email, role: clean(b.role, 40) || 'other', city: clean(b.city, 60) || '—',
     budget: Number.isFinite(+b.budget) && +b.budget > 0 ? Math.round(+b.budget) : null, note: clean(b.note, 1000) || null,
-    consent_text_ver: 'phase0-v1', consent_lang: b.consent_lang === 'en' ? 'en' : 'ar', marketing_consent: !!b.marketing_consent,
+    consent_text_ver: consentVer, consent_lang: b.consent_lang === 'en' ? 'en' : 'ar', marketing_consent: !!b.marketing_consent,
     ip_hash: createHash('sha256').update((process.env.IP_SALT || 'atbah') + ip).digest('hex').slice(0, 32),
     source: clean(b.source, 60) || 'site', wishes,
   };
@@ -64,7 +65,7 @@ export default async function handler(req, res) {
   if (process.env.RESEND_API_KEY && to.length) {
     const first = name.split(/\s+/)[0], masked = phone.replace(/^(\d{4})\d+(\d{2})$/, '$1••••$2');
     const subject = `عتبة — اهتمام جديد ${saved.ref} · ${first} · ${rec.city}`;
-    const rows = [['المرجع', saved.ref], ['الاسم', first], ['الجوّال', masked], ['الدور', rec.role], ['المدينة', rec.city], ['السقف التقديري', rec.budget ? rec.budget.toLocaleString('en-US') + ' ريال' : '—'], ['الرغبة', Object.entries(wishes).map(([k, v]) => `${k}: ${v}`).join(' · ') || '—'], ['المصدر', rec.source]];
+    const rows = [['المرجع', saved.ref], ['الاسم', first], ['الجوّال', masked], ['الدور', rec.role], ['المدينة', rec.city], ['السقف التقديري', rec.budget ? rec.budget.toLocaleString('en-US') + ' ريال' : '—'], ['الرغبة', Object.entries(wishes).map(([k, v]) => `${k}: ${v}`).join(' · ') || '—'], ['المصدر', rec.source], ['ملاحظة / التواصل', rec.note || '—']];
     const html = `<div dir="rtl" style="font-family:Tahoma,Arial,sans-serif;font-size:15px;line-height:1.8;color:#10322D"><p><b>اهتمام جديد وصل الآن.</b> اتّصال واحد خلال يومي عمل — لا كتالوج.</p><table>${rows.map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#5C7570">${k}</td><td><b>${v}</b></td></tr>`).join('')}</table><p style="font-size:12px;color:#8A9B96">التفاصيل الكاملة في المستقبِل داخل المملكة. لا تُعِد توجيه هذه الرسالة.</p></div>`;
     // Awaited (5s timeout): Vercel freezes the function once the response is sent, so an un-awaited request never leaves. A failure here never fails the registration.
     try {
