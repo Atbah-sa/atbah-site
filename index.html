@@ -155,6 +155,18 @@ body[data-lang="en"] .report .big{text-align:start}
 .calc-h h3{font-size:18px}
 .calc-h .lab{margin-inline-start:auto}
 .calc-b{padding:18px 20px 20px}
+.fork{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:6px;padding:18px 20px 20px;margin-bottom:14px;box-shadow:0 22px 50px -30px rgba(0,0,0,.45)}
+.fork h3{font-size:18px;margin:0 0 4px}
+.fork .q{font-size:13.5px;color:var(--muted);margin:0 0 14px}
+.fork-opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fork-opts button{font:inherit;text-align:start;background:var(--surface2);color:var(--ink);border:1.5px solid var(--line);border-radius:6px;padding:14px 14px 12px;min-height:72px;cursor:pointer}
+.fork-opts button b{display:block;font-size:16px;margin-bottom:2px}
+.fork-opts button span{font-size:12.5px;color:var(--muted)}
+.fork-opts button:hover{border-color:var(--gold)}
+.fork-opts button[aria-pressed=true]{border-color:var(--gold);background:var(--surface);box-shadow:inset 0 0 0 1px var(--gold)}
+.fork-cash{margin-top:14px}
+.fork-cash .btn{width:100%}
+@media (max-width:420px){.fork-opts{grid-template-columns:1fr}}
 .steps{display:flex;gap:6px;margin-bottom:16px}
 .steps span{flex:1;height:4px;background:var(--line2);border-radius:2px}
 .steps span.on{background:var(--gold)}
@@ -239,6 +251,11 @@ section.alt{background:var(--surface2);border-top:1px solid var(--line);border-b
 
 /* calculator page */
 .cpage{padding-block:34px 70px}
+.proj-soon{display:inline-flex;align-items:center;gap:10px;font-family:'Reem Kufi','IBM Plex Sans Arabic',Tahoma,sans-serif;font-size:17px;font-weight:600;color:var(--gold);border:1px solid var(--gold);border-radius:999px;padding:8px 16px;margin-bottom:16px}
+.proj-soon .dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+.proj-cities{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.proj-cities .card h3{font-size:18px;margin:0 0 4px}
+@media (max-width:720px){.proj-cities{grid-template-columns:1fr}}
 .crumb{font-size:13px;color:var(--muted);margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .crumb a{color:var(--muted);text-decoration:none}.crumb a:hover{color:var(--ink)}
 .cpage h1{font-size:clamp(24px,3.4vw,34px)}
@@ -351,7 +368,7 @@ const CALCS = [
     return `<div class="lab">${T({ ar: 'أقصى سعر عقار يناسبك', en: 'Highest price that fits you' })}</div>${big(sar(r.price), RIYAL)}
     <div class="split">${cell({ ar: 'القسط الشهري', en: 'Monthly payment' }, sar(r.monthly))}${cell({ ar: 'مبلغ التمويل', en: 'Financing' }, sar(r.loan))}${cell(v.support === 'grant' ? { ar: 'المطلوب منك نقداً', en: 'Cash from you' } : { ar: 'الدفعة الأولى', en: 'Down payment' }, sar(r.cashDown))}${cell({ ar: 'الميزانية الشهرية المتاحة', en: 'Monthly budget available' }, sar(r.budget))}</div>
     ${uplift}${verdict(T(V[r.verdict]), r.verdict === 'no_budget' || r.verdict === 'dti_high')}
-    <div class="res cta" style="padding:0"><a class="btn" href="#/interest?from=purchasing-power&price=${Math.round(r.price)}">${T({ ar: 'اطلب قراءة قدرتك الشرائية', en: 'Request a purchasing-power reading' })}</a><a class="btn ghost" href="#/report">${T({ ar: 'احفظ تقرير سقفك (PDF)', en: 'Save my ceiling report (PDF)' })}</a></div>
+    <div class="res cta" style="padding:0"><a class="btn" href="#/interest?from=purchasing-power&pay=loan&price=${Math.round(r.price)}">${T({ ar: 'اعرض عليّ ما يقع داخل سقفي', en: 'Show me what fits inside my ceiling' })}</a><a class="btn ghost" href="#/report">${T({ ar: 'احفظ تقرير سقفك (PDF)', en: 'Save my ceiling report (PDF)' })}</a></div>
     <div class="note">${T(DISC)} ${T({ ar: 'أرقام الدعم السكني تقديرية — الرقم المعتمد هو ما في شهادة استحقاقك من «سكني».', en: 'Housing-support figures are indicative — the binding figure is on your Sakani certificate.' })}</div>`;
   },
   assumptions: ['dtiDefault', 'dtiCapUnder15k', 'dtiCapAbove15k', 'dtiCapSubsidised', 'ltvFirstHome', 'ltvOther', 'retireAgePublic', 'retireAgePrivate', 'profitRate', 'grantLowIncome', 'grantHighIncome', 'subsidyCap', 'subsidyFullUpTo', 'subsidyMinPct'],
@@ -636,7 +653,7 @@ try { const m = localStorage.getItem('atbah.mode'); if (m === 'full' || m === 'c
 const $ = (s, r = document) => r.querySelector(s);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const S = {
-  nav: { tools: { ar: 'الحاسبات', en: 'Calculators' }, how: { ar: 'كيف نشتغل', en: 'How we work' }, services: { ar: 'خدماتنا', en: 'Services' }, interest: { ar: 'سجّل اهتمامك', en: 'Register interest' } },
+  nav: { projects: { ar: 'مشاريعنا', en: 'Our projects' }, tools: { ar: 'الحاسبات', en: 'Calculators' }, how: { ar: 'كيف نشتغل', en: 'How we work' }, services: { ar: 'خدماتنا', en: 'Services' }, interest: { ar: 'سجّل اهتمامك', en: 'Register interest' } },
   cta: { ar: 'اعرف سقفك أولاً', en: 'Know your ceiling first' },
 };
 const LOGO = (size = 30, arch = '#F1ECE3') => `<svg width="${size}" height="${Math.round(size * 142 / 130)}" viewBox="0 0 130 142" fill="none" aria-hidden="true"><path d="M18.5 106 L18.5 46 A25.5 25.5 0 0 1 44 20.5 L86 20.5 A25.5 25.5 0 0 1 111.5 46 L111.5 106 L98.5 106 L98.5 46 A12.5 12.5 0 0 0 86 33.5 L44 33.5 A12.5 12.5 0 0 0 31.5 46 L31.5 106 Z" fill="${arch}"/><path d="M48 106 L48 65 A17 17 0 0 1 82 65 L82 106 Z" fill="#C9964A"/><rect x="14" y="116" width="102" height="14" rx="2" fill="#B4522B"/></svg>`;
@@ -734,18 +751,34 @@ function pageComingSoon() {
   const pp = CALCS.find(c => c.home), block = calcBlock(pp, { stepped: true });
   const live = [
     [{ ar: 'الحاسبات السبع عشرة', en: 'Seventeen calculators' }, { ar: 'تعمل الآن — كل رقم يحمل مصدره وتاريخه.', en: 'Live now — every default carries its source and date.' }, 'on'],
-    [{ ar: 'قراءة قدرتك الشرائية', en: 'Your purchasing-power reading' }, { ar: 'سجّل اهتمامك ونتواصل مرة واحدة خلال يومي عمل.', en: 'Register and we contact you once within two working days.' }, 'on'],
-    [{ ar: 'الوحدات داخل سقفك', en: 'Units inside your ceiling' }, { ar: 'نتعاقد الآن مع أفضل المطوّرين على أفضل المشاريع — ونعرضها لك داخل سقفك فقط.', en: 'We are contracting now with the best developers on the best projects — shown to you inside your ceiling only.' }, 'soon'],
-    [{ ar: 'قائمة VIP', en: 'VIP list' }, { ar: 'من يسجّل الآن تُقرأ قدرته أولاً حين نفتح المواعيد، وتصله رسائل عتبة الدورية إن رغب.', en: 'Register now and your reading is scheduled first when slots open, with Atbah’s periodic updates if wanted.' }, 'on'],
+    [{ ar: 'سجّل ما تبحث عنه', en: 'Tell us what you are looking for' }, { ar: 'ميزانيتك أو سقفك، المدينة، نوع العقار — ونتواصل مرة واحدة خلال يومي عمل بما يقع داخل سقفك.', en: 'Your budget or ceiling, city and property type — one call within two working days with what fits inside your ceiling.' }, 'on'],
+    [{ ar: 'تصفّح الوحدات على الموقع', en: 'Browse units on the site' }, { ar: 'اليوم يعرضها عليك مستشارك مباشرةً داخل سقفك. عرضها هنا على الموقع يأتي قريباً.', en: 'Today your advisor shows them to you directly, inside your ceiling. Browsing them here on the site comes soon.' }, 'soon'],
+    [{ ar: 'قراءة قدرتك الشرائية', en: 'Your purchasing-power reading' }, { ar: 'قبل الحجز نقرأ قدرتك كاملةً معك في ١٥ دقيقة — بلا مقابل، حتى لا توقّع على ما يفوق سقفك.', en: 'Before you reserve we go through your full purchasing power with you in 15 minutes — free, so you never sign above your ceiling.' }, 'on'],
   ];
   return { html: `
   <header class="hero cs"><div class="wrap"><div class="grid"><div>
-    <div class="soon"><span class="dot"></span>${T({ ar: 'حلول عقارية مخصّصة — قريباً', en: 'Personalised real-estate solutions — coming soon' })}</div>
+    <div class="soon"><span class="dot"></span>${T({ ar: 'وساطة عقارية · الرياض · جدة · المنطقة الشرقية', en: 'Real-estate brokerage · Riyadh · Jeddah · Eastern Province' })}</div>
     <h1>${T({ ar: 'سوق العقار يحتاج صراحة، لا إعلاناً إضافياً.', en: 'The property market needs candour, not another advert.' })}</h1>
-    <div class="sub">${T({ ar: 'نبني منصّة عتبة على مهل لنغيّر طريقة الشراء. لكن حساباتك لا تحتمل الانتظار: اعرف سقفك الحقيقي الآن في دقيقة — النتيجة على شاشتك، لا في مكالمة من مسوّق.', en: 'We are building the Atbah platform without rushing, to change how people buy. Your numbers cannot wait: know your real ceiling now, in a minute — on your screen, not in a call from a salesman.' })}</div>
+    <div class="sub">${T({ ar: 'أخبرنا بميزانيتك وما تبحث عنه، ونعرض عليك ما يقع داخل سقفك من مشاريع مطوّرينا — اتصال واحد خلال يومي عمل. كاش؟ اكتب ميزانيتك. تمويل؟ اعرف سقفك الحقيقي في دقيقة، والنتيجة على شاشتك لا في مكالمة من مسوّق.', en: 'Tell us your budget and what you are looking for, and we show you what fits inside your ceiling from our developers’ projects — one call within two working days. Cash? Enter your budget. Mortgage? Know your real ceiling in a minute — on your screen, not in a call from a salesman.' })}</div>
     <div class="rule"></div>
     <div class="no">${T({ ar: 'نبدأ من قدرتك الشرائية ورغبتك الحقيقية، لا من المشاريع المتاحة. وأحياناً نقول: <em>ليست هذه السنة</em> — ونكتب لك خطة.', en: 'We start from your purchasing power and real intent, not from the projects on offer. And sometimes we say: <em>not this year</em> — and write you a plan.' })}</div>
-  </div><div id="home_calc">${block.html}</div></div></div></header>
+  </div><div>
+    <div class="fork" id="fork">
+      <h3>${T({ ar: 'كيف ستشتري؟', en: 'How will you buy?' })}</h3>
+      <p class="q">${T({ ar: 'نبدأ من سقفك — ثم نعرض عليك ما يقع داخله فقط.', en: 'We start from your ceiling — then show you only what fits inside it.' })}</p>
+      <div class="fork-opts">
+        <button type="button" id="fork_cash" aria-pressed="false"><b>${T({ ar: 'كاش', en: 'Cash' })}</b><span>${T({ ar: 'اكتب ميزانيتك وانتقل مباشرة', en: 'Enter your budget and go straight on' })}</span></button>
+        <button type="button" id="fork_loan" aria-pressed="false"><b>${T({ ar: 'تمويل عقاري', en: 'Mortgage' })}</b><span>${T({ ar: 'احسب سقفك في دقيقة — بلا بيانات شخصية', en: 'Work out your ceiling in a minute — no personal data' })}</span></button>
+      </div>
+      <div class="fork-cash" id="fork_cash_box" hidden>
+        <div class="f"><label for="fork_budget">${T({ ar: 'ميزانيتي للشراء (ريال)', en: 'My purchase budget (SAR)' })}</label><input type="number" id="fork_budget" inputmode="numeric" min="0" step="50000" placeholder="1500000"></div>
+        <div class="err" id="fork_err" hidden></div>
+        <button class="btn" type="button" id="fork_go">${T({ ar: 'سجّل ما أبحث عنه', en: 'Tell us what I am looking for' })}</button>
+        <p class="sm" style="margin:10px 0 0">${T({ ar: 'تذكّر: يوم الشراء تحتاج فوق السعر عمولة الوساطة وضريبتها والرسوم — <a href="#/tools/cash-on-day">احسبها هنا</a>.', en: 'Remember: on purchase day you need, above the price, the brokerage fee, its VAT and charges — <a href="#/tools/cash-on-day">work them out here</a>.' })}</p>
+      </div>
+    </div>
+    <div id="home_calc" hidden>${block.html}</div>
+  </div></div></div></header>
   <section class="alt" id="why"><div class="wrap"><div class="shead"><h2>${T({ ar: 'لماذا «عتبة»؟', en: 'Why “Atbah”?' })}</h2><span class="lab">Story</span></div>
     <div class="story"><div>
       <p class="lead">${T({ ar: 'العتبة ليست حجراً في مدخل الباب؛ هي الخطوة الفاصلة بين الحيرة والاستقرار. «عتبة البيت» أول ما تطؤه قدمك لتبدأ مرحلة من الأمان والاستقلال. لكن عتبة السوق اليوم صارت عالية ومربكة، ومحاطة بعشرات الاتصالات وإعلانات «العرض الأخير».', en: 'A threshold is not a stone at the door; it is the step between confusion and settling. The threshold of a home is the first thing your foot touches as a new chapter of security begins. But today’s market threshold has become high, confusing, and surrounded by dozens of calls and “last offer” adverts.' })}</p>
@@ -763,8 +796,23 @@ function pageComingSoon() {
     <div class="grid3" style="margin-top:22px">${Object.entries(GROUPS).map(([g, G]) => `<a class="tool" href="#/tools#${g}"><h3>${T(G.title)}</h3><div class="q">${T(G.desc)}</div><span class="lab">${T(G.tag)}</span></a>`).join('')}</div></div></section>
   <section class="alt" id="status"><div class="wrap"><div class="shead"><h2>${T({ ar: 'ما يعمل اليوم، وما يأتي', en: 'What works today, and what comes next' })}</h2><span class="lab">Status</span></div>
     <div class="grid4" style="margin-top:6px">${live.map(l => `<div class="card st ${l[2]}"><span class="pill ${l[2] === 'on' ? 'reg' : ''}">${l[2] === 'on' ? T({ ar: 'يعمل', en: 'Live' }) : T({ ar: 'قريباً', en: 'Soon' })}</span><h3 style="margin-top:10px">${T(l[0])}</h3><p class="sm" style="margin:0">${T(l[1])}</p></div>`).join('')}</div></div></section>
-  <div class="band"><div class="wrap"><div class="grid"><div><h2>${T({ ar: 'انضمّ إلى قائمة VIP', en: 'Join the VIP list' })}</h2><p style="margin-top:10px;max-width:48ch">${T({ ar: 'قراءة قدرتك الشرائية في ١٥ دقيقة بلا مقابل — أعضاء القائمة تُقرأ قدرتهم أولاً. لن نرسل لك كتالوجاً، ولن نتصل بك غداً لنضغط عليك.', en: 'A purchasing-power reading in 15 minutes, free — list members are read first. No catalogue, no call tomorrow to push you.' })}</p></div><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#/interest?from=coming-soon">${T(S.nav.interest)}</a><a class="btn ghost" href="#/tools">${T(S.nav.tools)}</a></div></div></div></div>`,
-    mount: () => mountCalc(pp, $('#home_calc'), { stepped: true }) };
+  <div class="band"><div class="wrap"><div class="grid"><div><h2>${T({ ar: 'أخبرنا بما تبحث عنه', en: 'Tell us what you are looking for' })}</h2><p style="margin-top:10px;max-width:48ch">${T({ ar: 'ميزانيتك أو سقفك، المدينة، ونوع العقار — ونعرض عليك ما يقع داخل سقفك من مشاريع مطوّرينا خلال يومي عمل. لن نرسل لك كتالوجاً، ولن نتصل بك غداً لنضغط عليك.', en: 'Your budget or ceiling, city and property type — and we show you what fits inside your ceiling from our developers’ projects within two working days. No catalogue, no call tomorrow to push you.' })}</p></div><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#/interest?from=coming-soon">${T(S.nav.interest)}</a><a class="btn ghost" href="#/tools">${T(S.nav.tools)}</a></div></div></div></div>`,
+    mount: () => {
+      mountCalc(pp, $('#home_calc'), { stepped: true });
+      const cashBtn = $('#fork_cash'), loanBtn = $('#fork_loan'), cashBox = $('#fork_cash_box'), calc = $('#home_calc');
+      const pick = (mode) => { try { sessionStorage.setItem('atbah_pay', mode); } catch (e) {}
+        cashBtn.setAttribute('aria-pressed', mode === 'cash'); loanBtn.setAttribute('aria-pressed', mode === 'loan');
+        cashBox.hidden = mode !== 'cash'; calc.hidden = mode !== 'loan';
+        if (mode === 'cash') $('#fork_budget').focus(); };
+      cashBtn.addEventListener('click', () => pick('cash')); loanBtn.addEventListener('click', () => pick('loan'));
+      const go = () => { const b = Math.round(+$('#fork_budget').value || 0), er = $('#fork_err');
+        if (!(b >= 100000)) { er.textContent = T({ ar: 'اكتب ميزانيتك بالريال (١٠٠ ألف فأكثر).', en: 'Enter your budget in SAR (100,000 or more).' }); er.hidden = false; return; }
+        location.hash = '#/interest?from=home-cash&pay=cash&price=' + b; };
+      $('#fork_go').addEventListener('click', go);
+      $('#fork_budget').addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+      let saved = null; try { saved = sessionStorage.getItem('atbah_pay'); } catch (e) {}
+      const st = STATE[pp.slug]; if (saved === 'loan' || (st && st.seen)) pick('loan'); else if (saved === 'cash') { cashBtn.setAttribute('aria-pressed', true); cashBox.hidden = false; }
+    } };
 }
 function pageHome() {
   if (SITE_MODE === 'coming_soon') return pageComingSoon();
@@ -809,11 +857,11 @@ function pageCalc(slug) {
 
 /* ---------- interest registration ---------- */
 const INTEREST = { ar: {
-  title: 'سجّل اهتمامك', sub: 'نتواصل معك مرة واحدة لتحديد موعد قراءة قدرتك الشرائية — بلا كتالوج، وبلا اتصال ثانٍ إن لم ترغب.',
-  name: 'الاسم', phone: 'رقم الجوّال', email: 'البريد الإلكتروني (اختياري)', role: 'أنا', city: 'المدينة', budget: 'سقفي التقديري من الحاسبة (إن حسبته)', note: 'ما الذي يوقفك اليوم؟ (اختياري)',
+  title: 'سجّل ما تبحث عنه', sub: 'نعرض عليك ما يقع داخل سقفك من مشاريع مطوّرينا — اتصال واحد خلال يومي عمل، بلا كتالوج، وبلا اتصال ثانٍ إن لم ترغب.',
+  name: 'الاسم', phone: 'رقم الجوّال', email: 'البريد الإلكتروني (اختياري)', role: 'أنا', city: 'المدينة', budget: 'سقفي التقديري من الحاسبة (ريال)', budgetCash: 'ميزانيتي للشراء (ريال)', budgetAny: 'ميزانيتي أو سقفي التقديري (ريال)', calcLink: 'لم تحسب سقفك بعد؟ <a href="#/">احسبه في دقيقة</a> ثم عُد.', note: 'ما الذي يوقفك اليوم؟ (اختياري)',
   roles: [['buyer', 'مشترٍ لأول مرة'], ['buyer2', 'مشترٍ سبق له التملّك'], ['investor', 'مستثمر'], ['developer', 'مطوّر'], ['owner', 'مالك يبحث عن إدارة مرافق'], ['other', 'أخرى']],
-  cities: ['الرياض', 'جدة', 'الدمام / الخبر', 'مكة', 'المدينة', 'أخرى'],
-  wishTitle: 'رغبتك (اختياري — يساعدنا أن نأتي إلى الموعد بخيارات داخل سقفك)',
+  cities: [['riyadh', 'الرياض'], ['jeddah', 'جدة'], ['eastern', 'المنطقة الشرقية (الدمام · الخبر · الظهران)'], ['other', 'مدينة أخرى']],
+  wishTitle: 'تفضيلاتك (اختياري — كلّما زادت دقّتها جئناك بخيارات أقرب)',
   pay: 'طريقة الشراء', pays: [['undecided', 'لم أقرّر بعد'], ['loan', 'تمويل عقاري'], ['cash', 'كاش']],
   district: 'الحيّ المفضّل (أو أكثر)', districtPh: 'مثال: الملقا، النرجس، اليرموك',
   ptype: 'نوع العقار', ptypes: [['any', 'لا فرق'], ['apartment', 'شقة'], ['floor', 'دور'], ['duplex', 'دوبلكس'], ['villa', 'فيلا'], ['townhouse', 'تاون هاوس'], ['land', 'أرض']],
@@ -821,17 +869,17 @@ const INTEREST = { ar: {
   purpose: 'الغرض', purposes: [['live', 'سكن'], ['invest', 'استثمار'], ['both', 'الاثنان']],
   when: 'متى تريد الانتقال؟', whens: [['3m', 'خلال ٣ أشهر'], ['6m', 'خلال ٦ أشهر'], ['12m', 'خلال سنة'], ['explore', 'أستكشف فقط']],
   status: 'حالة العقار', statuses: [['any', 'لا فرق'], ['ready', 'جاهز'], ['offplan', 'على الخارطة']],
-  consent: 'أوافق على معالجة بياناتي أعلاه لغرض التواصل معي بشأن قراءة قدرتي الشرائية وخدمات عتبة، وفق <a href="#/privacy">سياسة الخصوصية</a>. أعلم أن بإمكاني سحب موافقتي وطلب حذف بياناتي في أي وقت عبر privacy@atbah.sa.',
+  consent: 'أوافق على معالجة بياناتي أعلاه (ومنها ميزانيتي أو سقفي التقديري وتفضيلاتي) لغرض التواصل معي وعرض عقارات تناسبها وقراءة قدرتي الشرائية وخدمات عتبة، وفق <a href="#/privacy">سياسة الخصوصية</a>. أعلم أن بإمكاني سحب موافقتي وطلب حذف بياناتي في أي وقت عبر privacy@atbah.sa.',
   marketing: 'أرغب أيضاً في استلام رسائل عتبة الدورية (اختياري — يمكن الإلغاء في أي وقت).',
-  submit: 'سجّل اهتمامي', sending: 'جارٍ الإرسال…', ok: 'وصلنا اهتمامك.', okSub: 'رقمك المرجعي {ref}. سنتواصل مرة واحدة خلال يومي عمل لتحديد الموعد. لن نرسل كتالوجاً.',
-  errName: 'اكتب اسمك', errPhone: 'رقم جوّال سعودي صحيح (05xxxxxxxx)', errEmail: 'بريد إلكتروني غير صحيح', errConsent: 'لا نستطيع حفظ بياناتك بلا موافقتك', errSave: 'تعذّر الحفظ الآن — حاول مرة أخرى أو راسلنا على info@atbah.sa',
+  submit: 'سجّل اهتمامي', sending: 'جارٍ الإرسال…', ok: 'وصلنا اهتمامك.', okSub: 'رقمك المرجعي {ref}. سنتواصل مرة واحدة خلال يومي عمل بما يقع داخل سقفك. لن نرسل كتالوجاً.',
+  errName: 'اكتب اسمك', errBudget: 'اكتب ميزانيتك أو سقفك التقديري بالريال', errPhone: 'رقم جوّال سعودي صحيح (05xxxxxxxx)', errEmail: 'بريد إلكتروني غير صحيح', errConsent: 'لا نستطيع حفظ بياناتك بلا موافقتك', errSave: 'تعذّر الحفظ الآن — حاول مرة أخرى أو راسلنا على info@atbah.sa',
   errNotOpen: 'التسجيل يُفتح خلال أيام — إلى حينها راسلنا على info@atbah.sa وسنعود إليك مرة واحدة.',
 }, en: {
-  title: 'Register your interest', sub: 'We contact you once to schedule your purchasing-power reading — no catalogue, and no second call if you don’t want one.',
-  name: 'Name', phone: 'Mobile number', email: 'Email (optional)', role: 'I am', city: 'City', budget: 'My estimated ceiling from the calculator (if computed)', note: 'What is stopping you today? (optional)',
+  title: 'Tell us what you are looking for', sub: 'We show you what fits inside your ceiling from our developers’ projects — one call within two working days, no catalogue, and no second call if you don’t want one.',
+  name: 'Name', phone: 'Mobile number', email: 'Email (optional)', role: 'I am', city: 'City', budget: 'My estimated ceiling from the calculator (SAR)', budgetCash: 'My purchase budget (SAR)', budgetAny: 'My budget or estimated ceiling (SAR)', calcLink: 'Not worked out your ceiling yet? <a href="#/">Do it in a minute</a> and come back.', note: 'What is stopping you today? (optional)',
   roles: [['buyer', 'First-time buyer'], ['buyer2', 'Buyer who has owned before'], ['investor', 'Investor'], ['developer', 'Developer'], ['owner', 'Owner seeking facility management'], ['other', 'Other']],
-  cities: ['Riyadh', 'Jeddah', 'Dammam / Khobar', 'Makkah', 'Madinah', 'Other'],
-  wishTitle: 'Your intent (optional — helps us bring options inside your ceiling to the meeting)',
+  cities: [['riyadh', 'Riyadh'], ['jeddah', 'Jeddah'], ['eastern', 'Eastern Province (Dammam · Khobar · Dhahran)'], ['other', 'Another city']],
+  wishTitle: 'Your preferences (optional — the more precise, the closer the options we bring)',
   pay: 'How you would buy', pays: [['undecided', 'Not decided yet'], ['loan', 'Mortgage'], ['cash', 'Cash']],
   district: 'Preferred district(s)', districtPh: 'e.g. Al Malqa, Al Narjis, Al Yarmuk',
   ptype: 'Property type', ptypes: [['any', 'No preference'], ['apartment', 'Apartment'], ['floor', 'Floor'], ['duplex', 'Duplex'], ['villa', 'Villa'], ['townhouse', 'Townhouse'], ['land', 'Land']],
@@ -839,23 +887,26 @@ const INTEREST = { ar: {
   purpose: 'Purpose', purposes: [['live', 'To live in'], ['invest', 'Investment'], ['both', 'Both']],
   when: 'When do you want to move?', whens: [['3m', 'Within 3 months'], ['6m', 'Within 6 months'], ['12m', 'Within a year'], ['explore', 'Just exploring']],
   status: 'Property status', statuses: [['any', 'No preference'], ['ready', 'Ready'], ['offplan', 'Off-plan']],
-  consent: 'I agree to the processing of the data above to contact me about my purchasing-power reading and Atbah services, per the <a href="#/privacy">privacy policy</a>. I know I can withdraw consent and request deletion at any time via privacy@atbah.sa.',
+  consent: 'I agree to the processing of the data above (including my budget or estimated ceiling and my preferences) to contact me, show me matching properties, and about my purchasing-power reading and Atbah services, per the <a href="#/privacy">privacy policy</a>. I know I can withdraw consent and request deletion at any time via privacy@atbah.sa.',
   marketing: 'I also want Atbah’s periodic messages (optional — unsubscribe anytime).',
-  submit: 'Register my interest', sending: 'Sending…', ok: 'We received your interest.', okSub: 'Your reference is {ref}. We will contact you once within two working days to schedule. No catalogue will be sent.',
-  errName: 'Enter your name', errPhone: 'A valid Saudi mobile (05xxxxxxxx)', errEmail: 'Invalid email', errConsent: 'We cannot store your data without your consent', errSave: 'Could not save right now — try again or email info@atbah.sa',
+  submit: 'Register my interest', sending: 'Sending…', ok: 'We received your interest.', okSub: 'Your reference is {ref}. We will contact you once within two working days with what fits inside your ceiling. No catalogue will be sent.',
+  errName: 'Enter your name', errBudget: 'Enter your budget or estimated ceiling in SAR', errPhone: 'A valid Saudi mobile (05xxxxxxxx)', errEmail: 'Invalid email', errConsent: 'We cannot store your data without your consent', errSave: 'Could not save right now — try again or email info@atbah.sa',
   errNotOpen: 'Registration opens in a few days — until then email info@atbah.sa and we will get back to you once.',
 } };
 function pageInterest(params) {
   const I = INTEREST[LANG], budget = params.get('price') || '';
+  let pay0 = params.get('pay'); if (!['cash', 'loan'].includes(pay0)) { try { pay0 = sessionStorage.getItem('atbah_pay'); } catch (e) {} } if (!['cash', 'loan'].includes(pay0)) pay0 = 'undecided';
+  const cityLabel = (v) => ({ riyadh: 'الرياض', jeddah: 'جدة', eastern: 'المنطقة الشرقية', other: 'أخرى' })[v] || v;
   const opt = (arr) => arr.map(x => Array.isArray(x) ? `<option value="${x[0]}">${x[1]}</option>` : `<option>${x}</option>`).join('');
   return { html: `<div class="wrap cpage"><h1>${I.title}</h1><p class="q">${I.sub}</p>
   <form class="form" id="ifrm" novalidate style="margin-top:22px">
     <div class="row2"><div class="f"><label for="i_name">${I.name}</label><input type="text" id="i_name" autocomplete="name" required></div><div class="f"><label for="i_phone">${I.phone}</label><input type="tel" id="i_phone" inputmode="tel" placeholder="05xxxxxxxx" autocomplete="tel" required></div></div>
     <div class="row2"><div class="f"><label for="i_email">${I.email}</label><input type="email" id="i_email" autocomplete="email"></div><div class="f"><label for="i_role">${I.role}</label><select id="i_role">${opt(I.roles)}</select></div></div>
-    <div class="row2"><div class="f"><label for="i_city">${I.city}</label><select id="i_city">${opt(I.cities)}</select></div><div class="f"><label for="i_budget">${I.budget}</label><input type="number" id="i_budget" value="${esc(budget)}" step="10000" min="0"></div></div>
+    <div class="row2"><div class="f"><label for="w_pay">${I.pay}</label><select id="w_pay">${opt(I.pays)}</select></div><div class="f"><label for="i_budget" id="i_budget_l">${I.budget}</label><input type="number" id="i_budget" inputmode="numeric" value="${esc(budget)}" step="10000" min="0" required></div></div>
+    <p class="sm" id="i_calc_hint" style="margin:-6px 0 14px" hidden>${I.calcLink}</p>
+    <div class="row2"><div class="f"><label for="i_city">${I.city}</label><select id="i_city">${opt(I.cities)}</select></div><div class="f"><label for="w_ptype">${I.ptype}</label><select id="w_ptype">${opt(I.ptypes)}</select></div></div>
     <hr class="sep"><div class="lab" style="margin-bottom:12px">${I.wishTitle}</div>
-    <div class="row2"><div class="f"><label for="w_pay">${I.pay}</label><select id="w_pay">${opt(I.pays)}</select></div><div class="f"><label for="w_purpose">${I.purpose}</label><select id="w_purpose">${opt(I.purposes)}</select></div></div>
-    <div class="row2"><div class="f"><label for="w_ptype">${I.ptype}</label><select id="w_ptype">${opt(I.ptypes)}</select></div><div class="f"><label for="w_rooms">${I.rooms}</label><select id="w_rooms">${opt(I.roomsOpts)}</select></div></div>
+    <div class="row2"><div class="f"><label for="w_purpose">${I.purpose}</label><select id="w_purpose">${opt(I.purposes)}</select></div><div class="f"><label for="w_rooms">${I.rooms}</label><select id="w_rooms">${opt(I.roomsOpts)}</select></div></div>
     <div class="row2"><div class="f"><label for="w_district">${I.district}</label><input type="text" id="w_district" placeholder="${I.districtPh}"></div><div class="f"><label for="w_status">${I.status}</label><select id="w_status">${opt(I.statuses)}</select></div></div>
     <div class="f"><label for="w_when">${I.when}</label><select id="w_when">${opt(I.whens)}</select></div>
     <div class="f"><label for="i_note">${I.note}</label><textarea id="i_note" rows="3"></textarea></div>
@@ -866,6 +917,10 @@ function pageInterest(params) {
   </form><div class="ok-box" id="i_ok" hidden style="max-width:640px;margin-top:16px"></div></div>`,
     mount: () => {
       const f = $('#ifrm'), err = $('#i_err');
+      const payEl = $('#w_pay'); payEl.value = pay0;
+      const syncPay = () => { const p = payEl.value; $('#i_budget_l').textContent = p === 'cash' ? I.budgetCash : p === 'loan' ? I.budget : I.budgetAny; $('#i_calc_hint').hidden = !(p === 'loan' && !$('#i_budget').value); };
+      payEl.addEventListener('change', syncPay); $('#i_budget').addEventListener('input', syncPay); syncPay();
+      const needsBudget = () => ['buyer', 'buyer2', 'investor'].includes($('#i_role').value);
       f.addEventListener('submit', async (e) => {
         e.preventDefault(); err.hidden = true;
         const name = $('#i_name').value.trim(), phone = $('#i_phone').value.replace(/\s|-/g, ''), email = $('#i_email').value.trim();
@@ -873,11 +928,12 @@ function pageInterest(params) {
         if (name.length < 2) return fail(I.errName);
         if (!/^(05\d{8}|\+9665\d{8}|9665\d{8})$/.test(phone)) return fail(I.errPhone);
         if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fail(I.errEmail);
+        if (needsBudget() && !(+$('#i_budget').value >= 100000)) return fail(I.errBudget);
         if (!$('#i_consent').checked) return fail(I.errConsent);
         const btn = $('#i_submit'); btn.disabled = true; btn.textContent = I.sending;
-        const rec = { name, phone: phone.replace(/^(\+?966)/, '0'), email: email || null, role: $('#i_role').value, city: $('#i_city').value, budget: +$('#i_budget').value || null, note: $('#i_note').value.trim() || null,
+        const rec = { name, phone: phone.replace(/^(\+?966)/, '0'), email: email || null, role: $('#i_role').value, city: cityLabel($('#i_city').value), budget: Math.round(+$('#i_budget').value) || null, note: $('#i_note').value.trim() || null,
           wishes: { pay: $('#w_pay').value, purpose: $('#w_purpose').value, ptype: $('#w_ptype').value, rooms: $('#w_rooms').value, district: $('#w_district').value.trim() || null, status: $('#w_status').value, when: $('#w_when').value },
-          consent_text_ver: 'phase0-v1', consent_lang: LANG, marketing_consent: $('#i_marketing').checked, source: params.get('from') || 'site' };
+          consent_text_ver: 'phase0-v2', consent_lang: LANG, marketing_consent: $('#i_marketing').checked, source: params.get('from') || 'site' };
         try {
           const res = await fetch('/api/interest', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(rec) });
           const j = await res.json().catch(() => ({}));
@@ -887,6 +943,20 @@ function pageInterest(params) {
         } catch (ex) { fail(I.errSave); btn.disabled = false; btn.textContent = I.submit; }
       });
     } };
+}
+/* مشاريعنا — «قريباً» حتى رخصة المنصّة الإلكترونية؛ لا وحدات ولا أسماء مطوّرين قبلها */
+function pageProjects() {
+  const cities = [
+    [{ ar: 'الرياض', en: 'Riyadh' }, { ar: 'مشاريع سكنية جاهزة وعلى الخارطة.', en: 'Ready and off-plan residential projects.' }],
+    [{ ar: 'جدة', en: 'Jeddah' }, { ar: 'مشاريع سكنية جاهزة وعلى الخارطة.', en: 'Ready and off-plan residential projects.' }],
+    [{ ar: 'المنطقة الشرقية', en: 'Eastern Province' }, { ar: 'الدمام · الخبر · الظهران.', en: 'Dammam · Khobar · Dhahran.' }],
+  ];
+  return { html: `<div class="wrap cpage"><div class="proj-soon"><span class="dot"></span>${T({ ar: 'قريباً', en: 'Coming soon' })}</div>
+  <h1>${T({ ar: 'مشاريعنا', en: 'Our projects' })}</h1>
+  <p class="q">${T({ ar: 'نتعاقد مع مطوّرين في الرياض وجدة والمنطقة الشرقية على مشاريع سكنية جاهزة وعلى الخارطة. عرض المشاريع هنا على الموقع يأتي قريباً. حتى ذلك الحين يعرضها عليك مستشارك مباشرةً — داخل سقفك فقط، ولا شيء فوقه.', en: 'We contract with developers in Riyadh, Jeddah and the Eastern Province on ready and off-plan residential projects. Browsing them here on the site comes soon. Until then your advisor shows them to you directly — inside your ceiling only, and nothing above it.' })}</p>
+  <div class="proj-cities">${cities.map(c => `<div class="card"><h3>${T(c[0])}</h3><p class="sm" style="margin:0">${T(c[1])}</p></div>`).join('')}</div>
+  <div class="card" style="margin-top:26px;max-width:720px"><h3 style="margin:0 0 6px">${T({ ar: 'لا تنتظر الصفحة — أخبرنا بما تبحث عنه', en: 'Don’t wait for the page — tell us what you are looking for' })}</h3><p class="sm" style="margin:0 0 14px">${T({ ar: 'ميزانيتك أو سقفك، المدينة، ونوع العقار — ونعرض عليك ما يقع داخل سقفك من مشاريع مطوّرينا خلال يومي عمل. لن نرسل كتالوجاً.', en: 'Your budget or ceiling, city and property type — and we show you what fits inside your ceiling from our developers’ projects within two working days. No catalogue.' })}</p><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#/interest?from=projects">${T({ ar: 'سجّل ما تبحث عنه', en: 'Tell us what you are looking for' })}</a><a class="btn quiet" href="#/">${T({ ar: 'اعرف سقفك أولاً', en: 'Know your ceiling first' })}</a></div></div>
+  <p class="sm" style="margin-top:22px;max-width:70ch">${T({ ar: 'كل إعلان عن عقار مُعيَّن سيحمل رقم ترخيص الإعلان واسم الوسيط ورقم فال — لا نعرض وحدة قبل ذلك.', en: 'Every advert for a specific property will carry its advertising licence number, the broker’s name and FAL number — we show no unit before that.' })}</p></div>` };
 }
 /* تقرير سقفك — يُولَّد من حالة حاسبة القدرة الشرائية؛ الحفظ كـ PDF عبر الطباعة */
 function pageReport() {
@@ -909,7 +979,7 @@ function pageReport() {
     <div class="kv">${kv({ ar: 'صافي الدخل الشهري', en: 'Net monthly income' }, sar(v.income))}${kv({ ar: 'الالتزامات الشهرية', en: 'Monthly obligations' }, sar(v.obligations))}${kv({ ar: 'نسبة الاستقطاع المختارة', en: 'Chosen deduction ratio' }, v.dtiPct + '%')}${kv({ ar: 'مدّة التمويل', en: 'Term' }, yrs(r.termYears))}${kv({ ar: 'الدفعة الأولى', en: 'Down payment' }, r.downPct + '%')}${kv({ ar: 'نسبة الربح التقديرية', en: 'Indicative profit rate' }, v.ratePct + '%')}${kv({ ar: 'القسط الشهري', en: 'Monthly payment' }, sar(r.monthly))}${kv({ ar: 'مبلغ التمويل', en: 'Financing' }, sar(r.loan))}${kv({ ar: 'المطلوب منك نقداً', en: 'Cash from you' }, sar(r.cashDown))}${kv({ ar: 'إجمالي ما تدفعه', en: 'Total paid' }, sar(r.totalPaid))}</div>
     <h3>${T({ ar: 'خطواتك الثلاث القادمة', en: 'Your next three steps' })}</h3><ol>${steps.map(x => `<li>${T(x)}</li>`).join('')}</ol>
     <p class="sm" style="margin-top:16px">${T({ ar: 'نطاقات الأسعار بحسب الحيّ تُضاف إلى التقرير عند اعتماد مصدر بيانات رسمي — لا ننشر رقماً لا نستطيع إثباته.', en: 'Price ranges by district will be added once an official data source is adopted — we publish no figure we cannot prove.' })}</p>
-    <div class="actions"><button class="btn" type="button" onclick="window.print()">${T({ ar: 'احفظ كملف PDF', en: 'Save as PDF' })}</button><a class="btn quiet" href="#/interest?from=report&price=${Math.round(r.price)}">${T({ ar: 'انضمّ إلى قائمة VIP', en: 'Join the VIP list' })}</a><a class="btn quiet" href="#/">${T({ ar: 'عدّل الأرقام', en: 'Edit the numbers' })}</a></div>
+    <div class="actions"><button class="btn" type="button" onclick="window.print()">${T({ ar: 'احفظ كملف PDF', en: 'Save as PDF' })}</button><a class="btn quiet" href="#/interest?from=report&pay=loan&price=${Math.round(r.price)}">${T({ ar: 'انضمّ إلى قائمة VIP', en: 'Join the VIP list' })}</a><a class="btn quiet" href="#/">${T({ ar: 'عدّل الأرقام', en: 'Edit the numbers' })}</a></div>
     <div class="note sm" style="margin-top:18px;border-top:1px solid var(--line2);padding-top:12px">${T(DISC)} ${T({ ar: 'شركة عتبة بداية العقارية — س.ت 7055177823 — رخصة فال 1200050979.', en: 'Atabat Bidaya Real Estate Co. — CR 7055177823 — FAL 1200050979.' })}</div>
   </div></div>` };
 }
@@ -922,14 +992,14 @@ function pagePrivacy() {
 function navHtml(route) {
   const cur = (r) => route.startsWith(r) ? ' aria-current="page"' : '';
   return `<div class="wrap"><a class="brand" href="#/">${LOGO(54)}<b>${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</b></a>
-  <div class="links"><a href="#/tools"${cur('/tools')}>${T(S.nav.tools)}</a>${SITE_MODE === 'full' ? `<a href="#/#how">${T(S.nav.how)}</a><a href="#/#services">${T(S.nav.services)}</a>` : ''}<a href="#/interest"${cur('/interest')}>${T(S.nav.interest)}</a></div>
+  <div class="links"><a href="#/projects"${cur('/projects')}>${T(S.nav.projects)}</a><a href="#/tools"${cur('/tools')}>${T(S.nav.tools)}</a>${SITE_MODE === 'full' ? `<a href="#/#how">${T(S.nav.how)}</a><a href="#/#services">${T(S.nav.services)}</a>` : ''}<a href="#/interest"${cur('/interest')}>${T(S.nav.interest)}</a></div>
   <button class="lang" id="langbtn" type="button" aria-label="Switch language">${LANG === 'ar' ? 'EN' : 'عربي'}</button>
   <a class="btn" href="#/" style="padding:9px 16px;min-height:40px;font-size:14px">${T(S.cta)}</a></div>`;
 }
 function footerHtml() {
   return `<div class="wrap"><div class="cols"><div><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">${LOGO(38)}<b style="font-family:'Reem Kufi',Tahoma,sans-serif;font-size:24px">${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</b></div><div>${T({ ar: 'خدمات وساطة عقارية', en: 'Real-estate brokerage services' })}</div></div>
   <div><b>${T({ ar: 'بيانات الترخيص', en: 'Licence details' })}</b><br>${T({ ar: 'شركة عتبة بداية العقارية', en: 'Atabat Bidaya Real Estate Co. (LLC)' })}<br>${T({ ar: 'رخصة فال:', en: 'FAL licence:' })} <span class="num">1200050979</span> ${T({ ar: '(سارية حتى', en: '(valid to' })} <span class="num">2027-09-10</span>)<br>${T({ ar: 'السجل التجاري:', en: 'CR:' })} <span class="num">7055177823</span><br>${T({ ar: 'الرقم الضريبي:', en: 'VAT no.:' })} <span class="num">315016844100003</span></div>
-  <div><b>${T({ ar: 'تواصل', en: 'Contact' })}</b><br>info@atbah.sa<br><a href="#/privacy">${T({ ar: 'سياسة الخصوصية', en: 'Privacy policy' })}</a></div></div>
+  <div><b>${T({ ar: 'تواصل', en: 'Contact' })}</b><br>info@atbah.sa<br><a href="#/projects">${T({ ar: 'مشاريعنا', en: 'Our projects' })}</a><br><a href="#/privacy">${T({ ar: 'سياسة الخصوصية', en: 'Privacy policy' })}</a></div></div>
   <div class="legal">${T({ ar: 'جميع الأرقام والحاسبات في هذا الموقع تقديرية أوّلية غير ملزمة، وتخضع لموافقة الجهة الممولة. لا تُعدّ استشارة مالية ولا عرضاً تمويلياً. أي إعلان عن عقار مُعيَّن يحمل رقم ترخيص الإعلان. العمولة النظامية للوساطة ٢٫٥٪ ما لم يُتّفق كتابةً على غيرها. أرقام الدعم السكني استرشادية والمرجع هو «سكني» وشهادة استحقاقك.', en: 'All figures and calculators on this site are preliminary, non-binding estimates subject to the financing entity’s approval; not financial advice or a financing offer. Any listing carries its advertising-licence number. Statutory brokerage commission is 2.5% unless agreed otherwise in writing. Housing-support figures are indicative; Sakani and your eligibility certificate are the reference.' })}<br>© <span class="num">2026</span> ${T({ ar: 'شركة عتبة بداية العقارية — س.ت 7055177823 — رخصة فال 1200050979. جميع الحقوق محفوظة.', en: 'Atabat Bidaya Real Estate Co. — CR 7055177823 — FAL 1200050979. All rights reserved.' })}</div></div>`;
 }
 function route() {
@@ -942,6 +1012,7 @@ function route() {
   else if (path === '/tools') page = pageTools();
   else if (path.startsWith('/tools/')) page = pageCalc(path.slice(7));
   else if (path === '/interest') page = pageInterest(params);
+  else if (path === '/projects') page = pageProjects();
   else if (path === '/privacy') page = pagePrivacy();
   else if (path === '/report') page = pageReport();
   else page = pageHome();
