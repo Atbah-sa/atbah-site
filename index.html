@@ -1019,7 +1019,7 @@ function ledgerHtml(id, { source = 'home', withCalc = true } = {}) {
     <div class="lstep" data-step="1"><div class="n">01</div><div><b>${S3.s1}</b><div class="hint">${S3.s1h}</div>${chip('pay', [['cash', S3.cash], ['loan', S3.loan], ['undecided', S3.undecided]], LSTATE.pay)}</div></div>
     <div class="lstep" data-step="2"><div class="n">02</div><div><b data-s2>${S3.s2u}</b><div class="hint" data-s2h>${S3.s2h}</div>
       ${pp ? `<div class="inlinecalc" data-inlinecalc hidden><div id="${id}_calc">${calcBlock(pp, { stepped: true }).html}</div></div>` : ''}
-      <div class="money"><span class="cur">SAR</span><input type="number" inputmode="numeric" name="budget" min="0" step="10000" placeholder="1,500,000" value="${esc(LSTATE.budget)}"></div><div class="words" data-words></div>
+      <div class="money"><span class="cur">SAR</span><input type="text" inputmode="numeric" name="budget" autocomplete="off" dir="ltr" placeholder="1,500,000" value="${LSTATE.budget ? Number(LSTATE.budget).toLocaleString('en-US') : ''}"></div><div class="words" data-words></div>
       <div class="quick" data-quick>${[800000, 1000000, 1500000, 2000000, 3000000].map(v => `<button type="button" data-q="${v}">${(v / 1e6).toLocaleString('en-US')}M</button>`).join('')}</div></div></div>
     <div class="lstep" data-step="3"><div class="n">03</div><div><b>${S3.s3}</b><div class="hint">${S3.s3h}</div>
       <div class="row2"><div class="f"><label for="${id}_city">${S3.city}</label><select id="${id}_city" name="city">${opt(S3.cities)}</select></div><div class="f"><label for="${id}_type">${S3.type}</label><select id="${id}_type" name="type">${opt(S3.types)}</select></div></div>
@@ -1046,15 +1046,20 @@ function mountLedger(id, { withCalc = true } = {}) {
   const S3 = L3[LANG], f = document.getElementById(id); if (!f) return;
   const q = (sel) => f.querySelector(sel), qa = (sel) => [...f.querySelectorAll(sel)];
   const budgetEl = q('input[name=budget]'), err = q('[data-err]');
+  const AR_D = '٠١٢٣٤٥٦٧٨٩', FA_D = '۰۱۲۳۴۵۶۷۸۹';
+  const toLatin = (t) => String(t || '').replace(/[٠-٩]/g, (d) => AR_D.indexOf(d)).replace(/[۰-۹]/g, (d) => FA_D.indexOf(d));
+  const numVal = (el) => { const n = +toLatin(el.value).replace(/[^\d]/g, ''); return Number.isFinite(n) ? n : 0; };
+  const setBudget = (n) => { budgetEl.value = n > 0 ? Math.round(n).toLocaleString('en-US') : ''; };
+  const fmtBudget = () => { const raw = toLatin(budgetEl.value).replace(/[^\d]/g, ''); budgetEl.value = raw ? Number(raw).toLocaleString('en-US') : ''; try { budgetEl.setSelectionRange(budgetEl.value.length, budgetEl.value.length); } catch (e) {} };
   const setChip = (name, v) => { qa(`[data-chips="${name}"] button`).forEach(b => b.setAttribute('aria-pressed', b.dataset.v === v)); };
   const progress = () => {
-    const done = [!!LSTATE.pay, +budgetEl.value >= 100000, !!LSTATE.city && !!LSTATE.type, false];
+    const done = [!!LSTATE.pay, numVal(budgetEl) >= 100000, !!LSTATE.city && !!LSTATE.type, false];
     qa('.lstep').forEach((s, i) => s.classList.toggle('done', !!done[i]));
     const n = done.findIndex(d => !d) + 1 || 4; q('[data-prog]').textContent = S3.prog.replace('{n}', String(n)); q('[data-bar]').style.width = `${(done.filter(Boolean).length / 4) * 100}%`;
     const bEl = q('[data-s2]'); bEl.textContent = LSTATE.pay === 'cash' ? S3.s2c : LSTATE.pay === 'loan' ? S3.s2l : S3.s2u;
     const ic0 = q('[data-inlinecalc]'); if (ic0) ic0.hidden = LSTATE.pay !== 'loan'; const qk = q('[data-quick]'); if (qk) qk.hidden = LSTATE.pay === 'loan';
     const hEl = q('[data-s2h]'); hEl.textContent = LSTATE.pay === 'loan' ? S3.s2lh : S3.s2h;
-    q('[data-words]').textContent = +budgetEl.value >= 100000 ? S3.words(+budgetEl.value) + (LSTATE.fromCalc ? ' · ' + S3.used : '') : '';
+    q('[data-words]').textContent = numVal(budgetEl) >= 100000 ? S3.words(numVal(budgetEl)) + (LSTATE.fromCalc ? ' · ' + S3.used : '') : '';
   };
   qa('[data-chips="pay"] button').forEach(b => b.addEventListener('click', () => { LSTATE.pay = b.dataset.v; try { sessionStorage.setItem('atbah_pay', LSTATE.pay); } catch (e) {} setChip('pay', LSTATE.pay); progress(); if (LSTATE.pay === 'cash') budgetEl.focus(); if (LSTATE.pay === 'loan') { const ic1 = q('[data-inlinecalc]'); if (ic1) ic1.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); } }));
   const cityEl = q('select[name=city]'), typeEl = q('select[name=type]'); cityEl.value = LSTATE.city || ''; typeEl.value = LSTATE.type || '';
@@ -1062,8 +1067,8 @@ function mountLedger(id, { withCalc = true } = {}) {
   const timeBox = q('[data-timebox]'); const syncContact = () => { timeBox.hidden = LSTATE.contact !== 'call'; };
   qa('[data-chips="contact"] button').forEach(b => b.addEventListener('click', () => { LSTATE.contact = b.dataset.v; setChip('contact', LSTATE.contact); syncContact(); }));
   qa('[data-chips="time"] button').forEach(b => b.addEventListener('click', () => { LSTATE.time = b.dataset.v; setChip('time', LSTATE.time); })); syncContact();
-  qa('[data-q]').forEach(b => b.addEventListener('click', () => { budgetEl.value = b.dataset.q; LSTATE.budget = budgetEl.value; LSTATE.fromCalc = false; progress(); }));
-  budgetEl.addEventListener('input', () => { LSTATE.budget = budgetEl.value; LSTATE.fromCalc = false; progress(); });
+  qa('[data-q]').forEach(b => b.addEventListener('click', () => { setBudget(+b.dataset.q); LSTATE.budget = String(numVal(budgetEl)); LSTATE.fromCalc = false; progress(); }));
+  budgetEl.addEventListener('input', () => { fmtBudget(); LSTATE.budget = String(numVal(budgetEl)); LSTATE.fromCalc = false; progress(); });
   const isReq = f.dataset.source === 'request'; const distEl = q('input[name=district]'); const NEARSEL = new Set();
   if (isReq && distEl) {
     const wrap = q('[data-nearbywrap]'), box = q('[data-chips="nearby"]'), bench = q('[data-bench]');
@@ -1074,14 +1079,14 @@ function mountLedger(id, { withCalc = true } = {}) {
   const ic = q('[data-inlinecalc]');
   if (ic && withCalc) {
     const pp = CALCS.find(c => c.home), croot = document.getElementById(id + '_calc'); mountCalc(pp, croot, { stepped: true });
-    croot.addEventListener('atbah:calc', (e) => { const r = e.detail; if (r && r.price > 0) { budgetEl.value = Math.round(r.price); LSTATE.budget = budgetEl.value; LSTATE.fromCalc = true; progress(); } });
+    croot.addEventListener('atbah:calc', (e) => { const r = e.detail; if (r && r.price > 0) { setBudget(r.price); LSTATE.budget = String(numVal(budgetEl)); LSTATE.fromCalc = true; progress(); } });
     croot.addEventListener('click', (e) => { const a = e.target.closest('a[href*="#/interest"]'); if (a) { e.preventDefault(); const s3 = q('[data-step="3"]'); s3.scrollIntoView({ behavior: 'smooth', block: 'center' }); cityEl.focus({ preventScroll: true }); } });
   }
   f.addEventListener('submit', async (e) => {
     e.preventDefault(); err.hidden = true; const fail = (m, sel) => { err.textContent = m; err.hidden = false; if (sel) { const el = q(sel); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); } };
-    const name = q('input[name=name]').value.trim(), phone = q('input[name=phone]').value.replace(/\s|-/g, '');
+    const name = q('input[name=name]').value.trim(), phone = toLatin(q('input[name=phone]').value).replace(/[\s\-()]/g, '');
     if (!LSTATE.pay) return fail(S3.errPay, '[data-step="1"]');
-    if (!(+budgetEl.value >= 100000)) return fail(S3.errBudget, '[data-step="2"]');
+    if (!(numVal(budgetEl) >= 100000)) return fail(S3.errBudget, '[data-step="2"]');
     if (!LSTATE.city) return fail(S3.errCity, '[data-step="3"]');
     if (!LSTATE.type) return fail(S3.errType, '[data-step="3"]');
     if (isReq && !(distEl && distEl.value.trim())) return fail(T({ ar: 'اكتب الحيّ الذي تريده — نبحث فيه وفي الأحياء المجاورة.', en: 'Enter the district you want — we search it and its neighbours.' }), '[data-step="3"]');
@@ -1095,7 +1100,7 @@ function mountLedger(id, { withCalc = true } = {}) {
     const timeAr = { morning: 'صباحاً 9–12', noon: 'ظهراً 12–4', evening: 'مساءً 4–9', any: 'أي وقت' };
     const contactLine = LSTATE.contact === 'wa' ? 'التواصل: واتساب' : `التواصل: اتصال — ${timeAr[LSTATE.time] || ''}`;
     const nearbyList = isReq ? [...NEARSEL] : [];
-    const rec = { name, phone: phone.replace(/^(\+?966)/, '0'), email: null, role: 'buyer', city: CITY_AR[LSTATE.city] || LSTATE.city, budget: Math.round(+budgetEl.value), note: [isReq ? 'طلب عقارك' : '', contactLine, nearbyList.length ? 'الأحياء المجاورة: ' + nearbyList.join('، ') : '', v('note').trim()].filter(Boolean).join(' · '),
+    const rec = { name, phone: phone.replace(/^(\+?966)/, '0'), email: null, role: 'buyer', city: CITY_AR[LSTATE.city] || LSTATE.city, budget: Math.round(numVal(budgetEl)), note: [isReq ? 'طلب عقارك' : '', contactLine, nearbyList.length ? 'الأحياء المجاورة: ' + nearbyList.join('، ') : '', v('note').trim()].filter(Boolean).join(' · '),
       wishes: { pay: LSTATE.pay, ptype: LSTATE.type, rooms: v('rooms') || 'any', status: v('status') || 'any', purpose: v('purpose') || 'live', when: v('when') || '3m', district: v('district').trim() || null, nearby: nearbyList.join('،') || null },
       consent_text_ver: 'phase0-v2', consent_lang: LANG, marketing_consent: q('input[name=marketing]').checked, source: f.dataset.source + (LSTATE.fromCalc ? '+calc' : '') };
     try {
