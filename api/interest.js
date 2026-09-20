@@ -27,7 +27,7 @@ export default async function handler(req, res) {
   const name = clean(b.name, 120), rawPhone = clean(b.phone, 20).replace(/\s|-/g, ''), email = clean(b.email, 160) || null;
   if (name.length < 2 || !PHONE.test(rawPhone)) return res.status(400).json({ error: 'invalid' });
   if (email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return res.status(400).json({ error: 'invalid_email' });
-  const consentVer = ['phase0-v1', 'phase0-v2'].includes(b.consent_text_ver) ? b.consent_text_ver : null; // v2 (2026-09-17): adds budget/ceiling + preferences and showing matching properties
+  const consentVer = ['phase0-v1', 'phase0-v2', 'phase0-v3'].includes(b.consent_text_ver) ? b.consent_text_ver : null; // v3 (2026-09-20): short consent line + full policy page // v2 (2026-09-17): adds budget/ceiling + preferences and showing matching properties
   if (!consentVer) return res.status(400).json({ error: 'consent' });
   const phone = rawPhone.replace(/^(\+?966)/, '0');
   const wishes = {}; const w = b.wishes && typeof b.wishes === 'object' ? b.wishes : {};
