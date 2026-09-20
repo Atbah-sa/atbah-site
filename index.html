@@ -790,8 +790,7 @@ const CALCS = [
 
 const GROUPS = {
   buyer: { title: { ar: 'للمشتري', en: 'For buyers' }, tag: { ar: 'سبع حاسبات', en: 'Seven calculators' }, desc: { ar: 'القرارات التي يقف عندها الناس فعلاً — بالترتيب الذي لا يُعكس: القدرة أولاً، ثم القسط، ثم الكاش، ثم التوقيت — ثم إن اشتريتَ لتؤجّر: العائد الإيجاري والاستثماري.', en: 'The decisions people actually stall at — capacity first, then payment, cash, timing — and if you buy to let: rental and investment return.' } },
-  investor: { title: { ar: 'للمستثمر', en: 'For investors' }, tag: { ar: 'أربع حاسبات', en: 'Four calculators' }, desc: { ar: 'من العائد الإيجاري البسيط إلى التسعير والتدفّق المخصوم والرافعة — الأدوات نفسها التي يستخدمها المستثمر المؤسسي.', en: 'From simple rental yield to pricing, DCF and leverage — the same tools an institutional investor uses.' } },
-  developer: { title: { ar: 'للمطوّر والمهني', en: 'For developers & professionals' }, tag: { ar: 'ست حاسبات · للتعلّم واتخاذ القرار', en: 'Six calculators · learning & decision' }, desc: { ar: 'الأرض، والإيجار التجاري، والعقود الطويلة — بالمنطق الذي تُدار به المفاوضات بالأرقام لا بالتقدير.', en: 'Land, commercial rent and long leases — the logic that runs negotiations on numbers, not guesses.' } },
+  investor: { title: { ar: 'Investment Lab', en: 'Investment Lab' }, tag: { ar: 'أربع حاسبات للمستثمر', en: 'Four investor calculators' }, desc: { ar: 'من العائد الإيجاري البسيط إلى التسعير والتدفّق المخصوم والرافعة — الأدوات نفسها التي يستخدمها المستثمر المؤسسي.', en: 'From simple rental yield to pricing, DCF and leverage — the same tools an institutional investor uses.' } },
 };
 
 /* عتبة — التطبيق: توجيه، عرض الحاسبات، تسجيل الاهتمام */
@@ -803,7 +802,7 @@ try { const m = localStorage.getItem('atbah.mode'); if (m === 'full' || m === 'c
 const $ = (s, r = document) => r.querySelector(s);
 const esc = (s) => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const S = {
-  nav: { about: { ar: 'من نحن', en: 'About' }, projects: { ar: 'مشاريعنا', en: 'Our projects' }, tools: { ar: 'الحاسبات', en: 'Calculators' }, how: { ar: 'كيف نشتغل', en: 'How we work' }, services: { ar: 'خدماتنا', en: 'Services' }, interest: { ar: 'سجّل اهتمامك', en: 'Register interest' }, request: { ar: 'اطلب عقارك', en: 'Request a property' } },
+  nav: { about: { ar: 'من نحن', en: 'About' }, projects: { ar: 'مشاريعنا', en: 'Our projects' }, tools: { ar: 'حاسبات تهمك', en: 'Calculators for you' }, lab: { ar: 'Investment Lab', en: 'Investment Lab' }, how: { ar: 'كيف نشتغل', en: 'How we work' }, services: { ar: 'خدماتنا', en: 'Services' }, interest: { ar: 'سجّل اهتمامك', en: 'Register interest' }, request: { ar: 'اطلب عقارك', en: 'Request a property' } },
   cta: { ar: 'اعرف سقفك أولاً', en: 'Know your ceiling first' },
 };
 const LOGO = (size = 30, arch = '#F1ECE3') => `<svg width="${size}" height="${Math.round(size * 142 / 130)}" viewBox="0 0 130 142" fill="none" aria-hidden="true"><path d="M18.5 106 L18.5 46 A25.5 25.5 0 0 1 44 20.5 L86 20.5 A25.5 25.5 0 0 1 111.5 46 L111.5 106 L98.5 106 L98.5 46 A12.5 12.5 0 0 0 86 33.5 L44 33.5 A12.5 12.5 0 0 0 31.5 46 L31.5 106 Z" fill="${arch}"/><path d="M48 106 L48 65 A17 17 0 0 1 82 65 L82 106 Z" fill="#C9964A"/><rect x="14" y="116" width="102" height="14" rx="2" fill="#B4522B"/></svg>`;
@@ -913,25 +912,32 @@ function pageHome() {
   <section id="how"><div class="wrap"><div class="shead"><h2>${T({ ar: 'كيف نشتغل — بالترتيب المعكوس', en: 'How we work — in reverse order' })}</h2><span class="lab">Method</span></div>
     <p class="lead">${T({ ar: 'أغلب الوسطاء يبدأون من الصور. نحن نبدأ من رقمك، ولهذا نعرف ما نستبعده قبل أن نعرف ما نعرضه.', en: 'Most brokers start from pictures. We start from your number — so we know what to rule out before we know what to show.' })}</p>
     <div class="grid4" style="margin-top:22px">${how.map((h, i) => `<div class="card"><div class="step"><div class="n2">0${i + 1}</div><div><h3>${T(h[0])}</h3><p class="sm" style="margin:0">${T(h[1])}</p></div></div></div>`).join('')}</div></div></section>
-  <section class="alt" id="tools"><div class="wrap"><div class="shead"><h2>${T({ ar: 'حاسبات عتبة', en: 'Atbah calculators' })}</h2><span class="lab">17 tools</span></div>
-    <p class="lead">${T({ ar: 'سبع عشرة حاسبة في ثلاث مجموعات — كلها تقديرية، وكلها تُظهر لك المعادلة لا النتيجة فقط، وكل رقم افتراضي فيها يحمل مصدره وتاريخه.', en: 'Seventeen calculators in three groups — all estimates, all showing the formula, every default carrying its source and date.' })}</p>
-    <div class="grid3" style="margin-top:22px">${Object.entries(GROUPS).map(([g, G]) => `<a class="tool" href="#/tools#${g}"><h3>${T(G.title)}</h3><div class="q">${T(G.desc)}</div><span class="lab">${T(G.tag)}</span></a>`).join('')}</div></div></section>
+  <section class="alt" id="tools"><div class="wrap"><div class="shead"><h2>${T({ ar: 'حاسبات تهمك', en: 'Calculators for you' })}</h2><span class="lab">11 tools</span></div>
+    <p class="lead">${T({ ar: 'سبع حاسبات للمشتري وأربع للمستثمر في Investment Lab — كلها تقديرية، وكلها تُظهر لك المعادلة لا النتيجة فقط، وكل رقم افتراضي فيها يحمل مصدره وتاريخه.', en: 'Seven buyer calculators and four investor tools in the Investment Lab — all estimates, all showing the formula, every default carrying its source and date.' })}</p>
+    <div class="grid3" style="margin-top:22px">${Object.entries(GROUPS).map(([g, G]) => `<a class="tool" href="${g === 'investor' ? '#/lab' : '#/tools#' + g}"><h3>${T(G.title)}</h3><div class="q">${T(G.desc)}</div><span class="lab">${T(G.tag)}</span></a>`).join('')}</div></div></section>
   <section id="services"><div class="wrap"><div class="shead"><h2>${T({ ar: 'خدماتنا', en: 'Services' })}</h2><span class="lab">Services</span></div>
     <p class="lead">${T({ ar: 'رمز واحد وأربعة أذرع. كل ذراع تصنع عملاً للأخرى — ولهذا الصدق عندنا نموذج ربح لا شعار.', en: 'One mark, four arms. Each arm makes work for the next — which is why honesty here is a business model, not a slogan.' })}</p>
     <div class="grid4" style="margin-top:22px">${arms.map(a => `<div class="arm ${a[0]}"><h3>${T(a[1])}</h3><p class="sm" style="margin:6px 0 0">${T(a[2])}</p></div>`).join('')}</div></div></section>
   <div class="band"><div class="wrap"><div class="grid"><div><h2>${T({ ar: 'خذ وقتك — وسجّل اهتمامك', en: 'Take your time — and register your interest' })}</h2><p style="margin-top:10px;max-width:48ch">${T({ ar: 'قراءة قدرتك الشرائية في ١٥ دقيقة بلا مقابل. لن نرسل لك كتالوجاً، ولن نتصل بك غداً لنضغط عليك.', en: 'A purchasing-power reading in 15 minutes, free. No catalogue, no call tomorrow to push you.' })}</p></div><div style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn" href="#/request">${T(S.nav.request)}</a><a class="btn ghost" href="#/interest">${T(S.nav.interest)}</a><a class="btn ghost" href="#/tools">${T(S.nav.tools)}</a></div></div></div></div>`,
     mount: () => mountCalc(pp, $('#home_calc'), { stepped: true }) };
 }
+function pageLab() {
+  const G = GROUPS.investor;
+  return { html: `<section class="v3sec dark"><div class="wrap"><div class="v3head rv in"><div class="no">→</div><div><div class="lab">INVESTMENT LAB</div><h2 style="font-size:clamp(28px,4vw,44px)">Investment Lab</h2><p style="max-width:48ch;color:#B3C8C2;margin:10px 0 0;font-size:16px">${T(G.desc)}</p></div></div></div></section>
+  <div class="wrap cpage"><div class="group" id="investor"><div class="gh"><h2>${T({ ar: 'أدوات المستثمر', en: 'Investor tools' })}</h2><span class="tag">${T(G.tag)}</span></div><div class="grid3" style="margin-top:14px">${CALCS.filter(c => c.group === 'investor').map(c => `<a class="tool" href="#/tools/${c.slug}"><h3>${T(c.title)}</h3><div class="q">${T(c.q)}</div><span class="lab">${c.eyebrow.split('·')[0].trim()}</span></a>`).join('')}</div></div>
+  <div class="warn" style="margin-top:30px"><b>${T({ ar: 'عن كل الأرقام في هذه الصفحات:', en: 'About every number on these pages:' })}</b> ${T({ ar: 'تقديرات أوّلية غير ملزمة تُظهر المعادلة كاملة، ولا تُعدّ توصية استثمارية ولا وعدًا بعائد.', en: 'Preliminary, non-binding estimates showing the whole formula — not investment advice and not a promised return.' })}</div></div>`, mount: () => { mountReveal(); } };
+}
 function pageTools() {
-  return { html: `<div class="wrap cpage"><h1>${T({ ar: 'حاسبات عتبة', en: 'Atbah calculators' })}</h1><p class="q">${T({ ar: 'كلها تقديرية، وكلها تُظهر المعادلة. اختر مجموعتك.', en: 'All estimates, all showing the formula. Pick your group.' })}</p>
-  ${Object.entries(GROUPS).map(([g, G]) => `<div class="group" id="${g}" style="margin-top:30px"><div class="gh"><h2>${T(G.title)}</h2><span class="tag">${T(G.tag)}</span></div><p class="sm" style="max-width:70ch">${T(G.desc)}</p><div class="grid3" style="margin-top:14px">${CALCS.filter(c => c.group === g).map(c => `<a class="tool" href="#/tools/${c.slug}"><h3>${T(c.title)}</h3><div class="q">${T(c.q)}</div><span class="lab">${c.eyebrow.split('·')[0].trim()}</span></a>`).join('')}</div></div>`).join('')}
+  return { html: `<div class="wrap cpage"><h1>${T({ ar: 'حاسبات تهمك', en: 'Calculators for you' })}</h1><p class="q">${T({ ar: 'كلها تقديرية، وكلها تُظهر المعادلة — بالترتيب الذي يقف عنده المشتري فعلاً.', en: 'All estimates, all showing the formula — in the order a buyer actually stalls at.' })}</p>
+  ${Object.entries(GROUPS).filter(([g]) => g === 'buyer').map(([g, G]) => `<div class="group" id="${g}" style="margin-top:30px"><div class="gh"><h2>${T(G.title)}</h2><span class="tag">${T(G.tag)}</span></div><p class="sm" style="max-width:70ch">${T(G.desc)}</p><div class="grid3" style="margin-top:14px">${CALCS.filter(c => c.group === g).map(c => `<a class="tool" href="#/tools/${c.slug}"><h3>${T(c.title)}</h3><div class="q">${T(c.q)}</div><span class="lab">${c.eyebrow.split('·')[0].trim()}</span></a>`).join('')}</div></div>`).join('')}
+  <div class="group" style="margin-top:30px"><div class="gh"><h2>Investment Lab</h2><span class="tag">${T(GROUPS.investor.tag)}</span></div><p class="sm" style="max-width:70ch">${T(GROUPS.investor.desc)}</p><a class="btn quiet" href="#/lab" style="margin-top:10px">${T({ ar: 'افتح Investment Lab', en: 'Open the Investment Lab' })}</a></div>
   <div class="warn" style="margin-top:30px"><b>${T({ ar: 'عن كل الأرقام في هذه الصفحات:', en: 'About every number on these pages:' })}</b> ${T({ ar: 'تقديرات أوّلية غير ملزمة، ولا تُغني عن عرض رسمي من جهة ممولة. نُظهر لك المعادلة كاملة لأن ما لا تفهمه لا يجب أن توقّع عليه — لكن القرار يبقى قرارك.', en: 'Preliminary, non-binding estimates, no substitute for a formal offer from a financing entity. We show the whole formula because you should never sign what you don’t understand — but the decision stays yours.' })}</div></div>` };
 }
 function pageCalc(slug) {
-  const c = CALCS.find(x => x.slug === slug); if (!c) return pageTools();
+  const c = CALCS.find(x => x.slug === slug); if (!c || !GROUPS[c.group]) return pageTools();
   const block = calcBlock(c), G = GROUPS[c.group];
   const idx = CALCS.filter(x => x.group === c.group), i = idx.indexOf(c), next = idx[i + 1], prev = idx[i - 1];
-  return { html: `<div class="wrap cpage"><div class="crumb"><a href="#/tools">${T({ ar: 'الحاسبات', en: 'Calculators' })}</a> › <a href="#/tools#${c.group}">${T(G.title)}</a> › <span>${T(c.title)}</span></div>
+  return { html: `<div class="wrap cpage"><div class="crumb"><a href="${c.group === 'investor' ? '#/lab' : '#/tools'}">${c.group === 'investor' ? 'Investment Lab' : T({ ar: 'حاسبات تهمك', en: 'Calculators for you' })}</a> › <a href="${c.group === 'investor' ? '#/lab' : '#/tools#' + c.group}">${T(G.title)}</a> › <span>${T(c.title)}</span></div>
     <div class="lab">${c.eyebrow}</div><h1>${T(c.title)}</h1><p class="q">${T(c.q)}</p>${block.html}${assumptionsHtml(c)}
     <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:20px">${prev ? `<a class="btn quiet" href="#/tools/${prev.slug}">${T({ ar: '← السابقة:', en: '← Previous:' })} ${T(prev.title)}</a>` : ''}${next ? `<a class="btn quiet" href="#/tools/${next.slug}">${T({ ar: 'التالية:', en: 'Next:' })} ${T(next.title)} →</a>` : ''}</div></div>`,
     mount: () => mountCalc(c, $('#cg_' + c.slug).parentElement) };
@@ -1151,8 +1157,8 @@ function pageComingSoon() {
   <section class="v3sec dark"><div class="arches"></div><div class="wrap" style="position:relative"><div class="v3head rv"><div class="no">03</div><div><div class="lab">${T({ ar: 'مشاريعنا', en: 'Our projects' })}</div><h2>${T({ ar: 'ثلاث مناطق — ومشاريع تُعرض عليك داخل سقفك.', en: 'Three regions — and projects shown to you inside your ceiling.' })}</h2></div></div>
     <div class="cities3">${cities.map(c => `<div class="v3card rv"><div class="arch"></div><h3>${T(c[0])}</h3><p>${T(c[1])}</p></div>`).join('')}</div>
     <p class="sm rv" style="margin-top:18px;color:#8FA8A1">${T({ ar: 'عرض المشاريع على الموقع يأتي قريباً. حتى ذلك الحين يعرضها عليك مستشارك مباشرةً.', en: 'Browsing projects on the site comes soon. Until then your advisor shows them to you directly.' })} <a href="#/projects" style="color:#C9964A">${T({ ar: 'صفحة مشاريعنا ←', en: 'Our projects →' })}</a></p></div></section>
-  <section class="v3sec"><div class="wrap"><div class="v3head rv"><div class="no">04</div><div><div class="lab">${T({ ar: 'الحاسبات', en: 'Calculators' })}</div><h2>${T({ ar: 'سبع عشرة حاسبة — تُظهر لك المعادلة لا النتيجة فقط.', en: 'Seventeen calculators — showing you the formula, not just the result.' })}</h2></div></div>
-    <div class="v3cards">${Object.entries(GROUPS).map(([g, G]) => `<a class="v3card rv" href="#/tools#${g}" style="text-decoration:none;color:inherit"><div class="arch"></div><div class="k">${T(G.tag)}</div><h3>${T(G.title)}</h3><p>${T(G.desc)}</p></a>`).join('')}</div></div></section>`,
+  <section class="v3sec"><div class="wrap"><div class="v3head rv"><div class="no">04</div><div><div class="lab">${T({ ar: 'حاسبات تهمك', en: 'Calculators for you' })}</div><h2>${T({ ar: 'إحدى عشرة حاسبة — تُظهر لك المعادلة لا النتيجة فقط.', en: 'Eleven calculators — showing you the formula, not just the result.' })}</h2></div></div>
+    <div class="v3cards"> ${Object.entries(GROUPS).map(([g, G]) => `<a class="v3card rv" href="${g === 'investor' ? '#/lab' : '#/tools#' + g}" style="text-decoration:none;color:inherit"><div class="arch"></div><div class="k">${T(G.tag)}</div><h3>${T(G.title)}</h3><p>${T(G.desc)}</p></a>`).join('')}</div></div></section>`,
     mount: () => { mountLedger('ledger_home'); mountReveal(); mountSticky('#ledger_home_wrap'); } };
 }
 
@@ -1279,9 +1285,9 @@ function pageRequest(params) {
 function navHtml(route) {
   const cur = (r) => route.startsWith(r) ? ' aria-current="page"' : '';
   return `<div class="wrap"><a class="brand" href="#/">${LOGO(54)}<b>${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</b></a>
-  <div class="links"><a href="#/about"${cur('/about')}>${T(S.nav.about)}</a><a href="#/projects"${cur('/projects')}>${T(S.nav.projects)}</a><a href="#/tools"${cur('/tools')}>${T(S.nav.tools)}</a>${SITE_MODE === 'full' ? `<a href="#/#how">${T(S.nav.how)}</a><a href="#/#services">${T(S.nav.services)}</a>` : ''}<a href="#/request"${cur('/request')}>${T(S.nav.request)}</a><a href="#/interest"${cur('/interest')}>${T(S.nav.interest)}</a></div>
+  <div class="links"><a href="#/about"${cur('/about')}>${T(S.nav.about)}</a><a href="#/projects"${cur('/projects')}>${T(S.nav.projects)}</a><a href="#/tools"${cur('/tools')}>${T(S.nav.tools)}</a><a href="#/lab"${cur('/lab')}>${T(S.nav.lab)}</a>${SITE_MODE === 'full' ? `<a href="#/#how">${T(S.nav.how)}</a><a href="#/#services">${T(S.nav.services)}</a>` : ''}<a href="#/"${route === '/' ? ' aria-current="page"' : ''}>${T(S.cta)}</a><a href="#/interest"${cur('/interest')}>${T(S.nav.interest)}</a></div>
   <button class="lang" id="langbtn" type="button" aria-label="Switch language">${LANG === 'ar' ? 'EN' : 'عربي'}</button>
-  <a class="btn" href="#/" style="padding:9px 16px;min-height:40px;font-size:14px">${T(S.cta)}</a></div>`;
+  <a class="btn" href="#/request" style="padding:9px 16px;min-height:40px;font-size:14px">${T(S.nav.request)}</a></div>`;
 }
 function footerHtml() {
   return `<div class="wrap"><div class="cols"><div><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">${LOGO(38)}<b style="font-family:'Reem Kufi',Tahoma,sans-serif;font-size:24px">${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</b></div><div>${T({ ar: 'خدمات وساطة عقارية', en: 'Real-estate brokerage services' })}</div></div>
@@ -1297,6 +1303,7 @@ function route() {
   let page;
   if (path === '/' || path === '') page = pageHome();
   else if (path === '/tools') page = pageTools();
+  else if (path === '/lab') page = pageLab();
   else if (path.startsWith('/tools/')) page = pageCalc(path.slice(7));
   else if (path === '/interest') page = pageInterest(params);
   else if (path === '/request') page = pageRequest(params);
