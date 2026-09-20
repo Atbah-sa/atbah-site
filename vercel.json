@@ -1,4 +1,7 @@
 {
+  "rewrites": [
+    { "source": "/sync/leads-export", "destination": "/api/leads-export" }
+  ],
   "headers": [
     { "source": "/(.*)", "headers": [
       { "key": "X-Content-Type-Options", "value": "nosniff" },
