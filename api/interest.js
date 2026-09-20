@@ -33,6 +33,7 @@ export default async function handler(req, res) {
   const wishes = {}; const w = b.wishes && typeof b.wishes === 'object' ? b.wishes : {};
   for (const k of Object.keys(WISH)) if (WISH[k].includes(w[k])) wishes[k] = w[k];
   if (clean(w.district, 120)) wishes.district = clean(w.district, 120);
+  if (clean(w.nearby, 200)) wishes.nearby = clean(w.nearby, 200); // «اطلب عقارك»: الأحياء المجاورة (فاصلة عربية)
 
   const rec = {
     name, phone, email, role: clean(b.role, 40) || 'other', city: clean(b.city, 60) || '—',
@@ -64,10 +65,11 @@ export default async function handler(req, res) {
   const to = (process.env.NOTIFY_EMAIL_TO || '').split(',').map((s) => s.trim()).filter(Boolean);
   if (process.env.RESEND_API_KEY && to.length) {
     const first = name.split(/\s+/)[0], masked = phone.replace(/^(\d{4})\d+(\d{2})$/, '$1••••$2');
-    const subject = `عتبة — اهتمام جديد ${saved.ref} · ${first} · ${rec.city}`;
-    const rows = [['المرجع', saved.ref], ['الاسم', first], ['الجوّال', masked], ['الدور', rec.role], ['المدينة', rec.city], ['السقف التقديري', rec.budget ? rec.budget.toLocaleString('en-US') + ' ريال' : '—'], ['الرغبة', Object.entries(wishes).map(([k, v]) => `${k}: ${v}`).join(' · ') || '—'], ['المصدر', rec.source], ['ملاحظة / التواصل', rec.note || '—']];
-    const html = `<div dir="rtl" style="font-family:Tahoma,Arial,sans-serif;font-size:15px;line-height:1.8;color:#10322D"><p><b>اهتمام جديد وصل الآن.</b> اتّصال واحد خلال يومي عمل — لا كتالوج.</p><table>${rows.map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#5C7570">${k}</td><td><b>${v}</b></td></tr>`).join('')}</table><p style="font-size:12px;color:#8A9B96">التفاصيل الكاملة في المستقبِل داخل المملكة. لا تُعِد توجيه هذه الرسالة.</p></div>`;
-    // Awaited (5s timeout): Vercel freezes the function once the response is sent, so an un-awaited request never leaves. A failure here never fails the registration.
+    const isRequest = rec.source.startsWith('request');
+    const subject = isRequest ? `عتبة — طلب عقارك ${saved.ref} · ${first} · ${wishes.district || rec.city}` : `عتبة — اهتمام جديد ${saved.ref} · ${first} · ${rec.city}`;
+    const rows = [['المرجع', saved.ref], ['الاسم', first], ['الجوّال', masked], ['الدور', rec.role], ['المدينة', rec.city], ['السقف التقديري', rec.budget ? rec.budget.toLocaleString('en-US') + ' ريال' : '—'], ['الرغبة', Object.entries(wishes).map(([k, v]) => `${k}: ${v}`).join(' · ') || '—'], ...(isRequest ? [['الحيّ', wishes.district || '—'], ['الأحياء المجاورة', wishes.nearby ? wishes.nearby.replace(/،/g, '، ') : '—']] : []), ['المصدر', rec.source], ['ملاحظة / التواصل', rec.note || '—']];
+    const html = `<div dir="rtl" style="font-family:Tahoma,Arial,sans-serif;font-size:15px;line-height:1.8;color:#10322D"><p><b>${isRequest ? 'طلب عقارك — وصل الآن.' : 'اهتمام جديد وصل الآن.'}</b> ${isRequest ? 'يُفتح في نظام عتبة (طلبات البحث) خلال ساعة، ويبدأ الباحث البحث والتحقق — أول تقرير خلال يومي عمل.' : 'اتّصال واحد خلال يومي عمل — لا كتالوج.'}</p><table>${rows.map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#5C7570">${k}</td><td><b>${v}</b></td></tr>`).join('')}</table><p style="font-size:12px;color:#8A9B96">التفاصيل الكاملة في المستقبِل داخل المملكة. لا تُعِد توجيه هذه الرسالة.</p></div>`;
+    // يُنتظر الإرسال (بمهلة ٥ ثوانٍ): الدالّة على Vercel تُجمَّد فور الردّ، فالطلب غير المنتظَر لا يصل. الفشل لا يُفشل التسجيل.
     try {
       const er = await fetch('https://api.resend.com/emails', {
         method: 'POST', headers: { Authorization: `Bearer ${process.env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
