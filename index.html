@@ -1449,8 +1449,9 @@ const SANAD_SVG = (cls = 'snav') => `<svg class="${cls}" data-state="idle" viewB
 const SN = { open: false, msgs: [], busy: false };
 const snT = (o) => T(o);
 function snState(st) { document.querySelectorAll('.snav').forEach((e) => e.dataset.state = st); }
+function snFmt(t) { return esc(t).replace(/\*\*([^*\n]{1,80})\*\*/g, '<b>$1</b>').replace(/^\s*[-•]\s+/gm, '· ').replace(/\n/g, '<br>'); }
 function snRender() {
-  const box = $('#sn_m'); box.innerHTML = SN.msgs.map((m) => m.role === 'user' ? `<div class="sn-msg u">${esc(m.content)}</div>` : `<div class="sn-msg a${m.think ? ' think' : ''}">${esc(m.content)}</div>${m.actions && m.actions.length ? `<div class="sn-acts">${m.actions.map(snAction).join('')}</div>` : ''}`).join('');
+  const box = $('#sn_m'); box.innerHTML = SN.msgs.map((m) => m.role === 'user' ? `<div class="sn-msg u">${esc(m.content)}</div>` : `<div class="sn-msg a${m.think ? ' think' : ''}">${snFmt(m.content)}</div>${m.actions && m.actions.length ? `<div class="sn-acts">${m.actions.map(snAction).join('')}</div>` : ''}`).join('');
   box.scrollTop = box.scrollHeight;
   $('#sn_q').innerHTML = SN.msgs.length <= 1 ? [[snT({ ar: 'احسب سقفي', en: 'My ceiling' }), 'calc'], [snT({ ar: 'اطلب عقاري', en: 'Request a property' }), 'request'], [snT({ ar: 'سعر المتر في حيّي', en: 'Price per m² in my district' }), 'q:price'], [snT({ ar: 'كلّم مستشارًا', en: 'Talk to an advisor' }), 'whatsapp']].map(([l, a]) => `<button type="button" data-snq="${a}">${l}</button>`).join('') : '';
   document.querySelectorAll('[data-snq]').forEach((b) => b.addEventListener('click', () => { const a = b.dataset.snq; if (a === 'q:price') { $('#sn_in').value = snT({ ar: 'كم سعر المتر في حي ', en: 'What is the price per m² in ' }); $('#sn_in').focus(); return; } snGo({ a }); }));
