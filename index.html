@@ -1490,4 +1490,19 @@ route();
 </script>
 
 
+<!-- Vercel Web Analytics (بلا كوكيز) + أحداث الدفتر -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+(function(){ var ev = function(n, p){ try { window.va('event', { name: n, data: p || {} }); } catch (e) {} };
+  document.addEventListener('click', function(e){ var t = e.target.closest && e.target.closest('[data-chips="pay"] button, #wa, #snbtn, [data-submit], .btn.wa, a[href*="wa.me"], a[href*="whatsapp"]'); if(!t) return;
+    if (t.matches('[data-chips="pay"] button')) ev('pay_chosen', { pay: t.dataset.v });
+    else if (t.id === 'wa' || t.matches('.btn.wa, a[href*="wa.me"], a[href*="whatsapp"]')) ev('whatsapp_click', { page: location.hash.split('?')[0] });
+    else if (t.id === 'snbtn') ev('sanad_open');
+  }, true);
+  document.addEventListener('change', function(e){ var t = e.target; if (!t || !t.name) return;
+    if (t.name === 'budget' && +t.value >= 100000) ev('budget_set');
+    if (t.name === 'type' && t.value) ev('step3_done', { type: t.value });
+  }, true);
+  document.addEventListener('submit', function(e){ var f = e.target; if (f && f.classList && f.classList.contains('ledger')) ev('submit', { source: f.dataset.source || '' }); }, true);
+})();</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body></html>
