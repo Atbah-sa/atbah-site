@@ -8,6 +8,9 @@
       { "key": "X-Frame-Options", "value": "DENY" },
       { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
       { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
+    ] },
+    { "source": "/(og|logo|icon-192|icon-512|apple-touch-icon|favicon-48)\\.png", "headers": [
+      { "key": "Cache-Control", "value": "public, max-age=86400, s-maxage=31536000" }
     ] }
   ]
 }
