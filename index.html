@@ -7,8 +7,9 @@
 <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://atbah.sa/">
+<link rel="preload" as="image" href="media/hero-poster.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Archivo:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cormorant+Garamond:wght@500;600&family=Reem+Kufi:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Archivo:wght@400;500;600;700&display=swap">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
 {"@type":["Organization","RealEstateAgent"],"@id":"https://atbah.sa/#org","name":"عتبة","legalName":"شركة عتبة بداية العقارية","alternateName":"Atbah","url":"https://atbah.sa/","logo":{"@type":"ImageObject","url":"https://atbah.sa/logo.png","width":600,"height":600},"image":"https://atbah.sa/og.png","email":"info@atbah.sa","address":{"@type":"PostalAddress","addressLocality":"الرياض","addressRegion":"منطقة الرياض","addressCountry":"SA"},"areaServed":[{"@type":"City","name":"الرياض"},{"@type":"City","name":"جدة"},{"@type":"City","name":"الدمام"}],"identifier":[{"@type":"PropertyValue","name":"رخصة فال","value":"1200050979"},{"@type":"PropertyValue","name":"السجل التجاري","value":"7055177823"},{"@type":"PropertyValue","name":"الرقم الضريبي","value":"315016844100003"}]},
@@ -509,6 +510,252 @@ nav.top .links a{font-size:14.5px}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
 
+
+/* ================= v4 «العتبة الفاخرة» ================= */
+body:not([data-lang="en"]) h1,body:not([data-lang="en"]) h2{font-family:'Amiri','Reem Kufi',Tahoma,serif;font-weight:700;line-height:1.5}
+body:not([data-lang="en"]) h1{font-size:clamp(32px,4.8vw,52px)}
+body:not([data-lang="en"]) h2{font-size:clamp(25px,3.2vw,34px)}
+body[data-lang="en"] .lx-hero h1,body[data-lang="en"] .lx-h2,body[data-lang="en"] .lx-final h2,body[data-lang="en"] .lx-pledge h3,body[data-lang="en"] .lx-tools h3,body[data-lang="en"] .lx-tile b{font-family:'Cormorant Garamond','Amiri',Georgia,serif;font-weight:600;letter-spacing:0}
+/* nav over the hero */
+body.lx-home nav.top{position:fixed;top:0;left:0;right:0;background:transparent;border-bottom-color:rgba(241,236,227,.14);transition:background .35s ease,border-color .35s ease}
+body.lx-home nav.top .brand svg{filter:none}
+body.lx-home.lx-scrolled nav.top,body.lx-home nav.top.open{background:rgba(8,30,27,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom-color:var(--railline)}
+body.lx-home nav.top .links a{color:rgba(241,236,227,.82)}
+/* hero */
+.lx-hero{position:relative;min-height:100vh;min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;color:#F1ECE3;background:#061615 url(media/hero-poster.jpg) 30% 50%/cover no-repeat;overflow:hidden;isolation:isolate}
+.lx-vid{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:30% 50%;z-index:-2;pointer-events:none}
+body[data-lang="en"] .lx-vid,body[data-lang="en"] .lx-hero{background-position:70% 50%}
+body[data-lang="en"] .lx-vid{transform:scaleX(-1);object-position:30% 50%}
+.lx-hero::before{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(to left,rgba(6,22,21,.86) 0%,rgba(6,22,21,.6) 36%,rgba(6,22,21,0) 64%),linear-gradient(to bottom,rgba(6,22,21,.6) 0%,rgba(6,22,21,0) 20%,rgba(6,22,21,0) 62%,rgba(6,22,21,.92) 100%)}
+body[data-lang="en"] .lx-hero::before{background:linear-gradient(to right,rgba(6,22,21,.86) 0%,rgba(6,22,21,.6) 36%,rgba(6,22,21,0) 64%),linear-gradient(to bottom,rgba(6,22,21,.6) 0%,rgba(6,22,21,0) 20%,rgba(6,22,21,0) 62%,rgba(6,22,21,.92) 100%)}
+.lx-hero .lx-in{width:100%;padding-block:150px 56px}
+.lx-hero .lx-in>*{max-width:640px}
+.lx-kicker{display:flex;align-items:center;gap:14px;font-size:14px;color:rgba(241,236,227,.78)}
+.lx-kicker i{width:40px;height:1px;background:#C9964A;flex:0 0 auto}
+.lx-hero h1{color:#F1ECE3;font-size:clamp(40px,5.4vw,78px)!important;line-height:1.3!important;margin-top:22px;text-wrap:balance}
+.lx-hero h1 em{display:block;font-style:normal;color:#E2BB78}
+.lx-hero .sub{font-size:clamp(16px,1.45vw,19px);line-height:1.95;color:rgba(241,236,227,.86);max-width:50ch;margin-top:22px;font-weight:300}
+.lx-cta{display:flex;gap:14px;flex-wrap:wrap;margin-top:32px}
+.lx-cta.c{justify-content:center}
+.lx-cta .btn{min-height:54px;padding:0 30px;font-size:16px}
+.btn.lx-ghost{background:transparent;color:#F1ECE3;border:1px solid rgba(241,236,227,.5)}
+.btn.lx-ghost:hover{background:transparent;border-color:#C9964A;color:#F1ECE3}
+.lx-trust{display:flex;flex-wrap:wrap;gap:6px 0;margin-top:22px;font-size:13.5px;color:rgba(241,236,227,.72)}
+.lx-trust span+span::before{content:'·';margin-inline:12px;color:#C9964A}
+.lx-strip{border-top:1px solid rgba(241,236,227,.14);font-size:12.5px;color:rgba(241,236,227,.6)}
+.lx-strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;flex-wrap:wrap;padding-block:8px}
+.lx-pause{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid rgba(241,236,227,.28);color:rgba(241,236,227,.8);border-radius:4px;min-height:44px;padding:0 14px;font:inherit;font-size:12.5px;cursor:pointer}
+.lx-pause:hover{border-color:#C9964A}
+.lx-pause[aria-pressed="true"] svg rect:last-child{display:none}
+/* sections */
+.lx-sec{padding-block:clamp(72px,9vw,124px);position:relative}
+.lx-sec.cream{background:var(--ground)}
+.lx-sec.paper{background:var(--surface2);border-block:1px solid var(--line)}
+.lx-sec.dark{background:#10322D;color:#F1ECE3}
+#start{scroll-margin-top:84px}
+.lx-eyebrow{display:flex;align-items:center;gap:12px;font-size:14px;font-weight:500;color:var(--clayink)}
+.lx-eyebrow i{width:28px;height:1px;background:currentColor;opacity:.6}
+.lx-sec.dark .lx-eyebrow{color:#E2BB78}
+.lx-h2{font-size:clamp(30px,3.9vw,52px)!important;line-height:1.38!important;color:var(--ink);margin-top:14px!important;max-width:22ch}
+.lx-sec.dark .lx-h2{color:#F1ECE3}
+.lx-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px 40px;flex-wrap:wrap;margin-bottom:clamp(36px,5vw,64px)}
+.lx-note{margin:0;font-size:15px;line-height:1.85;color:var(--muted);max-width:40ch}
+.lx-sec.dark .lx-note{color:rgba(241,236,227,.66)}
+.lx-link{display:inline-flex;align-items:center;gap:12px;color:var(--ink);font-weight:600;font-size:15.5px;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:6px}
+.lx-link:hover{color:var(--goldink)}
+body[data-lang="en"] .lx-arr{transform:scaleX(-1)}
+/* intro + ledger */
+.lx-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,520px);gap:clamp(40px,6vw,96px);align-items:start}
+.lx-txt{border-inline-start:3px solid var(--gold);padding-inline-start:clamp(22px,3vw,44px)}
+.lx-body{font-size:clamp(16.5px,1.4vw,18.5px);line-height:2;color:var(--ink2);max-width:52ch;margin-top:22px}
+.lx-quote{margin:34px 0 30px;display:flex;gap:18px;align-items:flex-start;color:var(--ink)}
+.lx-quote svg{flex:0 0 auto;margin-top:6px}
+.lx-quote p{margin:0;font-family:'Amiri',serif;font-size:clamp(21px,2.1vw,27px);line-height:1.7;color:var(--ink)}
+.lx-ledger{position:relative}
+@media(max-width:960px){.lx-intro{grid-template-columns:1fr}}
+/* steps */
+.lx-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(24px,3vw,40px)}
+.lx-step{border-top:1px solid var(--ink);padding-top:26px}
+.lx-step .n{font-family:'Amiri',serif;font-size:clamp(48px,5vw,68px);line-height:1;color:var(--green2);direction:ltr}
+.lx-step b{display:block;font-size:19px;font-weight:600;color:var(--ink);margin:16px 0 8px}
+.lx-step p{margin:0;font-size:15.5px;line-height:1.9;color:var(--muted)}
+@media(max-width:900px){.lx-steps{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.lx-steps{grid-template-columns:1fr;gap:0}.lx-step{display:grid;grid-template-columns:64px 1fr;column-gap:14px;padding:20px 0}.lx-step .n{grid-row:span 2;font-size:44px}.lx-step b{margin:4px 0 4px}}
+/* deals */
+.lx-deals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink);border-bottom:1px solid var(--line)}
+.lx-deals a{display:flex;flex-direction:column;gap:6px;padding:28px 24px;text-decoration:none;color:inherit;border-inline-end:1px solid var(--line);transition:background .25s}
+.lx-deals a:last-child{border-inline-end:0}
+.lx-deals a:hover{background:var(--surface)}
+.lx-deals .k{font-size:15px;font-weight:600;color:var(--ink)}
+.lx-deals .v{font-weight:300;font-size:clamp(32px,3.2vw,46px);line-height:1.1;color:var(--ink);align-self:flex-start}
+.lx-deals .c{font-size:13px;color:var(--muted)}
+.lx-src{margin-top:16px;font-size:13px;color:var(--muted)}
+.lx-src a{color:var(--goldink)}
+@media(max-width:760px){.lx-deals{grid-template-columns:1fr 1fr}.lx-deals a:nth-child(2){border-inline-end:0}.lx-deals a:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+/* project tiles */
+.lx-tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.lx-tile{position:relative;display:block;aspect-ratio:3/4;border-radius:4px;overflow:hidden;color:#F1ECE3;text-decoration:none;isolation:isolate}
+.lx-tile svg:first-child{position:absolute;inset:0;width:100%;height:100%;z-index:-2;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.lx-tile:hover svg:first-child{transform:scale(1.05)}
+.lx-tile::after{content:'';position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,22,21,0) 42%,rgba(6,22,21,.88) 100%)}
+.lx-tile .tag{position:absolute;top:20px;inset-inline-start:20px;border:1px solid rgba(241,236,227,.5);border-radius:4px;padding:3px 12px;font-size:12.5px}
+.lx-tile .cap{position:absolute;inset-inline:26px;bottom:26px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.lx-tile b{display:block;font-family:'Amiri',serif;font-size:clamp(28px,2.6vw,38px);font-weight:700;line-height:1.3}
+.lx-tile small{display:block;font-size:14px;color:rgba(241,236,227,.75);margin-top:4px}
+@media(max-width:760px){.lx-tiles{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;margin-inline:-20px;padding-inline:20px;scrollbar-width:none}.lx-tile{scroll-snap-align:start}}
+/* pledge */
+.lx-pledge{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(28px,4vw,56px)}
+.lx-pledge>div{border-top:1px solid var(--clay);padding-top:28px}
+.lx-pledge h3{font-family:'Amiri',serif;font-size:clamp(24px,2.3vw,30px);font-weight:700;line-height:1.5;color:var(--ink)}
+.lx-pledge p{margin:12px 0 0;font-size:16px;line-height:1.95;color:var(--muted)}
+@media(max-width:760px){.lx-pledge{grid-template-columns:1fr}}
+/* tools */
+.lx-tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:clamp(24px,3vw,40px)}
+.lx-tools a{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--ink);padding-top:24px;text-decoration:none;color:inherit}
+.lx-tools .k{font-family:'Archivo',sans-serif;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+.lx-tools h3{font-family:'Amiri',serif;font-size:clamp(23px,2.1vw,28px);font-weight:700;line-height:1.5;color:var(--ink);transition:color .2s}
+.lx-tools p{margin:0;font-size:15px;line-height:1.85;color:var(--muted)}
+.lx-tools .lx-arr{color:var(--ink);margin-top:6px}
+.lx-tools a:hover h3{color:var(--goldink)}
+@media(max-width:860px){.lx-tools{grid-template-columns:1fr}}
+/* final */
+.lx-final{position:relative;background:#0A211D;color:#F1ECE3;text-align:center;padding-block:clamp(96px,12vw,150px);overflow:hidden}
+.lx-bgarch{position:absolute;left:50%;top:50%;width:min(620px,110vw);transform:translate(-50%,-46%);opacity:.45;pointer-events:none}
+.lx-bgarch svg{width:100%;height:auto;display:block}
+.lx-final .wrap{position:relative}
+.lx-final h2{color:#F1ECE3;font-size:clamp(36px,5vw,68px)!important;line-height:1.35!important}
+.lx-final h2 em{display:block;font-style:normal;color:#E2BB78}
+.lx-final p{color:rgba(241,236,227,.75);font-size:18px;margin-top:18px}
+/* mobile hero */
+@media(max-width:760px){
+  .lx-hero::before,body[data-lang="en"] .lx-hero::before{background:linear-gradient(to bottom,rgba(6,22,21,.55) 0%,rgba(6,22,21,.15) 26%,rgba(6,22,21,.55) 50%,rgba(6,22,21,.94) 78%,#061615 100%)}
+  .lx-vid{object-position:30% 40%}
+  .lx-hero .lx-in{padding-block:120px 28px}
+  .lx-hero h1{font-size:clamp(36px,10.5vw,48px)!important}
+  .lx-cta .btn{flex:1 1 auto}
+  .lx-strip .wrap{justify-content:center;text-align:center}
+  .lx-strip .lx-cap{flex-basis:100%}
+}
+@media(prefers-reduced-motion:reduce){.lx-tile svg:first-child{transition:none}}
+body[data-lang="en"] .lx-hero h1,body[data-lang="en"] .lx-final h2,body[data-lang="en"] .lx-h2{line-height:1.08!important}
+body[data-lang="en"] .lx-hero h1{max-width:14ch}
+@media(max-width:960px){.lx-ledger{order:-1}}
+@media(max-width:760px){.lx-strip{font-size:11.5px}.lx-strip .wrap{gap:4px 14px;padding-block:10px 14px}.lx-pause{min-height:40px;padding:0 12px}.lx-pause span{display:none}.lx-pause{width:44px;justify-content:center}}
+
+/* ================= v4.1 لمعة وظلال ================= */
+@keyframes lxSheen{0%{transform:translateX(-160%) skewX(-20deg)}100%{transform:translateX(260%) skewX(-20deg)}}
+@keyframes lxSheenAuto{0%,78%{transform:translateX(-160%) skewX(-20deg)}100%{transform:translateX(260%) skewX(-20deg)}}
+@keyframes lxGoldText{0%,100%{background-position:100% 50%}50%{background-position:0% 50%}}
+/* الأزرار الذهبية: تدرّج معدني + ظل دافئ + لمعة */
+.btn:not(.ghost):not(.quiet):not(.lx-ghost){position:relative;overflow:hidden;isolation:isolate;background:linear-gradient(160deg,#DDB46B 0%,#C9964A 48%,#B5843D 100%);box-shadow:inset 0 1px 0 rgba(255,244,214,.55),inset 0 -1px 0 rgba(90,60,20,.25),0 12px 26px -14px rgba(201,150,74,.75);transition:box-shadow .3s ease,transform .3s ease}
+.btn:not(.ghost):not(.quiet):not(.lx-ghost)::after{content:'';position:absolute;top:0;bottom:0;left:0;width:45%;z-index:-1;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,248,228,.55),rgba(255,255,255,0));transform:translateX(-160%) skewX(-20deg);pointer-events:none}
+.btn:not(.ghost):not(.quiet):not(.lx-ghost):hover{background:linear-gradient(160deg,#E4BE78 0%,#D1A052 48%,#BC8B42 100%);box-shadow:inset 0 1px 0 rgba(255,244,214,.6),inset 0 -1px 0 rgba(90,60,20,.25),0 16px 32px -14px rgba(201,150,74,.9);transform:translateY(-1px)}
+.btn:not(.ghost):not(.quiet):not(.lx-ghost):hover::after{animation:lxSheen .9s ease}
+.lx-hero .lx-cta .btn:not(.lx-ghost)::after,.lx-final .lx-cta .btn:not(.lx-ghost)::after{animation:lxSheenAuto 7s ease-in-out infinite}
+.btn.lx-ghost{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);background:rgba(6,22,21,.18);transition:border-color .3s,box-shadow .3s}
+.btn.lx-ghost:hover{box-shadow:0 0 0 1px rgba(226,187,120,.35),0 10px 30px -12px rgba(201,150,74,.45)}
+/* العناوين: ظل ناعم + لمعة ذهبية متحركة على الكلمات الذهبية */
+.lx-hero h1{text-shadow:0 2px 34px rgba(0,0,0,.45)}
+.lx-strip .wrap{justify-content:center}
+.lx-kicker b{font-weight:700;color:#F1ECE3;font-size:15px}
+.lx-hero h1 em,.lx-final h2 em{background:linear-gradient(100deg,#C9964A 0%,#E2BB78 30%,#FBE7BD 45%,#E2BB78 60%,#C9964A 100%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;text-shadow:none;animation:lxGoldText 9s ease-in-out infinite}
+/* الشريط العلوي عند التمرير */
+body.lx-home.lx-scrolled nav.top,nav.top{box-shadow:0 12px 32px -18px rgba(0,0,0,.55)}
+body.lx-home:not(.lx-scrolled) nav.top:not(.open){box-shadow:none}
+nav.top::after{content:'';position:absolute;inset-inline:0;bottom:-1px;height:1px;background:linear-gradient(90deg,transparent,rgba(226,187,120,.45),transparent);pointer-events:none}
+/* الأقسام الداكنة: توهّج ذهبي خافت */
+.lx-sec.dark,.lx-final{background-image:radial-gradient(ellipse 60% 55% at 85% 0%,rgba(201,150,74,.13),transparent 70%),radial-gradient(ellipse 50% 50% at 10% 100%,rgba(46,90,82,.35),transparent 70%)}
+.lx-final{background-image:radial-gradient(ellipse 45% 55% at 50% 40%,rgba(201,150,74,.14),transparent 70%)}
+/* الخطوط الفاصلة: ذهب يتلاشى */
+.lx-eyebrow i{background:linear-gradient(90deg,transparent,currentColor);opacity:.9}
+.lx-kicker i{background:linear-gradient(90deg,transparent,#E2BB78)}
+.lx-pledge>div{border-top:0;position:relative}
+.lx-pledge>div::before{content:'';position:absolute;top:0;inset-inline:0;height:1px;background:linear-gradient(to left,var(--clay),transparent)}
+body[data-lang="en"] .lx-pledge>div::before{background:linear-gradient(to right,var(--clay),transparent)}
+/* بطاقة الدفتر: عمق طبقي + خط ذهبي علوي */
+.lx-ledger .ledger{box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 2px 4px rgba(16,50,45,.04),0 18px 36px -22px rgba(16,50,45,.28),0 50px 90px -50px rgba(16,50,45,.45);border-color:color-mix(in srgb,var(--line) 70%,#C9964A)}
+.lx-ledger::before{content:'';position:absolute;top:0;inset-inline:28px;height:2px;z-index:2;background:linear-gradient(90deg,transparent,#C9964A,transparent);border-radius:2px}
+/* بطاقات المناطق: ظل عميق + حافة ذهبية + لمعة عند المرور */
+.lx-tile{box-shadow:0 30px 60px -32px rgba(0,0,0,.75),0 0 0 1px rgba(226,187,120,.12);transition:transform .6s cubic-bezier(.2,.7,.2,1),box-shadow .6s ease}
+.lx-tile::before{content:'';position:absolute;top:0;bottom:0;left:0;width:40%;z-index:1;background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,241,210,.16),rgba(255,255,255,0));transform:translateX(-160%) skewX(-20deg);pointer-events:none}
+.lx-tile:hover{transform:translateY(-6px);box-shadow:0 40px 70px -30px rgba(0,0,0,.85),0 0 0 1px rgba(226,187,120,.4)}
+.lx-tile:hover::before{animation:lxSheen 1.2s ease}
+.lx-tile .tag{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);background:rgba(6,22,21,.25)}
+/* مؤشر الصفقات والحاسبات: رفع ناعم عند المرور */
+.lx-deals a{position:relative;transition:background .3s,box-shadow .3s}
+.lx-deals a:hover{box-shadow:0 22px 44px -28px rgba(16,50,45,.35);z-index:1}
+.lx-deals a::after{content:'';position:absolute;inset-inline:24px;bottom:0;height:2px;background:linear-gradient(90deg,transparent,#C9964A,transparent);opacity:0;transition:opacity .3s}
+.lx-deals a:hover::after{opacity:1}
+.lx-tools a{transition:transform .35s ease}
+.lx-tools a:hover{transform:translateY(-3px)}
+.lx-tools a .lx-arr{transition:transform .35s ease}
+.lx-tools a:hover .lx-arr{transform:translateX(-6px)}
+body[data-lang="en"] .lx-tools a:hover .lx-arr{transform:scaleX(-1) translateX(-6px)}
+/* الاقتباس والشعار */
+.lx-quote svg{filter:drop-shadow(0 6px 14px rgba(201,150,74,.35))}
+/* بطاقات بقية الصفحات: ظل طبقي خفيف */
+.card,.tool,.arm,.v3card{transition:box-shadow .3s ease,transform .3s ease,border-color .3s}
+.tool:hover,.v3card:hover{box-shadow:0 22px 44px -28px rgba(16,50,45,.4);transform:translateY(-2px)}
+@media(prefers-reduced-motion:reduce){.btn::after,.lx-tile::before,.lx-hero h1 em,.lx-final h2 em{animation:none!important}.lx-tile:hover,.lx-tools a:hover,.tool:hover,.v3card:hover,.btn:hover{transform:none!important}}
+/* v4.2 — «اسأل سَنَد»: خلفية زجاجية داكنة ثابتة تُقرأ فوق أي قسم (كانت var(--paper) غير المعرَّفة = شفافة) */
+@keyframes snTipIn{from{opacity:0;transform:translateX(var(--sn-dx,-6px))}to{opacity:1;transform:none}}
+@keyframes snTipSheen{0%,70%{background-position:180% 0}100%{background-position:-80% 0}}
+.sn-btn .sn-tip{background:linear-gradient(110deg,rgba(255,241,210,0) 35%,rgba(255,241,210,.16) 50%,rgba(255,241,210,0) 65%) 180% 0/250% 100% no-repeat,linear-gradient(160deg,rgba(18,51,46,.94),rgba(6,22,21,.94));color:#F1ECE3;border:1px solid rgba(226,187,120,.55);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:500;line-height:1.4;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:inset 0 1px 0 rgba(255,244,214,.14),0 10px 26px -10px rgba(0,0,0,.6),0 0 0 4px rgba(201,150,74,.08);animation:snTipIn .5s ease both,snTipSheen 6s ease-in-out 1s infinite;transition:border-color .25s,box-shadow .25s}
+body[data-lang="en"] .sn-btn .sn-tip{--sn-dx:6px}
+.sn-btn:hover .sn-tip,.sn-btn:focus-visible .sn-tip{border-color:#E2BB78;box-shadow:inset 0 1px 0 rgba(255,244,214,.2),0 12px 30px -10px rgba(0,0,0,.65),0 0 0 4px rgba(201,150,74,.18)}
+@media(prefers-reduced-motion:reduce){.sn-btn .sn-tip{animation:none}}
+/* v4.3 — «فلتر عتبة» الموحّد لكل الصور: يُضاف أي صورة داخل .atb-media فتأخذ لون الهوية */
+.atb-media{position:absolute;inset:0;z-index:-2;overflow:hidden;background:#10322D;isolation:isolate}
+.atb-media img{display:block;width:100%;height:100%;object-fit:cover;filter:saturate(.62) contrast(1.08) brightness(.84) sepia(.12);transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.atb-media::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:color;background:linear-gradient(180deg,#123E37 0%,#1F4A42 45%,#8C6A3E 78%,#B98A4E 100%);opacity:.58}
+.atb-media::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:soft-light;background:radial-gradient(ellipse 80% 60% at 50% 85%,rgba(233,190,120,.55),transparent 70%),linear-gradient(180deg,rgba(6,22,21,.35),transparent 40%)}
+.atb-media[data-tone="bright"] img{filter:saturate(.55) contrast(1.12) brightness(.66) sepia(.14)}
+.lx-tile:hover .atb-media img{transform:scale(1.05)}
+.lx-tiles.short .lx-tile{aspect-ratio:4/3}
+@media(max-width:760px){.lx-tiles.short{grid-template-columns:1fr;grid-auto-flow:row;overflow:visible;margin-inline:0;padding-inline:0}.lx-tiles.short .lx-tile{aspect-ratio:16/10}}
+@media(prefers-reduced-motion:reduce){.atb-media img{transition:none}}
+/* v4.5 — صور خلفية تعبيرية بفلتر عتبة + غطاء داكن */
+.has-photo{position:relative;isolation:isolate;overflow:hidden}
+.has-photo>.atb-media{z-index:-3}
+.atb-veil{position:absolute;inset:0;z-index:-2;pointer-events:none;background:linear-gradient(to left,rgba(6,22,21,.9) 0%,rgba(6,22,21,.72) 45%,rgba(6,22,21,.45) 100%),linear-gradient(to bottom,rgba(6,22,21,.35),rgba(6,22,21,0) 30%,rgba(6,22,21,0) 70%,rgba(6,22,21,.6))}
+body[data-lang="en"] .atb-veil{background:linear-gradient(to right,rgba(6,22,21,.9) 0%,rgba(6,22,21,.72) 45%,rgba(6,22,21,.45) 100%),linear-gradient(to bottom,rgba(6,22,21,.35),rgba(6,22,21,0) 30%,rgba(6,22,21,0) 70%,rgba(6,22,21,.6))}
+.atb-veil.c{background:radial-gradient(ellipse 70% 70% at 50% 50%,rgba(6,22,21,.72),rgba(6,22,21,.9))}
+.atb-cap{position:absolute;bottom:14px;inset-inline-end:20px;font-size:11px;color:rgba(241,236,227,.5);z-index:1;pointer-events:none}
+/* شريط الاقتباس */
+.lx-band{min-height:clamp(340px,40vw,520px);display:flex;align-items:center;color:#F1ECE3;padding-block:72px}
+.lx-band .wrap{width:100%}
+.lx-band .q{margin:0;font-family:'Amiri',serif;font-weight:700;font-size:clamp(30px,3.8vw,52px);line-height:1.45;color:#F1ECE3;max-width:21ch;text-wrap:balance;text-shadow:0 2px 30px rgba(0,0,0,.4)}
+body[data-lang="en"] .lx-band .q{font-family:'Cormorant Garamond','Amiri',serif;line-height:1.12}
+.lx-band .by{display:flex;align-items:center;gap:12px;margin-top:22px;font-size:14px;color:#E2BB78}
+.lx-band .by::before{content:'';width:40px;height:1px;background:linear-gradient(90deg,transparent,#E2BB78)}
+.lx-band .atb-veil{background:linear-gradient(to left,rgba(6,22,21,.85) 0%,rgba(6,22,21,.55) 45%,rgba(6,22,21,.25) 100%)}
+body[data-lang="en"] .lx-band .atb-veil{background:linear-gradient(to right,rgba(6,22,21,.85) 0%,rgba(6,22,21,.55) 45%,rgba(6,22,21,.25) 100%)}
+/* الختام بصورة */
+.lx-final.has-photo .lx-bgarch{opacity:.3}
+/* v4.6 — رؤوس الصفحات بصور + عهد العتبة بصورة جانبية */
+.abhero.has-photo .arches,.abhero.has-photo .ring{display:none}
+.abhero.has-photo{padding-block:clamp(96px,11vw,140px) clamp(88px,10vw,120px)}
+.abhero.has-photo .atb-veil{background:radial-gradient(ellipse 75% 80% at 50% 50%,rgba(6,22,21,.78),rgba(6,22,21,.92))}
+.lx-pagehead{color:#F1ECE3;padding-block:clamp(72px,9vw,112px) clamp(56px,7vw,88px)}
+.lx-pagehead h1{color:#F1ECE3;font-size:clamp(32px,4.6vw,56px)!important;text-shadow:0 2px 30px rgba(0,0,0,.4)}
+.lx-pagehead .q{color:rgba(241,236,227,.82);font-size:clamp(16px,1.4vw,18px);max-width:56ch;margin-top:14px}
+.lx-pagehead+.cpage{padding-top:40px}
+.lx-pledge-wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(32px,5vw,72px);align-items:stretch}
+.lx-pledge-img{margin:0;min-height:420px;border-radius:4px;box-shadow:0 30px 60px -32px rgba(16,50,45,.55),0 0 0 1px rgba(201,150,74,.18)}
+.lx-pledge-img .atb-veil{background:linear-gradient(to top,rgba(6,22,21,.55),rgba(6,22,21,0) 55%)}
+.lx-pledge-wrap .lx-pledge{grid-template-columns:1fr;gap:0}
+.lx-pledge-wrap .lx-pledge>div{padding-block:26px 30px}
+@media(max-width:860px){.lx-pledge-wrap{grid-template-columns:1fr}.lx-pledge-img{min-height:0;aspect-ratio:16/10}}
+
+/* صفحات أخرى */
+.v3hero.has-photo{padding-block:clamp(88px,10vw,128px) clamp(88px,10vw,120px)!important}
+.v3hero.has-photo .arches{display:none}
+.v3sec.dark.has-photo{padding-block:clamp(88px,10vw,120px)}
+.v3sec.dark.has-photo .arches{display:none}
+@media(max-width:760px){.atb-veil,body[data-lang="en"] .atb-veil{background:linear-gradient(to bottom,rgba(6,22,21,.72),rgba(6,22,21,.86))}}
+
+
+
 </style>
 <nav class="top" id="nav"></nav>
 <main id="app"></main>
@@ -879,11 +1126,11 @@ function pageRequest(params) {
     [{ ar: 'نتحقّق قبل أن نعرض', en: 'We verify before we show' }, { ar: 'نتصل بكل مالك ونثبّت أن العرض قائم وسعره حقيقي وصكّه سليم. ما لم يجتز التحقق لا يصلك.', en: 'We call every owner and confirm the offer stands, the price is real and the deed is clean. What fails verification never reaches you.' }],
     [{ ar: 'نريك السعر مقابل الصفقات ونفاوض', en: 'We show price vs. real deals — and negotiate' }, { ar: 'كل عرض في تقريرك مقارَن بسعر المتر في الصفقات المسجّلة فعلًا في الحي، لا بأسعار الإعلانات. وبهذه الأرقام نفاوض عنك.', en: 'Every offer in your report is measured against the price per m² of deals actually registered in the district, not against listing prices. Those are the numbers we negotiate with.' }]];
   const top = REQ_IDX.slice().sort((a, b) => b.c - a.c).slice(0, 12);
-  return { html: `<section class="v3sec dark"><div class="wrap"><div class="v3head rv in"><div class="no">→</div><div><div class="lab">${T({ ar: 'اطلب عقارك', en: 'Request a property' })}</div><h2 style="font-size:clamp(28px,4vw,44px)">${T({ ar: 'اطلب عقارك. بلا رسوم عليك.', en: 'Request your property. No fee to you.' })}</h2><p style="max-width:44ch;color:#B3C8C2;margin:10px 0 0;font-size:16px">${T({ ar: 'نبحث في السوق كله، نريك سعر كل عرض مقابل الصفقات الفعلية المسجّلة في الحي، ونفاوض عنك — وأنت تقرر.', en: 'We search the whole market, show you every offer against actual registered deals in the district, and negotiate for you — you decide.' })}</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><a class="btn" href="#/request#ledger_request" style="background:#C9964A;color:#10322D">${T({ ar: 'ابدأ طلبك — دقيقتان', en: 'Start — two minutes' })}</a><a class="btn ghost" href="#/request#req_report">${T({ ar: 'كيف يبدو التقرير؟', en: 'What does the report look like?' })}</a></div></div></div>
-    <div class="v3cards">${steps.map((x, i) => `<div class="v3card rv"><div class="arch"></div><div class="k">STEP ${i + 1}</div><h3>${T(x[0])}</h3><p>${T(x[1])}</p></div>`).join('')}</div></div></section>
-  <section class="v3sec"><div class="wrap"><div class="v3head rv"><div class="no">01</div><div><div class="lab">${T({ ar: 'الطلب', en: 'The request' })}</div><h2>${T({ ar: 'أربع خطوات على شاشة واحدة — الحيّ إلزامي هنا', en: 'Four steps on one screen — the district is required here' })}</h2></div></div>
+  return { html: `<section class="v3sec dark has-photo">${atbMedia({ src: 'media/scenes/aerial.jpg', pos: '50% 45%', eager: true, tone: 'bright' })}<span class="atb-veil"></span><div class="wrap"><div class="v3head rv in"><div class="no">→</div><div><div class="lab">${T({ ar: 'اطلب عقارك', en: 'Request a property' })}</div><h2 style="font-size:clamp(28px,4vw,44px)">${T({ ar: 'اطلب عقارك. بلا رسوم عليك.', en: 'Request your property. No fee to you.' })}</h2><p style="max-width:44ch;color:#B3C8C2;margin:10px 0 0;font-size:16px">${T({ ar: 'نبحث في السوق كله، نريك سعر كل عرض مقابل الصفقات الفعلية المسجّلة في الحي، ونفاوض عنك — وأنت تقرر.', en: 'We search the whole market, show you every offer against actual registered deals in the district, and negotiate for you — you decide.' })}</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px"><a class="btn" href="#/request#ledger_request" style="background:#C9964A;color:#10322D">${T({ ar: 'ابدأ طلبك — دقيقتان', en: 'Start — two minutes' })}</a><a class="btn ghost" href="#/request#req_report">${T({ ar: 'كيف يبدو التقرير؟', en: 'What does the report look like?' })}</a></div></div></div>
+    <div class="v3cards">${steps.map((x, i) => `<div class="v3card rv"><div class="arch"></div><div class="k">${T({ ar: 'الخطوة', en: 'STEP' })} ${i + 1}</div><h3>${T(x[0])}</h3><p>${T(x[1])}</p></div>`).join('')}</div></div></section>
+  <section class="v3sec"><div class="wrap"><div class="v3head rv"><div class="no">01</div><div><div class="lab">${T({ ar: 'الطلب', en: 'The request' })}</div><h2>${T({ ar: 'أربع خطوات على شاشة واحدة — ونحتاج هنا الحيّ الذي تريده', en: 'Four steps on one screen — here we need the district you want' })}</h2></div></div>
     <div style="max-width:760px" class="rv in">${ledgerHtml('ledger_request', { source: 'request' })}</div>
-    <p class="sm rv" style="margin-top:18px;max-width:72ch">${T({ ar: 'إقرار قصير ضمن النموذج: الخدمة بلا رسوم عليك، والعروض التي تصلك في تقرير عتبة عُرضت عليك عبر عتبة، وعتبة تفصح عن مشاريعها الخاصة داخل التقرير وتقارنها بنفس المعايير.', en: 'A short acknowledgement inside the form: the service is free for you, offers in your Atbah report were presented via Atbah, and Atbah discloses its own projects inside the report and compares them by the same criteria.' })}</p></div></section>
+    <p class="sm rv" style="margin-top:18px;max-width:72ch">${T({ ar: 'قبل الإرسال تقرّ بثلاثة أمور: الخدمة بلا رسوم عليك · العروض في تقريرك تُعدّ معروضة عليك عن طريق عتبة · ونفصح داخل التقرير عن أي مشروع لنا فيه مصلحة، ونقارنه بالمعايير نفسها.', en: 'Before you send, you confirm three things: the service is free for you · offers in your report count as presented to you by Atbah · and we disclose inside the report any project we have an interest in, measured by the same criteria.' })}</p></div></section>
   <section class="v3sec" id="req_report" style="background:var(--surface2)"><div class="wrap"><div class="v3head rv"><div class="no">02</div><div><div class="lab">${T({ ar: 'التقرير', en: 'The report' })}</div><h2>${T({ ar: 'هكذا يبدو تقريرك', en: 'This is what your report looks like' })}</h2></div></div>
     <div class="report rv" style="position:relative;overflow:hidden"><div style="position:absolute;inset:0;display:grid;place-items:center;transform:rotate(-22deg);opacity:.06;pointer-events:none">${LOGO(360, '#10322D')}</div>
       <div class="rh"><div class="brand">${LOGO(34, '#10322D')}<span>${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</span></div><div class="sm">${T({ ar: 'تقرير عروض مطابقة لطلبك · مثال بأرقام حقيقية من حي العارض', en: 'Matched offers report · example with real Al-Aridh figures' })} · <span class="num">REQ-2026-0142</span></div></div>
@@ -1031,12 +1278,12 @@ function pageHome() {
 }
 function pageLab() {
   const G = GROUPS.investor;
-  return { html: `<section class="v3sec dark"><div class="wrap"><div class="v3head rv in"><div class="no">→</div><div><div class="lab">INVESTMENT LAB</div><h2 style="font-size:clamp(28px,4vw,44px)">Investment Lab</h2><p style="max-width:48ch;color:#B3C8C2;margin:10px 0 0;font-size:16px">${T(G.desc)}</p></div></div></div></section>
+  return { html: `<section class="v3sec dark has-photo">${atbMedia({ src: 'media/scenes/office.jpg', pos: '55% 45%', eager: true })}<span class="atb-veil"></span><div class="wrap"><div class="v3head rv in"><div class="no">→</div><div><div class="lab">INVESTMENT LAB</div><h2 style="font-size:clamp(28px,4vw,44px)">Investment Lab</h2><p style="max-width:48ch;color:#B3C8C2;margin:10px 0 0;font-size:16px">${T(G.desc)}</p></div></div></div></section>
   <div class="wrap cpage"><div class="group" id="investor"><div class="gh"><h2>${T({ ar: 'أدوات المستثمر', en: 'Investor tools' })}</h2><span class="tag">${T(G.tag)}</span></div><div class="grid3" style="margin-top:14px">${CALCS.filter(c => c.group === 'investor').map(c => `<a class="tool" href="#/tools/${c.slug}"><h3>${T(c.title)}</h3><div class="q">${T(c.q)}</div><span class="lab">${c.eyebrow.split('·')[0].trim()}</span></a>`).join('')}</div></div>
   <div class="warn" style="margin-top:30px"><b>${T({ ar: 'عن كل الأرقام في هذه الصفحات:', en: 'About every number on these pages:' })}</b> ${T({ ar: 'تقديرات أوّلية غير ملزمة تُظهر المعادلة كاملة، ولا تُعدّ توصية استثمارية ولا وعدًا بعائد.', en: 'Preliminary, non-binding estimates showing the whole formula — not investment advice and not a promised return.' })}</div></div>`, mount: () => { mountReveal(); } };
 }
 function pageTools() {
-  return { html: `<div class="wrap cpage"><h1>${T({ ar: 'حاسبات تهمك', en: 'Calculators for you' })}</h1><p class="q">${T({ ar: 'كلها تقديرية، وكلها تُظهر المعادلة — بالترتيب الذي يقف عنده المشتري فعلاً.', en: 'All estimates, all showing the formula — in the order a buyer actually stalls at.' })}</p>
+  return { html: `<header class="lx-pagehead has-photo">${atbMedia({ src: 'media/scenes/townhouse.jpg', pos: '45% 50%', eager: true, tone: 'bright' })}<span class="atb-veil"></span><div class="wrap rv in"><h1>${T({ ar: 'حاسبات تهمك', en: 'Calculators for you' })}</h1><p class="q">${T({ ar: 'كلها تقديرية، وكلها تُظهر المعادلة — بالترتيب الذي يقف عنده المشتري فعلاً.', en: 'All estimates, all showing the formula — in the order a buyer actually stalls at.' })}</p></div></header><div class="wrap cpage">
   ${Object.entries(GROUPS).filter(([g]) => g === 'buyer').map(([g, G]) => `<div class="group" id="${g}" style="margin-top:30px"><div class="gh"><h2>${T(G.title)}</h2><span class="tag">${T(G.tag)}</span></div><p class="sm" style="max-width:70ch">${T(G.desc)}</p><div class="grid3" style="margin-top:14px">${CALCS.filter(c => c.group === g).map(c => `<a class="tool" href="#/tools/${c.slug}"><h3>${T(c.title)}</h3><div class="q">${T(c.q)}</div><span class="lab">${c.eyebrow.split('·')[0].trim()}</span></a>`).join('')}</div></div>`).join('')}
   <div class="group" style="margin-top:30px"><div class="gh"><h2>Investment Lab</h2><span class="tag">${T(GROUPS.investor.tag)}</span></div><p class="sm" style="max-width:70ch">${T(GROUPS.investor.desc)}</p><a class="btn quiet" href="#/lab" style="margin-top:10px">${T({ ar: 'افتح Investment Lab', en: 'Open the Investment Lab' })}</a></div>
   <div class="warn" style="margin-top:30px"><b>${T({ ar: 'عن كل الأرقام في هذه الصفحات:', en: 'About every number on these pages:' })}</b> ${T({ ar: 'تقديرات أوّلية غير ملزمة، ولا تُغني عن عرض رسمي من جهة ممولة. نُظهر لك المعادلة كاملة لأن ما لا تفهمه لا يجب أن توقّع عليه — لكن القرار يبقى قرارك.', en: 'Preliminary, non-binding estimates, no substitute for a formal offer from a financing entity. We show the whole formula because you should never sign what you don’t understand — but the decision stays yours.' })}</div></div>` };
@@ -1061,9 +1308,9 @@ const INTEREST = { ar: {
   pay: 'طريقة الشراء', pays: [['undecided', 'لم أقرّر بعد'], ['loan', 'تمويل عقاري'], ['cash', 'كاش']],
   district: 'الحيّ المفضّل (أو أكثر)', districtPh: 'مثال: الملقا، النرجس، اليرموك',
   ptype: 'نوع العقار', ptypes: [['any', 'لا فرق'], ['apartment', 'شقة'], ['floor', 'دور'], ['duplex', 'دوبلكس'], ['villa', 'فيلا'], ['townhouse', 'تاون هاوس'], ['land', 'أرض']],
-  rooms: 'عدد الغرف', roomsOpts: [['any', 'لا فرق'], ['1', 'غرفة'], ['2', 'غرفتان'], ['3', '٣ غرف'], ['4', '٤ غرف'], ['5+', '٥ فأكثر']],
+  rooms: 'عدد الغرف', roomsOpts: [['any', 'لا فرق'], ['1', 'غرفة'], ['2', 'غرفتان'], ['3', '3 غرف'], ['4', '4 غرف'], ['5+', '5 فأكثر']],
   purpose: 'الغرض', purposes: [['live', 'سكن'], ['invest', 'استثمار'], ['both', 'الاثنان']],
-  when: 'متى تريد الانتقال؟', whens: [['3m', 'خلال ٣ أشهر'], ['6m', 'خلال ٦ أشهر'], ['12m', 'خلال سنة'], ['explore', 'أستكشف فقط']],
+  when: 'متى تريد الانتقال؟', whens: [['3m', 'خلال 3 أشهر'], ['6m', 'خلال 6 أشهر'], ['12m', 'خلال سنة'], ['explore', 'أستكشف فقط']],
   status: 'حالة العقار', statuses: [['any', 'لا فرق'], ['ready', 'جاهز'], ['offplan', 'على الخارطة']],
   consent: 'أوافق على معالجة بياناتي أعلاه (ومنها ميزانيتي أو سقفي التقديري وتفضيلاتي) لغرض التواصل معي وعرض عقارات تناسبها وقراءة قدرتي الشرائية وخدمات عتبة، وفق <a href="#/privacy">سياسة الخصوصية</a>. أعلم أن بإمكاني سحب موافقتي وطلب حذف بياناتي في أي وقت عبر privacy@atbah.sa.',
   marketing: 'أرغب أيضاً في استلام رسائل عتبة الدورية (اختياري — يمكن الإلغاء في أي وقت).',
@@ -1097,13 +1344,13 @@ const L3 = {
     s3: 'أين وماذا؟', s3h: 'المدينة ونوع العقار — والبقية اختيارية.', more: 'تفضيلات إضافية', s4: 'كيف نتواصل معك؟', s4h: 'اتصال واحد خلال يومي عمل بما يقع داخل سقفك — لا كتالوج.',
     name: 'الاسم', phone: 'رقم الجوّال', submit: 'اعرض عليّ ما يقع داخل سقفي', sending: 'جارٍ الإرسال…', contact: 'كيف تفضّل أن نتواصل؟', call: 'اتصال', wa: 'واتساب', calltime: 'الوقت المناسب للاتصال', times: [['morning', 'صباحاً (9–12)'], ['noon', 'ظهراً (12–4)'], ['evening', 'مساءً (4–9)'], ['any', 'أي وقت']], errContact: 'اختر طريقة التواصل', errTime: 'اختر الوقت المناسب للاتصال',
     ok: 'وصلنا ما تبحث عنه.', okSub: 'مستشارك يتّصل مرة واحدة خلال يومي عمل بما يقع داخل سقفك. احتفظ بالرقم المرجعي:', okTools: 'حتى ذلك الحين، حاسبة الكاش المطلوب يوم الشراء تُظهر لك ما تحتاجه فوق السعر.',
-    errPay: 'اختر طريقة الشراء أولاً', errBudget: 'اكتب ميزانيتك أو سقفك بالريال (١٠٠ ألف فأكثر)', errCity: 'اختر المدينة', errType: 'اختر نوع العقار', errName: 'اكتب اسمك', errPhone: 'رقم جوّال سعودي صحيح (05xxxxxxxx)', errConsent: 'لا نستطيع حفظ بياناتك بلا موافقتك', errSave: 'تعذّر الحفظ الآن — حاول مرة أخرى أو راسلنا على info@atbah.sa', errNotOpen: 'التسجيل يُفتح خلال أيام — راسلنا على info@atbah.sa.',
+    errPay: 'اختر طريقة الشراء أولاً', errBudget: 'اكتب ميزانيتك أو سقفك بالريال (100 ألف فأكثر)', errCity: 'اختر المدينة', errType: 'اختر نوع العقار', errName: 'اكتب اسمك', errPhone: 'رقم جوّال سعودي صحيح (05xxxxxxxx)', errConsent: 'لا نستطيع حفظ بياناتك بلا موافقتك', errSave: 'تعذّر الحفظ الآن — حاول مرة أخرى أو راسلنا على info@atbah.sa', errNotOpen: 'التسجيل يُفتح خلال أيام — راسلنا على info@atbah.sa.',
     cities: [['', 'اختر المدينة'], ['riyadh', 'الرياض'], ['jeddah', 'جدة'], ['eastern', 'المنطقة الشرقية'], ['other', 'أخرى']], city: 'المدينة', type: 'نوع العقار',
     types: [['', 'اختر نوع العقار'], ['apartment', 'شقة'], ['villa', 'فيلا'], ['duplex', 'دوبلكس'], ['townhouse', 'تاون هاوس'], ['floor', 'دور'], ['any', 'لا فرق']],
     words: (n) => n >= 1e6 ? `${(n / 1e6).toLocaleString('en-US', { maximumFractionDigits: 2 })} مليون ريال` : `${Math.round(n / 1e3).toLocaleString('en-US')} ألف ريال`,
   },
   en: {
-    title: 'Start from your ceiling', prog: 'Step {n} of 4', s1: 'How will you buy?', s1h: 'Your choice only changes the next step.', cash: 'Cash', loan: 'Mortgage', undecided: 'Not decided yet',
+    title: 'Start with your ceiling', prog: 'Step {n} of 4', s1: 'How will you buy?', s1h: 'Your choice only changes the next step.', cash: 'Cash', loan: 'Mortgage', undecided: 'Not decided yet',
     s2c: 'Your purchase budget', s2l: 'Your estimated ceiling', s2u: 'Your budget or estimated ceiling', s2h: 'We store the number only — not your income or obligations.', s2lh: 'Work out your ceiling here first — three steps, no personal data, and the result fills the field automatically.', used: 'We took your ceiling from the calculator — adjust it if you like.',
     s3: 'Where, and what?', s3h: 'City and property type — the rest is optional.', more: 'More preferences', s4: 'How do we reach you?', s4h: 'One call within two working days with what fits inside your ceiling — no catalogue.',
     name: 'Name', phone: 'Mobile number', submit: 'Show me what fits inside my ceiling', sending: 'Sending…', contact: 'How would you like us to reach you?', call: 'Phone call', wa: 'WhatsApp', calltime: 'Best time to call', times: [['morning', 'Morning (9–12)'], ['noon', 'Midday (12–4)'], ['evening', 'Evening (4–9)'], ['any', 'Any time']], errContact: 'Choose how to reach you', errTime: 'Choose the best time to call',
@@ -1242,51 +1489,105 @@ function mountSticky(targetSel) {
 }
 
 /* ================= الرئيسية v3 ================= */
+/* ================= الرئيسية v4 «العتبة الفاخرة» ================= */
+const LX_SCENES = [
+  `<svg viewBox="0 0 384 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="lxR" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E2B27"/><stop offset=".55" stop-color="#3F3F2C"/><stop offset=".72" stop-color="#9A6A3A"/></linearGradient></defs><rect width="384" height="520" fill="url(#lxR)"/><circle cx="250" cy="330" r="46" fill="#E9C07A" opacity=".85"/><path d="M0 350H40V320H62V350H90V300H104V250H112V230H118V250H126V300H140V350H180V330H214V350H300V326H330V350H384V520H0Z" fill="#0B2622"/><path d="M0 400Q90 360 200 390T384 380V520H0Z" fill="#112F2A"/><path d="M0 450Q120 410 240 440T384 430V520H0Z" fill="#081E1B"/></svg>`,
+  `<svg viewBox="0 0 384 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="lxJ" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E2B27"/><stop offset=".5" stop-color="#2E5A52"/><stop offset=".66" stop-color="#B98A4E"/></linearGradient></defs><rect width="384" height="520" fill="url(#lxJ)"/><rect y="342" width="384" height="178" fill="#0D2A26"/><g stroke="#E9C07A" stroke-opacity=".35" stroke-width="1.2"><path d="M40 370H150M80 392H200M30 416H120M150 440H260"/></g><path d="M200 342V200H224V186H310V200H330V342Z" fill="#0A221E"/><g fill="#B4522B" opacity=".8"><rect x="226" y="214" width="26" height="38" rx="1"/><rect x="266" y="214" width="26" height="38" rx="1"/><rect x="226" y="270" width="26" height="38" rx="1"/><rect x="266" y="270" width="26" height="38" rx="1"/></g><path d="M226 226H252M226 238H252M266 226H292M266 238H292M226 282H252M226 294H252M266 282H292M266 294H292" stroke="#0A221E" stroke-width="2"/><rect x="304" y="226" width="16" height="116" fill="#0A221E"/></svg>`,
+  `<svg viewBox="0 0 384 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="lxE" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#12342F"/><stop offset=".55" stop-color="#5A5A3E"/><stop offset=".68" stop-color="#C9A26A"/></linearGradient></defs><rect width="384" height="520" fill="url(#lxE)"/><rect y="356" width="384" height="164" fill="#123029"/><path d="M20 380H180M120 404H340M40 430H220" stroke="#F1ECE3" stroke-opacity=".18"/><g stroke="#081E1B" fill="none" stroke-linecap="round"><path d="M90 470Q96 400 84 330M300 470Q292 380 306 290" stroke-width="6"/><path d="M84 330Q50 318 30 336M84 330Q60 300 40 300M84 330Q96 296 120 292M84 330Q118 316 138 334M84 330Q86 306 72 290M306 290Q272 280 254 298M306 290Q286 262 262 262M306 290Q318 256 344 254M306 290Q340 278 360 298M306 290Q310 266 296 250" stroke-width="4"/></g><path d="M0 470H384V520H0Z" fill="#081E1B"/></svg>`
+];
+const LX_PHOTOS = [{ src: 'media/regions/riyadh.jpg', pos: '39% 50%' }, { src: 'media/regions/jeddah.jpg', pos: '50% 50%', tone: 'bright' }, { src: 'media/regions/eastern.jpg', pos: '50% 50%' }];
+const atbMedia = (p) => `<span class="atb-media"${p.tone ? ` data-tone="${p.tone}"` : ''} aria-hidden="true"><img src="${p.src}" alt="" loading="${p.eager ? 'eager' : 'lazy'}" decoding="async" style="object-position:${p.pos || '50% 50%'}"></span>`;
+const LX_ARROW = `<svg class="lx-arr" width="20" height="13" viewBox="0 0 18 12" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M17 6H1M6 1L1 6l5 5"/></svg>`;
 function pageComingSoon() {
   const pledge = [
-    [{ ar: 'وساطة بدون إزعاج', en: 'Brokerage without the nagging' }, { ar: 'لا يتّصل بك أحد إلا إن سجّلت بنفسك — مرة واحدة، ثم يبقى القرار لك.', en: 'Nobody calls unless you register yourself — once, and the decision stays yours.' }],
+    [{ ar: 'وساطة بلا إزعاج', en: 'Brokerage without the nagging' }, { ar: 'لا يتّصل بك أحد إلا إن سجّلت بنفسك — مرة واحدة، ثم يبقى القرار لك.', en: 'Nobody calls unless you register yourself — once, and the decision stays yours.' }],
+    [{ ar: 'شجاعة أن نقول «لا»', en: 'The nerve to say “no”' }, { ar: 'حين لا يناسبك التوقيت نقولها بوضوح: «ليست هذه السنة» — ونكتب لك خطة للاستعداد.', en: 'When the timing is wrong we say so plainly — “not this year” — and write you a plan to get ready.' }],
     [{ ar: 'صراحة بلا رتوش', en: 'Candour without gloss' }, { ar: 'لا عدّاد تنازلي، ولا «آخر وحدة»، ولا عائد مضمون. كل رقم يحمل معادلته ومصدره وتاريخه.', en: 'No countdown, no “last unit”, no guaranteed return. Every number carries its formula, source and date.' }],
-    [{ ar: 'شريكك بعد الشراء', en: 'Your partner beyond the purchase' }, { ar: 'نتابع معك التسليم، وإدارة المرافق والصيانة بعده — فالبيت يبدأ حين ينتهي البيع.', en: 'We stay through handover, then facility management and maintenance — a home begins when the sale ends.' }],
+    [{ ar: 'شريكك بعد الشراء', en: 'Your partner beyond the purchase' }, { ar: 'نتابع معك التسليم، ثم إدارة المرافق والصيانة — فالبيت يبدأ حين ينتهي البيع.', en: 'We stay through handover, then facility management and maintenance — a home begins when the sale ends.' }],
   ];
   const steps = [
     [{ ar: 'تخبرنا بسقفك', en: 'You tell us your ceiling' }, { ar: 'كاش أو تمويل، ورقم واحد. الحاسبة تعمل بلا بيانات.', en: 'Cash or mortgage, and one number. The calculator needs no data.' }],
-    [{ ar: 'نطابق المشاريع', en: 'We match projects' }, { ar: 'من مشاريع مطوّرينا في الرياض وجدة والشرقية — داخل سقفك فقط.', en: 'From our developers’ projects in Riyadh, Jeddah and the East — inside your ceiling only.' }],
+    [{ ar: 'نطابق ما يناسبك', en: 'We match what fits' }, { ar: 'من مشاريع مطوّرينا في الرياض وجدة والمنطقة الشرقية، ومن السوق كله إن طلبت — داخل سقفك فقط.', en: 'From our developers’ projects in Riyadh, Jeddah and the Eastern Province — and the whole market if you ask. Inside your ceiling only.' }],
     [{ ar: 'اتصال واحد', en: 'One call' }, { ar: 'مستشارك باسمه ورقم فال، خلال يومي عمل. لا كتالوج.', en: 'Your named, licensed advisor, within two working days. No catalogue.' }],
-    [{ ar: 'قراءة كاملة قبل الحجز', en: 'A full reading before you reserve' }, { ar: 'قبل أي عربون نقرأ قدرتك معك في ١٥ دقيقة حتى لا توقّع فوق سقفك.', en: 'Before any deposit we read your full capacity with you in 15 minutes, so you never sign above your ceiling.' }],
+    [{ ar: 'قراءة كاملة قبل الحجز', en: 'A full reading before you reserve' }, { ar: 'قبل أي عربون نقرأ قدرتك معك في 15 دقيقة، حتى لا توقّع فوق سقفك.', en: 'Before any deposit we read your full capacity with you in 15 minutes, so you never sign above your ceiling.' }],
   ];
   const cities = [[{ ar: 'الرياض', en: 'Riyadh' }, { ar: 'شمال الرياض وشرقها — شقق، دوبلكس، فلل.', en: 'North and east Riyadh — apartments, duplexes, villas.' }], [{ ar: 'جدة', en: 'Jeddah' }, { ar: 'مشاريع جاهزة وعلى الخارطة.', en: 'Ready and off-plan projects.' }], [{ ar: 'المنطقة الشرقية', en: 'Eastern Province' }, { ar: 'الدمام · الخبر · الظهران.', en: 'Dammam · Khobar · Dhahran.' }]];
+  const eb = (n, t) => `<div class="lx-eyebrow"><span class="num">${n}</span><i></i>${T(t)}</div>`;
   return { html: `
-  <header class="v3hero"><div class="arches"></div><div class="bigarch"></div><div class="wrap"><div class="grid">
-    <div class="rv in">
-      <div class="kicker"><i></i>${T({ ar: 'وساطة عقارية · الرياض · جدة · المنطقة الشرقية', en: 'Real-estate brokerage · Riyadh · Jeddah · Eastern Province' })}</div>
-      <h1>${T({ ar: 'نقف معك على العتبة، حتى تعبرها وأنت مطمئن.', en: 'We stand with you at the threshold — and see you across it.' })}</h1>
-      <p class="sub">${T({ ar: 'أخبرنا كيف ستشتري وبكم، ونعرض عليك ما يقع داخل سقفك من مشاريع مطوّرينا. اتصال واحد خلال يومي عمل — بلا كتالوج، وبلا «آخر وحدة».', en: 'Tell us how you will buy and for how much, and we show you what fits inside your ceiling from our developers’ projects. One call within two working days — no catalogue, no “last unit”.' })}</p>
-      <div class="re"><span>${T({ ar: 'بلا التزام', en: 'No obligation' })}</span><span>${T({ ar: 'النتيجة على شاشتك', en: 'Result on your screen' })}</span><span>${T({ ar: 'رخصة فال', en: 'FAL licence' })} <span class="num">1200050979</span></span></div>
-      <p style="margin-top:18px;font-size:14.5px"><a href="#/request" style="color:#C9964A;text-decoration:none;border-bottom:1px solid #C9964A">${T({ ar: 'تعرف ما تريد؟ اطلب عقارك — بلا رسوم عليك ←', en: 'Know what you want? Request a property — no fee to you →' })}</a></p>
+  <header class="lx-hero">
+    <video class="lx-vid" autoplay muted loop playsinline preload="metadata" poster="media/hero-poster.jpg" aria-hidden="true" tabindex="-1"><source src="media/hero.webm" type="video/webm"><source src="media/hero.mp4" type="video/mp4"></video>
+    <div class="wrap lx-in">
+      <div class="lx-kicker rv in"><i></i><b>${T({ ar: 'وساطة عقارية', en: 'Real-estate brokerage' })}</b></div>
+      <h1 class="rv in">${T({ ar: 'نقف معك على العتبة<em>حتى تعبرها وأنت مطمئن</em>', en: 'We stand with you at the threshold<em>until you cross it with confidence</em>' })}</h1>
+      <p class="sub rv in">${T({ ar: 'أخبرنا كيف ستشتري وأين، ونعرض عليك ما يناسبك.', en: 'Tell us how and where you want to buy, and we’ll show you what fits.' })}</p>
+      <div class="lx-cta rv in"><a class="btn" href="#/#start" data-lx-scroll="start">${T({ ar: 'ابدأ من سقفك', en: 'Start with your ceiling' })}</a><a class="btn lx-ghost" href="#/request">${T({ ar: 'اطلب عقارك', en: 'Request a property' })}</a></div>
+      
     </div>
-    <div class="rv in" id="ledger_home_wrap">${ledgerHtml('ledger_home', { source: 'home' })}</div>
-  </div></div></header>
-  <div class="quoteband rv"><div class="wrap"><div class="m">${LOGO(52, '#10322D')}</div><p class="q">${T({ ar: 'سوق العقار يحتاج صراحة، لا إعلاناً إضافياً.', en: 'The property market needs candour, not another advert.' })}</p></div></div>
-  <section class="v3sec dark"><div class="arches"></div><div class="wrap" style="position:relative"><div class="v3head rv"><div class="no">01</div><div><div class="lab">${T({ ar: 'كيف نعمل', en: 'How it works' })}</div><h2>${T({ ar: 'أربع خطوات، لا خامسة لها.', en: 'Four steps, and no fifth.' })}</h2></div></div>
-    <div class="steps4 rv">${steps.map((s, i) => `<div><div class="n">0${i + 1}</div><b>${T(s[0])}</b><p>${T(s[1])}</p></div>`).join('')}</div></div></section>
-  <section class="v3sec" style="padding-block:44px;background:var(--surface2);border-block:1px solid var(--line)"><div class="wrap"><div class="v3head rv" style="margin-bottom:18px"><div class="no">m²</div><div><div class="lab">${T({ ar: 'مؤشر الصفقات', en: 'Deals index' })}</div><h2 style="font-size:clamp(20px,2.6vw,28px)">${T({ ar: 'كم سعر المتر فعلًا في حيّك؟ من الصفقات المسجّلة لا الإعلانات.', en: 'What does a square metre really cost in your district? From registered deals, not listings.' })}</h2></div></div>
-    <div class="v3cards deals4">${['العارض', 'النرجس', 'الملقا', 'الياسمين'].map(n => { const r = REQ_IDX.find(x => x.n === n); return r ? `<a class="v3card rv" href="#/request?district=${encodeURIComponent(n)}#ledger_request" style="text-decoration:none;color:inherit;padding:16px 18px"><div class="k">${T({ ar: 'فلل · ر.س/م²', en: 'Villas · SAR/m²' })}</div><h3 style="font-family:'Archivo',sans-serif;font-size:26px;direction:ltr;text-align:end">${r.v.toLocaleString('en-US')}</h3><p>${n} · ${T({ ar: `${r.c} صفقة مسجّلة`, en: `${r.c} registered deals` })}</p></a>` : ''; }).join('')}</div>
-    <p class="sm rv" style="margin-top:12px">${T({ ar: 'المصدر: البورصة العقارية (وزارة العدل) عبر سهيل · تُحدَّث يوميًا · استرشادية لا تقييم.', en: 'Source: Real Estate Exchange (Ministry of Justice) via Suhail · updated daily · indicative, not a valuation.' })} <a href="#/request">${T({ ar: 'كل الأحياء في صفحة الطلب ←', en: 'All districts on the request page →' })}</a></p></div></section>
-  <section class="v3sec"><div class="wrap"><div class="v3head rv"><div class="no">02</div><div><div class="lab">${T({ ar: 'عهد العتبة', en: 'The Atbah pledge' })}</div><h2>${T({ ar: 'ثلاثة وعود — لأنها ما يفتقده الناس في هذا السوق.', en: 'Three promises — because they are what people miss in this market.' })}</h2></div></div>
-    <div class="v3cards">${pledge.map((c, i) => `<div class="v3card rv"><div class="arch"></div><div class="k">0${i + 1}</div><h3>${T(c[0])}</h3><p>${T(c[1])}</p></div>`).join('')}</div></div></section>
-  <section class="v3sec dark"><div class="arches"></div><div class="wrap" style="position:relative"><div class="v3head rv"><div class="no">03</div><div><div class="lab">${T({ ar: 'مشاريعنا', en: 'Our projects' })}</div><h2>${T({ ar: 'ثلاث مناطق — ومشاريع تُعرض عليك داخل سقفك.', en: 'Three regions — and projects shown to you inside your ceiling.' })}</h2></div></div>
-    <div class="cities3">${cities.map(c => `<div class="v3card rv"><div class="arch"></div><h3>${T(c[0])}</h3><p>${T(c[1])}</p></div>`).join('')}</div>
-    <p class="sm rv" style="margin-top:18px;color:#8FA8A1">${T({ ar: 'عرض المشاريع على الموقع يأتي قريباً. حتى ذلك الحين يعرضها عليك مستشارك مباشرةً.', en: 'Browsing projects on the site comes soon. Until then your advisor shows them to you directly.' })} <a href="#/projects" style="color:#C9964A">${T({ ar: 'صفحة مشاريعنا ←', en: 'Our projects →' })}</a></p></div></section>
-  <section class="v3sec"><div class="wrap"><div class="v3head rv"><div class="no">04</div><div><div class="lab">${T({ ar: 'حاسبات تهمك', en: 'Calculators for you' })}</div><h2>${T({ ar: 'إحدى عشرة حاسبة — تُظهر لك المعادلة لا النتيجة فقط.', en: 'Eleven calculators — showing you the formula, not just the result.' })}</h2></div></div>
-    <div class="v3cards"> ${Object.entries(GROUPS).map(([g, G]) => `<a class="v3card rv" href="${g === 'investor' ? '#/lab' : '#/tools#' + g}" style="text-decoration:none;color:inherit"><div class="arch"></div><div class="k">${T(G.tag)}</div><h3>${T(G.title)}</h3><p>${T(G.desc)}</p></a>`).join('')}</div></div></section>`,
-    mount: () => { mountLedger('ledger_home'); mountReveal(); mountSticky('#ledger_home_wrap'); } };
+    
+  </header>
+
+  <section class="lx-sec cream" id="start"><div class="wrap lx-intro">
+    <div class="lx-txt rv">
+      ${eb('01', { ar: 'لماذا نبدأ من السقف', en: 'Why we start with the ceiling' })}
+      <h2 class="lx-h2">${T({ ar: 'يقف الناس على العتبة أكثر ممّا يعبرونها.', en: 'People linger at the threshold more than they cross it.' })}</h2>
+      <p class="lx-body">${T({ ar: 'يجمعون ويحسبون ويسألون، ثم يتراجعون خطوة — لا لأنهم لا يريدون البيت، بل لأن أحداً لم يقل لهم بصدق: هل تستطيع؟ ومتى؟ وبكم؟ أجب عن أربعة أسئلة قصيرة، ونعرض عليك ما يقع داخل سقفك — لا ما فوقه.', en: 'They gather, calculate, ask — then step back. Not because they don’t want the home, but because nobody told them honestly: can you? when? for how much? Answer four short questions and we show you what fits inside your ceiling — never what sits above it.' })}</p>
+      <blockquote class="lx-quote">${LOGO(34, 'currentColor')}<p>${T({ ar: '«سوق العقار يحتاج صراحة، لا إعلاناً إضافياً.»', en: '“The property market needs candour, not another advert.”' })}</p></blockquote>
+      <a class="lx-link" href="#/request">${T({ ar: 'تعرف ما تريد؟ اطلب عقارك ونبحث لك في السوق كله — بلا رسوم', en: 'Know what you want? Request a property and we search the whole market for you — free' })} ${LX_ARROW}</a>
+    </div>
+    <div class="lx-ledger rv" id="ledger_home_wrap">${ledgerHtml('ledger_home', { source: 'home' })}</div>
+  </div></section>
+
+  <section class="lx-sec paper"><div class="wrap">
+    <div class="lx-head rv"><div>${eb('02', { ar: 'كيف نعمل', en: 'How it works' })}<h2 class="lx-h2">${T({ ar: 'أربع خطوات، لا خامسة لها.', en: 'Four steps, and no fifth.' })}</h2></div></div>
+    <div class="lx-steps">${steps.map((s, i) => `<div class="lx-step rv"><div class="n num">0${i + 1}</div><b>${T(s[0])}</b><p>${T(s[1])}</p></div>`).join('')}</div>
+  </div></section>
+
+  <section class="lx-band has-photo">${atbMedia({ src: 'media/scenes/residence.jpg', pos: '55% 50%' })}<span class="atb-veil"></span><div class="wrap rv"><p class="q">${T({ ar: 'نقول لك ما تستطيع حمله، قبل أن نُريك ما قد ترغبه.', en: 'We tell you what you can carry before we show you what you might want.' })}</p><span class="by">${T({ ar: 'وعدنا لك', en: 'Our promise to you' })}</span></div></section>
+
+  <section class="lx-sec cream"><div class="wrap">
+    <div class="lx-head rv"><div>${eb('03', { ar: 'مؤشر الصفقات', en: 'Deals index' })}<h2 class="lx-h2">${T({ ar: 'كم سعر المتر فعلًا في حيّك؟', en: 'What does a square metre really cost in your district?' })}</h2></div><p class="lx-note">${T({ ar: 'من الصفقات المسجّلة لا الإعلانات — فلل، ريال للمتر المربع.', en: 'From registered deals, not listings — villas, SAR per m².' })}</p></div>
+    <div class="lx-deals rv">${['العارض', 'النرجس', 'الملقا', 'الياسمين'].map(n => { const r = REQ_IDX.find(x => x.n === n); return r ? `<a href="#/request?district=${encodeURIComponent(n)}#ledger_request"><span class="k">${LANG === 'ar' ? n : ({ 'العارض': 'Al-Aridh', 'النرجس': 'Al-Narjis', 'الملقا': 'Al-Malqa', 'الياسمين': 'Al-Yasmin' })[n] || n}</span><span class="v num">${r.v.toLocaleString('en-US')}</span><span class="c">${T({ ar: `${r.c} صفقة مسجّلة`, en: `${r.c} registered deals` })}</span></a>` : ''; }).join('')}</div>
+    <p class="lx-src rv">${T({ ar: 'المصدر: البورصة العقارية (وزارة العدل) عبر سهيل · تُحدَّث يوميًا · استرشادية لا تقييم.', en: 'Source: Real Estate Exchange (Ministry of Justice) via Suhail · updated daily · indicative, not a valuation.' })} <a href="#/request">${T({ ar: 'كل الأحياء في صفحة الطلب', en: 'All districts on the request page' })}</a></p>
+  </div></section>
+
+  <section class="lx-sec dark"><div class="wrap">
+    <div class="lx-head rv"><div>${eb('04', { ar: 'مشاريعنا', en: 'Our projects' })}<h2 class="lx-h2">${T({ ar: 'ثلاث مناطق — ومشاريع تُعرض عليك داخل سقفك.', en: 'Three regions — and projects shown to you inside your ceiling.' })}</h2></div></div>
+    <div class="lx-tiles">${cities.map((c, i) => `<a class="lx-tile rv" href="#/projects">${LX_PHOTOS[i] ? atbMedia(LX_PHOTOS[i]) : LX_SCENES[i]}<span class="cap"><span><b>${T(c[0])}</b></span>${LX_ARROW}</span></a>`).join('')}</div>
+  </div></section>
+
+  <section class="lx-sec cream"><div class="wrap">
+    <div class="lx-head rv"><div>${eb('05', { ar: 'عهد العتبة', en: 'The Atbah pledge' })}<h2 class="lx-h2">${T({ ar: 'أربعة وعود — لأنها ما يفتقده الناس في هذا السوق.', en: 'Four promises — because they are what people miss in this market.' })}</h2></div></div>
+    <div class="lx-pledge-wrap"><figure class="lx-pledge-img has-photo rv">${atbMedia({ src: 'media/scenes/villa-pool.jpg', pos: '45% 50%' })}<span class="atb-veil"></span></figure><div class="lx-pledge">${pledge.map(c => `<div class="rv"><h3>${T(c[0])}</h3><p>${T(c[1])}</p></div>`).join('')}</div></div>
+  </div></section>
+
+  <section class="lx-sec paper"><div class="wrap">
+    <div class="lx-head rv"><div>${eb('06', { ar: 'حاسبات تهمك', en: 'Calculators for you' })}<h2 class="lx-h2">${T({ ar: 'إحدى عشرة حاسبة — تُظهر لك المعادلة لا النتيجة فقط.', en: 'Eleven calculators — showing you the formula, not just the result.' })}</h2></div><a class="lx-link" href="#/tools">${T({ ar: 'كل الحاسبات', en: 'All calculators' })} ${LX_ARROW}</a></div>
+    <div class="lx-tools">${Object.entries(GROUPS).map(([g, G]) => `<a class="rv" href="${g === 'investor' ? '#/lab' : '#/tools#' + g}"><span class="k">${T(G.tag)}</span><h3>${T(G.title)}</h3><p>${T(G.desc)}</p>${LX_ARROW}</a>`).join('')}</div>
+  </div></section>
+
+  <section class="lx-final has-photo">${atbMedia({ src: 'media/scenes/community.jpg', pos: '50% 55%' })}<span class="atb-veil c"></span><div class="lx-bgarch" aria-hidden="true"><svg viewBox="0 0 130 142" fill="none"><path d="M18.5 106 L18.5 46 A25.5 25.5 0 0 1 44 20.5 L86 20.5 A25.5 25.5 0 0 1 111.5 46 L111.5 106 L98.5 106 L98.5 46 A12.5 12.5 0 0 0 86 33.5 L44 33.5 A12.5 12.5 0 0 0 31.5 46 L31.5 106 Z" stroke="#2E5A52" stroke-width=".35"/><path d="M48 106 L48 65 A17 17 0 0 1 82 65 L82 106" stroke="#C9964A" stroke-opacity=".5" stroke-width=".35"/></svg></div>
+    <div class="wrap rv"><h2>${T({ ar: 'اعرف سقفك أولاً.<em>ثم نتحدّث.</em>', en: 'Know your ceiling first.<em>Then we talk.</em>' })}</h2>
+    <p>${T({ ar: 'أربعة أسئلة، بلا التزام. والقرار يبقى قرارك.', en: 'Four questions, no obligation. The decision stays yours.' })}</p>
+    <div class="lx-cta c"><a class="btn" href="#/#start" data-lx-scroll="start">${T({ ar: 'ابدأ من سقفك', en: 'Start with your ceiling' })}</a><a class="btn lx-ghost" href="#/request">${T({ ar: 'اطلب عقارك', en: 'Request a property' })}</a></div></div>
+  </section>`,
+    mount: () => { mountLedger('ledger_home'); mountReveal(); mountSticky('#ledger_home_wrap'); lxMount(); } };
+}
+function lxMount() {
+  const v = document.querySelector('.lx-vid'), pb = document.querySelector('[data-lx-pause]');
+  const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let paused = false;
+  const setP = (p) => { paused = p; if (v) { if (p) v.pause(); else { v.muted = true; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); } }
+    if (pb) { pb.setAttribute('aria-pressed', String(p)); pb.querySelector('span').textContent = p ? T({ ar: 'تشغيل الحركة', en: 'Play motion' }) : T({ ar: 'إيقاف الحركة', en: 'Pause motion' }); } };
+  setP(paused || reduce);
+  if (pb) pb.addEventListener('click', () => { setP(!paused); try { localStorage.setItem('atbah.motion', paused ? 'off' : 'on'); } catch (e) {} });
+  document.querySelectorAll('[data-lx-scroll]').forEach(a => a.addEventListener('click', (e) => { const t = document.getElementById(a.dataset.lxScroll); if (t) { e.preventDefault(); t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); } }));
 }
 
 
 /* ================= من نحن ================= */
 function pageAbout() {
   const pledge = [
-    [{ ar: 'وساطة بدون إزعاج', en: 'Brokerage without the nagging' }, { ar: 'نتيجة الحاسبة تظهر على شاشتك فوراً وبلا بيانات. ولا يتّصل بك أحد إلا إن سجّلت بنفسك — مرة واحدة لتحديد الخطوة التالية، ثم يبقى القرار لك.', en: 'The calculator result appears on your screen instantly, with no data required. Nobody calls unless you register yourself — once, to agree the next step, and the decision stays yours.' }],
+    [{ ar: 'وساطة بلا إزعاج', en: 'Brokerage without the nagging' }, { ar: 'نتيجة الحاسبة تظهر على شاشتك فوراً وبلا بيانات. ولا يتّصل بك أحد إلا إن سجّلت بنفسك — مرة واحدة لتحديد الخطوة التالية، ثم يبقى القرار لك.', en: 'The calculator result appears on your screen instantly, with no data required. Nobody calls unless you register yourself — once, to agree the next step, and the decision stays yours.' }],
     [{ ar: 'شجاعة أن نقول «لا»', en: 'The courage to say “no”' }, { ar: 'حين نرى أن التوقيت لا يناسبك نقولها بوضوح: «ليست هذه السنة» — ونكتب لك خطة للاستعداد. لا نبيع لك ما يفوق سقفك حتى لو أرادت الجهة الممولة.', en: 'When the timing is wrong we say so: “not this year” — and write you a plan to get ready. We do not sell you above your ceiling, even if a lender would allow it.' }],
     [{ ar: 'صراحة بلا رتوش', en: 'Candour without gloss' }, { ar: 'لا عدّاد تنازلي، ولا «آخر وحدة»، ولا عائد مضمون. كل رقم عندنا يحمل معادلته ومصدره وتاريخه — لتراجعه بنفسك.', en: 'No countdown, no “last unit”, no guaranteed return. Every number carries its formula, source and date — for you to check yourself.' }],
     [{ ar: 'شريكك في الرحلة حتى بعد الشراء', en: 'Your partner beyond the purchase' }, { ar: 'لا تنتهي علاقتنا عند الإفراغ. نتابع معك التسليم، وإدارة المرافق والصيانة بعده — فالبيت يبدأ حين ينتهي البيع.', en: 'Our relationship does not end at transfer. We stay through handover, then facility management and maintenance — a home begins when the sale ends.' }],
@@ -1294,7 +1595,7 @@ function pageAbout() {
   const values = [
     [{ ar: 'مرخّصون', en: 'Licensed' }, { ar: 'رخصة فال من الهيئة العامة للعقار، وكل إعلان يحمل رقم ترخيصه.', en: 'A FAL licence from the Real Estate General Authority; every advert carries its licence number.' }],
     [{ ar: 'متخصّصون في المبيعات', en: 'Sales specialists' }, { ar: 'فريق مبيعات ميداني في الرياض وجدة والمنطقة الشرقية يعرف المشاريع بابًا بابًا.', en: 'A field sales team in Riyadh, Jeddah and the Eastern Province who know the projects door by door.' }],
-    [{ ar: 'تسويق يُقاس', en: 'Marketing that is measured' }, { ar: 'حملات موجّهة على المشاريع، وكل قناة تُقاس بما تجلبه لا بما تكلّفه.', en: 'Project-led campaigns, and every channel measured by what it brings, not what it costs.' }],
+    [{ ar: 'نُقاس بما يكتمل', en: 'Measured by completions' }, { ar: 'نقيس نجاحنا بعدد البيوت التي تُفرَغ لأصحابها، لا بعدد الاتصالات التي نجريها.', en: 'We measure ourselves by homes transferred to their owners, not by calls made.' }],
     [{ ar: 'الصدق منهج', en: 'Honesty as method' }, { ar: 'لا رقم لا نستطيع إثباته، ولا وعد لا نستطيع الوفاء به.', en: 'No number we cannot prove, and no promise we cannot keep.' }],
   ];
   const nots = [
@@ -1303,7 +1604,7 @@ function pageAbout() {
     [{ ar: 'لا عائد مضمون', en: 'No guaranteed return' }, { ar: 'نُظهر المعادلة، ولا نعد بنتيجة.', en: 'We show the formula; we do not promise an outcome.' }],
   ];
   return { html: `
-  <header class="abhero"><div class="ring r2"></div><div class="ring"></div><div class="arches"></div><div class="wrap" style="position:relative"><div class="m rv in">${LOGO(76)}</div>
+  <header class="abhero has-photo">${atbMedia({ src: 'media/scenes/rooftop.jpg', pos: '40% 50%', eager: true })}<span class="atb-veil"></span><div class="ring r2"></div><div class="ring"></div><div class="arches"></div><div class="wrap" style="position:relative"><div class="m rv in">${LOGO(76)}</div>
     <h1 class="rv in">${T({ ar: 'العتبة ليست حجراً في مدخل الباب.', en: 'A threshold is not a stone at the door.' })}</h1>
     <p class="sub rv in">${T({ ar: 'هي الخطوة الفاصلة بين الحيرة والاستقرار — أول ما تطؤه قدمك لتبدأ مرحلة من الأمان والاستقلال. سمّينا أنفسنا «عتبة» لأننا نقف معك عندها.', en: 'It is the step between confusion and settling — the first thing your foot touches as a chapter of security and independence begins. We named ourselves Atbah — threshold — because we stand with you there.' })}</p></div></header>
   <section class="v3sec"><div class="wrap"><div class="v3head rv"><div class="no">01</div><div><div class="lab">${T({ ar: 'القصة', en: 'The story' })}</div><h2>${T({ ar: 'لماذا «عتبة»؟', en: 'Why “Atbah”?' })}</h2></div></div>
@@ -1319,19 +1620,18 @@ function pageAbout() {
   <section class="v3sec"><div class="wrap"><div class="v3head rv"><div class="no">03</div><div><div class="lab">${T({ ar: 'من نحن', en: 'Who we are' })}</div><h2>${T({ ar: 'شركة وساطة عقارية سعودية — بفريق مبيعات، لا مركز اتصال.', en: 'A Saudi real-estate brokerage — with a sales team, not a call centre.' })}</h2></div></div>
     <div class="values4">${values.map(v => `<div class="v3card rv"><div class="arch"></div><h3>${T(v[0])}</h3><p>${T(v[1])}</p></div>`).join('')}</div>
     <div class="lic rv" style="margin-top:26px"><div><div class="k">${T({ ar: 'الاسم النظامي', en: 'Legal name' })}</div><div class="v" style="font-family:inherit;direction:inherit;text-align:inherit;font-size:17px">${T({ ar: 'شركة عتبة بداية العقارية', en: 'Atabat Bidaya Real Estate Co.' })}</div></div><div><div class="k">${T({ ar: 'رخصة فال', en: 'FAL licence' })}</div><div class="v">1200050979</div></div><div><div class="k">${T({ ar: 'السجل التجاري', en: 'Commercial registration' })}</div><div class="v">7055177823</div></div></div></div></section>
-  <div class="abcta rv"><div class="wrap"><h2>${T({ ar: 'ابدأ من سقفك — ونعرض عليك ما يقع داخله.', en: 'Start from your ceiling — and we show you what fits inside it.' })}</h2><div class="btns"><a class="btn" href="#/interest?from=about">${T({ ar: 'سجّل ما تبحث عنه', en: 'Tell us what you are looking for' })}</a><a class="btn quiet" href="#/projects">${T({ ar: 'مشاريعنا', en: 'Our projects' })}</a></div></div></div>`,
+  <div class="abcta rv"><div class="wrap"><h2>${T({ ar: 'ابدأ من سقفك — ونعرض عليك ما يقع داخله.', en: 'Start with your ceiling — and we show you what fits inside it.' })}</h2><div class="btns"><a class="btn" href="#/interest?from=about">${T({ ar: 'سجّل ما تبحث عنه', en: 'Tell us what you are looking for' })}</a><a class="btn quiet" href="#/projects">${T({ ar: 'مشاريعنا', en: 'Our projects' })}</a></div></div></div>`,
     mount: () => { mountReveal(); } };
 }
 
 /* ================= مشاريعنا v3 ================= */
 function pageProjects() {
   const cities = [[{ ar: 'الرياض', en: 'Riyadh' }, { ar: 'مشاريع سكنية جاهزة وعلى الخارطة.', en: 'Ready and off-plan residential projects.' }], [{ ar: 'جدة', en: 'Jeddah' }, { ar: 'مشاريع سكنية جاهزة وعلى الخارطة.', en: 'Ready and off-plan residential projects.' }], [{ ar: 'المنطقة الشرقية', en: 'Eastern Province' }, { ar: 'الدمام · الخبر · الظهران.', en: 'Dammam · Khobar · Dhahran.' }]];
-  return { html: `<header class="v3hero" style="padding-block:44px 48px"><div class="arches"></div><div class="wrap" style="position:relative"><div class="rv in"><div class="kicker"><i></i>${T({ ar: 'قريباً على الموقع', en: 'Coming soon on the site' })}</div><h1>${T({ ar: 'مشاريعنا', en: 'Our projects' })}</h1>
+  return { html: `<header class="v3hero has-photo" style="padding-block:44px 48px">${atbMedia({ src: 'media/scenes/masterplan.jpg', pos: '50% 50%', eager: true })}<span class="atb-veil"></span><div class="arches"></div><div class="wrap" style="position:relative"><div class="rv in"><div class="kicker"><i></i>${T({ ar: 'قريباً على الموقع', en: 'Coming soon on the site' })}</div><h1>${T({ ar: 'مشاريعنا', en: 'Our projects' })}</h1>
     <p class="sub">${T({ ar: 'نتعاقد مع مطوّرين في الرياض وجدة والمنطقة الشرقية على مشاريع سكنية جاهزة وعلى الخارطة. عرضها هنا يأتي قريباً؛ حتى ذلك الحين يعرضها عليك مستشارك مباشرةً — داخل سقفك فقط.', en: 'We contract with developers in Riyadh, Jeddah and the Eastern Province on ready and off-plan residential projects. Browsing them here comes soon; until then your advisor shows them to you directly — inside your ceiling only.' })}</p></div></div></header>
-  <section class="v3sec"><div class="wrap"><div class="cities3">${cities.map(c => `<div class="v3card rv"><div class="arch"></div><h3>${T(c[0])}</h3><p>${T(c[1])}</p></div>`).join('')}</div>
+  <section class="v3sec"><div class="wrap"><div class="lx-tiles short">${cities.map((c, i) => `<div class="lx-tile rv">${LX_PHOTOS[i] ? atbMedia(LX_PHOTOS[i]) : LX_SCENES[i]}<span class="cap"><span><b>${T(c[0])}</b></span></span></div>`).join('')}</div>
     <div class="v3head rv" style="margin-top:56px"><div class="no">→</div><div><div class="lab">${T({ ar: 'لا تنتظر الصفحة', en: 'Don’t wait for the page' })}</div><h2>${T({ ar: 'أخبرنا بما تبحث عنه — ونعرضه عليك خلال يومي عمل.', en: 'Tell us what you are looking for — and we show it to you within two working days.' })}</h2></div></div>
-    <div style="max-width:720px" class="rv">${ledgerHtml('ledger_projects', { source: 'projects' })}</div>
-    <p class="sm rv" style="margin-top:22px;max-width:70ch">${T({ ar: 'كل إعلان عن عقار مُعيَّن سيحمل رقم ترخيص الإعلان واسم الوسيط ورقم فال — لا نعرض وحدة قبل ذلك.', en: 'Every advert for a specific property will carry its advertising licence number, the broker’s name and FAL number — we show no unit before that.' })}</p></div></section>`,
+    <div style="max-width:720px" class="rv">${ledgerHtml('ledger_projects', { source: 'projects' })}</div></div></section>`,
     mount: () => { mountLedger('ledger_projects'); mountReveal(); } };
 }
 
@@ -1340,7 +1640,7 @@ function pageInterest(params) {
   const I = INTEREST[LANG];
   const pay = params.get('pay'); if (pay === 'cash' || pay === 'loan') LSTATE.pay = pay;
   const price = +params.get('price'); if (price > 0) { LSTATE.budget = String(Math.round(price)); LSTATE.fromCalc = params.get('from') === 'purchasing-power' || params.get('from') === 'report'; }
-  return { html: `<div class="wrap cpage"><h1>${I.title}</h1><p class="q">${I.sub}</p><div style="max-width:720px;margin-top:22px" class="rv in">${ledgerHtml('ledger_page', { source: params.get('from') || 'interest' })}</div></div>`,
+  return { html: `<header class="lx-pagehead has-photo">${atbMedia({ src: 'media/scenes/villa-fire.jpg', pos: '55% 50%', eager: true })}<span class="atb-veil"></span><div class="wrap rv in"><h1>${I.title}</h1><p class="q">${I.sub}</p></div></header><div class="wrap cpage"><div style="max-width:720px;margin-top:22px" class="rv in">${ledgerHtml('ledger_page', { source: params.get('from') || 'interest' })}</div></div>`,
     mount: () => { mountLedger('ledger_page'); } };
 }
 
@@ -1415,10 +1715,10 @@ function navHtml(route) {
   <a class="btn" href="#/request" style="padding:9px 16px;min-height:40px;font-size:14px">${T(S.nav.request)}</a></div>`;
 }
 function footerHtml() {
-  return `<div class="wrap"><div class="cols"><div><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">${LOGO(38)}<b style="font-family:'Reem Kufi',Tahoma,sans-serif;font-size:24px">${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</b></div><div>${T({ ar: 'خدمات وساطة عقارية', en: 'Real-estate brokerage services' })}</div></div>
+  return `<div class="wrap"><div class="cols"><div><div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">${LOGO(38)}<b style="font-family:'Reem Kufi',Tahoma,sans-serif;font-size:24px">${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</b></div><div>${T({ ar: 'وساطة عقارية تبدأ من سقفك.', en: 'Brokerage that starts with your ceiling.' })}</div></div>
   <div><b>${T({ ar: 'بيانات الترخيص', en: 'Licence details' })}</b><br>${T({ ar: 'شركة عتبة بداية العقارية', en: 'Atabat Bidaya Real Estate Co. (LLC)' })}<br>${T({ ar: 'رخصة فال:', en: 'FAL licence:' })} <span class="num">1200050979</span> ${T({ ar: '(سارية حتى', en: '(valid to' })} <span class="num">2027-09-10</span>)<br>${T({ ar: 'السجل التجاري:', en: 'CR:' })} <span class="num">7055177823</span><br>${T({ ar: 'الرقم الضريبي:', en: 'VAT no.:' })} <span class="num">315016844100003</span></div>
   <div><b>${T({ ar: 'تواصل', en: 'Contact' })}</b><br>info@atbah.sa<br><a href="#/about">${T({ ar: 'من نحن', en: 'About' })}</a> · <a href="#/projects">${T({ ar: 'مشاريعنا', en: 'Our projects' })}</a> · <a href="#/interest">${T({ ar: 'سجّل اهتمامك', en: 'Register interest' })}</a><br><a href="#/privacy">${T({ ar: 'سياسة الخصوصية', en: 'Privacy policy' })}</a> · <a href="https://wa.me/966580116896" target="_blank" rel="noopener">${T({ ar: 'واتساب', en: 'WhatsApp' })} <span class="num">+966 58 011 6896</span></a></div></div>
-  <div class="legal">${T({ ar: 'جميع الأرقام والحاسبات في هذا الموقع تقديرية أوّلية غير ملزمة، وتخضع لموافقة الجهة الممولة. لا تُعدّ استشارة مالية ولا عرضاً تمويلياً. أي إعلان عن عقار مُعيَّن يحمل رقم ترخيص الإعلان. العمولة النظامية للوساطة ٢٫٥٪ ما لم يُتّفق كتابةً على غيرها. أرقام الدعم السكني استرشادية والمرجع هو «سكني» وشهادة استحقاقك.', en: 'All figures and calculators on this site are preliminary, non-binding estimates subject to the financing entity’s approval; not financial advice or a financing offer. Any listing carries its advertising-licence number. Statutory brokerage commission is 2.5% unless agreed otherwise in writing. Housing-support figures are indicative; Sakani and your eligibility certificate are the reference.' })}<br>© <span class="num">2026</span> ${T({ ar: 'شركة عتبة بداية العقارية — س.ت 7055177823 — رخصة فال 1200050979. جميع الحقوق محفوظة.', en: 'Atabat Bidaya Real Estate Co. — CR 7055177823 — FAL 1200050979. All rights reserved.' })}</div></div>`;
+  <div class="legal">${T({ ar: 'جميع الأرقام والحاسبات في هذا الموقع تقديرية أوّلية غير ملزمة، وتخضع لموافقة الجهة الممولة. لا تُعدّ استشارة مالية ولا عرضاً تمويلياً. أي إعلان عن عقار مُعيَّن يحمل رقم ترخيص الإعلان. العمولة النظامية للوساطة 2.5% ما لم يُتّفق كتابةً على غيرها. أرقام الدعم السكني استرشادية والمرجع هو «سكني» وشهادة استحقاقك.', en: 'All figures and calculators on this site are preliminary, non-binding estimates subject to the financing entity’s approval; not financial advice or a financing offer. Any listing carries its advertising-licence number. Statutory brokerage commission is 2.5% unless agreed otherwise in writing. Housing-support figures are indicative; Sakani and your eligibility certificate are the reference.' })}<br>© <span class="num">2026</span> ${T({ ar: 'شركة عتبة بداية العقارية — س.ت 7055177823 — رخصة فال 1200050979. جميع الحقوق محفوظة.', en: 'Atabat Bidaya Real Estate Co. — CR 7055177823 — FAL 1200050979. All rights reserved.' })}</div></div>`;
 }
 function route() {
   const raw = location.hash.replace(/^#/, '') || '/';
@@ -1437,7 +1737,7 @@ function route() {
   else if (path === '/privacy') page = pagePrivacy();
   else if (path === '/report') page = pageReport();
   else page = pageHome();
-  document.documentElement.lang = LANG; document.documentElement.dir = LANG === 'ar' ? 'rtl' : 'ltr'; document.body.dataset.lang = LANG;
+  document.documentElement.lang = LANG; document.documentElement.dir = LANG === 'ar' ? 'rtl' : 'ltr'; document.body.dataset.lang = LANG; document.body.classList.toggle('lx-home', (path === '/' || path === '') && SITE_MODE === 'coming_soon');
   $('#nav').innerHTML = navHtml(path); $('#app').innerHTML = page.html; $('#foot').innerHTML = footerHtml();
   const wa = $('#wa'); if (wa) { const msg = path === '/request' ? T({ ar: 'السلام عليكم، أريد أن أطلب عقارًا عبر عتبة.', en: 'Hello, I would like to request a property through Atbah.' }) : T({ ar: 'السلام عليكم، لدي استفسار عن خدمات عتبة.', en: 'Hello, I have a question about Atbah services.' }); wa.href = 'https://wa.me/966580116896?text=' + encodeURIComponent(msg); $('#watxt').textContent = T({ ar: 'واتساب عتبة', en: 'WhatsApp us' }); }
   if (page.mount) page.mount();
@@ -1447,6 +1747,7 @@ function route() {
   if (anchor) { const el = document.getElementById(anchor); if (el) el.scrollIntoView({ block: 'start' }); } else window.scrollTo(0, 0);
 }
 window.addEventListener('hashchange', route);
+window.addEventListener('scroll', () => document.body.classList.toggle('lx-scrolled', window.scrollY > 40), { passive: true });
 
 /* ================= سَنَد — المساعد الآلي ================= */
 const SANAD_SVG = (cls = 'snav') => `<svg class="${cls}" data-state="idle" viewBox="0 0 130 142" fill="none" aria-hidden="true"><circle class="ring" cx="65" cy="70" r="22"/><circle class="ring r2" cx="65" cy="70" r="22"/><path d="M18.5 106 L18.5 46 A25.5 25.5 0 0 1 44 20.5 L86 20.5 A25.5 25.5 0 0 1 111.5 46 L111.5 106 L98.5 106 L98.5 46 A12.5 12.5 0 0 0 86 33.5 L44 33.5 A12.5 12.5 0 0 0 31.5 46 L31.5 106 Z" fill="#F1ECE3"/><path class="glow" d="M25 106 L25 46 A19 19 0 0 1 44 27 L86 27 A19 19 0 0 1 105 46 L105 106"/><path class="door" d="M48 106 L48 65 A17 17 0 0 1 82 65 L82 106 Z" fill="#C9964A"/><g><rect class="bar" x="53" y="84" width="4" height="16" rx="2"/><rect class="bar" x="60" y="84" width="4" height="16" rx="2"/><rect class="bar" x="67" y="84" width="4" height="16" rx="2"/><rect class="bar" x="74" y="84" width="4" height="16" rx="2"/></g><rect x="14" y="116" width="102" height="14" rx="2" fill="#B4522B"/></svg>`;
