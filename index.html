@@ -971,6 +971,28 @@ footer{font-size:13px}
 /* v5.7 — الهيرو (الفيديو) أصغر بنحو 30% */
 .lx-hero{min-height:57vh!important;min-height:57svh!important}
 @media(max-width:900px){.lx-hero{min-height:55svh!important}}
+/* v5.7 EN — مواءمة النسخة الإنجليزية مع التعديلات */
+body[data-lang="en"] .lx-hero h1{max-width:21ch!important;font-size:clamp(30px,3.3vw,48px)!important}
+body[data-lang="en"] .lx-h2{max-width:30ch}
+body[data-lang="en"] .adt b,body[data-lang="en"] .dr-done b.t{font-family:'Cormorant Garamond','Amiri',Georgia,serif}
+body[data-lang="en"] .adt b{font-size:17.5px;line-height:1.15}
+@media(max-width:900px){
+  body[data-lang="en"] .lx-hero h1{max-width:none!important;font-size:clamp(28px,7.6vw,36px)!important}
+  body[data-lang="en"] .adt b{font-family:inherit;font-size:12px}
+  body[data-lang="en"] .lx-head .adt{top:-40px}
+}
+@media(max-width:560px){
+  body[data-lang="en"] nav.top .wrap{gap:6px!important;flex-wrap:nowrap}
+  body[data-lang="en"] nav.top .brand b{font-size:21px!important;letter-spacing:.04em}
+  body[data-lang="en"] nav.top .brand svg{width:26px;height:auto}
+  body[data-lang="en"] nav.top .wrap>.btn{font-size:11.5px!important;padding:7px 9px!important;white-space:nowrap}
+  body[data-lang="en"] nav.top .lang{padding:5px 8px}
+}
+/* v5.7 — بطاقات المناطق على الجوال: سحب أفقي فقط */
+@media(max-width:760px){
+  .lx-tiles:not(.short){overflow-x:auto;overflow-y:hidden!important;overscroll-behavior-x:contain;overscroll-behavior-y:auto;touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch}
+  .lx-tiles:not(.short) .lx-tile.rv{transform:none!important}
+}
 /* v5.5 — «واتساب عتبة» يظهر عند مرور الماوس فقط */
 .wa{padding:12px!important;gap:0!important;transition:gap .25s ease,padding .25s ease}
 .wa span{display:inline-block!important;max-width:0;opacity:0;overflow:hidden;white-space:nowrap;transition:max-width .3s ease,opacity .25s ease}
