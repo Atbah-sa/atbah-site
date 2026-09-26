@@ -937,6 +937,24 @@ footer{font-size:13px}
   .dr-ceil{font-size:26px}.dr-hd b{font-size:14.5px}
 }
 
+/* v5.4 — خطوات مكتملة أصغر + لوحة الباب ثابتة على الجوال */
+.dr-step:not(.open){padding:8px 14px}
+.dr-step:not(.open) .dr-hd{min-height:26px}
+.dr-step:not(.open) .dr-hd b{font-size:13.5px;font-weight:600}
+.dr-step:not(.open) .dr-hd .sum{font-size:12.5px}
+.dr-step:not(.open) .dr-bdg{width:22px;height:22px;font-size:11px}
+.dr-step.ok:not(.open){background:transparent;border-style:dashed}
+.dr-steps{gap:8px}
+@media(max-width:900px){
+  .dr-panel{position:sticky;top:64px;z-index:6;padding:10px 14px;gap:14px}
+  .dr-panel svg{width:72px}
+  .dr-ceil{font-size:24px}.dr-lbl,.dr-hint{font-size:11.5px}.dr-mini{font-size:11.5px}
+  .dr-done b.t{font-size:22px}.dr-done span{font-size:12px;line-height:1.6}
+}
+/* v5.5 — «اسأل سَنَد» يظهر عند مرور الماوس فقط */
+.sn-btn .sn-tip{opacity:0!important;visibility:hidden;pointer-events:none;transform:translateX(var(--sn-dx,-6px));transition:opacity .25s ease,transform .25s ease,visibility 0s linear .25s;animation:none!important}
+.sn-btn:hover .sn-tip,.sn-btn:focus-visible .sn-tip{opacity:1!important;visibility:visible;transform:none;transition:opacity .25s ease,transform .25s ease,visibility 0s}
+@media (hover:none){.sn-btn .sn-tip{display:none}}
 </style>
 <nav class="top" id="nav"></nav>
 <main id="app"></main>
@@ -1709,7 +1727,7 @@ function doorHtml(id) {
   const rng = (key, label, min, max, step, val) => `<div class="dr-rng"><span><label for="${id}_n${key}">${T(label)}</label><span class="dr-numw"><input class="dr-num" id="${id}_n${key}" type="text" inputmode="numeric" autocomplete="off" dir="ltr" placeholder="0" data-n="${key}"><i>${T({ ar: 'ريال', en: 'SAR' })}</i></span></span><input type="range" min="${min}" max="${max}" step="${step}" value="${val}" data-r="${key}" aria-label="${T(label)}" tabindex="-1"></div>`;
   return `<form class="dr" id="${id}" novalidate data-source="home">
   <div class="dr-steps">
-    <div class="dr-top"><span class="k">${T({ ar: 'حاسبة التمويل وتسجيل الاهتمام معًا', en: 'Mortgage calculator and registration in one' })}</span><span data-prog></span></div>
+    <div class="dr-top"><span></span><span data-prog></span></div>
     <div class="dr-bars"><i></i><i></i><i></i><i></i></div>
     <div class="dr-step" data-step="0">${hd(0, { ar: 'كيف ستشتري؟', en: 'How will you buy?' })}<div class="dr-bd">${pills('pay', [['loan', { ar: 'تمويل عقاري', en: 'Mortgage' }], ['cash', { ar: 'كاش', en: 'Cash' }], ['undecided', { ar: 'لم أقرّر بعد', en: 'Not decided yet' }]], LSTATE.pay)}</div></div>
     <div class="dr-step" data-step="1">${hd(1, { ar: 'احسب سقفك — حاسبة التمويل', en: 'Your ceiling — mortgage calculator' })}<div class="dr-bd">
@@ -1855,7 +1873,7 @@ function pageComingSoon() {
   </div></section>
 
   <section class="lx-sec paper" id="start"><div class="wrap">
-    <div class="lx-head rv"><div>${eb('02', { ar: 'ابدأ من سقفك', en: 'Start with your ceiling' })}<h2 class="lx-h2">${T({ ar: 'يقف الناس على العتبة أكثر ممّا يعبرونها.', en: 'People linger at the threshold more than they cross it.' })}</h2></div><p class="lx-note">${T({ ar: 'احسب سقفك وسجّل اهتمامك في دقيقة — ونعرض عليك ما يقع داخله، لا ما فوقه.', en: 'Work out your ceiling and register in a minute — we show you what fits inside it, never above it.' })}<br><a class="lx-link" href="#/request">${T({ ar: 'تعرف ما تريد؟ اطلب عقارك', en: 'Know what you want? Request a property' })} ${LX_ARROW}</a></p></div>
+    <div class="lx-head rv"><div>${eb('02', { ar: 'ابدأ من سقفك', en: 'Start with your ceiling' })}<h2 class="lx-h2">${T({ ar: 'يقف الناس على العتبة أكثر ممّا يعبرونها.', en: 'People linger at the threshold more than they cross it.' })}</h2></div><p class="lx-note">${T({ ar: 'احسب سقفك وسجّل اهتمامك في دقيقة — ونعرض عليك ما يقع داخله، لا ما فوقه.', en: 'Work out your ceiling and register in a minute — we show you what fits inside it, never above it.' })}</p></div>
     <div class="rv" id="ledger_home_wrap">${doorHtml('ledger_home')}</div>
   </div></section>
 
