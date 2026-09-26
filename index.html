@@ -968,6 +968,9 @@ footer{font-size:13px}
   nav.top .links a::before{content:"";position:absolute;top:-2px;inset-inline-start:-2px;width:8px;height:8px;border:1.5px solid #C9964A;border-bottom:0;border-inline-end:0}
   nav.top .links a[aria-current="page"]{border-color:#C9964A!important;color:#F6DDA8!important}
 }
+/* v5.7 — الهيرو (الفيديو) أصغر بنحو 30% */
+.lx-hero{min-height:57vh!important;min-height:57svh!important}
+@media(max-width:900px){.lx-hero{min-height:55svh!important}}
 /* v5.5 — «واتساب عتبة» يظهر عند مرور الماوس فقط */
 .wa{padding:12px!important;gap:0!important;transition:gap .25s ease,padding .25s ease}
 .wa span{display:inline-block!important;max-width:0;opacity:0;overflow:hidden;white-space:nowrap;transition:max-width .3s ease,opacity .25s ease}
