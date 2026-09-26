@@ -710,6 +710,8 @@ body[data-lang="en"] .sn-btn .sn-tip{--sn-dx:6px}
 .atb-media::before{content:'';position:absolute;inset:0;z-index:1;pointer-events:none;mix-blend-mode:color;background:linear-gradient(180deg,#123E37 0%,#1F4A42 45%,#8C6A3E 78%,#B98A4E 100%);opacity:.58}
 .atb-media::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;mix-blend-mode:soft-light;background:radial-gradient(ellipse 80% 60% at 50% 85%,rgba(233,190,120,.55),transparent 70%),linear-gradient(180deg,rgba(6,22,21,.35),transparent 40%)}
 .atb-media[data-tone="bright"] img{filter:saturate(.55) contrast(1.12) brightness(.66) sepia(.14)}
+.lx-vid::-webkit-media-controls,.lx-vid::-webkit-media-controls-start-playback-button,.lx-vid::-webkit-media-controls-overlay-play-button{display:none!important;-webkit-appearance:none}
+img.lx-anim{display:block}
 .lx-tile:hover .atb-media img{transform:scale(1.05)}
 .lx-tiles.short .lx-tile{aspect-ratio:4/3}
 @media(max-width:760px){.lx-tiles.short{grid-template-columns:1fr;grid-auto-flow:row;overflow:visible;margin-inline:0;padding-inline:0}.lx-tiles.short .lx-tile{aspect-ratio:16/10}}
@@ -1515,7 +1517,7 @@ function pageComingSoon() {
   const eb = (n, t) => `<div class="lx-eyebrow"><span class="num">${n}</span><i></i>${T(t)}</div>`;
   return { html: `
   <header class="lx-hero">
-    <video class="lx-vid" autoplay muted loop playsinline preload="metadata" poster="media/hero-poster.jpg" aria-hidden="true" tabindex="-1"><source src="media/hero.webm" type="video/webm"><source src="media/hero.mp4" type="video/mp4"></video>
+    <video class="lx-vid" autoplay muted loop playsinline webkit-playsinline preload="auto" disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" poster="media/hero-poster.jpg" aria-hidden="true" tabindex="-1"><source src="media/hero.mp4" type="video/mp4"><source src="media/hero.webm" type="video/webm"></video>
     <div class="wrap lx-in">
       <div class="lx-kicker rv in"><i></i><b>${T({ ar: 'وساطة عقارية', en: 'Real-estate brokerage' })}</b></div>
       <h1 class="rv in">${T({ ar: 'نقف معك على العتبة<em>حتى تعبرها وأنت مطمئن</em>', en: 'We stand with you at the threshold<em>until you cross it with confidence</em>' })}</h1>
@@ -1573,13 +1575,25 @@ function pageComingSoon() {
     mount: () => { mountLedger('ledger_home'); mountReveal(); mountSticky('#ledger_home_wrap'); lxMount(); } };
 }
 function lxMount() {
-  const v = document.querySelector('.lx-vid'), pb = document.querySelector('[data-lx-pause]');
+  const v = document.querySelector('.lx-vid');
   const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let paused = false;
-  const setP = (p) => { paused = p; if (v) { if (p) v.pause(); else { v.muted = true; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); } }
-    if (pb) { pb.setAttribute('aria-pressed', String(p)); pb.querySelector('span').textContent = p ? T({ ar: 'تشغيل الحركة', en: 'Play motion' }) : T({ ar: 'إيقاف الحركة', en: 'Pause motion' }); } };
-  setP(paused || reduce);
-  if (pb) pb.addEventListener('click', () => { setP(!paused); try { localStorage.setItem('atbah.motion', paused ? 'off' : 'on'); } catch (e) {} });
+  if (v) {
+    v.muted = true; v.defaultMuted = true; v.playsInline = true; v.loop = true; v.autoplay = true;
+    v.setAttribute('muted', ''); v.setAttribute('playsinline', ''); v.setAttribute('webkit-playsinline', '');
+    const go = () => { if (!v.isConnected || !v.paused) return; const pr = v.play(); if (pr && pr.catch) pr.catch(() => {}); };
+    go(); ['loadeddata', 'canplay', 'canplaythrough'].forEach(ev => v.addEventListener(ev, go));
+    const onVis = () => { if (!document.hidden) go(); }; document.addEventListener('visibilitychange', onVis);
+    const EVS = ['touchstart', 'touchend', 'pointerdown', 'pointerup', 'click', 'scroll', 'keydown'];
+    const kick = () => { go(); if (!v.paused) EVS.forEach(ev => window.removeEventListener(ev, kick)); };
+    EVS.forEach(ev => window.addEventListener(ev, kick, { passive: true }));
+    v.addEventListener('pause', () => { if (v.isConnected && !document.hidden) setTimeout(go, 400); });
+    /* جوّال في وضع توفير الطاقة يمنع تشغيل أي فيديو تلقائياً: نستبدله بنسخة صورة متحركة (WebP) تعمل دائماً */
+    const fallback = () => { if (!v.isConnected || !v.paused || document.hidden || v.dataset.fb) return; v.dataset.fb = '1';
+      const img = new Image(); img.className = 'lx-vid lx-anim'; img.alt = ''; img.setAttribute('aria-hidden', 'true'); img.decoding = 'async';
+      img.onload = () => { if (v.isConnected && v.paused) { v.replaceWith(img); } }; img.src = 'media/hero-anim.webp'; };
+    setTimeout(fallback, 2500);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) setTimeout(fallback, 2500); });
+  }
   document.querySelectorAll('[data-lx-scroll]').forEach(a => a.addEventListener('click', (e) => { const t = document.getElementById(a.dataset.lxScroll); if (t) { e.preventDefault(); t.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); } }));
 }
 
