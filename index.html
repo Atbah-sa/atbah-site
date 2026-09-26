@@ -951,6 +951,29 @@ footer{font-size:13px}
   .dr-ceil{font-size:24px}.dr-lbl,.dr-hint{font-size:11.5px}.dr-mini{font-size:11.5px}
   .dr-done b.t{font-size:22px}.dr-done span{font-size:12px;line-height:1.6}
 }
+/* v5.6 — خيارات الشريط العلوي داخل مربعات فنية */
+@media(min-width:861px){
+  nav.top .links{gap:10px;align-items:center}
+  nav.top .links a{position:relative;padding:7px 16px!important;border:1px solid rgba(226,187,120,.28)!important;border-radius:3px;background:linear-gradient(160deg,rgba(241,236,227,.07),rgba(241,236,227,.015));color:rgba(241,236,227,.88)!important;line-height:1.5;transition:border-color .3s,background .3s,color .3s,box-shadow .3s}
+  nav.top .links a::before,nav.top .links a::after{content:"";position:absolute;width:7px;height:7px;border:1.5px solid #C9964A;transition:width .3s,height .3s}
+  nav.top .links a::before{top:-2px;inset-inline-start:-2px;border-bottom:0;border-inline-end:0}
+  nav.top .links a::after{bottom:-2px;inset-inline-end:-2px;border-top:0;border-inline-start:0}
+  nav.top .links a:hover,nav.top .links a:focus-visible{border-color:rgba(226,187,120,.7)!important;background:linear-gradient(160deg,rgba(226,187,120,.16),rgba(226,187,120,.04));color:#F1ECE3!important;box-shadow:0 0 0 3px rgba(201,150,74,.1),0 10px 22px -14px rgba(201,150,74,.8)}
+  nav.top .links a:hover::before,nav.top .links a:hover::after{width:12px;height:12px}
+  nav.top .links a[aria-current="page"]{border-color:#C9964A!important;background:linear-gradient(160deg,rgba(226,187,120,.22),rgba(226,187,120,.06));color:#F6DDA8!important}
+}
+@media(max-width:860px){
+  nav.top .links{gap:8px!important;padding:10px 0 6px!important}
+  nav.top .links a{border:1px solid rgba(226,187,120,.28)!important;border-radius:4px;padding:11px 14px!important;background:rgba(241,236,227,.04);position:relative}
+  nav.top .links a::before{content:"";position:absolute;top:-2px;inset-inline-start:-2px;width:8px;height:8px;border:1.5px solid #C9964A;border-bottom:0;border-inline-end:0}
+  nav.top .links a[aria-current="page"]{border-color:#C9964A!important;color:#F6DDA8!important}
+}
+/* v5.5 — «واتساب عتبة» يظهر عند مرور الماوس فقط */
+.wa{padding:12px!important;gap:0!important;transition:gap .25s ease,padding .25s ease}
+.wa span{display:inline-block!important;max-width:0;opacity:0;overflow:hidden;white-space:nowrap;transition:max-width .3s ease,opacity .25s ease}
+.wa:hover,.wa:focus-visible{gap:8px!important;padding:12px 16px 12px 12px!important}
+.wa:hover span,.wa:focus-visible span{max-width:140px;opacity:1}
+@media (hover:none){.wa span{display:none!important}}
 /* v5.5 — «اسأل سَنَد» يظهر عند مرور الماوس فقط */
 .sn-btn .sn-tip{opacity:0!important;visibility:hidden;pointer-events:none;transform:translateX(var(--sn-dx,-6px));transition:opacity .25s ease,transform .25s ease,visibility 0s linear .25s;animation:none!important}
 .sn-btn:hover .sn-tip,.sn-btn:focus-visible .sn-tip{opacity:1!important;visibility:visible;transform:none;transition:opacity .25s ease,transform .25s ease,visibility 0s}
