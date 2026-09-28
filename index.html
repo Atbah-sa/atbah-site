@@ -1109,6 +1109,15 @@ body[data-lang="en"] h1,body[data-lang="en"] h2,body[data-lang="en"] h3,body[dat
 .consent-note a{color:var(--goldink)}
 .consent-note [data-consentfull]{display:block;margin-top:6px;font-size:12px}
 .consent-note [data-consentfull][hidden]{display:none}
+/* cash default: one-tap switch to mortgage */
+.dr-swap{align-self:flex-start;margin-top:10px;background:none;border:0;padding:6px 0;font:inherit;font-size:13.5px;font-weight:600;color:var(--goldink);cursor:pointer;text-decoration:underline;text-underline-offset:.3em;text-decoration-thickness:1px}
+.dr-swap:hover{color:var(--clayink)}
+/* floating WhatsApp + Sanad on the end side (left in Arabic, right in English), clear of right-aligned Arabic labels */
+.wa,.sn-btn,.sn{inset-inline-start:auto!important;inset-inline-end:16px!important}
+.sn-tip{inset-inline-start:auto!important;inset-inline-end:60px!important}
+/* hidden while the visitor types in a form field */
+.wa{transition:gap .25s ease,padding .25s ease,opacity .25s ease,visibility .25s ease}.sn-btn{transition:opacity .25s ease,visibility .25s ease,transform .25s ease}
+body.typing .wa,body.typing .sn-btn{opacity:0;visibility:hidden;pointer-events:none}
 </style>
 <nav class="top" id="nav"></nav>
 <main id="app"></main>
@@ -1178,7 +1187,7 @@ const CALCS = [
     rng('subsidyPct', { ar: 'نسبة دعم هامش الربح', en: 'Profit-margin subsidy' }, 100, 0, 100, 5, 'pct', { step_: 1, show: v => v.support === 'margin', auto: v => A.suggestSubsidyPct(v.income), hint: { ar: '١٠٠٪ لمن دخله ١٤ ألفاً فأقل، وتتناقص بعدها. على أول ٥٠٠٬٠٠٠ ريال من التمويل.', en: '100% up to 14k income, tapering after. Applies to the first SAR 500,000 of financing.' } }),
     rng('dtiPct', { ar: 'نسبة الاستقطاع التي تختارها', en: 'Deduction ratio you choose' }, 45, 20, 65, 1, 'pct', { step_: 2, hint: { ar: 'الحدّ النظامي ٥٥٪ لمن دخله أقل من ١٥ ألفاً و٦٥٪ لمن فوقها ولمستفيدي الدعم. ٤٥٪ افتراضنا المتحفّظ — البنك قد يمنحك أكثر، ولا يعني ذلك أنه يناسبك.', en: 'Regulatory cap: 55% below 15k income, 65% above and for support beneficiaries. 45% is our conservative default — the bank may allow more; that doesn’t mean it suits you.' } }),
     rng('downPct', { ar: 'الدفعة الأولى', en: 'Down payment' }, 10, 5, 50, 1, 'pct', { step_: 2, hint: { ar: 'الحدّ الأدنى ١٠٪ للمسكن الأول (تمويل ٩٠٪) و٣٠٪ لغيره.', en: 'Minimum 10% for a first home (90% LTV), 30% otherwise.' } }),
-    rng('termYears', { ar: 'مدّة التمويل', en: 'Term' }, 25, 5, 30, 1, 'yr', { step_: 2, hint: { ar: 'المدّة محكومة بعمرك عند نهاية التمويل (٦٠ حكومي / ٦٥ خاص).', en: 'Capped by your age at maturity (60 public / 65 private).' } }),
+    rng('termYears', { ar: 'مدّة التمويل', en: 'Term' }, 20, 5, 30, 1, 'yr', { step_: 2, hint: { ar: 'المدّة محكومة بعمرك عند نهاية التمويل (٦٠ حكومي / ٦٥ خاص).', en: 'Capped by your age at maturity (60 public / 65 private).' } }),
     rng('ratePct', { ar: 'نسبة الربح السنوية التقديرية', en: 'Indicative annual profit rate' }, 5.5, 1, 12, 0.1, 'pct', { step_: 2 }),
   ],
   compute: v => A.purchasingPower({ income: v.income, obligations: v.obligations, dtiPct: v.dtiPct, age: v.age, sector: v.sector, termYears: v.termYears, ratePct: v.ratePct, firstHome: v.firstHome === '1', downPct: v.downPct, support: v.support, grant: v.grant, subsidyPct: v.subsidyPct, subsidyCap: A.V('subsidyCap') }),
@@ -1206,7 +1215,7 @@ const CALCS = [
 {
   slug: 'installment', group: 'buyer', title: { ar: 'القسط الشهري', en: 'Monthly installment' }, eyebrow: 'INSTALLMENT',
   q: { ar: 'كم قسط هذا البيت شهرياً — وكم يكلّفك التمويل على مدّته كلّها؟', en: 'What is this home’s monthly payment — and what does the financing cost over the whole term?' },
-  fields: [num('price', { ar: 'سعر العقار', en: 'Property price' }, 900000, 10000, { fmt: 'sar' }), rng('downPct', { ar: 'الدفعة الأولى', en: 'Down payment' }, 10, 5, 50, 1, 'pct'), rng('years', { ar: 'المدّة', en: 'Term' }, 25, 5, 30, 1, 'yr'), rng('ratePct', { ar: 'نسبة الربح السنوية', en: 'Annual profit rate' }, 5.5, 1, 12, 0.1, 'pct')],
+  fields: [num('price', { ar: 'سعر العقار', en: 'Property price' }, 900000, 10000, { fmt: 'sar' }), rng('downPct', { ar: 'الدفعة الأولى', en: 'Down payment' }, 10, 5, 50, 1, 'pct'), rng('years', { ar: 'المدّة', en: 'Term' }, 20, 5, 30, 1, 'yr'), rng('ratePct', { ar: 'نسبة الربح السنوية', en: 'Annual profit rate' }, 5.5, 1, 12, 0.1, 'pct')],
   formula: 'PMT = L × r ÷ (1 − (1 + r)^−n)   r = rate ÷ 12, n = years × 12',
   compute: v => A.installment(v),
   render: (r) => `<div class="lab">${T({ ar: 'القسط الشهري', en: 'Monthly payment' })}</div>${big(sar(r.monthly), RIYAL)}
@@ -1245,7 +1254,7 @@ const CALCS = [
 {
   slug: 'rent-vs-buy', group: 'buyer', title: { ar: 'إيجار أم تملّك؟', en: 'Rent or buy?' }, eyebrow: 'RENT VS BUY',
   q: { ar: 'على أفقك الزمني أنت — أيهما أقلّ كلفة صافية: الإيجار، أم التملّك، أم ملكية مشتركة؟', en: 'Over your own horizon — which costs less net: renting, buying, or shared ownership?' },
-  fields: [num('rent', { ar: 'إيجارك السنوي الحالي', en: 'Current annual rent' }, 48000, 1000, { fmt: 'sar' }), num('price', { ar: 'سعر البيت المرشّح', en: 'Candidate home price' }, 900000, 10000, { fmt: 'sar' }), rng('horizonYears', { ar: 'أفق المقارنة', en: 'Horizon' }, 7, 2, 25, 1, 'yr', { hint: { ar: 'عشرون سنة مع أطفال ← تملّك · ثلاث سنوات ← استأجر. الأفق هو نصف الجواب.', en: 'Twenty years with kids → buy · three years → rent. The horizon is half the answer.' } }), rng('downPct', { ar: 'الدفعة الأولى', en: 'Down payment' }, 10, 5, 50, 1, 'pct'), rng('ratePct', { ar: 'نسبة الربح', en: 'Profit rate' }, 5.5, 1, 12, 0.1, 'pct'), rng('termYears', { ar: 'مدّة التمويل', en: 'Term' }, 25, 5, 30, 1, 'yr'), rng('rentGrowthPct', { ar: 'ارتفاع الإيجار سنوياً', en: 'Rent growth' }, 4, 0, 12, 0.5, 'pct'), rng('priceGrowthPct', { ar: 'ارتفاع قيمة العقار سنوياً', en: 'Price growth' }, 3, -3, 12, 0.5, 'pct'), rng('maintenancePct', { ar: 'صيانة المسكن سنوياً (٪ من القيمة)', en: 'Upkeep (% of value / yr)' }, 1, 0, 3, 0.25, 'pct'), rng('altReturnPct', { ar: 'العائد البديل على دفعتك لو بقيت نقداً', en: 'Alternative return on your cash' }, 4, 0, 10, 0.5, 'pct'), seg('sharedOn', { ar: 'أضف مسار الملكية المشتركة', en: 'Add shared-ownership path' }, [['0', { ar: 'لا', en: 'No' }], ['1', { ar: 'نعم', en: 'Yes' }]], '0'), rng('sharePct', { ar: 'حصّتك في الملكية المشتركة', en: 'Your share' }, 50, 25, 75, 5, 'pct', { show: v => v.sharedOn === '1' }), rng('partnerYieldPct', { ar: 'عائد الشريك على حصّته', en: 'Partner’s yield on their share' }, 5, 3, 8, 0.25, 'pct', { show: v => v.sharedOn === '1' })],
+  fields: [num('rent', { ar: 'إيجارك السنوي الحالي', en: 'Current annual rent' }, 48000, 1000, { fmt: 'sar' }), num('price', { ar: 'سعر البيت المرشّح', en: 'Candidate home price' }, 900000, 10000, { fmt: 'sar' }), rng('horizonYears', { ar: 'أفق المقارنة', en: 'Horizon' }, 7, 2, 25, 1, 'yr', { hint: { ar: 'عشرون سنة مع أطفال ← تملّك · ثلاث سنوات ← استأجر. الأفق هو نصف الجواب.', en: 'Twenty years with kids → buy · three years → rent. The horizon is half the answer.' } }), rng('downPct', { ar: 'الدفعة الأولى', en: 'Down payment' }, 10, 5, 50, 1, 'pct'), rng('ratePct', { ar: 'نسبة الربح', en: 'Profit rate' }, 5.5, 1, 12, 0.1, 'pct'), rng('termYears', { ar: 'مدّة التمويل', en: 'Term' }, 20, 5, 30, 1, 'yr'), rng('rentGrowthPct', { ar: 'ارتفاع الإيجار سنوياً', en: 'Rent growth' }, 4, 0, 12, 0.5, 'pct'), rng('priceGrowthPct', { ar: 'ارتفاع قيمة العقار سنوياً', en: 'Price growth' }, 3, -3, 12, 0.5, 'pct'), rng('maintenancePct', { ar: 'صيانة المسكن سنوياً (٪ من القيمة)', en: 'Upkeep (% of value / yr)' }, 1, 0, 3, 0.25, 'pct'), rng('altReturnPct', { ar: 'العائد البديل على دفعتك لو بقيت نقداً', en: 'Alternative return on your cash' }, 4, 0, 10, 0.5, 'pct'), seg('sharedOn', { ar: 'أضف مسار الملكية المشتركة', en: 'Add shared-ownership path' }, [['0', { ar: 'لا', en: 'No' }], ['1', { ar: 'نعم', en: 'Yes' }]], '0'), rng('sharePct', { ar: 'حصّتك في الملكية المشتركة', en: 'Your share' }, 50, 25, 75, 5, 'pct', { show: v => v.sharedOn === '1' }), rng('partnerYieldPct', { ar: 'عائد الشريك على حصّته', en: 'Partner’s yield on their share' }, 5, 3, 8, 0.25, 'pct', { show: v => v.sharedOn === '1' })],
   compute: v => A.rentVsBuy({ ...v, shared: v.sharedOn === '1' ? { sharePct: v.sharePct, partnerYieldPct: v.partnerYieldPct } : undefined }),
   render: (r, v) => {
     const names = { rent: { ar: 'الإيجار أوفر', en: 'Renting costs less' }, buy: { ar: 'التملّك أوفر', en: 'Buying costs less' }, shared: { ar: 'الملكية المشتركة أوفر', en: 'Shared ownership costs less' } };
@@ -1673,7 +1682,7 @@ const INTEREST = { ar: {
   consent: 'أوافق على معالجة بياناتي أعلاه (ومنها ميزانيتي أو سقفي التقديري وتفضيلاتي) لغرض التواصل معي وعرض عقارات تناسبها وقراءة قدرتي الشرائية وخدمات عتبة، وفق <a href="#/privacy">سياسة الخصوصية</a>. أعلم أن بإمكاني سحب موافقتي وطلب حذف بياناتي في أي وقت عبر privacy@atbah.sa.',
   marketing: 'أرغب أيضاً في استلام رسائل عتبة الدورية (اختياري — يمكن الإلغاء في أي وقت).',
   submit: 'سجّل اهتمامي', sending: 'جارٍ الإرسال…', ok: 'وصلنا اهتمامك.', okSub: 'رقمك المرجعي {ref}. سنتواصل مرة واحدة خلال يومي عمل بما يقع داخل سقفك. لن نرسل كتالوجاً.',
-  errName: 'اكتب اسمك', errBudget: 'اكتب ميزانيتك أو سقفك التقديري بالريال', errPhone: 'رقم جوّال سعودي صحيح (05xxxxxxxx)', errEmail: 'بريد إلكتروني غير صحيح', errConsent: 'لا نستطيع حفظ بياناتك بلا موافقتك', errSave: 'تعذّر الحفظ الآن — حاول مرة أخرى أو راسلنا على info@atbah.sa',
+  errName: 'اكتب اسمك', errBudget: 'اكتب ميزانيتك أو سقفك التقديري بالريال', errPhone: 'اكتب رقم جوّال سعودي صحيح — مثل 05xxxxxxxx أو ‎+9665xxxxxxxx', errEmail: 'بريد إلكتروني غير صحيح', errConsent: 'لا نستطيع حفظ بياناتك بلا موافقتك', errSave: 'تعذّر الحفظ الآن — حاول مرة أخرى أو راسلنا على info@atbah.sa',
   errNotOpen: 'التسجيل يُفتح خلال أيام — إلى حينها راسلنا على info@atbah.sa وسنعود إليك مرة واحدة.',
 }, en: {
   title: 'Tell us what you are looking for', sub: 'We show you what fits inside your ceiling from our developers’ projects — one call within two working days, no catalogue, and no second call if you don’t want one.',
@@ -1691,7 +1700,7 @@ const INTEREST = { ar: {
   consent: 'I agree to the processing of the data above (including my budget or estimated ceiling and my preferences) to contact me, show me matching properties, and about my purchasing-power reading and Atbah services, per the <a href="#/privacy">privacy policy</a>. I know I can withdraw consent and request deletion at any time via privacy@atbah.sa.',
   marketing: 'I also want Atbah’s periodic messages (optional — unsubscribe anytime).',
   submit: 'Register my interest', sending: 'Sending…', ok: 'We received your interest.', okSub: 'Your reference is {ref}. We will contact you once within two working days with what fits inside your ceiling. No catalogue will be sent.',
-  errName: 'Enter your name', errBudget: 'Enter your budget or estimated ceiling in SAR', errPhone: 'A valid Saudi mobile (05xxxxxxxx)', errEmail: 'Invalid email', errConsent: 'We cannot store your data without your consent', errSave: 'Could not save right now — try again or email info@atbah.sa',
+  errName: 'Enter your name', errBudget: 'Enter your budget or estimated ceiling in SAR', errPhone: 'Enter a valid Saudi mobile — e.g. 05xxxxxxxx or +9665xxxxxxxx', errEmail: 'Invalid email', errConsent: 'We cannot store your data without your consent', errSave: 'Could not save right now — try again or email info@atbah.sa',
   errNotOpen: 'Registration opens in a few days — until then email info@atbah.sa and we will get back to you once.',
 } };
 /* ================= v3 — الدفتر (تسجيل عملي بأربع خطوات) ================= */
@@ -1702,7 +1711,7 @@ const L3 = {
     s3: 'أين وماذا؟', s3h: 'المدينة ونوع العقار — والبقية اختيارية.', more: 'تفضيلات إضافية', s4: 'كيف نتواصل معك؟', s4h: 'اتصال واحد خلال يومي عمل بما يقع داخل سقفك — لا كتالوج.',
     name: 'الاسم', phone: 'رقم الجوّال', submit: 'اعرض عليّ ما يقع داخل سقفي', sending: 'جارٍ الإرسال…', contact: 'كيف تفضّل أن نتواصل؟', call: 'اتصال', wa: 'واتساب', calltime: 'الوقت المناسب للاتصال', times: [['morning', 'صباحاً (9–12)'], ['noon', 'ظهراً (12–4)'], ['evening', 'مساءً (4–9)'], ['any', 'أي وقت']], errContact: 'اختر طريقة التواصل', errTime: 'اختر الوقت المناسب للاتصال',
     ok: 'وصلنا ما تبحث عنه.', okSub: 'مستشارك يتّصل مرة واحدة خلال يومي عمل بما يقع داخل سقفك. احتفظ بالرقم المرجعي:', okTools: 'حتى ذلك الحين، حاسبة الكاش المطلوب يوم الشراء تُظهر لك ما تحتاجه فوق السعر.',
-    errPay: 'اختر طريقة الشراء أولاً', errBudget: 'اكتب ميزانيتك أو سقفك بالريال (100 ألف فأكثر)', errCity: 'اختر المدينة', errType: 'اختر نوع العقار', errName: 'اكتب اسمك', errPhone: 'رقم جوّال سعودي صحيح (05xxxxxxxx)', errConsent: 'لا نستطيع حفظ بياناتك بلا موافقتك', errSave: 'تعذّر الحفظ الآن — حاول مرة أخرى أو راسلنا على info@atbah.sa', errNotOpen: 'التسجيل يُفتح خلال أيام — راسلنا على info@atbah.sa.',
+    errPay: 'اختر طريقة الشراء أولاً', errBudget: 'اكتب ميزانيتك أو سقفك بالريال (100 ألف فأكثر)', errCity: 'اختر المدينة', errType: 'اختر نوع العقار', errName: 'اكتب اسمك', errPhone: 'اكتب رقم جوّال سعودي صحيح — مثل 05xxxxxxxx أو ‎+9665xxxxxxxx', errConsent: 'لا نستطيع حفظ بياناتك بلا موافقتك', errSave: 'تعذّر الحفظ الآن — حاول مرة أخرى أو راسلنا على info@atbah.sa', errNotOpen: 'التسجيل يُفتح خلال أيام — راسلنا على info@atbah.sa.',
     cities: [['', 'اختر المدينة'], ['riyadh', 'الرياض'], ['jeddah', 'جدة'], ['eastern', 'المنطقة الشرقية'], ['other', 'أخرى']], city: 'المدينة', type: 'نوع العقار',
     types: [['', 'اختر نوع العقار'], ['apartment', 'شقة'], ['villa', 'فيلا'], ['duplex', 'دوبلكس'], ['townhouse', 'تاون هاوس'], ['floor', 'دور'], ['any', 'لا فرق']],
     words: (n) => n >= 1e6 ? `${(n / 1e6).toLocaleString('en-US', { maximumFractionDigits: 2 })} مليون ريال` : `${Math.round(n / 1e3).toLocaleString('en-US')} ألف ريال`,
@@ -1713,14 +1722,14 @@ const L3 = {
     s3: 'Where, and what?', s3h: 'City and property type — the rest is optional.', more: 'More preferences', s4: 'How do we reach you?', s4h: 'One call within two working days with what fits inside your ceiling — no catalogue.',
     name: 'Name', phone: 'Mobile number', submit: 'Show me what fits inside my ceiling', sending: 'Sending…', contact: 'How would you like us to reach you?', call: 'Phone call', wa: 'WhatsApp', calltime: 'Best time to call', times: [['morning', 'Morning (9–12)'], ['noon', 'Midday (12–4)'], ['evening', 'Evening (4–9)'], ['any', 'Any time']], errContact: 'Choose how to reach you', errTime: 'Choose the best time to call',
     ok: 'We have what you are looking for.', okSub: 'Your advisor calls once within two working days with what fits inside your ceiling. Keep your reference:', okTools: 'Until then, the cash-on-purchase-day calculator shows what you need above the price.',
-    errPay: 'Choose how you will buy first', errBudget: 'Enter your budget or ceiling in SAR (100,000 or more)', errCity: 'Choose a city', errType: 'Choose a property type', errName: 'Enter your name', errPhone: 'A valid Saudi mobile (05xxxxxxxx)', errConsent: 'We cannot store your data without your consent', errSave: 'Could not save right now — try again or email info@atbah.sa', errNotOpen: 'Registration opens in a few days — email info@atbah.sa.',
+    errPay: 'Choose how you will buy first', errBudget: 'Enter your budget or ceiling in SAR (100,000 or more)', errCity: 'Choose a city', errType: 'Choose a property type', errName: 'Enter your name', errPhone: 'Enter a valid Saudi mobile — e.g. 05xxxxxxxx or +9665xxxxxxxx', errConsent: 'We cannot store your data without your consent', errSave: 'Could not save right now — try again or email info@atbah.sa', errNotOpen: 'Registration opens in a few days — email info@atbah.sa.',
     cities: [['', 'Choose a city'], ['riyadh', 'Riyadh'], ['jeddah', 'Jeddah'], ['eastern', 'Eastern Province'], ['other', 'Other']], city: 'City', type: 'Property type',
     types: [['', 'Choose a property type'], ['apartment', 'Apartment'], ['villa', 'Villa'], ['duplex', 'Duplex'], ['townhouse', 'Townhouse'], ['floor', 'Floor'], ['any', 'No preference']],
     words: (n) => n >= 1e6 ? `${(n / 1e6).toLocaleString('en-US', { maximumFractionDigits: 2 })} million SAR` : `${Math.round(n / 1e3).toLocaleString('en-US')}k SAR`,
   },
 };
 const CITY_AR = { riyadh: 'الرياض', jeddah: 'جدة', eastern: 'المنطقة الشرقية', other: 'أخرى' };
-const LSTATE = { pay: null, budget: '', city: null, type: null, fromCalc: false, contact: null, time: null };
+const LSTATE = { pay: 'cash', budget: '', city: null, type: null, fromCalc: false, contact: null, time: null };
 try { const p = sessionStorage.getItem('atbah_pay'); if (p === 'cash' || p === 'loan') LSTATE.pay = p; } catch (e) {}
 
 function ledgerHtml(id, { source = 'home', withCalc = true } = {}) {
@@ -1745,7 +1754,7 @@ function ledgerHtml(id, { source = 'home', withCalc = true } = {}) {
         <div class="f"><label for="${id}_note">${I.note}</label><textarea id="${id}_note" name="note" rows="2"></textarea></div>
       </details></div></div>
     <div class="lstep" data-step="4"><div class="n">04</div><div><b>${S3.s4}</b><div class="hint">${S3.s4h}</div>
-      <div class="row2"><div class="f"><label for="${id}_name">${S3.name}</label><input type="text" id="${id}_name" name="name" autocomplete="name"></div><div class="f"><label for="${id}_phone">${S3.phone}</label><input type="tel" id="${id}_phone" name="phone" inputmode="tel" placeholder="05xxxxxxxx" autocomplete="tel"></div></div>
+      <div class="row2"><div class="f"><label for="${id}_name">${S3.name}</label><input type="text" id="${id}_name" name="name" autocomplete="name"></div><div class="f"><label for="${id}_phone">${S3.phone}</label><input type="tel" id="${id}_phone" name="phone" inputmode="tel" placeholder="05xxxxxxxx" autocomplete="tel" dir="ltr"></div></div>
       <div class="f" style="margin-top:4px"><label>${S3.contact}</label>${chip('contact', [['call', S3.call], ['wa', S3.wa]], LSTATE.contact)}</div>
       <div class="f" data-timebox hidden><label>${S3.calltime}</label>${chip('time', S3.times, LSTATE.time)}</div>
       <p class="consent-note">${T({ ar: 'بإرسال طلبك توافق على أن نتواصل معك بخصوصه وفق <a href="#/privacy">سياسة الخصوصية</a>.', en: 'By sending your request you agree that we contact you about it per the <a href="#/privacy">privacy policy</a>.' })} <a href="#" data-consentmore style="white-space:nowrap">${T({ ar: 'التفاصيل', en: 'Details' })}</a><span data-consentfull hidden>${I.consent}</span></p>
@@ -1800,14 +1809,14 @@ function mountLedger(id, { withCalc = true } = {}) {
   }
   f.addEventListener('submit', async (e) => {
     e.preventDefault(); err.hidden = true; const fail = (m, sel) => { err.textContent = m; err.hidden = false; if (sel) { const el = q(sel); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' }); } };
-    const name = q('input[name=name]').value.trim(), phone = toLatin(q('input[name=phone]').value).replace(/[\s\-()]/g, '');
+    const name = q('input[name=name]').value.trim(), phone = saPhone(q('input[name=phone]').value) || '';
     if (!LSTATE.pay) return fail(S3.errPay, '[data-step="1"]');
     if (!(numVal(budgetEl) >= 100000)) return fail(S3.errBudget, '[data-step="2"]');
     if (!LSTATE.city) return fail(S3.errCity, '[data-step="3"]');
     if (!LSTATE.type) return fail(S3.errType, '[data-step="3"]');
     if (isReq && !(distEl && distEl.value.trim())) return fail(T({ ar: 'اكتب الحيّ الذي تريده — نبحث فيه وفي الأحياء المجاورة.', en: 'Enter the district you want — we search it and its neighbours.' }), '[data-step="3"]');
     if (name.length < 2) return fail(S3.errName);
-    if (!/^(05\d{8}|\+9665\d{8}|9665\d{8})$/.test(phone)) return fail(S3.errPhone);
+    if (!phone) return fail(S3.errPhone);
     if (!LSTATE.contact) return fail(S3.errContact);
     if (LSTATE.contact === 'call' && !LSTATE.time) return fail(S3.errTime);
     const btn = q('[data-submit]'); btn.disabled = true; btn.textContent = S3.sending;
@@ -1815,7 +1824,7 @@ function mountLedger(id, { withCalc = true } = {}) {
     const timeAr = { morning: 'صباحاً 9–12', noon: 'ظهراً 12–4', evening: 'مساءً 4–9', any: 'أي وقت' };
     const contactLine = LSTATE.contact === 'wa' ? 'التواصل: واتساب' : `التواصل: اتصال — ${timeAr[LSTATE.time] || ''}`;
     const nearbyList = isReq ? [...NEARSEL] : [];
-    const rec = { name, phone: phone.replace(/^(\+?966)/, '0'), email: null, role: 'buyer', city: CITY_AR[LSTATE.city] || LSTATE.city, budget: Math.round(numVal(budgetEl)), note: [isReq ? 'طلب عقارك' : '', contactLine, 'الموافقة: إشعار عند الإرسال (دون مربع)', nearbyList.length ? 'الأحياء المجاورة: ' + nearbyList.join('، ') : '', v('note').trim()].filter(Boolean).join(' · '),
+    const rec = { name, phone, email: null, role: 'buyer', city: CITY_AR[LSTATE.city] || LSTATE.city, budget: Math.round(numVal(budgetEl)), note: [isReq ? 'طلب عقارك' : '', contactLine, 'الموافقة: إشعار عند الإرسال (دون مربع)', nearbyList.length ? 'الأحياء المجاورة: ' + nearbyList.join('، ') : '', v('note').trim()].filter(Boolean).join(' · '),
       wishes: { pay: LSTATE.pay, ptype: LSTATE.type, rooms: v('rooms') || 'any', status: v('status') || 'any', purpose: v('purpose') || 'live', when: v('when') || '3m', district: v('district').trim() || null, nearby: nearbyList.join('،') || null },
       consent_text_ver: 'phase0-v3', consent_lang: LANG, marketing_consent: q('input[name=marketing]').checked, source: f.dataset.source + (LSTATE.fromCalc ? '+calc' : '') };
     try {
@@ -1870,8 +1879,9 @@ const adTile = (slug) => { const a = ADT[slug]; return `<a class="adt ${a.v}" hr
 
 function mountAds() { document.querySelectorAll('[data-ad]').forEach(a => a.addEventListener('click', () => { try { window.va && window.va('event', { name: 'banner_click', data: { tool: a.dataset.ad } }); } catch (e) {} })); }
 /* ================= v5.1 «الباب يُفتح معك» — ابدأ من سقفك: حاسبة التمويل + تسجيل الاهتمام ================= */
+function saPhone(v) { let d = drLatin(String(v || '')).replace(/[^\d+]/g, '').replace(/^\+/, '00'); d = d.replace(/^00966/, '').replace(/^966/, '').replace(/^0+/, ''); return /^5\d{8}$/.test(d) ? '0' + d : null; }
 const drLatin = (t) => String(t || '').replace(/[٠-٩]/g, (d) => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g, (d) => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
-const DSTATE = { cur: 0, s: 0, o: 0, term: 25, b: 0, ok2: false, done: false, ref: '' };
+const DSTATE = { cur: 0, s: 0, o: 0, term: 20, b: 0, ok2: false, done: false, ref: '' };
 const DOOR_TYPES = [['apartment', { ar: 'شقة', en: 'Apartment' }], ['villa', { ar: 'فيلا', en: 'Villa' }], ['duplex', { ar: 'دوبلكس', en: 'Duplex' }], ['townhouse', { ar: 'تاون هاوس', en: 'Townhouse' }], ['any', { ar: 'لا فرق', en: 'No preference' }]];
 const DOOR_CITIES = [['riyadh', { ar: 'الرياض', en: 'Riyadh' }], ['jeddah', { ar: 'جدة', en: 'Jeddah' }], ['eastern', { ar: 'المنطقة الشرقية', en: 'Eastern Province' }], ['other', { ar: 'أخرى', en: 'Other' }]];
 function doorCalc() {
@@ -1887,11 +1897,11 @@ function doorHtml(id) {
   <div class="dr-steps">
     <div class="dr-top"><span></span><span data-prog></span></div>
     <div class="dr-bars"><i></i><i></i><i></i><i></i></div>
-    <div class="dr-step" data-step="0">${hd(0, { ar: 'كيف ستشتري؟', en: 'How will you buy?' })}<div class="dr-bd">${pills('pay', [['loan', { ar: 'تمويل عقاري', en: 'Mortgage' }], ['cash', { ar: 'كاش', en: 'Cash' }], ['undecided', { ar: 'لم أقرّر بعد', en: 'Not decided yet' }]], LSTATE.pay)}</div></div>
+    <div class="dr-step" data-step="0">${hd(0, { ar: 'كيف ستشتري؟', en: 'How will you buy?' })}<div class="dr-bd">${pills('pay', [['cash', { ar: 'كاش', en: 'Cash' }], ['loan', { ar: 'تمويل عقاري', en: 'Mortgage' }], ['undecided', { ar: 'لم أقرّر بعد', en: 'Not decided yet' }]], LSTATE.pay)}</div></div>
     <div class="dr-step" data-step="1">${hd(1, { ar: 'احسب سقفك — حاسبة التمويل', en: 'Your ceiling — mortgage calculator' })}<div class="dr-bd">
       <div class="dr-grid" data-loanbox>${rng('s', { ar: 'راتبك الشهري', en: 'Your monthly salary' }, 0, 60000, 500, DSTATE.s)}${rng('o', { ar: 'أقساطك القائمة', en: 'Existing instalments' }, 0, 20000, 250, DSTATE.o)}
         <div style="grid-column:1/-1">${pills('term', [[15, { ar: '15 سنة', en: '15 yrs' }], [20, { ar: '20 سنة', en: '20 yrs' }], [25, { ar: '25 سنة', en: '25 yrs' }], [30, { ar: '30 سنة', en: '30 yrs' }]].map(([v, l]) => [String(v), l]), String(DSTATE.term), 'sm').replace('<button', `<span class="lb">${T({ ar: 'مدة التمويل', en: 'Term' })}</span><button`)}</div></div>
-      <div data-cashbox hidden>${rng('b', { ar: 'ميزانيتك للشراء', en: 'Your purchase budget' }, 0, 6000000, 50000, DSTATE.b)}</div>
+      <div data-cashbox hidden>${rng('b', { ar: 'ميزانيتك للشراء', en: 'Your purchase budget' }, 0, 6000000, 50000, DSTATE.b)}<button type="button" class="dr-swap" data-toloan>${T({ ar: 'بتمويل عقاري؟ احسب سقفك', en: 'Using a mortgage? Work out your ceiling' })} ←</button></div>
       <span class="dr-assume" data-assume></span>
       <span class="dr-need" data-need></span><button type="button" class="dr-next" data-ok2>${T({ ar: 'اعتمد هذا السقف', en: 'Use this ceiling' })}</button></div></div>
     <div class="dr-step" data-step="2">${hd(2, { ar: 'أين وماذا؟', en: 'Where and what?' })}<div class="dr-bd">${pills('city', DOOR_CITIES, LSTATE.city)}${pills('type', DOOR_TYPES, LSTATE.type)}</div></div>
@@ -1963,23 +1973,24 @@ function mountDoor(id) {
   LSTATE.contact = LSTATE.contact || 'call';
   qa('[data-chips="contact"] button').forEach(b => b.addEventListener('click', () => { LSTATE.contact = b.dataset.v; setPill('contact', LSTATE.contact); }));
   q('[data-consentmore]').addEventListener('click', (e) => { e.preventDefault(); const x = q('[data-consentfull]'); x.hidden = !x.hidden; });
+  const tl = q('[data-toloan]'); if (tl) tl.addEventListener('click', () => { LSTATE.pay = 'loan'; try { sessionStorage.setItem('atbah_pay', 'loan'); } catch (e) {} setPill('pay', 'loan'); go(1); });
   f.__setCity = (c) => { LSTATE.city = c; setPill('city', c); if (!DSTATE.done && LSTATE.pay && DSTATE.ok2 && !LSTATE.type) go(2); else render(); };
   const err = q('[data-err]');
   f.addEventListener('submit', async (e) => {
     e.preventDefault(); err.hidden = true;
     const fail = (m, step) => { if (step != null) go(step); err.textContent = m; err.hidden = step != null && step !== 3; if (step != null && step !== 3) { const h = f.querySelector(`[data-step="${step}"]`); h && h.scrollIntoView({ behavior: 'smooth', block: 'center' }); } return false; };
     const S3 = L3[LANG];
-    const name = q('input[name=name]').value.trim(), phone = drLatin(q('input[name=phone]').value).replace(/[\s\-()]/g, '');
+    const name = q('input[name=name]').value.trim(), phone = saPhone(q('input[name=phone]').value) || '';
     if (!LSTATE.pay) return fail(S3.errPay, 0);
     if (!DSTATE.ok2) { DSTATE.ok2 = true; }
     if (!LSTATE.city) return fail(S3.errCity, 2);
     if (!LSTATE.type) return fail(S3.errType, 2);
     if (name.length < 2) return fail(S3.errName);
-    if (!/^(05\d{8}|\+9665\d{8}|9665\d{8})$/.test(phone)) return fail(S3.errPhone);
+    if (!phone) return fail(S3.errPhone);
     const c = doorCalc(); if (c.ceil < 100000) return fail(S3.errBudget, 1);
     const btn = q('[data-submit]'); btn.disabled = true; const label = btn.textContent; btn.textContent = T({ ar: 'نفتح الباب…', en: 'Opening…' });
     const note = ['ابدأ من سقفك (الباب)', 'الموافقة: إشعار عند الإرسال (دون مربع)', c.loan ? `سقف تقديري ${fmt(c.ceil)} ريال · مدة ${DSTATE.term} سنة` : `ميزانية كاش ${fmt(c.ceil)} ريال`, LSTATE.contact === 'wa' ? 'التواصل: واتساب' : 'التواصل: اتصال'].join(' · ');
-    const rec = { name, phone: phone.replace(/^(\+?966)/, '0'), email: null, role: 'buyer', city: CITY_AR[LSTATE.city] || LSTATE.city, budget: Math.round(c.ceil), note,
+    const rec = { name, phone, email: null, role: 'buyer', city: CITY_AR[LSTATE.city] || LSTATE.city, budget: Math.round(c.ceil), note,
       wishes: { pay: LSTATE.pay, ptype: LSTATE.type, rooms: 'any', status: 'any', purpose: 'live', when: '3m', district: null, nearby: null },
       consent_text_ver: 'phase0-v3', consent_lang: LANG, marketing_consent: false, source: 'home-door' + (c.loan ? '+calc' : '') };
     try { window.va && window.va('event', { name: 'submit', data: { source: 'home-door' } }); } catch (e2) {}
@@ -2299,6 +2310,11 @@ function snInit() {
 function snI18n() { $('#sntip').textContent = snT({ ar: 'اسأل سَنَد', en: 'Ask Sanad' }); $('#sn_name').textContent = snT({ ar: 'سَنَد', en: 'Sanad' }); $('#sn_sub').textContent = snT({ ar: 'مساعد عتبة الآلي · أرقام تقديرية', en: 'Atbah’s AI assistant · figures are estimates' }); $('#sn_in').placeholder = snT({ ar: 'اكتب سؤالك…', en: 'Type your question…' }); $('#sn_note').textContent = snT({ ar: 'مساعد آلي لا مستشار. لا تُحفظ المحادثة ولا تُجمع بيانات شخصية هنا. الأرقام تقديرية غير ملزمة.', en: 'An automated assistant, not an advisor. Chats are not stored and no personal data is collected here. Figures are non-binding estimates.' }); $('#snbtn').setAttribute('aria-label', snT({ ar: 'اسأل سَنَد', en: 'Ask Sanad' })); }
 
 snInit();
+(function typingGuard() {
+  const isField = (e) => e && e.matches && e.matches('input:not([type=range]):not([type=checkbox]):not([type=radio]):not([type=button]):not([type=submit]), textarea, select') && !e.closest('#sn');
+  document.addEventListener('focusin', (e) => { if (isField(e.target)) document.body.classList.add('typing'); });
+  document.addEventListener('focusout', () => setTimeout(() => { if (!isField(document.activeElement)) document.body.classList.remove('typing'); }, 120));
+})();
 (function bootLang() {
   if (!(LANG_SAVED || LANG_BOT || LANG_BROWSER_AR)) {
     let tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
