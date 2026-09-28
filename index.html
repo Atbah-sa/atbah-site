@@ -1003,6 +1003,116 @@ body[data-lang="en"] .adt b{font-size:17.5px;line-height:1.15}
 .sn-btn .sn-tip{opacity:0!important;visibility:hidden;pointer-events:none;transform:translateX(var(--sn-dx,-6px));transition:opacity .25s ease,transform .25s ease,visibility 0s linear .25s;animation:none!important}
 .sn-btn:hover .sn-tip,.sn-btn:focus-visible .sn-tip{opacity:1!important;visibility:visible;transform:none;transition:opacity .25s ease,transform .25s ease,visibility 0s}
 @media (hover:none){.sn-btn .sn-tip{display:none}}
+/* ================= v5.8 — polish (same layout, finer finish) ================= */
+:root{--hair-gold:rgba(201,150,74,.38);--grain:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .95 0 0 0 0 .92 0 0 0 0 .86 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  --arch:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 130 142'%3E%3Cpath d='M18.5 106 L18.5 46 A25.5 25.5 0 0 1 44 20.5 L86 20.5 A25.5 25.5 0 0 1 111.5 46 L111.5 106 L98.5 106 L98.5 46 A12.5 12.5 0 0 0 86 33.5 L44 33.5 A12.5 12.5 0 0 0 31.5 46 L31.5 106 Z M48 106 L48 65 A17 17 0 0 1 82 65 L82 106 Z M14 116 H116 V130 H14 Z'/%3E%3C/svg%3E")}
+::selection{background:#E2BB78;color:#10322D}
+html{scrollbar-color:#2E5A52 #0B2521}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+:focus-visible{outline:2px solid #E2BB78;outline-offset:3px;border-radius:2px}
+a{text-underline-offset:.24em;text-decoration-thickness:1px}
+h1,h2,h3,.lx-h2{text-wrap:balance}
+p{text-wrap:pretty}
+
+/* film grain on every dark surface — the paper-and-ink feel of a printed brochure */
+.lx-hero,.lx-sec.dark,.lx-final,footer,.dr-panel,nav.top{position:relative}
+.lx-hero::after,.lx-sec.dark::after,.lx-final::after,footer::after,.dr-panel::after{content:"";position:absolute;inset:0;background-image:var(--grain);background-size:160px;opacity:.07;mix-blend-mode:overlay;pointer-events:none;z-index:0}
+.lx-hero>.wrap,.lx-final>.wrap,footer>.wrap,.lx-sec.dark>.wrap{position:relative;z-index:1}
+.dr-panel>*{position:relative;z-index:1}
+
+/* hero: a slower, staged entrance */
+@keyframes lxRise{from{opacity:0;transform:translateY(18px);filter:blur(4px)}to{opacity:1;transform:none;filter:none}}
+@media(prefers-reduced-motion:no-preference){
+  .lx-hero .lx-kicker{animation:lxRise 1s cubic-bezier(.16,1,.3,1) .15s both}
+  .lx-hero h1{animation:lxRise 1.2s cubic-bezier(.16,1,.3,1) .3s both}
+  .lx-hero .sub{animation:lxRise 1.1s cubic-bezier(.16,1,.3,1) .55s both}
+  .lx-hero .lx-cta{animation:lxRise 1.1s cubic-bezier(.16,1,.3,1) .75s both}
+}
+.lx-hero h1{letter-spacing:-.005em}
+.lx-kicker b{letter-spacing:.02em}
+.lx-kicker::after{content:"";width:6px;height:6px;transform:rotate(45deg);border:1px solid #E2BB78;flex:0 0 auto}
+
+/* eyebrows: engraved numerals */
+.lx-eyebrow .num{font-variant-numeric:lining-nums;font-feature-settings:'lnum' 1;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:600;font-size:22px;line-height:1;color:#C9964A;letter-spacing:.02em}
+.lx-sec.dark .lx-eyebrow .num{color:#E2BB78}
+.lx-eyebrow i{width:44px}
+.lx-h2{letter-spacing:-.005em}
+
+/* the arch seal between sections — the logo stitched into every seam */
+.lx-sec+.lx-sec::before{content:"";position:absolute;top:0;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;box-sizing:border-box;background:var(--ground) var(--arch) center/19px auto no-repeat;border:1px solid var(--hair-gold);z-index:3}
+.lx-sec.paper+.lx-sec::before{background-color:var(--ground)}
+.lx-sec+.lx-sec.paper::before{background-color:var(--surface2)}
+.lx-sec.dark+.lx-sec::before,.lx-sec+.lx-sec.dark::before{display:none}
+
+/* region tiles: a gold passe-partout that draws in on hover */
+.lx-tile{outline:1px solid rgba(226,187,120,0);outline-offset:-14px;transition:outline-color .6s ease,outline-offset .6s cubic-bezier(.16,1,.3,1),transform .6s cubic-bezier(.2,.7,.2,1),box-shadow .6s ease}
+.lx-tile:hover{outline-color:rgba(226,187,120,.6);outline-offset:-18px}
+.lx-tile .cap b{letter-spacing:-.005em;text-shadow:0 2px 18px rgba(0,0,0,.45)}
+.lx-tile .lx-arr{transition:transform .5s cubic-bezier(.16,1,.3,1)}
+.lx-tile:hover .lx-arr{transform:translateX(-6px)}
+body[data-lang="en"] .lx-tile:hover .lx-arr{transform:translateX(6px) scaleX(-1)}
+
+/* steps: numerals set like a monument */
+.lx-step{border-top:0;position:relative}
+.lx-step::before{content:"";position:absolute;top:0;inset-inline:0;height:1px;background:linear-gradient(to left,var(--ink),rgba(16,50,45,.12))}
+body[data-lang="en"] .lx-step::before{background:linear-gradient(to right,var(--ink),rgba(16,50,45,.12))}
+.lx-step .n{font-variant-numeric:lining-nums;font-feature-settings:'lnum' 1;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-weight:500;color:#C9964A;letter-spacing:-.02em}
+.lx-step b{font-family:'Amiri',serif;font-size:21px;font-weight:700;letter-spacing:0}
+body[data-lang="en"] .lx-step b{font-family:'Cormorant Garamond',serif;font-size:23px}
+
+/* deals index: precise, engraved figures */
+.lx-deals{border-top-color:#C9964A}
+.lx-deals .v{font-variant-numeric:tabular-nums lining-nums;letter-spacing:-.02em}
+.lx-deals .k{font-family:'Amiri',serif;font-size:19px;font-weight:700}
+body[data-lang="en"] .lx-deals .k{font-family:'Cormorant Garamond',serif;font-size:21px}
+
+/* pledge: each promise sealed with the arch */
+.lx-pledge h3{display:flex;align-items:center;gap:12px}
+.lx-pledge h3::before{content:"";flex:0 0 auto;width:18px;height:20px;background:#B4522B;-webkit-mask:var(--arch) center/contain no-repeat;mask:var(--arch) center/contain no-repeat;opacity:.9}
+
+/* the door panel: framed like a showcase */
+.dr-panel{box-shadow:inset 0 0 0 1px rgba(226,187,120,.16),inset 0 0 0 9px #10322D,inset 0 0 0 10px rgba(226,187,120,.1)}
+.dr-ceil{letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.dr-step.open{box-shadow:0 18px 40px -26px rgba(16,50,45,.4),inset 0 1px 0 rgba(255,255,255,.6)}
+
+/* buttons: calmer shimmer, crisper edge */
+.lx-hero .lx-cta .btn:not(.lx-ghost)::after,.lx-final .lx-cta .btn:not(.lx-ghost)::after{animation-duration:11s}
+.btn{letter-spacing:.01em}
+.btn.lx-ghost{border-color:rgba(241,236,227,.42)}
+
+/* nav: underline that grows from the centre */
+nav.top .links a{position:relative}
+nav.top .links a::after{content:"";position:absolute;left:50%;right:50%;bottom:2px;height:1px;background:#E2BB78;transition:left .35s ease,right .35s ease}
+nav.top .links a:hover::after{left:14px;right:14px}
+
+/* final call: quiet arch watermark reads stronger */
+.lx-final .lx-bgarch svg path{stroke-width:.45}
+.lx-final h2{letter-spacing:-.005em}
+
+/* footer: gold hairline and a faint seal */
+footer{border-top:1px solid transparent;background-image:linear-gradient(90deg,transparent,rgba(201,150,74,.5),transparent);background-size:100% 1px;background-repeat:no-repeat;background-color:var(--rail2)}
+footer .cols>div:first-child b{letter-spacing:.01em}
+footer a{transition:color .25s}
+footer a:hover{color:#E2BB78}
+footer .legal{border-top-color:rgba(201,150,74,.18)}
+
+/* small screens keep the seal smaller */
+@media(max-width:760px){.lx-sec+.lx-sec::before{width:36px;height:36px;background-size:15px auto}.lx-eyebrow .num{font-size:19px}}
+@media(prefers-reduced-motion:reduce){.lx-tile,.lx-tile .lx-arr,nav.top .links a::after{transition:none}}
+/* ================= v5.9 — unified type + fixes ================= */
+/* one type system on every page: Amiri for headings, IBM Plex Sans Arabic for text, Archivo for numbers, Reem Kufi only in the wordmark */
+button,input,select,textarea{font-family:inherit}
+h1,h2,h3,.pull{font-family:'Amiri','IBM Plex Sans Arabic',serif!important;font-weight:700!important;letter-spacing:0}
+h3{line-height:1.5}
+body[data-lang="en"] h1,body[data-lang="en"] h2,body[data-lang="en"] h3,body[data-lang="en"] .pull,body[data-lang="en"] .lx-step b,body[data-lang="en"] .lx-deals .k{font-family:'Cormorant Garamond','Amiri',Georgia,serif!important;font-weight:600!important}
+.num,[dir="ltr"].num{font-family:'Archivo',sans-serif}
+/* selected chips stay readable in dark mode */
+.chips button[aria-pressed=true]{color:var(--ground)}
+/* consent notice (checkbox paused) */
+.consent-note{margin:4px 0 0;font-size:12.5px;line-height:1.8;color:var(--muted)}
+.consent-note a{color:var(--goldink)}
+.consent-note [data-consentfull]{display:block;margin-top:6px;font-size:12px}
+.consent-note [data-consentfull][hidden]{display:none}
 </style>
 <nav class="top" id="nav"></nav>
 <main id="app"></main>
@@ -1382,7 +1492,7 @@ function pageRequest(params) {
     <div class="report rv" style="position:relative;overflow:hidden"><div style="position:absolute;inset:0;display:grid;place-items:center;transform:rotate(-22deg);opacity:.06;pointer-events:none">${LOGO(360, '#10322D')}</div>
       <div class="rh"><div class="brand">${LOGO(34, '#10322D')}<span>${LANG === 'ar' ? 'عتبة' : 'ATBAH'}</span></div><div class="sm">${T({ ar: 'تقرير عروض مطابقة لطلبك · مثال بأرقام حقيقية من حي العارض', en: 'Matched offers report · example with real Al-Aridh figures' })} · <span class="num">REQ-2026-0142</span></div></div>
       <p style="margin:0 0 12px">${T({ ar: 'بحثنا في السوق كله ووجدنا <b class="num">41</b> عرضًا مطابقًا؛ جارٍ التحقق من <b class="num">33</b> منها مع ملاكها، و<b class="num">3</b> جاهزة للمعاينة الآن. كل عرض مقارَن بوسيط سعر المتر في الصفقات المسجّلة في العارض (<b class="num">10,425</b> ريال/م² — البورصة العقارية). لا رسوم عليك.', en: 'We searched the whole market and found <b class="num">41</b> matching offers; <b class="num">33</b> are being verified with their owners and <b class="num">3</b> are ready to view now. Each is measured against the median registered deal price in Al-Aridh (<b class="num">10,425</b> SAR/m²). No fee to you.' })}</p>
-      ${[['ATB-0003', { ar: 'فيلا جاهزة في العارض', en: 'Ready villa, Al-Aridh' }, '3,350,000', '402', '5', '8,333', '−20.1%', true, false], ['ATB-0007', { ar: 'فيلا على الخارطة في العارض', en: 'Off-plan villa, Al-Aridh' }, '2,950,000', '330', '4', '8,939', '−14.3%', true, true], ['ATB-0002', { ar: 'فيلا جديدة في العارض', en: 'New villa, Al-Aridh' }, '3,500,000', '302', '4', '11,589', '+11.2%', false, false]].map(o => `<div style="border:1px solid ${o[8] ? '#C9964A' : 'var(--line)'};border-radius:8px;padding:12px 14px;margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline"><b><span class="num">${o[0]}</span> · ${T(o[1])}</b><span class="sm">${o[8] ? `<span style="background:#F3E8D2;color:#7A5A22;border-radius:4px;padding:1px 8px">${T({ ar: 'مشروع عتبة — نفصح أن لنا مصلحة فيه', en: 'Atbah project — we disclose our interest' })}</span> ` : ''}${T({ ar: 'جاهز للمعاينة', en: 'Ready to view' })}</span></div><div class="kv" style="margin-top:8px"><div><span>${T({ ar: 'السعر', en: 'Price' })}</span><b class="num">${o[2]}</b></div><div><span>${T({ ar: 'المساحة · الغرف', en: 'Area · rooms' })}</span><b><span class="num">${o[3]}</span> م² · ${o[4]}</b></div><div><span>${T({ ar: 'سعر المتر', en: 'Price / m²' })}</span><b class="num">${o[5]}</b></div><div><span>${T({ ar: 'مقابل صفقات الحي', en: 'vs. district deals' })}</span><b class="num" style="color:${o[7] ? '#2E5A52' : '#B4522B'}">${o[6]}</b></div></div></div>`).join('')}
+      ${[['ATB-0003', { ar: 'فيلا جاهزة في العارض', en: 'Ready villa, Al-Aridh' }, '3,350,000', '402', '5', '8,333', '−20.1%', true, false], ['ATB-0007', { ar: 'فيلا على الخارطة في العارض', en: 'Off-plan villa, Al-Aridh' }, '2,950,000', '330', '4', '8,939', '−14.3%', true, true], ['ATB-0002', { ar: 'فيلا جديدة في العارض', en: 'New villa, Al-Aridh' }, '3,500,000', '302', '4', '11,589', '+11.2%', false, false]].map(o => `<div style="border:1px solid ${o[8] ? '#C9964A' : 'var(--line)'};border-radius:8px;padding:12px 14px;margin-bottom:10px"><div style="display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline"><b><span class="num">${o[0]}</span> · ${T(o[1])}</b><span class="sm">${o[8] ? `<span style="background:#F3E8D2;color:#7A5A22;border-radius:4px;padding:1px 8px">${T({ ar: 'مشروع عتبة — نفصح أن لنا مصلحة فيه', en: 'Atbah project — we disclose our interest' })}</span> ` : ''}${T({ ar: 'جاهز للمعاينة', en: 'Ready to view' })}</span></div><div class="kv" style="margin-top:8px"><div><span>${T({ ar: 'السعر', en: 'Price' })}</span><b class="num">${o[2]}</b></div><div><span>${T({ ar: 'المساحة · الغرف', en: 'Area · rooms' })}</span><b><span class="num">${o[3]}</span> م² · ${o[4]}</b></div><div><span>${T({ ar: 'سعر المتر', en: 'Price / m²' })}</span><b class="num">${o[5]}</b></div><div><span>${T({ ar: 'مقابل صفقات الحي', en: 'vs. district deals' })}</span><b class="num" style="color:${o[7] ? 'var(--ok)' : 'var(--clayink)'}">${o[6]}</b></div></div></div>`).join('')}
       <p class="sm" style="margin:0">${T({ ar: 'لا يحوي التقرير روابط الإعلانات ولا أرقام الملاك؛ الموقع الدقيق والصور عند المعاينة بحضور مستشارك. الأسعار كما وردت من الملاك وقت التحقق.', en: 'The report carries no listing links or owner numbers; exact location and photos at the viewing with your advisor. Prices as stated by owners at verification time.' })}</p></div></div></section>
   <section class="v3sec"><div class="wrap"><div class="v3head rv"><div class="no">03</div><div><div class="lab">${T({ ar: 'مؤشر الصفقات', en: 'Deals index' })}</div><h2>${T({ ar: 'وسيط سعر المتر في الصفقات المسجّلة — أحياء الرياض', en: 'Median registered deal price per m² — Riyadh districts' })}</h2></div></div>
     <div class="card rv" style="padding:18px"><div style="overflow:auto"><table style="width:100%;border-collapse:collapse;font-size:14px;min-width:560px"><thead><tr>${[{ ar: 'الحي', en: 'District' }, { ar: 'صفقات مسجّلة', en: 'Registered deals' }, { ar: 'فلل', en: 'Villas' }, { ar: 'شقق', en: 'Apartments' }, { ar: 'أرض سكنية', en: 'Residential land' }, { ar: '', en: '' }].map(h => `<th style="text-align:start;font-size:11.5px;color:var(--muted);font-weight:500;padding:6px 8px;border-bottom:1px solid var(--line)">${T(h)}</th>`).join('')}</tr></thead><tbody>${top.map(r => `<tr><td style="padding:8px;border-bottom:1px solid var(--line)"><b>${r.n}</b></td><td class="num" style="padding:8px;border-bottom:1px solid var(--line)">${r.c}</td><td class="num" style="padding:8px;border-bottom:1px solid var(--line)"><b>${fm(r.v)}</b></td><td class="num" style="padding:8px;border-bottom:1px solid var(--line)">${fm(r.a)}</td><td class="num" style="padding:8px;border-bottom:1px solid var(--line)">${fm(r.l)}</td><td style="padding:8px;border-bottom:1px solid var(--line)"><a href="#/request?district=${encodeURIComponent(r.n)}#ledger_request">${T({ ar: 'اطلب في ' + r.n, en: 'Request in ' + r.n })}</a></td></tr>`).join('')}</tbody></table></div>
@@ -1637,7 +1747,7 @@ function ledgerHtml(id, { source = 'home', withCalc = true } = {}) {
       <div class="row2"><div class="f"><label for="${id}_name">${S3.name}</label><input type="text" id="${id}_name" name="name" autocomplete="name"></div><div class="f"><label for="${id}_phone">${S3.phone}</label><input type="tel" id="${id}_phone" name="phone" inputmode="tel" placeholder="05xxxxxxxx" autocomplete="tel"></div></div>
       <div class="f" style="margin-top:4px"><label>${S3.contact}</label>${chip('contact', [['call', S3.call], ['wa', S3.wa]], LSTATE.contact)}</div>
       <div class="f" data-timebox hidden><label>${S3.calltime}</label>${chip('time', S3.times, LSTATE.time)}</div>
-      <label class="consent"><input type="checkbox" name="consent"><span>${T({ ar: 'أوافق على التواصل معي بخصوص طلبي وفق <a href="#/privacy">سياسة الخصوصية</a>.', en: 'I agree to be contacted about my request per the <a href="#/privacy">privacy policy</a>.' })} <a href="#" data-consentmore style="color:var(--goldink);white-space:nowrap">${T({ ar: 'التفاصيل', en: 'Details' })}</a><span data-consentfull hidden style="display:block;margin-top:6px;font-size:12px;color:var(--muted)">${I.consent}</span></span></label>
+      <p class="consent-note">${T({ ar: 'بإرسال طلبك توافق على أن نتواصل معك بخصوصه وفق <a href="#/privacy">سياسة الخصوصية</a>.', en: 'By sending your request you agree that we contact you about it per the <a href="#/privacy">privacy policy</a>.' })} <a href="#" data-consentmore style="white-space:nowrap">${T({ ar: 'التفاصيل', en: 'Details' })}</a><span data-consentfull hidden>${I.consent}</span></p>
       <label class="consent" style="margin-top:-4px"><input type="checkbox" name="marketing"><span>${I.marketing}</span></label>
       <div class="err" data-err hidden></div>
       <button class="btn" type="submit" data-submit>${S3.submit}</button></div></div>
@@ -1699,13 +1809,12 @@ function mountLedger(id, { withCalc = true } = {}) {
     if (!/^(05\d{8}|\+9665\d{8}|9665\d{8})$/.test(phone)) return fail(S3.errPhone);
     if (!LSTATE.contact) return fail(S3.errContact);
     if (LSTATE.contact === 'call' && !LSTATE.time) return fail(S3.errTime);
-    if (!q('input[name=consent]').checked) return fail(S3.errConsent);
     const btn = q('[data-submit]'); btn.disabled = true; btn.textContent = S3.sending;
     const v = (n) => { const el = q(`[name=${n}]`); return el ? el.value : ''; };
     const timeAr = { morning: 'صباحاً 9–12', noon: 'ظهراً 12–4', evening: 'مساءً 4–9', any: 'أي وقت' };
     const contactLine = LSTATE.contact === 'wa' ? 'التواصل: واتساب' : `التواصل: اتصال — ${timeAr[LSTATE.time] || ''}`;
     const nearbyList = isReq ? [...NEARSEL] : [];
-    const rec = { name, phone: phone.replace(/^(\+?966)/, '0'), email: null, role: 'buyer', city: CITY_AR[LSTATE.city] || LSTATE.city, budget: Math.round(numVal(budgetEl)), note: [isReq ? 'طلب عقارك' : '', contactLine, nearbyList.length ? 'الأحياء المجاورة: ' + nearbyList.join('، ') : '', v('note').trim()].filter(Boolean).join(' · '),
+    const rec = { name, phone: phone.replace(/^(\+?966)/, '0'), email: null, role: 'buyer', city: CITY_AR[LSTATE.city] || LSTATE.city, budget: Math.round(numVal(budgetEl)), note: [isReq ? 'طلب عقارك' : '', contactLine, 'الموافقة: إشعار عند الإرسال (دون مربع)', nearbyList.length ? 'الأحياء المجاورة: ' + nearbyList.join('، ') : '', v('note').trim()].filter(Boolean).join(' · '),
       wishes: { pay: LSTATE.pay, ptype: LSTATE.type, rooms: v('rooms') || 'any', status: v('status') || 'any', purpose: v('purpose') || 'live', when: v('when') || '3m', district: v('district').trim() || null, nearby: nearbyList.join('،') || null },
       consent_text_ver: 'phase0-v3', consent_lang: LANG, marketing_consent: q('input[name=marketing]').checked, source: f.dataset.source + (LSTATE.fromCalc ? '+calc' : '') };
     try {
@@ -1788,7 +1897,7 @@ function doorHtml(id) {
     <div class="dr-step" data-step="3">${hd(3, { ar: 'كيف نصل إليك؟', en: 'How do we reach you?' })}<div class="dr-bd">
       <div class="dr-row"><label style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)" for="${id}_name">${T({ ar: 'الاسم', en: 'Name' })}</label><input class="inp" id="${id}_name" name="name" autocomplete="name" placeholder="${T({ ar: 'الاسم', en: 'Name' })}"><label style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)" for="${id}_phone">${T({ ar: 'رقم الجوال', en: 'Mobile' })}</label><input class="inp" id="${id}_phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="05xxxxxxxx" dir="ltr" style="font-family:Archivo,sans-serif;text-align:${LANG === 'ar' ? 'right' : 'left'}"></div>
       <div class="dr-pills"><span class="lb">${T({ ar: 'نتواصل عبر', en: 'Contact via' })}</span>${pills('contact', [['call', { ar: 'اتصال', en: 'Call' }], ['wa', { ar: 'واتساب', en: 'WhatsApp' }]], LSTATE.contact || 'call').replace('<div class="dr-pills ', '<div style="display:contents" class="dr-pills ')}<button type="submit" class="dr-go" data-submit>${T({ ar: 'افتح لي الباب', en: 'Open the door for me' })}</button></div>
-      <label class="dr-cons"><input type="checkbox" name="consent"><span>${T({ ar: 'أوافق على التواصل معي بخصوص طلبي وفق <a href="#/privacy">سياسة الخصوصية</a> — نحفظ سقفك التقديري لا راتبك.', en: 'I agree to be contacted about my request per the <a href="#/privacy">privacy policy</a> — we keep your estimated ceiling, not your salary.' })} <a href="#" data-consentmore style="color:var(--goldink);white-space:nowrap">${T({ ar: 'التفاصيل', en: 'Details' })}</a><span data-consentfull hidden style="display:block;margin-top:6px">${INTEREST[LANG].consent}</span></span></label>
+      <p class="consent-note">${T({ ar: 'بإرسال طلبك توافق على أن نتواصل معك بخصوصه وفق <a href="#/privacy">سياسة الخصوصية</a> — نحفظ سقفك التقديري لا راتبك.', en: 'By sending your request you agree that we contact you about it per the <a href="#/privacy">privacy policy</a> — we keep your estimated ceiling, not your salary.' })} <a href="#" data-consentmore style="white-space:nowrap">${T({ ar: 'التفاصيل', en: 'Details' })}</a><span data-consentfull hidden>${INTEREST[LANG].consent}</span></p>
       <div class="dr-err" data-err hidden></div></div></div>
   </div>
   <div class="dr-panel" aria-live="polite">
@@ -1866,10 +1975,9 @@ function mountDoor(id) {
     if (!LSTATE.type) return fail(S3.errType, 2);
     if (name.length < 2) return fail(S3.errName);
     if (!/^(05\d{8}|\+9665\d{8}|9665\d{8})$/.test(phone)) return fail(S3.errPhone);
-    if (!q('input[name=consent]').checked) return fail(S3.errConsent);
     const c = doorCalc(); if (c.ceil < 100000) return fail(S3.errBudget, 1);
     const btn = q('[data-submit]'); btn.disabled = true; const label = btn.textContent; btn.textContent = T({ ar: 'نفتح الباب…', en: 'Opening…' });
-    const note = ['ابدأ من سقفك (الباب)', c.loan ? `سقف تقديري ${fmt(c.ceil)} ريال · مدة ${DSTATE.term} سنة` : `ميزانية كاش ${fmt(c.ceil)} ريال`, LSTATE.contact === 'wa' ? 'التواصل: واتساب' : 'التواصل: اتصال'].join(' · ');
+    const note = ['ابدأ من سقفك (الباب)', 'الموافقة: إشعار عند الإرسال (دون مربع)', c.loan ? `سقف تقديري ${fmt(c.ceil)} ريال · مدة ${DSTATE.term} سنة` : `ميزانية كاش ${fmt(c.ceil)} ريال`, LSTATE.contact === 'wa' ? 'التواصل: واتساب' : 'التواصل: اتصال'].join(' · ');
     const rec = { name, phone: phone.replace(/^(\+?966)/, '0'), email: null, role: 'buyer', city: CITY_AR[LSTATE.city] || LSTATE.city, budget: Math.round(c.ceil), note,
       wishes: { pay: LSTATE.pay, ptype: LSTATE.type, rooms: 'any', status: 'any', purpose: 'live', when: '3m', district: null, nearby: null },
       consent_text_ver: 'phase0-v3', consent_lang: LANG, marketing_consent: false, source: 'home-door' + (c.loan ? '+calc' : '') };
