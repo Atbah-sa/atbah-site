@@ -21,7 +21,21 @@
 {"@type":"Question","name":"كم تكلفة الشراء يوم الإفراغ إضافةً إلى الدفعة؟","acceptedAnswer":{"@type":"Answer","text":"ضريبة التصرّفات العقارية ٥٪ (تتحمّلها الدولة للمسكن الأول حتى مليون ريال)، عمولة الوساطة ٢٫٥٪ مع ضريبة القيمة المضافة، ورسوم إدارية بسقف ١٪ أو ٥٬٠٠٠ ريال. حاسبة الكاش المطلوب يوم الشراء تجمعها لك."}}]}
 ]}
 </script>
-<style>body{margin:0}</style></head><body>
+<style>body{margin:0}
+/* projects: live project cards */
+.pj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-top:22px}
+.pj-card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;text-decoration:none;color:var(--ink);transition:transform .25s,box-shadow .25s,border-color .25s}
+.pj-card:hover{transform:translateY(-3px);box-shadow:0 18px 40px -22px rgba(16,50,45,.45);border-color:var(--gold)}
+.pj-img{display:block;aspect-ratio:4/3;overflow:hidden;background:var(--sand)}
+.pj-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s}
+.pj-card:hover .pj-img img{transform:scale(1.04)}
+.pj-b{display:flex;flex-direction:column;gap:6px;padding:16px 18px 18px}
+.pj-k{font-size:13px;color:var(--goldink);font-weight:600}
+.pj-t{font-family:'Reem Kufi',Tahoma,system-ui,sans-serif;font-weight:600;font-size:24px;line-height:1.3}
+body[data-lang="en"] .pj-t{font-family:'Archivo',system-ui,sans-serif}
+.pj-d{font-size:14.5px;color:var(--muted);line-height:1.7}
+.pj-go{margin-top:6px;font-size:14px;font-weight:600;color:var(--clay)}
+</style></head><body>
 <noscript><h1>عتبة — حاسبة القدرة الشرائية العقارية و١١ حاسبة عقارية</h1><p>للمشتري: القدرة الشرائية · القسط الشهري · الكاش المطلوب يوم الشراء · متى أقدر أشتري؟ · إيجار أم تملّك؟ · العائد الإيجاري · العائد الاستثماري. للمستثمر: العائد الإيجاري · المعدّل الرأسمالي · التدفّق النقدي المخصوم · الرافعة والدين.</p><p>شركة عتبة بداية العقارية — رخصة فال 1200050979 — السجل التجاري 7055177823 — info@atbah.sa</p></noscript>
 <style>
 :root{
@@ -2154,9 +2168,14 @@ function pageAbout() {
 /* ================= مشاريعنا v3 ================= */
 function pageProjects() {
   const cities = [[{ ar: 'الرياض', en: 'Riyadh' }, { ar: 'مشاريع سكنية جاهزة وعلى الخارطة.', en: 'Ready and off-plan residential projects.' }], [{ ar: 'جدة', en: 'Jeddah' }, { ar: 'مشاريع سكنية جاهزة وعلى الخارطة.', en: 'Ready and off-plan residential projects.' }], [{ ar: 'المنطقة الشرقية', en: 'Eastern Province' }, { ar: 'الدمام · الخبر · الظهران.', en: 'Dammam · Khobar · Dhahran.' }]];
-  return { html: `<header class="v3hero has-photo" style="padding-block:44px 48px">${atbMedia({ src: 'media/scenes/masterplan.jpg', pos: '50% 50%', eager: true })}<span class="atb-veil"></span><div class="arches"></div><div class="wrap" style="position:relative"><div class="rv in"><div class="kicker"><i></i>${T({ ar: 'قريباً على الموقع', en: 'Coming soon on the site' })}</div><h1>${T({ ar: 'مشاريعنا', en: 'Our projects' })}</h1>
-    <p class="sub">${T({ ar: 'نتعاقد مع مطوّرين في الرياض وجدة والمنطقة الشرقية على مشاريع سكنية جاهزة وعلى الخارطة. عرضها هنا يأتي قريباً؛ حتى ذلك الحين يعرضها عليك مستشارك مباشرةً — داخل سقفك فقط.', en: 'We contract with developers in Riyadh, Jeddah and the Eastern Province on ready and off-plan residential projects. Browsing them here comes soon; until then your advisor shows them to you directly — inside your ceiling only.' })}</p></div></div></header>
+  return { html: `<header class="v3hero has-photo" style="padding-block:44px 48px">${atbMedia({ src: 'media/scenes/masterplan.jpg', pos: '50% 50%', eager: true })}<span class="atb-veil"></span><div class="arches"></div><div class="wrap" style="position:relative"><div class="rv in"><div class="kicker"><i></i>${T({ ar: 'الرياض · جدة · المنطقة الشرقية', en: 'Riyadh · Jeddah · Eastern Province' })}</div><h1>${T({ ar: 'مشاريعنا', en: 'Our projects' })}</h1>
+    <p class="sub">${T({ ar: 'نتعاقد مع مطوّرين في الرياض وجدة والمنطقة الشرقية على مشاريع سكنية جاهزة وعلى الخارطة. نعرض هنا ما نسوّقه الآن، والباقي يعرضه عليك مستشارك مباشرةً — داخل سقفك فقط.', en: 'We contract with developers in Riyadh, Jeddah and the Eastern Province on ready and off-plan residential projects. What we are marketing now is shown here; your advisor shows you the rest directly — inside your ceiling only.' })}</p></div></div></header>
   <section class="v3sec"><div class="wrap"><div class="lx-tiles short">${cities.map((c, i) => `<div class="lx-tile rv">${LX_PHOTOS[i] ? atbMedia(LX_PHOTOS[i]) : LX_SCENES[i]}<span class="cap"><span><b>${T(c[0])}</b></span></span></div>`).join('')}</div>
+    <div class="v3head rv" style="margin-top:56px" id="pj-riyadh"><div class="no">01</div><div><div class="lab">${T({ ar: 'الرياض', en: 'Riyadh' })}</div><h2>${T({ ar: 'مشاريع نسوّقها الآن في الرياض', en: 'Projects we are marketing now in Riyadh' })}</h2></div></div>
+    <div class="pj-grid"><a class="pj-card rv" href="/najd7/" data-pj="najd7"><span class="pj-img"><img src="/najd7/thumb.webp" alt="${T({ ar: 'نجد 7 — فلل تاون هاوس في حي العارض بالرياض', en: 'Najd 7 — townhouses in Al Arid, Riyadh' })}" width="1200" height="900" loading="lazy" decoding="async"></span>
+      <span class="pj-b"><span class="pj-k">${T({ ar: 'الرياض · حي العارض', en: 'Riyadh · Al Arid' })}</span><b class="pj-t">${T({ ar: 'نجد 7', en: 'Najd 7' })}</b>
+      <span class="pj-d">${T({ ar: '73 فيلا تاون هاوس بأربعة نماذج · 3 و4 غرف نوم · مسبح ونادٍ رياضي وملعب ومواقف سفلية.', en: '73 townhouses in four types · 3–4 bedrooms · pool, gym, court and basement parking.' })}</span>
+      <span class="pj-go">${T({ ar: 'استكشف المشروع والمجسّم ثلاثي الأبعاد', en: 'Explore the project in 3D' })} <span aria-hidden="true">${LANG === 'ar' ? '←' : '→'}</span></span></span></a></div>
     <div class="v3head rv" style="margin-top:56px"><div class="no">→</div><div><div class="lab">${T({ ar: 'لا تنتظر الصفحة', en: 'Don’t wait for the page' })}</div><h2>${T({ ar: 'أخبرنا بما تبحث عنه — ونعرضه عليك خلال يومي عمل.', en: 'Tell us what you are looking for — and we show it to you within two working days.' })}</h2></div></div>
     <div style="max-width:720px" class="rv">${ledgerHtml('ledger_projects', { source: 'projects' })}</div></div></section>`,
     mount: () => { mountLedger('ledger_projects'); mountReveal(); } };
