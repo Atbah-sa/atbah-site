@@ -1507,7 +1507,12 @@ const GROUPS = {
 
 /* عتبة — التطبيق: توجيه، عرض الحاسبات، تسجيل الاهتمام */
 let LANG = 'ar';
-try { LANG = localStorage.getItem('atbah.lang') === 'en' ? 'en' : 'ar'; } catch (e) {}
+let LANG_SAVED = null;
+try { LANG_SAVED = localStorage.getItem('atbah.lang'); } catch (e) {}
+try { const ql = new URLSearchParams(location.search).get('lang') || (location.hash.match(/[?&]lang=(ar|en)/) || [])[1]; if (ql === 'ar' || ql === 'en') { LANG_SAVED = ql; localStorage.setItem('atbah.lang', ql); } } catch (e) {}
+const LANG_BOT = /bot|crawl|spider|slurp|facebookexternalhit|whatsapp|twitterbot|linkedinbot|telegram|preview/i.test(navigator.userAgent || '');
+const LANG_BROWSER_AR = ((navigator.languages && navigator.languages[0]) || navigator.language || '').toLowerCase().startsWith('ar');
+LANG = LANG_SAVED === 'en' || LANG_SAVED === 'ar' ? LANG_SAVED : 'ar';
 /* وضع الموقع: 'coming_soon' (الافتراضي — صفحة هبوط + الحاسبات + تسجيل الاهتمام) أو 'full'. للمقارنة: #/?mode=full */
 let SITE_MODE = 'coming_soon';
 try { const m = localStorage.getItem('atbah.mode'); if (m === 'full' || m === 'coming_soon') SITE_MODE = m; } catch (e) {}
@@ -2298,7 +2303,14 @@ function snInit() {
 function snI18n() { $('#sntip').textContent = snT({ ar: 'اسأل سَنَد', en: 'Ask Sanad' }); $('#sn_name').textContent = snT({ ar: 'سَنَد', en: 'Sanad' }); $('#sn_sub').textContent = snT({ ar: 'مساعد عتبة الآلي · أرقام تقديرية', en: 'Atbah’s AI assistant · figures are estimates' }); $('#sn_in').placeholder = snT({ ar: 'اكتب سؤالك…', en: 'Type your question…' }); $('#sn_note').textContent = snT({ ar: 'مساعد آلي لا مستشار. لا تُحفظ المحادثة ولا تُجمع بيانات شخصية هنا. الأرقام تقديرية غير ملزمة.', en: 'An automated assistant, not an advisor. Chats are not stored and no personal data is collected here. Figures are non-binding estimates.' }); $('#snbtn').setAttribute('aria-label', snT({ ar: 'اسأل سَنَد', en: 'Ask Sanad' })); }
 
 snInit();
-route();
+(function bootLang() {
+  if (!(LANG_SAVED || LANG_BOT || LANG_BROWSER_AR)) {
+    let tz = ''; try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+    const ARAB_TZ = /^(Asia\/(Riyadh|Dubai|Kuwait|Qatar|Bahrain|Muscat|Aden|Baghdad|Amman|Damascus|Beirut|Gaza|Hebron)|Africa\/(Cairo|Tripoli|Tunis|Algiers|Casablanca|El_Aaiun|Khartoum|Nouakchott|Mogadishu|Djibouti)|Indian\/Comoro)$/;
+    LANG = tz && !ARAB_TZ.test(tz) ? 'en' : 'ar';
+  }
+  route();
+})();
 
 </script>
 
