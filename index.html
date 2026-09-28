@@ -1015,7 +1015,7 @@ h1,h2,h3,.lx-h2{text-wrap:balance}
 p{text-wrap:pretty}
 
 /* film grain on every dark surface — the paper-and-ink feel of a printed brochure */
-.lx-hero,.lx-sec.dark,.lx-final,footer,.dr-panel,nav.top{position:relative}
+.lx-hero,.lx-sec.dark,.lx-final,footer{position:relative}
 .lx-hero::after,.lx-sec.dark::after,.lx-final::after,footer::after,.dr-panel::after{content:"";position:absolute;inset:0;background-image:var(--grain);background-size:160px;opacity:.07;mix-blend-mode:overlay;pointer-events:none;z-index:0}
 .lx-hero>.wrap,.lx-final>.wrap,footer>.wrap,.lx-sec.dark>.wrap{position:relative;z-index:1}
 .dr-panel>*{position:relative;z-index:1}
@@ -1080,10 +1080,6 @@ body[data-lang="en"] .lx-deals .k{font-family:'Cormorant Garamond',serif;font-si
 .btn{letter-spacing:.01em}
 .btn.lx-ghost{border-color:rgba(241,236,227,.42)}
 
-/* nav: underline that grows from the centre */
-nav.top .links a{position:relative}
-nav.top .links a::after{content:"";position:absolute;left:50%;right:50%;bottom:2px;height:1px;background:#E2BB78;transition:left .35s ease,right .35s ease}
-nav.top .links a:hover::after{left:14px;right:14px}
 
 /* final call: quiet arch watermark reads stronger */
 .lx-final .lx-bgarch svg path{stroke-width:.45}
@@ -1098,7 +1094,7 @@ footer .legal{border-top-color:rgba(201,150,74,.18)}
 
 /* small screens keep the seal smaller */
 @media(max-width:760px){.lx-sec+.lx-sec::before{width:36px;height:36px;background-size:15px auto}.lx-eyebrow .num{font-size:19px}}
-@media(prefers-reduced-motion:reduce){.lx-tile,.lx-tile .lx-arr,nav.top .links a::after{transition:none}}
+@media(prefers-reduced-motion:reduce){.lx-tile,.lx-tile .lx-arr{transition:none}}
 /* ================= v5.9 — unified type + fixes ================= */
 /* one type system on every page: Amiri for headings, IBM Plex Sans Arabic for text, Archivo for numbers, Reem Kufi only in the wordmark */
 button,input,select,textarea{font-family:inherit}
