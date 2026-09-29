@@ -1168,6 +1168,13 @@ body[data-lang="en"] .pj-t{font-family:'Cormorant Garamond','Amiri',Georgia,seri
 @media(prefers-reduced-motion:reduce){.pj-panel{animation:none}.pj-chev{transition:none}}
 @media(min-width:861px){.pj-tab{order:0!important}.pj-panel{order:1!important}}
 @media(max-width:860px){.pj-tabs{grid-template-columns:1fr;gap:14px}.pj-tab{aspect-ratio:16/8}.pj-panel{padding:6px 0 10px}}
+
+/* v5.9.9 — city projects pages */
+.pj-tabs a.pj-tab{text-decoration:none}
+.pj-others{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:22px}
+.pj-others a{font-size:14px;font-weight:600;color:var(--goldink);text-decoration:none}
+.pj-others a:hover{text-decoration:underline}
+.pj-cityhead .kicker a:hover{text-decoration:underline!important}
 </style>
 <nav class="top" id="nav"></nav>
 <main id="app"></main>
@@ -2090,7 +2097,7 @@ function pageComingSoon() {
 
   <section class="lx-sec cream lx-regions"><div class="wrap">
     <div class="lx-head rv has-ad">${adTile('installment')}<div>${eb('01', { ar: 'أين تبحث؟', en: 'Where are you looking?' })}<h2 class="lx-h2">${T({ ar: 'اختر منطقتك، ونبدأ من سقفك.', en: 'Pick your region, and we start with your ceiling.' })}</h2></div></div>
-    <div class="lx-tiles">${cities.map(([id, name], i) => `<a class="lx-tile rv" href="#/#start" data-lx-city="${id}">${LX_PHOTOS[i] ? atbMedia(LX_PHOTOS[i]) : LX_SCENES[i]}<span class="cap"><span><b>${T(name)}</b></span>${LX_ARROW}</span></a>`).join('')}</div>
+    <div class="lx-tiles">${cities.map(([id, name], i) => `<a class="lx-tile rv" href="#/projects/${id}">${LX_PHOTOS[i] ? atbMedia(LX_PHOTOS[i]) : LX_SCENES[i]}<span class="cap"><span><b>${T(name)}</b></span>${LX_ARROW}</span></a>`).join('')}</div>
   </div></section>
 
   <section class="lx-sec paper" id="start"><div class="wrap">
@@ -2197,29 +2204,39 @@ function pageAbout() {
 }
 
 /* ================= مشاريعنا v3 ================= */
-function pageProjects(params) {
-  const cities = [[{ ar: 'الرياض', en: 'Riyadh' }, { ar: 'مشاريع سكنية جاهزة وعلى الخارطة.', en: 'Ready and off-plan residential projects.' }], [{ ar: 'جدة', en: 'Jeddah' }, { ar: 'مشاريع سكنية جاهزة وعلى الخارطة.', en: 'Ready and off-plan residential projects.' }], [{ ar: 'المنطقة الشرقية', en: 'Eastern Province' }, { ar: 'الدمام · الخبر · الظهران.', en: 'Dammam · Khobar · Dhahran.' }]];
-  const PJ_KEYS = ['riyadh', 'jeddah', 'eastern'];
-  const najd7 = `<a class="pj-card" href="/najd7/" data-pj="najd7"><span class="pj-img"><img src="/najd7/thumb.webp" alt="${T({ ar: 'نجد 7 — فلل تاون هاوس في حي العارض بالرياض', en: 'Najd 7 — townhouses in Al Arid, Riyadh' })}" width="1200" height="900" loading="lazy" decoding="async"></span>
+function pjData() {
+  const najd7 = `<a class="pj-card rv" href="/najd7/" data-pj="najd7"><span class="pj-img"><img src="/najd7/thumb.webp" alt="${T({ ar: 'نجد 7 — فلل تاون هاوس في حي العارض بالرياض', en: 'Najd 7 — townhouses in Al Arid, Riyadh' })}" width="1200" height="900" loading="lazy" decoding="async"></span>
         <span class="pj-b"><span class="pj-k">${T({ ar: 'الرياض · حي العارض', en: 'Riyadh · Al Arid' })}</span><b class="pj-t">${T({ ar: 'نجد 7', en: 'Najd 7' })}</b>
         <span class="pj-d">${T({ ar: '73 فيلا تاون هاوس بأربعة نماذج · 3 و4 غرف نوم · مسبح ونادٍ رياضي وملعب ومواقف سفلية.', en: '73 townhouses in four types · 3–4 bedrooms · pool, gym, court and basement parking.' })}</span>
         <span class="pj-go">${T({ ar: 'استكشف المشروع والمجسّم ثلاثي الأبعاد', en: 'Explore the project in 3D' })} <span aria-hidden="true">${LANG === 'ar' ? '←' : '→'}</span></span></span></a>`;
-  const PJ_LIST = [[najd7], [], []];
-  const pjOpen = (params && params.get('city')) || '';
+  return [
+    { key: 'riyadh', name: { ar: 'الرياض', en: 'Riyadh' }, photo: 0, projects: [najd7] },
+    { key: 'jeddah', name: { ar: 'جدة', en: 'Jeddah' }, photo: 1, projects: [] },
+    { key: 'eastern', name: { ar: 'المنطقة الشرقية', en: 'Eastern Province' }, photo: 2, projects: [] },
+  ];
+}
+function pageProjects(params) {
+  const city = params && params.get('city'); if (city && pjData().some(c => c.key === city)) return pageCity(city);
+  const C = pjData();
   return { html: `<header class="v3hero has-photo" style="padding-block:44px 48px">${atbMedia({ src: 'media/scenes/masterplan.jpg', pos: '50% 50%', eager: true })}<span class="atb-veil"></span><div class="arches"></div><div class="wrap" style="position:relative"><div class="rv in"><div class="kicker"><i></i>${T({ ar: 'الرياض · جدة · المنطقة الشرقية', en: 'Riyadh · Jeddah · Eastern Province' })}</div><h1>${T({ ar: 'مشاريعنا', en: 'Our projects' })}</h1>
-    <p class="sub">${T({ ar: 'نتعاقد مع مطوّرين في الرياض وجدة والمنطقة الشرقية على مشاريع سكنية جاهزة وعلى الخارطة. نعرض هنا ما نسوّقه الآن، والباقي يعرضه عليك مستشارك مباشرةً — داخل سقفك فقط.', en: 'We contract with developers in Riyadh, Jeddah and the Eastern Province on ready and off-plan residential projects. What we are marketing now is shown here; your advisor shows you the rest directly — inside your ceiling only.' })}</p></div></div></header>
-  <section class="v3sec"><div class="wrap"><p class="pj-hint">${T({ ar: 'اختر المدينة لعرض مشاريعها', en: 'Choose a city to see its projects' })}</p><div class="pj-tabs" role="tablist">${cities.map((c, i) => `<button type="button" class="lx-tile pj-tab rv" role="tab" id="pj-tab-${PJ_KEYS[i]}" data-city="${PJ_KEYS[i]}" aria-selected="false" aria-controls="pj-panel-${PJ_KEYS[i]}" style="order:${i * 2}">${LX_PHOTOS[i] ? atbMedia(LX_PHOTOS[i]) : LX_SCENES[i]}<span class="cap"><span><b>${T(c[0])}</b></span><span class="pj-chev" aria-hidden="true"></span></span></button>
-      <div class="pj-panel" role="tabpanel" id="pj-panel-${PJ_KEYS[i]}" aria-labelledby="pj-tab-${PJ_KEYS[i]}" hidden style="order:${i * 2 + 1}"><div class="pj-ph"><h2>${T({ ar: 'مشاريعنا في ' + c[0].ar, en: 'Our projects in ' + c[0].en })}</h2></div>
-      ${PJ_LIST[i].length ? `<div class="pj-grid">${PJ_LIST[i].join('')}</div>` : `<div class="pj-soon"><b>${T({ ar: 'مشاريع قيد التعاقد', en: 'Projects being contracted' })}</b><span>${T({ ar: 'نعرضها هنا فور اعتمادها. سجّل ما تبحث عنه ونعرض عليك ما يناسبك أولاً.', en: 'Shown here as soon as they are signed. Tell us what you are looking for and we will show you first.' })}</span><a href="#/request">${T({ ar: 'اطلب عقارك في', en: 'Request a property in' })} ${T(c[0])} ${LANG === 'ar' ? '←' : '→'}</a></div>`}</div>`).join('')}</div>
+    <p class="sub">${T({ ar: 'نتعاقد مع مطوّرين في الرياض وجدة والمنطقة الشرقية على مشاريع سكنية جاهزة وعلى الخارطة. اختر مدينتك لتشاهد مشاريعها.', en: 'We contract with developers in Riyadh, Jeddah and the Eastern Province on ready and off-plan residential projects. Choose your city to see its projects.' })}</p></div></div></header>
+  <section class="v3sec"><div class="wrap"><div class="pj-tabs">${C.map(c => `<a class="lx-tile pj-tab rv" href="#/projects/${c.key}" data-city="${c.key}">${LX_PHOTOS[c.photo] ? atbMedia(LX_PHOTOS[c.photo]) : LX_SCENES[c.photo]}<span class="cap"><span><b>${T(c.name)}</b></span>${LX_ARROW}</span></a>`).join('')}</div>
     <div class="v3head rv" style="margin-top:56px"><div class="no">→</div><div><div class="lab">${T({ ar: 'لا تنتظر الصفحة', en: 'Don’t wait for the page' })}</div><h2>${T({ ar: 'أخبرنا بما تبحث عنه — ونعرضه عليك خلال يومي عمل.', en: 'Tell us what you are looking for — and we show it to you within two working days.' })}</h2></div></div>
     <div style="max-width:720px" class="rv">${ledgerHtml('ledger_projects', { source: 'projects' })}</div></div></section>`,
-    mount: () => { mountLedger('ledger_projects'); mountReveal();
-      const tabs = [...document.querySelectorAll('.pj-tab')];
-      const open = (key, scroll) => { tabs.forEach(t => { const on = t.dataset.city === key && t.getAttribute('aria-selected') !== 'true'; t.setAttribute('aria-selected', String(on)); document.getElementById('pj-panel-' + t.dataset.city).hidden = !on; if (on && scroll) setTimeout(() => document.getElementById('pj-panel-' + key).scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 60); });
-        try { window.va && window.va('event', { name: 'projects_city', data: { city: key } }); } catch (e) {} };
-      tabs.forEach(t => t.addEventListener('click', () => open(t.dataset.city, true)));
-      if (PJ_KEYS.includes(pjOpen)) open(pjOpen, true);
-    } };
+    mount: () => { mountLedger('ledger_projects'); mountReveal(); document.querySelectorAll('.pj-tab').forEach(a => a.addEventListener('click', () => { try { window.va && window.va('event', { name: 'projects_city', data: { city: a.dataset.city } }); } catch (e) {} })); } };
+}
+function pageCity(key) {
+  const C = pjData(), c = C.find(x => x.key === key) || C[0];
+  LSTATE.city = c.key;
+  const n = T(c.name), list = c.projects;
+  return { html: `<header class="v3hero has-photo pj-cityhead" style="padding-block:44px 48px">${atbMedia({ ...(LX_PHOTOS[c.photo] || { src: 'media/scenes/masterplan.jpg' }), eager: true })}<span class="atb-veil"></span><div class="arches"></div><div class="wrap" style="position:relative"><div class="rv in"><div class="kicker"><i></i><a href="#/projects" style="color:inherit;text-decoration:none">${T({ ar: 'مشاريعنا', en: 'Our projects' })}</a> · ${n}</div><h1>${T({ ar: 'مشاريعنا في ' + c.name.ar, en: 'Our projects in ' + c.name.en })}</h1>
+    ${list.length ? '<p class="sub">' : ''}${list.length ? T({ ar: 'المشاريع التي نسوّقها الآن في ' + c.name.ar + '. اختر مشروعاً لتشاهد مخططه ووحداته، وسجّل اهتمامك بالوحدة التي تناسبك.', en: 'The projects we are marketing now in ' + c.name.en + '. Open a project to see its plan and units, and register interest in the unit that suits you.' }) : ''}${list.length ? '</p>' : ''}</div></div></header>
+  <section class="v3sec"><div class="wrap">
+    ${list.length ? `<div class="pj-grid">${list.join('')}</div>` : ''}
+    <div class="pj-others rv">${C.filter(x => x.key !== c.key).map(x => `<a href="#/projects/${x.key}">${T({ ar: 'مشاريعنا في ' + x.name.ar, en: 'Projects in ' + x.name.en })} ${LANG === 'ar' ? '←' : '→'}</a>`).join('')}</div>
+    <div class="v3head rv" style="margin-top:48px"><div class="no">→</div><div><div class="lab">${n}</div><h2>${T({ ar: 'لم تجد ما يناسبك؟ أخبرنا بما تبحث عنه في ' + c.name.ar + '.', en: 'Not what you need? Tell us what you are looking for in ' + c.name.en + '.' })}</h2></div></div>
+    <div style="max-width:720px" class="rv">${ledgerHtml('ledger_city', { source: 'projects-' + c.key })}</div></div></section>`,
+    mount: () => { mountLedger('ledger_city'); mountReveal(); } };
 }
 
 /* ================= سجّل ما تبحث عنه v3 ================= */
@@ -2322,6 +2339,7 @@ function route() {
   else if (path === '/request') page = pageRequest(params);
   else if (path === '/about') page = pageAbout();
   else if (path === '/projects') page = pageProjects(params);
+  else if (path.startsWith('/projects/')) page = pageCity(path.slice(10));
   else if (path === '/privacy') page = pagePrivacy();
   else if (path === '/report') page = pageReport();
   else page = pageHome();
