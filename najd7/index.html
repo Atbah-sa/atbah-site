@@ -209,6 +209,20 @@ footer{padding:22px 18px;font-size:12px;color:var(--mute);text-align:center;back
 .zoomer .zbar .pct{font-size:12.5px;min-width:52px;display:grid;place-items:center;color:#10322d;font-weight:600}
 .zoomer .zt{position:absolute;top:16px;right:16px;left:16px;display:flex;justify-content:space-between;align-items:center;color:#f1ece3;font-weight:600}
 .zoomer .zt button{font:inherit;background:rgba(255,255,255,.12);color:#f1ece3;border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:7px 14px;cursor:pointer}
+
+/* booking → leads */
+.bk{display:flex;flex-direction:column;gap:10px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.bk-t{font-size:15px;color:var(--g)}
+.bk-lbl{font-size:13px;color:var(--mute)}
+.bk-pay{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bk-pay button{min-height:44px;border-radius:6px;border:1px solid var(--line);background:#fff;color:var(--ink);font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+.bk-pay button[aria-pressed=true]{background:var(--g);border-color:var(--g);color:var(--cream)}
+.bk-f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--mute)}
+.bk-f input{min-height:46px;border-radius:6px;border:1px solid var(--line);padding:0 12px;font:inherit;font-size:16px;color:var(--ink);background:#fff}
+.bk-f input:focus{outline:2px solid var(--gold);outline-offset:1px}
+.bk-err{margin:0;font-size:13px;color:var(--brick)}
+.bk-ok{display:flex;flex-direction:column;gap:6px;margin-top:14px;padding:14px;border-radius:8px;background:rgba(62,142,98,.1);border:1px solid rgba(62,142,98,.35);font-size:14px;line-height:1.7;color:var(--ink)}
+.bk-ok>b{color:var(--g);font-size:15px}
 </style>
 
 <section class="hero" id="hero">
@@ -348,17 +362,49 @@ const svg=document.getElementById('plots'), lbl=document.getElementById('mlbl'),
 let sel=null, filt='all';
 const label=st=>st==='ok'?'متاحة':st==='hold'?'محجوزة':'مباعة';
 function render(){svg.innerHTML=plots.map(p=>`<rect class="p ${p.st!=='ok'?p.st:''} ${filt!=='all'&&p.t!==filt?'dim':''} ${sel===p.n?'sel':''}" data-n="${p.n}" x="${p.x.toFixed(1)}" y="${p.y.toFixed(1)}" width="${(p.w-2).toFixed(1)}" height="${p.h.toFixed(1)}" rx="2"><title>فيلا ${p.n} · ${TYPES[p.t].name} · ${label(p.st)}</title></rect>`).join('');}
+function bookForm(p,T){const ok=p.st==='ok';return `<form class="bk" id="n7book" data-n="${p.n}" novalidate>
+  <b class="bk-t">${ok?'احجز اهتمامك بهذه الفيلا':'أبلغني إن توفّرت هذه الفيلا'}</b>
+  <div class="bk-lbl">كيف ستشتري؟</div>
+  <div class="bk-pay" role="group" aria-label="طريقة الشراء"><button type="button" data-pay="cash" aria-pressed="false">كاش</button><button type="button" data-pay="loan" aria-pressed="false">تمويل عقاري</button></div>
+  <label class="bk-f"><span>الاسم</span><input name="name" autocomplete="name"></label>
+  <label class="bk-f"><span>رقم الجوّال</span><input name="phone" type="tel" inputmode="tel" dir="ltr" placeholder="05xxxxxxxx" autocomplete="tel"></label>
+  <button class="btn" type="submit">${ok?'سجّل اهتمامي بفيلا '+p.n:'أبلغني عند توفّرها'}</button>
+  <p class="bk-err" hidden></p>
+  <p class="note">بإرسال طلبك توافق على أن نتواصل معك بخصوصه وفق <a href="https://atbah.sa/#/privacy">سياسة الخصوصية</a>. مستشار عتبة يتصل بك مرة واحدة خلال يومي عمل.</p>
+</form>`;}
+function saPhone(v){const map='٠١٢٣٤٥٦٧٨٩',map2='۰۱۲۳۴۵۶۷۸۹';let d=String(v||'').replace(/[٠-٩]/g,c=>map.indexOf(c)).replace(/[۰-۹]/g,c=>map2.indexOf(c)).replace(/[^\d+]/g,'').replace(/^\+/,'00');d=d.replace(/^00966/,'').replace(/^966/,'').replace(/^0+/,'');return /^5\d{8}$/.test(d)?'0'+d:null;}
 function renderPanel(){const p=plots.find(x=>x.n===sel); if(!p){panel.innerHTML=`<div class="k">الفيلا</div><h3>اختر فيلا من المخطط</h3><p class="note">اضغط على أي رقم في المخطط لعرض النموذج والمساحة والحالة، وطلب العرض الكامل لهذه الفيلا.</p>`;return;}
   const T=TYPES[p.t]; const q=`?utm_source=project-site&utm_medium=microsite&utm_campaign=najd7&utm_content=villa-${p.n}#/request`;
   panel.innerHTML=`<div class="k">فيلا رقم ${p.n}</div><h3>${T.name} · ${T.bed}</h3><span class="pill ${p.st}">${label(p.st)}</span>
   <dl><dt>الطوابق</dt><dd>${T.floors}</dd><dt>المساحة الإجمالية</dt><dd>${T.area}</dd><dt>الصف</dt><dd>${p.n<=25?'الأمامي — على الشارع':p.n<=48?'الأوسط — على المسبح والنادي':'الخلفي — على الحديقة'}</dd><dt>السعر</dt><dd>${PRICE[p.n]?PRICE[p.n].toLocaleString('en-US')+' ريال':'يُعلن مع عرض الأسعار'}</dd></dl>
   <a class="planlink" href="#" data-3d="${p.t}">شاهد ${T.name} مجسّماً ↗</a>
-  ${p.st==='ok'?`<a class="btn" href="https://atbah.sa/${q}">اطلب هذه الفيلا</a>`:p.st==='hold'?`<a class="btn ghost" style="color:var(--g)" href="https://atbah.sa/${q}">أبلغني إن توفّرت</a>`:`<a class="btn ghost" style="color:var(--g)" href="https://atbah.sa/?utm_source=project-site&utm_medium=microsite&utm_campaign=najd7#/request">اعرض لي فيلا مشابهة</a>`}
+  ${p.st==='sold'?`<a class="btn ghost" style="color:var(--g)" href="https://atbah.sa/?utm_source=project-site&utm_medium=microsite&utm_campaign=najd7#/request">اعرض لي فيلا مشابهة</a>`:bookForm(p,T)}
   <p class="note">الحجز يُسدَّد إلى حساب المطوّر مباشرة؛ عتبة لا تستلم أي مبالغ. التوفّر يُؤكَّد من المطوّر قبل أي وعد.</p>`;}
 svg.addEventListener('click',e=>{const r=e.target.closest('.p'); if(!r)return; sel=+r.dataset.n; render(); renderPanel(); lbl.textContent=`فيلا ${sel} محدّدة`; if(innerWidth<900)panel.scrollIntoView({behavior:'smooth',block:'nearest'});});
 svg.addEventListener('mousemove',e=>{const r=e.target.closest('.p'); if(r){const p=plots.find(x=>x.n===+r.dataset.n); lbl.textContent=`فيلا ${p.n} — ${TYPES[p.t].name} · ${label(p.st)}`;}});
 svg.addEventListener('mouseleave',()=>{lbl.textContent=sel?`فيلا ${sel} محدّدة`:'مرّر فوق المخطط';});
 filters.addEventListener('click',e=>{const b=e.target.closest('button'); if(!b)return; filt=b.dataset.t; [...filters.children].forEach(x=>x.setAttribute('aria-pressed',x===b)); render(); document.dispatchEvent(new CustomEvent('n7filter'));});
+panel.addEventListener('click',e=>{const b=e.target.closest('[data-pay]');if(!b)return;panel.querySelectorAll('[data-pay]').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));const er=panel.querySelector('.bk-err');if(er)er.hidden=true;});
+panel.addEventListener('submit',async e=>{const f=e.target.closest('#n7book');if(!f)return;e.preventDefault();
+  const err=f.querySelector('.bk-err'),btn=f.querySelector('button[type=submit]'),fail=m=>{err.textContent=m;err.hidden=false;};err.hidden=true;
+  const n=+f.dataset.n,p=plots.find(x=>x.n===n),T=TYPES[p.t];const pay=(f.querySelector('[data-pay][aria-pressed=true]')||{}).dataset?.pay;
+  const name=f.querySelector('[name=name]').value.trim(),phone=saPhone(f.querySelector('[name=phone]').value);
+  if(!pay)return fail('اختر طريقة الشراء: كاش أو تمويل عقاري.');
+  if(name.length<2)return fail('اكتب اسمك.');
+  if(!phone)return fail('اكتب رقم جوّال سعودي صحيح — مثل 05xxxxxxxx أو ‎+9665xxxxxxxx');
+  const label=btn.textContent;btn.disabled=true;btn.textContent='جارٍ الإرسال…';
+  const rec={name,phone,email:null,role:'buyer',city:'الرياض',
+    note:['نجد 7 · فيلا '+n+' · '+T.name+' ('+T.bed+'، '+T.area+')',p.st==='ok'?'طلب حجز/اهتمام بالفيلا':'أبلغني إن توفّرت (الفيلا محجوزة)',pay==='cash'?'الشراء: كاش':'الشراء: تمويل عقاري','الموافقة: إشعار عند الإرسال (دون مربع)'].join(' · '),
+    wishes:{pay,ptype:'townhouse',purpose:'live',rooms:p.t==='A'?'4':'3',district:'العارض'},
+    consent_text_ver:'phase0-v3',consent_lang:'ar',marketing_consent:false,source:'najd7-villa'};
+  try{window.va&&window.va('event',{name:'n7_book_submit',data:{villa:n,pay}});}catch(x){}
+  try{const r=await fetch('/api/interest',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec)});const j=await r.json().catch(()=>({}));
+    if(r.status===503){btn.disabled=false;btn.textContent=label;return fail('التسجيل غير متاح لحظيًا — راسلنا على واتساب وسنحجز لك الاهتمام يدويًا.');}
+    if(r.status===429){btn.disabled=false;btn.textContent=label;return fail('أرسلت عدة طلبات خلال وقت قصير — انتظر قليلًا ثم أعد المحاولة.');}
+    if(!r.ok||!j.ref)throw new Error(j.error||'save');
+    f.outerHTML=`<div class="bk-ok"><b>تمّ — سجّلنا اهتمامك بفيلا ${n}.</b><span>مستشار عتبة يتصل بك مرة واحدة خلال يومي عمل بتفاصيل الفيلا والسعر وخطوات الحجز مع المطوّر.</span><span>مرجعك <b dir="ltr">${j.ref}</b></span></div>`;
+  }catch(x){btn.disabled=false;btn.textContent=label;fail('تعذّر الإرسال الآن — أعد المحاولة أو راسلنا على واتساب.');}
+});
 render(); renderPanel();
 window.N7={plots,TYPES,select(n){sel=n;render();renderPanel();lbl.textContent=`فيلا ${n} محدّدة`;},get sel(){return sel},get filt(){return filt}};
 
