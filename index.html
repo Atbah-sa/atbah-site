@@ -2205,12 +2205,8 @@ function pageAbout() {
 
 /* ================= مشاريعنا v3 ================= */
 function pjData() {
-  const najd7 = `<a class="pj-card rv" href="/najd7/" data-pj="najd7"><span class="pj-img"><img src="/najd7/thumb.webp" alt="${T({ ar: 'نجد 7 — فلل تاون هاوس في حي العارض بالرياض', en: 'Najd 7 — townhouses in Al Arid, Riyadh' })}" width="1200" height="900" loading="lazy" decoding="async"></span>
-        <span class="pj-b"><span class="pj-k">${T({ ar: 'الرياض · حي العارض', en: 'Riyadh · Al Arid' })}</span><b class="pj-t">${T({ ar: 'نجد 7', en: 'Najd 7' })}</b>
-        <span class="pj-d">${T({ ar: '73 فيلا تاون هاوس بأربعة نماذج · 3 و4 غرف نوم · مسبح ونادٍ رياضي وملعب ومواقف سفلية.', en: '73 townhouses in four types · 3–4 bedrooms · pool, gym, court and basement parking.' })}</span>
-        <span class="pj-go">${T({ ar: 'استكشف المشروع والمجسّم ثلاثي الأبعاد', en: 'Explore the project in 3D' })} <span aria-hidden="true">${LANG === 'ar' ? '←' : '→'}</span></span></span></a>`;
   return [
-    { key: 'riyadh', name: { ar: 'الرياض', en: 'Riyadh' }, photo: 0, projects: [najd7] },
+    { key: 'riyadh', name: { ar: 'الرياض', en: 'Riyadh' }, photo: 0, projects: [] },
     { key: 'jeddah', name: { ar: 'جدة', en: 'Jeddah' }, photo: 1, projects: [] },
     { key: 'eastern', name: { ar: 'المنطقة الشرقية', en: 'Eastern Province' }, photo: 2, projects: [] },
   ];
