@@ -35,6 +35,7 @@
 body[data-lang="en"] .pj-t{font-family:'Archivo',system-ui,sans-serif}
 .pj-d{font-size:14.5px;color:var(--muted);line-height:1.7}
 .pj-go{margin-top:6px;font-size:14px;font-weight:600;color:var(--clay)}
+.pj-img{position:relative;isolation:isolate}
 .pj-logo{height:34px;width:auto;max-width:55%;object-fit:contain;object-position:right;align-self:flex-start}
 [dir=ltr] .pj-logo{object-position:left}
 .pj-av{margin-top:4px}
@@ -2223,20 +2224,20 @@ function pageAbout() {
 const PJ_LIST = {
   riyadh: [
     { url: '/riyadh/theyard/', img: '/riyadh/theyard/img/ext-3.webp', logo: '/riyadh/theyard/img/logo-color.png', t: { ar: 'ذا يارد 21', en: 'The Yard 21' }, k: { ar: 'النرجس · دوبلكس وشقق على الخارطة', en: 'Al Narjis · off-plan duplexes & apartments' }, ok: 39, hold: 2, n: 41, p: { ar: '1.48–2.28 مليون ر.س', en: 'SAR 1.48–2.28M' } },
-    { url: '/riyadh/araqa11/', img: '/riyadh/araqa11/img/hero-1.webp', logo: '/riyadh/araqa11/img/logo-color.png', t: { ar: 'عراقة 11', en: 'Araqah 11' }, k: { ar: 'العارض · شقق جاهزة', en: 'Al Arid · ready apartments' }, ok: 15, hold: 4, n: 84, p: { ar: '1.13–1.33 مليون ر.س', en: 'SAR 1.13–1.33M' } },
-    { url: '/riyadh/araqaelite/', img: '/riyadh/araqaelite/img/hero-1.webp', logo: '/riyadh/araqaelite/img/logo-color.png', t: { ar: 'عراقة إليت', en: 'Araqa Elite' }, k: { ar: 'الرحاب، الدرعية · فلل مكتملة', en: 'Al Rehab, Diriyah · completed villas' }, ok: 23, hold: 3, n: 33, p: { ar: '5.25–13.9 مليون ر.س', en: 'SAR 5.25–13.9M' } },
-    { url: '/riyadh/araqaelite2/', img: '/riyadh/araqaelite2/img/hero-1.webp', logo: '/riyadh/araqaelite2/img/logo-color.png', t: { ar: 'عراقة إليت 2', en: 'Araqa Elite 2' }, k: { ar: 'الرحاب، الدرعية · شقق', en: 'Al Rehab, Diriyah · apartments' }, ok: 21, hold: 2, n: 24, p: { ar: '2.17–2.62 مليون ر.س', en: 'SAR 2.17–2.62M' } },
+    { url: '/riyadh/araqa11/', img: '/riyadh/araqa11/img/hero-1.webp', tone: 'bright', logo: '/riyadh/araqa11/img/logo-color.png', t: { ar: 'عراقة 11', en: 'Araqah 11' }, k: { ar: 'العارض · شقق جاهزة', en: 'Al Arid · ready apartments' }, ok: 15, hold: 4, n: 84, p: { ar: '1.13–1.33 مليون ر.س', en: 'SAR 1.13–1.33M' } },
+    { url: '/riyadh/araqaelite/', img: '/riyadh/araqaelite/img/hero-1.webp', tone: 'bright', logo: '/riyadh/araqaelite/img/logo-color.png', t: { ar: 'عراقة إليت', en: 'Araqa Elite' }, k: { ar: 'الرحاب، الدرعية · فلل مكتملة', en: 'Al Rehab, Diriyah · completed villas' }, ok: 23, hold: 3, n: 33, p: { ar: '5.25–13.9 مليون ر.س', en: 'SAR 5.25–13.9M' } },
+    { url: '/riyadh/araqaelite2/', img: '/riyadh/araqaelite2/img/hero-1.webp', tone: 'bright', logo: '/riyadh/araqaelite2/img/logo-color.png', t: { ar: 'عراقة إليت 2', en: 'Araqa Elite 2' }, k: { ar: 'الرحاب، الدرعية · شقق', en: 'Al Rehab, Diriyah · apartments' }, ok: 21, hold: 2, n: 24, p: { ar: '2.17–2.62 مليون ر.س', en: 'SAR 2.17–2.62M' } },
   ],
   eastern: [
     { url: '/khobar/harborboon/', img: '/khobar/harborboon/img/hero-1.webp', logo: '/khobar/harborboon/img/logo-color.png', t: { ar: 'هاربر بون', en: 'Harbor Boon' }, k: { ar: 'الروابي، الخبر · شقق جاهزة', en: 'Al Rawabi, Al Khobar · ready apartments' }, ok: 27, hold: 5, n: 42, p: { ar: '0.77–1.30 مليون ر.س', en: 'SAR 0.77–1.30M' } },
-    { url: '/khobar/deem/', img: '/khobar/deem/img/hero-1.webp', logo: '/khobar/deem/img/logo-color.png', t: { ar: 'ديم', en: 'Deem' }, k: { ar: 'الخبر · تاون هاوس', en: 'Al Khobar · townhouses' }, soon: true },
+    { url: '/khobar/deem/', img: '/khobar/deem/img/hero-1.webp', tone: 'bright', logo: '/khobar/deem/img/logo-color.png', t: { ar: 'ديم', en: 'Deem' }, k: { ar: 'الخبر · تاون هاوس', en: 'Al Khobar · townhouses' }, soon: true },
   ],
 };
 function pjCard(x) {
   const bar = x.soon
     ? `<div class="pj-av"><div class="pj-bar"><span><span class="pj-chip go">${T({ ar: 'سجّل اهتمامك', en: 'Register interest' })}</span><span class="pj-chip of">${T({ ar: 'الأسعار قريباً', en: 'Prices soon' })}</span></span></div></div>`
     : `<div class="pj-av"><div class="pj-bar" role="img" aria-label="${x.ok} / ${x.n}"><i class="ok" style="width:${(x.ok / x.n * 100).toFixed(2)}%"></i><i class="hold" style="width:${(x.hold / x.n * 100).toFixed(2)}%"></i><span><span class="pj-chip"><b>${x.ok}</b>${T({ ar: 'متاحة', en: 'available' })}</span><span class="pj-chip of">${T({ ar: 'من ' + x.n + ' وحدة', en: 'of ' + x.n + ' units' })}</span></span></div><div class="pj-p">${T(x.p)}</div></div>`;
-  return `<a class="pj-card rv" href="${x.url}"><span class="pj-img"><img src="${x.img}" alt="${T(x.t)}" loading="lazy"></span><span class="pj-b"><img class="pj-logo" src="${x.logo}" alt="" loading="lazy"><span class="pj-k">${T(x.k)}</span><span class="pj-t">${T(x.t)}</span>${bar}<span class="pj-go">${T(x.soon ? { ar: 'شاهد المشروع وسجّل اهتمامك ←', en: 'View the project →' } : { ar: 'شاهد الوحدات والأسعار ←', en: 'See units and prices →' })}</span></span></a>`;
+  return `<a class="pj-card rv" href="${x.url}"><span class="pj-img" role="img" aria-label="${T(x.t)}">${atbMedia({ src: x.img, tone: x.tone })}</span><span class="pj-b"><img class="pj-logo" src="${x.logo}" alt="" loading="lazy"><span class="pj-k">${T(x.k)}</span><span class="pj-t">${T(x.t)}</span>${bar}<span class="pj-go">${T(x.soon ? { ar: 'شاهد المشروع وسجّل اهتمامك ←', en: 'View the project →' } : { ar: 'شاهد الوحدات والأسعار ←', en: 'See units and prices →' })}</span></span></a>`;
 }
 function pjData() {
   return [
