@@ -35,6 +35,21 @@
 body[data-lang="en"] .pj-t{font-family:'Archivo',system-ui,sans-serif}
 .pj-d{font-size:14.5px;color:var(--muted);line-height:1.7}
 .pj-go{margin-top:6px;font-size:14px;font-weight:600;color:var(--clay)}
+.pj-logo{height:34px;width:auto;max-width:55%;object-fit:contain;object-position:right;align-self:flex-start}
+[dir=ltr] .pj-logo{object-position:left}
+.pj-av{margin-top:4px}
+.pj-bar{position:relative;height:22px;border-radius:6px;overflow:hidden;display:flex;direction:rtl;background:linear-gradient(180deg,#EDE6D8,#DCD3C2);box-shadow:inset 0 1px 3px rgba(18,49,43,.18),inset 0 -1px 0 rgba(255,255,255,.6),0 1px 0 rgba(255,255,255,.8)}
+.pj-bar i{display:block;height:100%}
+.pj-bar .ok{background:linear-gradient(180deg,#2E7D62 0%,#14564A 55%,#0F463D 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.28)}
+.pj-bar .hold{background:linear-gradient(180deg,#E6C78E 0%,#C99A55 55%,#A97C3C 100%)}
+.pj-bar::before{content:"";position:absolute;left:3px;right:3px;top:1px;height:45%;border-radius:4px 4px 2px 2px;background:linear-gradient(180deg,rgba(255,255,255,.38),rgba(255,255,255,.04));pointer-events:none;z-index:1}
+.pj-bar>span{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:0 3px}
+.pj-chip{background:linear-gradient(180deg,#fff,#F4EFE6);color:#14564A;border-radius:4px;padding:0 8px;font-size:11px;font-weight:600;line-height:16px;box-shadow:0 1px 2px rgba(0,0,0,.15)}
+.pj-chip b{font-family:'Reem Kufi',sans-serif;font-size:13px;margin-inline-end:3px}
+.pj-chip.of{color:#4E625D;font-weight:500}
+.pj-chip.go{background:linear-gradient(180deg,#2E7D62,#0F463D);color:#fff}
+.pj-p{margin-top:6px;font-size:13px;font-weight:600;color:var(--ink)}
+
 </style></head><body>
 <noscript><h1>عتبة — حاسبة القدرة الشرائية العقارية و١١ حاسبة عقارية</h1><p>للمشتري: القدرة الشرائية · القسط الشهري · الكاش المطلوب يوم الشراء · متى أقدر أشتري؟ · إيجار أم تملّك؟ · العائد الإيجاري · العائد الاستثماري. للمستثمر: العائد الإيجاري · المعدّل الرأسمالي · التدفّق النقدي المخصوم · الرافعة والدين.</p><p>شركة عتبة بداية العقارية — رخصة فال 1200050979 — السجل التجاري 7055177823 — info@atbah.sa</p></noscript>
 <style>
@@ -2204,11 +2219,30 @@ function pageAbout() {
 }
 
 /* ================= مشاريعنا v3 ================= */
+/* project cards (pages live at /<city>/<slug>/). Counts from developer price lists — update with each list. */
+const PJ_LIST = {
+  riyadh: [
+    { url: '/riyadh/theyard/', img: '/riyadh/theyard/img/ext-3.webp', logo: '/riyadh/theyard/img/logo-color.png', t: { ar: 'ذا يارد 21', en: 'The Yard 21' }, k: { ar: 'النرجس · دوبلكس وشقق على الخارطة', en: 'Al Narjis · off-plan duplexes & apartments' }, ok: 39, hold: 2, n: 41, p: { ar: '1.48–2.28 مليون ر.س', en: 'SAR 1.48–2.28M' } },
+    { url: '/riyadh/araqa11/', img: '/riyadh/araqa11/img/hero-1.webp', logo: '/riyadh/araqa11/img/logo-color.png', t: { ar: 'عراقة 11', en: 'Araqah 11' }, k: { ar: 'العارض · شقق جاهزة', en: 'Al Arid · ready apartments' }, ok: 15, hold: 4, n: 84, p: { ar: '1.13–1.33 مليون ر.س', en: 'SAR 1.13–1.33M' } },
+    { url: '/riyadh/araqaelite/', img: '/riyadh/araqaelite/img/hero-1.webp', logo: '/riyadh/araqaelite/img/logo-color.png', t: { ar: 'عراقة إليت', en: 'Araqa Elite' }, k: { ar: 'الرحاب، الدرعية · فلل مكتملة', en: 'Al Rehab, Diriyah · completed villas' }, ok: 23, hold: 3, n: 33, p: { ar: '5.25–13.9 مليون ر.س', en: 'SAR 5.25–13.9M' } },
+    { url: '/riyadh/araqaelite2/', img: '/riyadh/araqaelite2/img/hero-1.webp', logo: '/riyadh/araqaelite2/img/logo-color.png', t: { ar: 'عراقة إليت 2', en: 'Araqa Elite 2' }, k: { ar: 'الرحاب، الدرعية · شقق', en: 'Al Rehab, Diriyah · apartments' }, ok: 21, hold: 2, n: 24, p: { ar: '2.17–2.62 مليون ر.س', en: 'SAR 2.17–2.62M' } },
+  ],
+  eastern: [
+    { url: '/khobar/harborboon/', img: '/khobar/harborboon/img/hero-1.webp', logo: '/khobar/harborboon/img/logo-color.png', t: { ar: 'هاربر بون', en: 'Harbor Boon' }, k: { ar: 'الروابي، الخبر · شقق جاهزة', en: 'Al Rawabi, Al Khobar · ready apartments' }, ok: 27, hold: 5, n: 42, p: { ar: '0.77–1.30 مليون ر.س', en: 'SAR 0.77–1.30M' } },
+    { url: '/khobar/deem/', img: '/khobar/deem/img/hero-1.webp', logo: '/khobar/deem/img/logo-color.png', t: { ar: 'ديم', en: 'Deem' }, k: { ar: 'الخبر · تاون هاوس', en: 'Al Khobar · townhouses' }, soon: true },
+  ],
+};
+function pjCard(x) {
+  const bar = x.soon
+    ? `<div class="pj-av"><div class="pj-bar"><span><span class="pj-chip go">${T({ ar: 'سجّل اهتمامك', en: 'Register interest' })}</span><span class="pj-chip of">${T({ ar: 'الأسعار قريباً', en: 'Prices soon' })}</span></span></div></div>`
+    : `<div class="pj-av"><div class="pj-bar" role="img" aria-label="${x.ok} / ${x.n}"><i class="ok" style="width:${(x.ok / x.n * 100).toFixed(2)}%"></i><i class="hold" style="width:${(x.hold / x.n * 100).toFixed(2)}%"></i><span><span class="pj-chip"><b>${x.ok}</b>${T({ ar: 'متاحة', en: 'available' })}</span><span class="pj-chip of">${T({ ar: 'من ' + x.n + ' وحدة', en: 'of ' + x.n + ' units' })}</span></span></div><div class="pj-p">${T(x.p)}</div></div>`;
+  return `<a class="pj-card rv" href="${x.url}"><span class="pj-img"><img src="${x.img}" alt="${T(x.t)}" loading="lazy"></span><span class="pj-b"><img class="pj-logo" src="${x.logo}" alt="" loading="lazy"><span class="pj-k">${T(x.k)}</span><span class="pj-t">${T(x.t)}</span>${bar}<span class="pj-go">${T(x.soon ? { ar: 'شاهد المشروع وسجّل اهتمامك ←', en: 'View the project →' } : { ar: 'شاهد الوحدات والأسعار ←', en: 'See units and prices →' })}</span></span></a>`;
+}
 function pjData() {
   return [
-    { key: 'riyadh', name: { ar: 'الرياض', en: 'Riyadh' }, photo: 0, projects: [] },
+    { key: 'riyadh', name: { ar: 'الرياض', en: 'Riyadh' }, photo: 0, projects: PJ_LIST.riyadh.map(pjCard) },
     { key: 'jeddah', name: { ar: 'جدة', en: 'Jeddah' }, photo: 1, projects: [] },
-    { key: 'eastern', name: { ar: 'المنطقة الشرقية', en: 'Eastern Province' }, photo: 2, projects: [] },
+    { key: 'eastern', name: { ar: 'المنطقة الشرقية', en: 'Eastern Province' }, photo: 2, projects: PJ_LIST.eastern.map(pjCard) },
   ];
 }
 function pageProjects(params) {
