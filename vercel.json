@@ -1,16 +1,52 @@
 {
   "rewrites": [
-    { "source": "/sync/leads-export", "destination": "/api/leads-export" }
+    {
+      "source": "/sync/leads-export",
+      "destination": "/api/leads-export"
+    }
   ],
   "headers": [
-    { "source": "/(.*)", "headers": [
-      { "key": "X-Content-Type-Options", "value": "nosniff" },
-      { "key": "X-Frame-Options", "value": "DENY" },
-      { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-      { "key": "Strict-Transport-Security", "value": "max-age=31536000; includeSubDomains" }
-    ] },
-    { "source": "/(og|logo|icon-192|icon-512|apple-touch-icon|favicon-48)\\.png", "headers": [
-      { "key": "Cache-Control", "value": "public, max-age=86400, s-maxage=31536000" }
-    ] }
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains"
+        }
+      ]
+    },
+    {
+      "source": "/(og|logo|icon-192|icon-512|apple-touch-icon|favicon-48)\\.png",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, s-maxage=31536000"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/najd7",
+      "destination": "/riyadh/najd7/",
+      "permanent": true
+    },
+    {
+      "source": "/najd7/:path*",
+      "destination": "/riyadh/najd7/",
+      "permanent": true
+    }
   ]
 }
