@@ -1,4 +1,24 @@
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /sync/
+
+# AI crawlers are welcome (content is public, licensed brokerage)
+User-agent: GPTBot
+Allow: /
+User-agent: ChatGPT-User
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+User-agent: ClaudeBot
+Allow: /
+User-agent: Claude-SearchBot
+Allow: /
+User-agent: PerplexityBot
+Allow: /
+User-agent: Google-Extended
+Allow: /
+User-agent: Bingbot
+Allow: /
+
 Sitemap: https://atbah.sa/sitemap.xml
