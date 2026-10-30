@@ -3,6 +3,14 @@
     {
       "source": "/sync/leads-export",
       "destination": "/api/leads-export"
+    },
+    {
+      "source": "/projects/:city",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/projects/:city/",
+      "destination": "/index.html"
     }
   ],
   "headers": [
