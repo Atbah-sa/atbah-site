@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="ar" dir="rtl"><head><!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=AW-18454978219"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-18454978219');
+/* Atbah: fire the Ads conversion only after a lead form POST to /api/interest succeeds; project/unit from body.source */
+(function(){var of=window.fetch;if(!of)return;window.fetch=function(u,o){var p=of.apply(this,arguments);try{var url=String((u&&u.url)||u);if(o&&String(o.method||'').toUpperCase()==='POST'&&/\/api\/interest/.test(url)){var src='';try{src=(JSON.parse(o.body)||{}).source||'';}catch(e){}p.then(function(r){if(r&&r.ok){gtag('event','conversion',{send_to:'AW-18454978219/LABEL_PENDING',value:100,currency:'SAR',transaction_id:String(Date.now())});gtag('event','generate_lead',{lead_source:src,page_path:location.pathname});}}).catch(function(){});}}catch(e){}return p;};})();</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>عقارات الروضة الرياض: شقق وفلل وأدوار للبيع والإيجار في حي الروضة | عتبة العقارية</title>
 <meta name="description" content="دليل حي الروضة (شرق الرياض) لمن يريد شراء أو استئجار عقار: ما يُباع في الحيّ (شقق، أدوار، بيوت)، نطاقات الأسعار الإرشادية (شقق من ٧٠٠ ألف؛ أدوار من ٩٥٠ ألفاً)، لمن يناسب، وكيف تعرف سقفك قبل البحث. وسيط عقاري مرخّص.">
 <link rel="canonical" href="https://atbah.sa/riyadh/districts/al-rawdah/">
