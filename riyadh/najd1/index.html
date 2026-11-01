@@ -283,7 +283,7 @@ nav.top .by{font-size:13px;color:#fff}
     <label>الجوال<input name="phone" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="05xxxxxxxx" required></label></div>
     <div class="f2"><label id="rqUL">الوحدة (اختياري)<input name="unit" id="rqUnit" dir="ltr" maxlength="12"></label>
     <label>السقف التقريبي (ر.س، اختياري)<input name="budget" inputmode="numeric" dir="ltr" placeholder="1,500,000"></label></div>
-    <label class="cons"><input type="checkbox" name="consent" required> أوافق على أن تحفظ عتبة بياناتي وتتواصل معي بخصوص هذا الطلب وفق <a href="https://atbah.sa/#/privacy" target="_blank" rel="noopener">سياسة الخصوصية</a>.</label>
+    <p class="cons" style="display:block;line-height:1.7">بإرسال الطلب توافق على تواصلنا معك وفق <a href="https://atbah.sa/#/privacy" target="_blank" rel="noopener">سياسة الخصوصية</a>.</p>
     <button class="btn" type="submit" id="rqBtn">أرسل الطلب</button>
     <p class="msg" id="rqMsg" role="status" aria-live="polite"></p>
   </form>
@@ -474,7 +474,6 @@ f.addEventListener('submit',async e=>{e.preventDefault();msg.className='msg';
   const E=f.elements,name=E['name'].value.trim(),phone=E['phone'].value.replace(/[\s-]/g,''),unit=uIn.value.trim().toUpperCase(),budget=+E['budget'].value.replace(/[^0-9]/g,'')||null;
   if(name.length<2){msg.className='msg err';msg.textContent='اكتب اسمك.';E['name'].focus();return;}
   if(!/^(05\d{8}|\+?9665\d{8})$/.test(phone)){msg.className='msg err';msg.textContent='رقم الجوال يبدأ بـ 05 ويتكون من 10 أرقام.';E['phone'].focus();return;}
-  if(!E['consent'].checked){msg.className='msg err';msg.textContent='نحتاج موافقتك على حفظ البيانات للتواصل معك.';return;}
   btn.disabled=true;msg.textContent='جارٍ الإرسال…';
   const rec={name,phone,city:C.city,budget,role:'buyer',note:'مشروع '+C.name+' — '+C.district+(unit?' · الوحدة '+unit:''),wishes:{district:C.district,ptype:C.ptype},utm,
     consent_text_ver:'phase0-v3',consent_lang:'ar',marketing_consent:false,source:'project-'+C.slug+(unit?'-'+unit.toLowerCase():'')};
