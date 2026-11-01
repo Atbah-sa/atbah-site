@@ -355,7 +355,7 @@ nav.top .by{font-size:13px;color:#fff}
 <section class="cta" id="request"><div class="wrap">
   <div class="k">الخطوة التالية</div>
   <h2>اطلب وحدتك في ذا يارد</h2>
-  <p>أخبرنا بالوحدة التي أعجبتك أو بميزانيتك، ونتصل بك خلال يومي عمل بتأكيد التوفّر وخطة الدفع من المطوّر — وساطة عقارية مرخّصة، بلا رسوم عليك.</p>
+  <p>أخبرنا بالوحدة التي أعجبتك أو بميزانيتك، ونتصل بك قريباً بتأكيد التوفّر وخطة الدفع من المطوّر — وساطة عقارية مرخّصة، بلا رسوم عليك.</p>
   <form class="rq" id="rq" novalidate>
     <div class="f2"><label>الاسم<input name="name" autocomplete="name" required minlength="2" maxlength="120"></label>
     <label>الجوال<input name="phone" inputmode="tel" autocomplete="tel" dir="ltr" placeholder="05xxxxxxxx" required></label></div>
@@ -548,7 +548,7 @@ f.addEventListener('submit',async e=>{e.preventDefault();msg.className='msg';
   const rec={name,phone,city:'الرياض',budget,role:'buyer',note:'مشروع ذا يارد — النرجس'+(unit?' · الوحدة '+unit:''),wishes:{district:'النرجس',ptype:'townhouse'},utm,
     consent_text_ver:'phase0-v3',consent_lang:'ar',marketing_consent:false,source:'project-theyard'+(unit?'-'+unit.toLowerCase():'')};
   try{const r=await fetch('/api/interest',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec)});const d=await r.json().catch(()=>({}));
-    if(r.ok){f.reset();msg.className='msg ok';msg.textContent='وصل طلبك'+(d.ref?' (المرجع '+d.ref+')':'')+'. نتصل بك خلال يومي عمل.';try{window.va&&window.va('event',{name:'yard_request_submit'});}catch(_){}}
+    if(r.ok){f.reset();msg.className='msg ok';msg.textContent='وصل طلبك'+(d.ref?' (المرجع '+d.ref+')':'')+'. سنتواصل معك قريباً.';try{window.va&&window.va('event',{name:'yard_request_submit'});}catch(_){}}
     else if(r.status===429){msg.className='msg err';msg.textContent='محاولات كثيرة. حاول بعد دقائق أو راسلنا في واتساب.';}
     else{msg.className='msg err';msg.textContent='تعذّر الإرسال الآن. راسلنا في واتساب على ‎+966 55 954 7274.';}
   }catch(_){msg.className='msg err';msg.textContent='تعذّر الاتصال. راسلنا في واتساب على ‎+966 55 954 7274.';}
