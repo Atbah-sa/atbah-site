@@ -2242,6 +2242,9 @@ const PJ_LIST = {
     { url: '/riyadh/one/', img: '/riyadh/one/img/hero-1.webp', tone: 'bright', logo: '/riyadh/one/img/logo-dark.png', t: { ar: 'ون', en: 'ONE' }, k: { ar: 'شرق الرياض · آي ڤيلا وفلل', en: 'East Riyadh · iVilla & villas' }, from: { ar: 'من 1.31 مليون ر.س', en: 'from SAR 1.31M' } },
     { url: '/riyadh/elevee/', img: '/riyadh/elevee/img/hero-1.webp', tone: 'bright', logo: '/riyadh/elevee/img/logo-dark.png', t: { ar: 'إلوڤي', en: 'Élevée' }, k: { ar: 'النخيل · شقق على الخارطة في برج R2', en: 'Al Nakheel · off-plan tower apartments' }, ok: 90, hold: 0, n: 90, listOnly: true, p: { ar: '1.00–2.36 مليون ر.س', en: 'SAR 1.00–2.36M' } },
   ],
+  jeddah: [
+    { url: '/jeddah/fourseasons/', img: '/jeddah/fourseasons/img/hero-1.webp', logo: '/jeddah/fourseasons/img/logo-dark.png', t: { ar: 'مساكن فورسيزونز جدة', en: 'Four Seasons Private Residences Jeddah' }, k: { ar: 'كورنيش جدة · مساكن فندقية فاخرة', en: 'Jeddah Corniche · branded residences' }, from: { ar: 'من 6.6 مليون ر.س', en: 'from SAR 6.6M' } },
+  ],
   eastern: [
     { url: '/khobar/harborboon/', img: '/khobar/harborboon/img/hero-1.webp', logo: '/khobar/harborboon/img/logo-color.png', t: { ar: 'هاربر بون', en: 'Harbor Boon' }, k: { ar: 'الروابي، الخبر · شقق جاهزة', en: 'Al Rawabi, Al Khobar · ready apartments' }, ok: 27, hold: 5, n: 42, p: { ar: '0.77–1.30 مليون ر.س', en: 'SAR 0.77–1.30M' } },
     { url: '/khobar/deem/', img: '/khobar/deem/img/hero-1.webp', tone: 'bright', logo: '/khobar/deem/img/logo-color.png', t: { ar: 'ديم', en: 'Deem' }, k: { ar: 'الخبر · تاون هاوس', en: 'Al Khobar · townhouses' }, soon: true },
@@ -2258,7 +2261,7 @@ function pjCard(x) {
 function pjData() {
   return [
     { key: 'riyadh', name: { ar: 'الرياض', en: 'Riyadh' }, photo: 0, projects: PJ_LIST.riyadh.map(pjCard) },
-    { key: 'jeddah', name: { ar: 'جدة', en: 'Jeddah' }, photo: 1, projects: [] },
+    { key: 'jeddah', name: { ar: 'جدة', en: 'Jeddah' }, photo: 1, projects: PJ_LIST.jeddah.map(pjCard) },
     { key: 'eastern', name: { ar: 'المنطقة الشرقية', en: 'Eastern Province' }, photo: 2, projects: PJ_LIST.eastern.map(pjCard) },
   ];
 }
