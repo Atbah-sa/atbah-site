@@ -2501,6 +2501,7 @@ function pjEngine(el, center) {
   }
   return Promise.all([pjLoad('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', true), pjLoad('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js')]).then(() => {
     const map = L.map(el, { zoomControl: true, attributionControl: true, scrollWheelZoom: true }).setView(center, 11);
+    map.attributionControl.setPrefix(false);
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>' }).addTo(map);
     return {
       add(ll, node) { return L.marker(ll, { icon: L.divIcon({ html: node, className: 'pjm-anchor', iconSize: null }), keyboard: false }).addTo(map); },
