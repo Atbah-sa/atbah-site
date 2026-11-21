@@ -1191,6 +1191,74 @@ body[data-lang="en"] .pj-t{font-family:'Cormorant Garamond','Amiri',Georgia,seri
 .pj-others a{font-size:14px;font-weight:600;color:var(--goldink);text-decoration:none}
 .pj-others a:hover{text-decoration:underline}
 .pj-cityhead .kicker a:hover{text-decoration:underline!important}
+
+/* v7.1 — project filters, compact cards, projects map (2026-11-21) */
+.pj-grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.pj-t{font-size:21px}
+.pjf{display:flex;flex-direction:column;gap:10px;margin-top:4px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.pjf-top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.pjf-q{flex:1 1 220px;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg,#F1ECE3)}
+.pjf-q input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:15px;color:var(--ink);outline:none}
+.pjf-q svg{flex:0 0 auto;opacity:.6}
+.pjf-view{display:flex;gap:3px;padding:3px;border-radius:10px;background:var(--sand,#E6DED0)}
+.pjf-view button{appearance:none;border:0;font:inherit;font-size:14px;font-weight:600;min-height:40px;padding:0 16px;border-radius:8px;background:none;color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:6px}
+.pjf-view button[aria-pressed="true"]{background:#10322D;color:#F1ECE3}
+.pjf-row{display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
+.pjf-row::-webkit-scrollbar{display:none}
+.pjf-row>b{flex:0 0 auto;font-size:12.5px;font-weight:600;color:var(--muted);margin-inline-end:4px;min-width:58px}
+.pjf-row button{appearance:none;flex:0 0 auto;font:inherit;font-size:13.5px;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg,#F1ECE3);color:var(--ink);cursor:pointer;white-space:nowrap}
+.pjf-row button[aria-pressed="true"]{background:#10322D;border-color:#10322D;color:#F1ECE3}
+.pjf-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13.5px;color:var(--muted)}
+.pjf-meta button{appearance:none;border:0;background:none;font:inherit;font-size:13.5px;font-weight:600;color:var(--clay,#B4522B);cursor:pointer;min-height:36px;padding:0 4px}
+.pjf-empty{margin-top:18px;padding:22px;border:1px dashed var(--line);border-radius:14px;text-align:center;font-size:15px;line-height:1.8;color:var(--muted)}
+.pjf-empty button{appearance:none;margin-top:8px;border:1px solid #10322D;background:none;border-radius:10px;min-height:42px;padding:0 18px;font:inherit;font-weight:600;color:#10322D;cursor:pointer}
+@media(max-width:640px){
+ .pj-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
+ .pj-card{border-radius:12px}
+ .pj-img{aspect-ratio:4/3}
+ .pj-b{padding:9px 10px 11px;gap:3px}
+ .pj-logo{display:none}
+ .pj-k{font-size:11px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+ .pj-t{font-size:16px!important;line-height:1.35}
+ .pj-av{margin-top:2px}
+ .pj-bar{height:18px}
+ .pj-chip{font-size:10px;padding:0 5px;line-height:14px}
+ .pj-chip b{font-size:11px}
+ .pj-chip.of{display:none}
+ .pj-p{margin-top:3px;font-size:11.5px}
+ .pj-go{display:none}
+ .pjf{padding:10px;border-radius:12px}
+ .pjf-view{flex:1 1 100%}
+ .pjf-view button{flex:1;justify-content:center}
+}
+.pjmap{position:relative;margin-top:16px;height:min(72vh,680px);min-height:460px;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#E9E2D4}
+.pjmap-c{position:absolute;inset:0}
+.pjmap-c .leaflet-container,.pjmap-c{font-family:inherit}
+.pjm-anchor{position:absolute;width:0;height:0}
+.leaflet-marker-icon.pjm-anchor{background:none;border:0}
+.pjm{position:absolute;left:0;bottom:6px;transform:translateX(-50%);appearance:none;border:1.5px solid #10322D;background:#10322D;color:#F1ECE3;font:600 13px/1.15 'IBM Plex Sans Arabic',Tahoma,sans-serif;padding:7px 11px 6px;border-radius:15px 15px 4px 4px;white-space:nowrap;cursor:pointer;box-shadow:0 3px 8px rgba(6,22,21,.3);min-height:32px}
+.pjm::after{content:"";position:absolute;left:50%;bottom:-7px;width:26px;height:4px;margin-left:-13px;border-radius:2px;background:#B4522B}
+.pjm.soon{background:#FAF7F2;color:#10322D}
+.pjm.on{background:#C9964A;color:#10322D;z-index:5;font-weight:700;font-size:14px}
+.pjm:hover{background:#2E5A52}.pjm.on:hover{background:#C9964A}.pjm.soon:hover{background:#F3E6CC}
+.pjc{position:absolute;left:0;top:0;transform:translate(-50%,-50%);appearance:none;width:50px;height:50px;border-radius:50%;border:3px solid #F1ECE3;background:#10322D;color:#F1ECE3;font:700 17px 'Archivo',sans-serif;cursor:pointer;box-shadow:0 0 0 6px rgba(16,50,45,.2),0 4px 10px rgba(6,22,21,.3)}
+.pjmap-card{position:absolute;z-index:1000;bottom:14px;inset-inline-end:14px;width:340px;max-width:calc(100% - 28px);background:var(--surface,#FAF7F2);border-radius:16px;box-shadow:0 14px 36px rgba(6,22,21,.32);overflow:hidden;color:var(--ink)}
+.pjmap-card .im{position:relative;height:140px;background:#10322D}
+.pjmap-card .im img{width:100%;height:100%;object-fit:cover;display:block}
+.pjmap-card .x{position:absolute;top:8px;inset-inline-start:8px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(16,50,45,.7);color:#fff;font-size:20px;line-height:1;cursor:pointer}
+.pjmap-card .bd{padding:12px 14px 14px;display:flex;flex-direction:column;gap:6px}
+.pjmap-card .k{font-size:12.5px;color:var(--goldink);font-weight:600}
+.pjmap-card h3{margin:0;font-family:'Reem Kufi',Tahoma,sans-serif;font-size:22px;line-height:1.3}
+.pjmap-card .pr{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.pjmap-card .pr b{font-size:16px}
+.pjmap-card .pr span{font-size:13px;color:#2E7D5B;font-weight:600}
+.pjmap-card .bt{display:flex;gap:8px;margin-top:4px}
+.pjmap-card .bt a{min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:10px;text-decoration:none;font-weight:600;font-size:14px;padding:0 12px}
+.pjmap-card .bt a.go{flex:1;background:#C9964A;color:#10322D}
+.pjmap-card .bt a.pjwa,.pjmap-card .bt a.dir{border:1px solid #10322D;color:#10322D}
+.pjmap-card .note{font-size:12px;color:var(--muted)}
+.pjmap-hint{position:absolute;z-index:999;top:12px;inset-inline-start:12px;background:rgba(250,247,242,.95);border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:12.5px;color:var(--muted);pointer-events:none}
+@media(max-width:640px){.pjmap{height:70vh;min-height:420px;border-radius:12px}.pjmap-card{inset-inline:8px;bottom:8px;width:auto;max-width:none}.pjmap-card .im{height:110px}.pjm{font-size:12px;padding:6px 9px 5px}}
 </style>
 <nav class="top" id="nav"></nav>
 <main id="app"></main>
@@ -2250,14 +2318,49 @@ const PJ_LIST = {
     { url: '/khobar/deem/', img: '/khobar/deem/img/hero-1.webp', tone: 'bright', logo: '/khobar/deem/img/logo-color.png', t: { ar: 'ديم', en: 'Deem' }, k: { ar: 'الخبر · تاون هاوس', en: 'Al Khobar · townhouses' }, soon: true },
   ],
 };
-function pjCard(x) {
+function pjCard(x, i) {
   const bar = x.from
     ? `<div class="pj-av"><div class="pj-bar"><span><span class="pj-chip go">${T({ ar: 'الأسعار متاحة', en: 'Prices out' })}</span><span class="pj-chip of">${T(x.from)}</span></span></div></div>`
     : x.soon
     ? `<div class="pj-av"><div class="pj-bar"><span><span class="pj-chip go">${T({ ar: 'سجّل اهتمامك', en: 'Register interest' })}</span><span class="pj-chip of">${T({ ar: 'الأسعار قريباً', en: 'Prices soon' })}</span></span></div></div>`
     : `<div class="pj-av"><div class="pj-bar" role="img" aria-label="${x.ok} / ${x.n}"><i class="ok" style="width:${(x.ok / x.n * 100).toFixed(2)}%"></i><i class="hold" style="width:${(x.hold / x.n * 100).toFixed(2)}%"></i><span><span class="pj-chip"><b>${x.ok}</b>${T({ ar: 'متاحة', en: 'available' })}</span><span class="pj-chip of">${x.listOnly ? T({ ar: 'حسب قائمة المطوّر', en: 'per developer list' }) : T({ ar: 'من ' + x.n + ' وحدة', en: 'of ' + x.n + ' units' })}</span></span></div><div class="pj-p">${T(x.p)}</div></div>`;
-  return `<a class="pj-card rv" href="${x.url}"><span class="pj-img" role="img" aria-label="${T(x.t)}">${atbMedia({ src: x.img, tone: x.tone })}</span><span class="pj-b">${x.logo ? `<img class="pj-logo" src="${x.logo}" alt="" loading="lazy">` : ''}<span class="pj-k">${T(x.k)}</span><span class="pj-t">${T(x.t)}</span>${bar}<span class="pj-go">${T(x.soon ? { ar: 'شاهد المشروع وسجّل اهتمامك ←', en: 'View the project →' } : { ar: 'شاهد الوحدات والأسعار ←', en: 'See units and prices →' })}</span></span></a>`;
+  return `<a class="pj-card rv" href="${x.url}" data-pj="${i}"><span class="pj-img" role="img" aria-label="${T(x.t)}">${atbMedia({ src: x.img, tone: x.tone })}</span><span class="pj-b">${x.logo ? `<img class="pj-logo" src="${x.logo}" alt="" loading="lazy">` : ''}<span class="pj-k">${T(x.k)}</span><span class="pj-t">${T(x.t)}</span>${bar}<span class="pj-go">${T(x.soon ? { ar: 'شاهد المشروع وسجّل اهتمامك ←', en: 'View the project →' } : { ar: 'شاهد الوحدات والأسعار ←', en: 'See units and prices →' })}</span></span></a>`;
 }
+
+/* v7.1 — filter + map data per project (lat/lng from the developers' Google Maps pins where known; ~ = approximate) */
+const PJ_META = {
+  '/riyadh/theyard/': { ll: [24.876788, 46.6488135], ty: ['duplex', 'apt'], st: 'offplan' },
+  '/riyadh/araqa11/': { ll: [24.885, 46.625], approx: true, ty: ['apt'], st: 'ready' },
+  '/riyadh/araqaelite/': { ll: [24.774193, 46.568653], ty: ['villa'], st: 'ready' },
+  '/riyadh/araqaelite2/': { ll: [24.7737635, 46.5670892], ty: ['apt'], st: 'ready' },
+  '/riyadh/najd1/': { ll: [24.8200833, 46.803], ty: ['townhouse'], st: 'offplan' },
+  '/riyadh/najd2/': { ll: [24.9272903, 46.7969785], ty: ['villa'], st: 'offplan' },
+  '/riyadh/najd3/': { ll: [24.9251655, 46.7876554], ty: ['apt', 'duplex'], st: 'offplan' },
+  '/riyadh/najd4/': { ll: [24.9014341, 46.7917361], ty: ['apt', 'duplex'], st: 'offplan' },
+  '/riyadh/najd5/': { ll: [24.8278611, 46.8846389], ty: ['apt', 'duplex'], st: 'offplan' },
+  '/riyadh/najd6/': { ll: [24.9119722, 46.6002222], ty: ['villa'], st: 'offplan' },
+  '/riyadh/najd7/': { ll: [24.9123629, 46.6123718], ty: ['townhouse', 'villa'], st: 'offplan' },
+  '/riyadh/jarir156/': { ll: [24.6838281, 46.748279], ty: ['floor'], st: 'offplan' },
+  '/riyadh/letoile/': { ll: [24.8396892, 46.7332621], ty: ['villa'], st: 'offplan' },
+  '/riyadh/hayat/': { ll: [24.9561703, 46.8592161], ty: ['villa'], st: 'offplan' },
+  '/riyadh/one/': { ll: [24.8598831, 46.7919393], ty: ['villa'], st: 'offplan' },
+  '/riyadh/elevee/': { ll: [24.7536035, 46.6329366], approx: true, ty: ['apt'], st: 'offplan' },
+  '/jeddah/fourseasons/': { ll: [21.598, 39.107], approx: true, ty: ['apt'], st: '' },
+  '/khobar/harborboon/': { ll: [26.3259164, 50.2122767], ty: ['apt'], st: 'ready' },
+  '/khobar/deem/': { ll: [26.209553, 50.180692], ty: ['townhouse'], st: 'offplan' },
+};
+const PJ_TY = { villa: { ar: 'فلل', en: 'Villas' }, townhouse: { ar: 'تاون هاوس', en: 'Townhouses' }, apt: { ar: 'شقق', en: 'Apartments' }, duplex: { ar: 'دوبلكس', en: 'Duplexes' }, floor: { ar: 'أدوار', en: 'Floors' } };
+const PJ_PR = [
+  { k: 'b1', t: { ar: 'أقل من مليون', en: 'Under 1M' }, a: 0, b: 1e6 },
+  { k: 'b2', t: { ar: '1–2 مليون', en: '1–2M' }, a: 1e6, b: 2e6 },
+  { k: 'b3', t: { ar: '2–5 ملايين', en: '2–5M' }, a: 2e6, b: 5e6 },
+  { k: 'b4', t: { ar: '5 ملايين فأكثر', en: '5M+' }, a: 5e6, b: 1e13 },
+];
+const PJ_ST = { ready: { ar: 'جاهز', en: 'Ready' }, offplan: { ar: 'على الخارطة', en: 'Off-plan' } };
+/* Google Maps JavaScript API key (restrict it to atbah.sa/* in Google Cloud). Empty = preview map (OpenStreetMap). */
+const GMAPS_KEY = '';
+function pjMin(x) { const src = x.p || x.from; if (!src) return null; const m = String(src.en).match(/([0-9]+(?:\.[0-9]+)?)\s*(M|K)?/i); if (!m) return null; return +m[1] * (/k/i.test(m[2] || '') ? 1e3 : 1e6); }
+function pjItems(key) { const src = key === 'riyadh' ? PJ_LIST.riyadh : key === 'jeddah' ? PJ_LIST.jeddah : PJ_LIST.eastern; return src.map((x, i) => Object.assign({ i, min: pjMin(x) }, x, PJ_META[x.url] || {})); }
 function pjData() {
   return [
     { key: 'riyadh', name: { ar: 'الرياض', en: 'Riyadh' }, photo: 0, projects: PJ_LIST.riyadh.map(pjCard) },
@@ -2275,18 +2378,188 @@ function pageProjects(params) {
     <div style="max-width:720px" class="rv">${ledgerHtml('ledger_projects', { source: 'projects' })}</div></div></section>`,
     mount: () => { mountLedger('ledger_projects'); mountReveal(); document.querySelectorAll('.pj-tab').forEach(a => a.addEventListener('click', () => { try { window.va && window.va('event', { name: 'projects_city', data: { city: a.dataset.city } }); } catch (e) {} })); } };
 }
-function pageCity(key) {
+function pageCity(key, params) {
   const C = pjData(), c = C.find(x => x.key === key) || C[0];
   LSTATE.city = c.key;
   const n = T(c.name), list = c.projects;
   return { html: `<header class="v3hero has-photo pj-cityhead" style="padding-block:44px 48px">${atbMedia({ ...(LX_PHOTOS[c.photo] || { src: 'media/scenes/masterplan.jpg' }), eager: true })}<span class="atb-veil"></span><div class="arches"></div><div class="wrap" style="position:relative"><div class="rv in"><div class="kicker"><i></i><a href="#/projects" style="color:inherit;text-decoration:none">${T({ ar: 'مشاريعنا', en: 'Our projects' })}</a> · ${n}</div><h1>${T({ ar: 'مشاريعنا في ' + c.name.ar, en: 'Our projects in ' + c.name.en })}</h1>
     ${list.length ? '<p class="sub">' : ''}${list.length ? T({ ar: 'المشاريع التي نسوّقها الآن في ' + c.name.ar + '. اختر مشروعاً لتشاهد مخططه ووحداته، وسجّل اهتمامك بالوحدة التي تناسبك.', en: 'The projects we are marketing now in ' + c.name.en + '. Open a project to see its plan and units, and register interest in the unit that suits you.' }) : ''}${list.length ? '</p>' : ''}</div></div></header>
   <section class="v3sec"><div class="wrap">
-    ${list.length ? `<div class="pj-grid">${list.join('')}</div>` : ''}
+    ${list.length ? pjFilterHtml(c.key) + `<div class="pj-grid" id="pjgrid">${list.join('')}</div><div class="pjf-empty" id="pjempty" hidden>${T({ ar: 'لا يوجد مشروع بهذه المواصفات الآن. غيّر الفلاتر، أو أخبرنا بما تبحث عنه في الأسفل ونبحث لك.', en: 'No project matches right now. Change the filters, or tell us what you are looking for below.' })}<br><button type="button" data-pjclear>${T({ ar: 'مسح الفلاتر', en: 'Clear filters' })}</button></div><div class="pjmap" id="pjmap" hidden><div class="pjmap-c" id="pjmapc"></div><div class="pjmap-hint">${T({ ar: 'اضغط على اسم المشروع لعرض التفاصيل والأسعار', en: 'Tap a project name for details and prices' })}</div><div class="pjmap-card" id="pjcard" hidden></div></div>` : ''}
     <div class="pj-others rv">${C.filter(x => x.key !== c.key).map(x => `<a href="#/projects/${x.key}">${T({ ar: 'مشاريعنا في ' + x.name.ar, en: 'Projects in ' + x.name.en })} ${LANG === 'ar' ? '←' : '→'}</a>`).join('')}</div>
     <div class="v3head rv" style="margin-top:48px"><div class="no">→</div><div><div class="lab">${n}</div><h2>${T({ ar: 'لم تجد ما يناسبك؟ أخبرنا بما تبحث عنه في ' + c.name.ar + '.', en: 'Not what you need? Tell us what you are looking for in ' + c.name.en + '.' })}</h2></div></div>
     <div style="max-width:720px" class="rv">${ledgerHtml('ledger_city', { source: 'projects-' + c.key })}</div></div></section>`,
-    mount: () => { mountLedger('ledger_city'); mountReveal(); } };
+    mount: () => { mountLedger('ledger_city'); mountReveal(); if (list.length) pjMountFilters(c.key, params); } };
+}
+
+
+/* ================= v7.1 — filters + map on the city projects page ================= */
+function pjFilterHtml(key) {
+  const it = pjItems(key);
+  if (it.length < 2) return `<div class="pjf"><div class="pjf-top"><div class="pjf-view" role="group" aria-label="${T({ ar: 'طريقة العرض', en: 'View' })}"><button type="button" data-view="grid" aria-pressed="true">${T({ ar: 'القائمة', en: 'List' })}</button><button type="button" data-view="map" aria-pressed="false">${T({ ar: 'الخريطة', en: 'Map' })}</button></div></div></div>`;
+  const tys = Object.keys(PJ_TY).filter(k => it.some(x => (x.ty || []).includes(k)));
+  const prs = PJ_PR.filter(b => it.some(x => x.min != null && x.min >= b.a && x.min < b.b));
+  const sts = Object.keys(PJ_ST).filter(k => it.some(x => x.st === k));
+  const row = (g, label, opts) => opts.length > 1 ? `<div class="pjf-row" data-g="${g}"><b>${T(label)}</b><button type="button" data-v="" aria-pressed="true">${T({ ar: 'الكل', en: 'All' })}</button>${opts.map(o => `<button type="button" data-v="${o[0]}" aria-pressed="false">${T(o[1])}</button>`).join('')}</div>` : '';
+  return `<div class="pjf" role="search">
+    <div class="pjf-top"><label class="pjf-q"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" id="pjq" autocomplete="off" placeholder="${T({ ar: 'ابحث باسم المشروع أو الحي', en: 'Search by project or district' })}" aria-label="${T({ ar: 'ابحث باسم المشروع أو الحي', en: 'Search by project or district' })}"></label>
+    <div class="pjf-view" role="group" aria-label="${T({ ar: 'طريقة العرض', en: 'View' })}"><button type="button" data-view="grid" aria-pressed="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>${T({ ar: 'القائمة', en: 'List' })}</button><button type="button" data-view="map" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>${T({ ar: 'الخريطة', en: 'Map' })}</button></div></div>
+    ${row('ty', { ar: 'النوع', en: 'Type' }, tys.map(k => [k, PJ_TY[k]]))}
+    ${row('pr', { ar: 'السعر يبدأ من', en: 'Starting price' }, prs.map(b => [b.k, b.t]))}
+    ${row('st', { ar: 'الحالة', en: 'Status' }, sts.map(k => [k, PJ_ST[k]]))}
+    <div class="pjf-meta"><span id="pjcount" aria-live="polite"></span><button type="button" data-pjclear hidden>${T({ ar: 'مسح الفلاتر', en: 'Clear filters' })}</button></div></div>`;
+}
+function pjMountFilters(key, params) {
+  const items = pjItems(key), F = { q: '', ty: '', pr: '', st: '' };
+  const grid = document.getElementById('pjgrid'), empty = document.getElementById('pjempty'), mapBox = document.getElementById('pjmap');
+  const count = document.getElementById('pjcount');
+  let view = params && params.get('view') === 'map' ? 'map' : 'grid', MAP = null;
+  const norm = (t) => String(t || '').toLowerCase().replace(/[إأآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/[ًٌٍَُِّْـ]/g, '');
+  const ok = (x) => {
+    if (F.ty && !(x.ty || []).includes(F.ty)) return false;
+    if (F.st && x.st !== F.st) return false;
+    if (F.pr) { const b = PJ_PR.find(z => z.k === F.pr); if (x.min == null || x.min < b.a || x.min >= b.b) return false; }
+    if (F.q) { const hay = norm(x.t.ar + ' ' + x.t.en + ' ' + x.k.ar + ' ' + x.k.en); if (!norm(F.q).split(/\s+/).every(w => hay.includes(w))) return false; }
+    return true;
+  };
+  const shown = () => items.filter(ok);
+  const n2 = (n) => LANG !== 'ar' ? n + (n === 1 ? ' project' : ' projects') : n === 1 ? 'مشروع واحد' : n === 2 ? 'مشروعان' : n === 0 ? 'لا مشاريع' : n + (n <= 10 ? ' مشاريع' : ' مشروعاً');
+  function apply(track) {
+    const list = shown();
+    if (grid) grid.querySelectorAll('[data-pj]').forEach(a => { const x = items[+a.dataset.pj]; a.hidden = !ok(x); a.style.display = a.hidden ? 'none' : ''; if (!a.hidden) a.classList.add('in'); });
+    const active = !!(F.q || F.ty || F.pr || F.st);
+    if (count) count.textContent = n2(list.length) + (active ? T({ ar: ' تطابق اختيارك', en: ' match' }) : '');
+    document.querySelectorAll('[data-pjclear]').forEach(b => { if (b.closest('.pjf-meta')) b.hidden = !active; });
+    if (empty) empty.hidden = !(list.length === 0 && view === 'grid');
+    if (MAP) MAP.refresh(list);
+    if (track) { try { window.va && window.va('event', { name: 'filter_apply', data: { city: key, ty: F.ty, pr: F.pr, st: F.st, n: list.length } }); } catch (e) {} }
+  }
+  document.querySelectorAll('.pjf-row').forEach(r => r.addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    F[r.dataset.g] = b.dataset.v; r.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); apply(true);
+  }));
+  const q = document.getElementById('pjq'); let qt;
+  if (q) q.addEventListener('input', () => { F.q = q.value.trim(); clearTimeout(qt); apply(false); qt = setTimeout(() => apply(true), 900); });
+  document.querySelectorAll('[data-pjclear]').forEach(b => b.addEventListener('click', () => {
+    F.q = F.ty = F.pr = F.st = ''; if (q) q.value = '';
+    document.querySelectorAll('.pjf-row').forEach(r => r.querySelectorAll('button').forEach((x, i) => x.setAttribute('aria-pressed', String(i === 0)))); apply(true);
+  }));
+  function setView(v) {
+    view = v;
+    document.querySelectorAll('.pjf-view button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
+    if (grid) grid.hidden = v === 'map'; if (mapBox) mapBox.hidden = v !== 'map';
+    try { const h = '#/projects/' + key + (v === 'map' ? '?view=map' : ''); history.replaceState(null, '', location.pathname + location.search + h); } catch (e) {}
+    if (v === 'map' && !MAP) { MAP = pjMap(document.getElementById('pjmapc'), document.getElementById('pjcard'), items, key); MAP.ready.then(() => apply(false)); }
+    apply(false);
+    try { window.va && window.va('event', { name: 'projects_view', data: { city: key, view: v } }); } catch (e) {}
+  }
+  document.querySelectorAll('.pjf-view button').forEach(b => b.addEventListener('click', () => setView(b.dataset.view)));
+  if (view === 'map') setView('map'); else apply(false);
+}
+function pjLoad(src, css) {
+  return new Promise((res, rej) => {
+    if (css) { if (document.querySelector('link[href="' + src + '"]')) return res(); const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = src; l.onload = res; l.onerror = rej; document.head.appendChild(l); return; }
+    if (document.querySelector('script[src="' + src + '"]')) { const t = setInterval(() => { if (window.L || (window.google && google.maps)) { clearInterval(t); res(); } }, 50); return; }
+    const s = document.createElement('script'); s.src = src; s.async = true; s.onload = res; s.onerror = rej; document.head.appendChild(s);
+  });
+}
+const PJ_GSTYLE = [
+  { elementType: 'geometry', stylers: [{ color: '#EFE9DF' }] },
+  { elementType: 'labels.text.fill', stylers: [{ color: '#5D6F6A' }] },
+  { elementType: 'labels.text.stroke', stylers: [{ color: '#F6F2EA' }] },
+  { featureType: 'poi', stylers: [{ visibility: 'off' }] },
+  { featureType: 'poi.park', elementType: 'geometry', stylers: [{ visibility: 'on' }, { color: '#DDE3D2' }] },
+  { featureType: 'transit', stylers: [{ visibility: 'off' }] },
+  { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#FFFFFF' }] },
+  { featureType: 'road', elementType: 'labels.icon', stylers: [{ visibility: 'off' }] },
+  { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#F2E2C2' }] },
+  { featureType: 'water', stylers: [{ color: '#C9D6D0' }] },
+];
+function pjEngine(el, center) {
+  if (GMAPS_KEY) {
+    const url = 'https://maps.googleapis.com/maps/api/js?key=' + encodeURIComponent(GMAPS_KEY) + '&language=' + (LANG === 'ar' ? 'ar' : 'en') + '&region=SA&v=weekly';
+    return pjLoad(url).then(() => {
+      const g = google.maps;
+      const map = new g.Map(el, { center: { lat: center[0], lng: center[1] }, zoom: 11, styles: PJ_GSTYLE, disableDefaultUI: true, zoomControl: true, gestureHandling: 'greedy', clickableIcons: false, backgroundColor: '#EFE9DF' });
+      class Html extends g.OverlayView { constructor(ll, node) { super(); this.ll = new g.LatLng(ll[0], ll[1]); this.node = node; }
+        onAdd() { this.getPanes().overlayMouseTarget.appendChild(this.node); }
+        draw() { const p = this.getProjection().fromLatLngToDivPixel(this.ll); if (p) { this.node.style.left = p.x + 'px'; this.node.style.top = p.y + 'px'; } }
+        onRemove() { this.node.remove(); } }
+      const probe = new g.OverlayView(); probe.onAdd = () => {}; probe.draw = () => {}; probe.onRemove = () => {}; probe.setMap(map);
+      return {
+        add(ll, node) { node.classList.add('pjm-anchor'); const m = new Html(ll, node); m.setMap(map); return m; },
+        remove(m) { m.setMap(null); },
+        fit(lls, pad) { if (!lls.length) return; if (lls.length === 1) { map.setCenter({ lat: lls[0][0], lng: lls[0][1] }); map.setZoom(14); return; } const b = new g.LatLngBounds(); lls.forEach(p => b.extend({ lat: p[0], lng: p[1] })); map.fitBounds(b, pad || 60); },
+        px(ll) { const pr = probe.getProjection(); if (!pr) return null; const p = pr.fromLatLngToContainerPixel(new g.LatLng(ll[0], ll[1])); return p ? [p.x, p.y] : null; },
+        pan(ll) { map.panTo({ lat: ll[0], lng: ll[1] }); },
+        zoomAt(ll, by) { map.setCenter({ lat: ll[0], lng: ll[1] }); map.setZoom(Math.min(18, map.getZoom() + by)); },
+        on(fn) { map.addListener('idle', fn); },
+      };
+    });
+  }
+  return Promise.all([pjLoad('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', true), pjLoad('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js')]).then(() => {
+    const map = L.map(el, { zoomControl: true, attributionControl: true, scrollWheelZoom: true }).setView(center, 11);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { subdomains: 'abcd', maxZoom: 19, attribution: '© OpenStreetMap © CARTO' }).addTo(map);
+    return {
+      add(ll, node) { return L.marker(ll, { icon: L.divIcon({ html: node, className: 'pjm-anchor', iconSize: null }), keyboard: false }).addTo(map); },
+      remove(m) { map.removeLayer(m); },
+      fit(lls, pad) { if (!lls.length) return; if (lls.length === 1) { map.setView(lls[0], 14); return; } map.fitBounds(lls, { padding: [pad || 60, pad || 60] }); },
+      px(ll) { const p = map.latLngToContainerPoint(ll); return [p.x, p.y]; },
+      pan(ll) { map.panTo(ll); },
+      zoomAt(ll, by) { map.setView(ll, Math.min(18, map.getZoom() + by)); },
+      on(fn) { map.on('moveend zoomend', fn); },
+    };
+  });
+}
+function pjMap(el, card, items, key) {
+  const center = key === 'jeddah' ? [21.6, 39.12] : key === 'eastern' ? [26.27, 50.2] : [24.82, 46.7];
+  let E = null, marks = [], list = [], sel = null, fitted = false;
+  const priceTxt = (x) => x.p ? T(x.p) : x.from ? T(x.from) : T({ ar: 'الأسعار قريباً — سجّل اهتمامك', en: 'Prices soon — register interest' });
+  const availTxt = (x) => x.ok != null && !x.soon && !x.from ? (T({ ar: 'المتاح: ', en: 'Available: ' }) + x.ok) : '';
+  function showCard(x) {
+    if (!x) { card.hidden = true; return; }
+    const wa = 'https://wa.me/966559547274?text=' + encodeURIComponent(T({ ar: 'السلام عليكم، أرغب في معرفة المزيد عن مشروع ', en: 'Hello, I would like to know more about ' }) + T(x.t));
+    const dir = 'https://www.google.com/maps/dir/?api=1&destination=' + x.ll[0] + ',' + x.ll[1];
+    card.innerHTML = `<div class="im">${x.img ? `<img src="${x.img}" alt="" loading="lazy">` : ''}<button type="button" class="x" aria-label="${T({ ar: 'إغلاق', en: 'Close' })}">×</button></div><div class="bd"><span class="k">${T(x.k)}</span><h3>${T(x.t)}</h3><div class="pr"><b>${priceTxt(x)}</b><span>${availTxt(x)}</span></div>${x.approx ? `<span class="note">${T({ ar: 'الموقع تقريبي — نرسل لك الموقع الدقيق عبر واتساب.', en: 'Approximate location — we send the exact pin on WhatsApp.' })}</span>` : ''}<div class="bt"><a class="go" href="${x.url}?utm_source=site&utm_medium=map">${T(x.soon ? { ar: 'شاهد المشروع وسجّل اهتمامك', en: 'View the project' } : { ar: 'شاهد الوحدات والأسعار', en: 'See units and prices' })}</a><a class="pjwa" href="${wa}" target="_blank" rel="noopener">${T({ ar: 'واتساب', en: 'WhatsApp' })}</a>${x.approx ? '' : `<a class="dir" href="${dir}" target="_blank" rel="noopener" aria-label="${T({ ar: 'الاتجاهات في خرائط Google', en: 'Directions in Google Maps' })}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8z"></path></svg></a>`}</div></div>`;
+    card.hidden = false;
+    card.querySelector('.x').addEventListener('click', () => { sel = null; showCard(null); draw(); });
+    card.querySelector('.go').addEventListener('click', () => { try { window.va && window.va('event', { name: 'map_card_open', data: { p: x.url } }); } catch (e) {} });
+    card.querySelector('.pjwa').addEventListener('click', () => { try { window.va && window.va('event', { name: 'map_whatsapp', data: { p: x.url } }); } catch (e) {} });
+  }
+  function draw() {
+    if (!E) return;
+    marks.forEach(m => E.remove(m)); marks = [];
+    const pts = list.map(x => ({ x, p: E.px(x.ll) })).filter(o => o.p);
+    const groups = [];
+    pts.forEach(o => { const g = groups.find(g => Math.hypot(g.p[0] - o.p[0], g.p[1] - o.p[1]) < (el.clientWidth < 640 ? 46 : 62) && !(sel && (g.m.some(z => z.x === sel) || o.x === sel))); if (g) { g.m.push(o); } else groups.push({ p: o.p, m: [o] }); });
+    groups.forEach(g => {
+      if (g.m.length === 1) {
+        const x = g.m[0].x, b = document.createElement('div'), btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'pjm' + (x.soon ? ' soon' : '') + (sel === x ? ' on' : ''); btn.textContent = T(x.t);
+        btn.setAttribute('aria-label', T(x.t) + ' — ' + T({ ar: 'اضغط لعرض التفاصيل والأسعار', en: 'tap for details and prices' }));
+        btn.addEventListener('click', (e) => { e.stopPropagation(); sel = x; showCard(x); draw(); try { window.va && window.va('event', { name: 'map_pin_click', data: { p: x.url } }); } catch (er) {} });
+        b.appendChild(btn); marks.push(E.add(x.ll, b));
+      } else {
+        const lat = g.m.reduce((a, o) => a + o.x.ll[0], 0) / g.m.length, lng = g.m.reduce((a, o) => a + o.x.ll[1], 0) / g.m.length;
+        const b = document.createElement('div'), btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'pjc'; btn.textContent = g.m.length;
+        btn.setAttribute('aria-label', g.m.map(o => T(o.x.t)).join('، ') + ' — ' + T({ ar: 'اضغط للتكبير', en: 'tap to zoom in' }));
+        btn.addEventListener('click', (e) => { e.stopPropagation(); E.zoomAt([lat, lng], 2); });
+        b.appendChild(btn); marks.push(E.add([lat, lng], b));
+      }
+    });
+  }
+  const ready = pjEngine(el, center).then(e => { E = e; E.on(draw); }).catch(() => { el.innerHTML = `<div style="padding:24px;text-align:center;color:#6F827D">${T({ ar: 'تعذّر تحميل الخريطة. جرّب لاحقاً أو اعرض القائمة.', en: 'The map could not load. Try again later or use the list.' })}</div>`; });
+  return {
+    ready,
+    refresh(next) {
+      list = next.filter(x => x.ll);
+      if (sel && !list.includes(sel)) { sel = null; showCard(null); }
+      if (!E) return;
+      if (!fitted || list.length) { E.fit(list.map(x => x.ll), 60); fitted = true; }
+      setTimeout(draw, 0);
+    },
+  };
 }
 
 /* ================= سجّل ما تبحث عنه v3 ================= */
@@ -2389,7 +2662,8 @@ function route() {
   else if (path === '/request') page = pageRequest(params);
   else if (path === '/about') page = pageAbout();
   else if (path === '/projects') page = pageProjects(params);
-  else if (path.startsWith('/projects/')) page = pageCity(path.slice(10));
+  else if (path.startsWith('/projects/')) page = pageCity(path.slice(10), params);
+  else if (path === '/map') { params.set('view', 'map'); page = pageCity(params.get('city') || 'riyadh', params); }
   else if (path === '/privacy') page = pagePrivacy();
   else if (path === '/report') page = pageReport();
   else page = pageHome();
