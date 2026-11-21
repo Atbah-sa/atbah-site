@@ -2345,9 +2345,9 @@ const PJ_META = {
   '/riyadh/hayat/': { ll: [24.9561703, 46.8592161], ty: ['villa'], st: 'offplan' },
   '/riyadh/one/': { ll: [24.8598831, 46.7919393], ty: ['villa'], st: 'offplan' },
   '/riyadh/elevee/': { ll: [24.7536035, 46.6329366], approx: true, ty: ['apt'], st: 'offplan' },
-  '/jeddah/fourseasons/': { ll: [21.598, 39.107], approx: true, ty: ['apt'], st: '' },
-  '/khobar/harborboon/': { ll: [26.3259164, 50.2122767], ty: ['apt'], st: 'ready' },
-  '/khobar/deem/': { ll: [26.209553, 50.180692], ty: ['townhouse'], st: 'offplan' },
+  '/jeddah/fourseasons/': { ll: [21.5718056, 39.1126111], ty: ['apt'], st: '' },
+  '/khobar/harborboon/': { ty: ['apt'], st: 'ready' }, /* not on the map (owner 2026-11-21) */
+  '/khobar/deem/': { ty: ['townhouse'], st: 'offplan' }, /* not on the map (owner 2026-11-21) */
 };
 const PJ_TY = { villa: { ar: 'فلل', en: 'Villas' }, townhouse: { ar: 'تاون هاوس', en: 'Townhouses' }, apt: { ar: 'شقق', en: 'Apartments' }, duplex: { ar: 'دوبلكس', en: 'Duplexes' }, floor: { ar: 'أدوار', en: 'Floors' } };
 const PJ_PR = [
@@ -2396,14 +2396,15 @@ function pageCity(key, params) {
 /* ================= v7.1 — filters + map on the city projects page ================= */
 function pjFilterHtml(key) {
   const it = pjItems(key);
-  if (it.length < 2) return `<div class="pjf"><div class="pjf-top"><div class="pjf-view" role="group" aria-label="${T({ ar: 'طريقة العرض', en: 'View' })}"><button type="button" data-view="grid" aria-pressed="true">${T({ ar: 'القائمة', en: 'List' })}</button><button type="button" data-view="map" aria-pressed="false">${T({ ar: 'الخريطة', en: 'Map' })}</button></div></div></div>`;
+  const hasMap = it.some(x => x.ll);
+  if (it.length < 2) return `<div class="pjf"><div class="pjf-top"><div class="pjf-view" role="group" aria-label="${T({ ar: 'طريقة العرض', en: 'View' })}"><button type="button" data-view="grid" aria-pressed="true">${T({ ar: 'القائمة', en: 'List' })}</button>${hasMap ? `<button type="button" data-view="map" aria-pressed="false">${T({ ar: 'الخريطة', en: 'Map' })}</button>` : ''}</div></div></div>`;
   const tys = Object.keys(PJ_TY).filter(k => it.some(x => (x.ty || []).includes(k)));
   const prs = PJ_PR.filter(b => it.some(x => x.min != null && x.min >= b.a && x.min < b.b));
   const sts = Object.keys(PJ_ST).filter(k => it.some(x => x.st === k));
   const row = (g, label, opts) => opts.length > 1 ? `<div class="pjf-row" data-g="${g}"><b>${T(label)}</b><button type="button" data-v="" aria-pressed="true">${T({ ar: 'الكل', en: 'All' })}</button>${opts.map(o => `<button type="button" data-v="${o[0]}" aria-pressed="false">${T(o[1])}</button>`).join('')}</div>` : '';
   return `<div class="pjf" role="search">
     <div class="pjf-top"><label class="pjf-q"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="M20 20l-3.5-3.5"></path></svg><input type="search" id="pjq" autocomplete="off" placeholder="${T({ ar: 'ابحث باسم المشروع أو الحي', en: 'Search by project or district' })}" aria-label="${T({ ar: 'ابحث باسم المشروع أو الحي', en: 'Search by project or district' })}"></label>
-    <div class="pjf-view" role="group" aria-label="${T({ ar: 'طريقة العرض', en: 'View' })}"><button type="button" data-view="grid" aria-pressed="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>${T({ ar: 'القائمة', en: 'List' })}</button><button type="button" data-view="map" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>${T({ ar: 'الخريطة', en: 'Map' })}</button></div></div>
+    <div class="pjf-view" role="group" aria-label="${T({ ar: 'طريقة العرض', en: 'View' })}"><button type="button" data-view="grid" aria-pressed="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>${T({ ar: 'القائمة', en: 'List' })}</button>${hasMap ? '' : '<!--'}<button type="button" data-view="map" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-12a7 7 0 0 1 14 0c0 5.8-7 12-7 12z"></path><circle cx="12" cy="9" r="2.5"></circle></svg>${T({ ar: 'الخريطة', en: 'Map' })}</button>${hasMap ? '' : '-->'}</div></div>
     ${row('ty', { ar: 'النوع', en: 'Type' }, tys.map(k => [k, PJ_TY[k]]))}
     ${row('pr', { ar: 'السعر يبدأ من', en: 'Starting price' }, prs.map(b => [b.k, b.t]))}
     ${row('st', { ar: 'الحالة', en: 'Status' }, sts.map(k => [k, PJ_ST[k]]))}
@@ -2413,7 +2414,7 @@ function pjMountFilters(key, params) {
   const items = pjItems(key), F = { q: '', ty: '', pr: '', st: '' };
   const grid = document.getElementById('pjgrid'), empty = document.getElementById('pjempty'), mapBox = document.getElementById('pjmap');
   const count = document.getElementById('pjcount');
-  let view = params && params.get('view') === 'map' ? 'map' : 'grid', MAP = null;
+  let view = params && params.get('view') === 'map' && items.some(x => x.ll) ? 'map' : 'grid', MAP = null;
   const norm = (t) => String(t || '').toLowerCase().replace(/[إأآ]/g, 'ا').replace(/ة/g, 'ه').replace(/ى/g, 'ي').replace(/[ًٌٍَُِّْـ]/g, '');
   const ok = (x) => {
     if (F.ty && !(x.ty || []).includes(F.ty)) return false;
