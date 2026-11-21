@@ -1234,6 +1234,7 @@ body[data-lang="en"] .pj-t{font-family:'Cormorant Garamond','Amiri',Georgia,seri
 .pjmap{position:relative;margin-top:16px;height:min(72vh,680px);min-height:460px;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#E9E2D4}
 .pjmap-c{position:absolute;inset:0}
 .pjmap-c .leaflet-container,.pjmap-c{font-family:inherit}
+.pjmap-c .leaflet-tile-pane{filter:saturate(.55) sepia(.12) brightness(1.03)}
 .pjm-anchor{position:absolute;width:0;height:0}
 .leaflet-marker-icon.pjm-anchor{background:none;border:0}
 .pjm{position:absolute;left:0;bottom:6px;transform:translateX(-50%);appearance:none;border:1.5px solid #10322D;background:#10322D;color:#F1ECE3;font:600 13px/1.15 'IBM Plex Sans Arabic',Tahoma,sans-serif;padding:7px 11px 6px;border-radius:15px 15px 4px 4px;white-space:nowrap;cursor:pointer;box-shadow:0 3px 8px rgba(6,22,21,.3);min-height:32px}
@@ -2500,7 +2501,7 @@ function pjEngine(el, center) {
   }
   return Promise.all([pjLoad('https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', true), pjLoad('https://unpkg.com/leaflet@1.9.4/dist/leaflet.js')]).then(() => {
     const map = L.map(el, { zoomControl: true, attributionControl: true, scrollWheelZoom: true }).setView(center, 11);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', { subdomains: 'abcd', maxZoom: 19, attribution: '© OpenStreetMap © CARTO' }).addTo(map);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a>' }).addTo(map);
     return {
       add(ll, node) { return L.marker(ll, { icon: L.divIcon({ html: node, className: 'pjm-anchor', iconSize: null }), keyboard: false }).addTo(map); },
       remove(m) { map.removeLayer(m); },
