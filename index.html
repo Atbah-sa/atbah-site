@@ -1197,21 +1197,22 @@ body[data-lang="en"] .pj-t{font-family:'Cormorant Garamond','Amiri',Georgia,seri
 .pj-t{font-size:21px}
 .pjf{display:flex;flex-direction:column;gap:10px;margin-top:4px;padding:14px;background:var(--surface);border:1px solid var(--line);border-radius:14px}
 .pjf-top{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.pjf-q{flex:1 1 220px;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg,#F1ECE3)}
-.pjf-q input{flex:1;min-width:0;border:0;background:none;font:inherit;font-size:15px;color:var(--ink);outline:none}
+.pjf-q{flex:1 1 220px;min-width:0;max-width:100%;box-sizing:border-box;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 12px;border:1px solid var(--sand);border-radius:10px;background:transparent}
+.pjf-q input::placeholder{color:var(--muted);opacity:1}
+.pjf-q input{flex:1;min-width:0;width:100%;border:0;background:none;font:inherit;font-size:15px;color:var(--ink);outline:none}
 .pjf-q svg{flex:0 0 auto;opacity:.6}
 .pjf-view{display:flex;gap:3px;padding:3px;border-radius:10px;background:var(--sand,#E6DED0)}
 .pjf-view button{appearance:none;border:0;font:inherit;font-size:14px;font-weight:600;min-height:40px;padding:0 16px;border-radius:8px;background:none;color:var(--ink);cursor:pointer;display:flex;align-items:center;gap:6px}
-.pjf-view button[aria-pressed="true"]{background:#10322D;color:#F1ECE3}
+.pjf-view button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
 .pjf-row{display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:2px}
 .pjf-row::-webkit-scrollbar{display:none}
 .pjf-row>b{flex:0 0 auto;font-size:12.5px;font-weight:600;color:var(--muted);margin-inline-end:4px;min-width:58px}
-.pjf-row button{appearance:none;flex:0 0 auto;font:inherit;font-size:13.5px;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--line);background:var(--bg,#F1ECE3);color:var(--ink);cursor:pointer;white-space:nowrap}
-.pjf-row button[aria-pressed="true"]{background:#10322D;border-color:#10322D;color:#F1ECE3}
+.pjf-row button{appearance:none;flex:0 0 auto;font:inherit;font-size:13.5px;min-height:38px;padding:0 14px;border-radius:999px;border:1px solid var(--sand);background:transparent;color:var(--ink);cursor:pointer;white-space:nowrap}
+.pjf-row button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--surface)}
 .pjf-meta{display:flex;justify-content:space-between;align-items:center;gap:10px;font-size:13.5px;color:var(--muted)}
 .pjf-meta button{appearance:none;border:0;background:none;font:inherit;font-size:13.5px;font-weight:600;color:var(--clay,#B4522B);cursor:pointer;min-height:36px;padding:0 4px}
 .pjf-empty{margin-top:18px;padding:22px;border:1px dashed var(--line);border-radius:14px;text-align:center;font-size:15px;line-height:1.8;color:var(--muted)}
-.pjf-empty button{appearance:none;margin-top:8px;border:1px solid #10322D;background:none;border-radius:10px;min-height:42px;padding:0 18px;font:inherit;font-weight:600;color:#10322D;cursor:pointer}
+.pjf-empty button{appearance:none;margin-top:8px;border:1px solid var(--ink);background:none;border-radius:10px;min-height:42px;padding:0 18px;font:inherit;font-weight:600;color:var(--ink);cursor:pointer}
 @media(max-width:640px){
  .pj-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:14px}
  .pj-card{border-radius:12px}
@@ -1252,14 +1253,14 @@ body[data-lang="en"] .pj-t{font-family:'Cormorant Garamond','Amiri',Georgia,seri
 .pjmap-card h3{margin:0;font-family:'Reem Kufi',Tahoma,sans-serif;font-size:22px;line-height:1.3}
 .pjmap-card .pr{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
 .pjmap-card .pr b{font-size:16px}
-.pjmap-card .pr span{font-size:13px;color:#2E7D5B;font-weight:600}
+.pjmap-card .pr span{font-size:13px;color:var(--muted);font-weight:600}
 .pjmap-card .bt{display:flex;gap:8px;margin-top:4px}
 .pjmap-card .bt a{min-height:44px;display:flex;align-items:center;justify-content:center;border-radius:10px;text-decoration:none;font-weight:600;font-size:14px;padding:0 12px}
 .pjmap-card .bt a.go{flex:1;background:#C9964A;color:#10322D}
-.pjmap-card .bt a.pjwa,.pjmap-card .bt a.dir{border:1px solid #10322D;color:#10322D}
+.pjmap-card .bt a.pjwa,.pjmap-card .bt a.dir{border:1px solid var(--ink);color:var(--ink)}
 .pjmap-card .note{font-size:12px;color:var(--muted)}
-.pjmap-hint{position:absolute;z-index:999;top:12px;inset-inline-start:12px;background:rgba(250,247,242,.95);border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:12.5px;color:var(--muted);pointer-events:none}
-@media(max-width:640px){.pjmap{height:70vh;min-height:420px;border-radius:12px}.pjmap-card{inset-inline:8px;bottom:8px;width:auto;max-width:none}.pjmap-card .im{height:110px}.pjm{font-size:12px;padding:6px 9px 5px}}
+.pjmap-hint{position:absolute;z-index:999;top:12px;inset-inline-start:12px;max-width:calc(100% - 80px);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:6px 10px;font-size:12.5px;color:var(--muted);pointer-events:none}
+@media(max-width:640px){.pjmap{height:auto;min-height:0;border:0;border-radius:0;background:none;overflow:visible;padding-bottom:80px}.pjmap-c{position:relative;inset:auto;height:62vh;min-height:380px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:#E9E2D4}.pjmap-card{position:relative;inset:auto!important;margin-top:10px;width:auto;max-width:none;box-shadow:0 6px 18px rgba(6,22,21,.18);border:1px solid var(--line)}.pjmap-hint{inset-inline-start:8px;top:8px;max-width:calc(100% - 70px);font-size:11.5px;line-height:1.5;white-space:normal}.pjmap-card .im{height:110px}.pjm{font-size:12px;padding:6px 9px 5px}}
 </style>
 <nav class="top" id="nav"></nav>
 <main id="app"></main>
@@ -2525,6 +2526,7 @@ function pjMap(el, card, items, key) {
     const dir = 'https://www.google.com/maps/dir/?api=1&destination=' + x.ll[0] + ',' + x.ll[1];
     card.innerHTML = `<div class="im">${x.img ? `<img src="${x.img}" alt="" loading="lazy">` : ''}<button type="button" class="x" aria-label="${T({ ar: 'إغلاق', en: 'Close' })}">×</button></div><div class="bd"><span class="k">${T(x.k)}</span><h3>${T(x.t)}</h3><div class="pr"><b>${priceTxt(x)}</b><span>${availTxt(x)}</span></div>${x.approx ? `<span class="note">${T({ ar: 'الموقع تقريبي — نرسل لك الموقع الدقيق عبر واتساب.', en: 'Approximate location — we send the exact pin on WhatsApp.' })}</span>` : ''}<div class="bt"><a class="go" href="${x.url}?utm_source=site&utm_medium=map">${T(x.soon ? { ar: 'شاهد المشروع وسجّل اهتمامك', en: 'View the project' } : { ar: 'شاهد الوحدات والأسعار', en: 'See units and prices' })}</a><a class="pjwa" href="${wa}" target="_blank" rel="noopener">${T({ ar: 'واتساب', en: 'WhatsApp' })}</a>${x.approx ? '' : `<a class="dir" href="${dir}" target="_blank" rel="noopener" aria-label="${T({ ar: 'الاتجاهات في خرائط Google', en: 'Directions in Google Maps' })}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 11l18-8-8 18-2-8z"></path></svg></a>`}</div></div>`;
     card.hidden = false;
+    if (window.innerWidth <= 640) setTimeout(() => { try { const r = card.getBoundingClientRect(); const over = r.bottom - (window.innerHeight - 120); if (over > 0) window.scrollBy({ top: over, behavior: 'smooth' }); } catch (e) {} }, 60);
     card.querySelector('.x').addEventListener('click', () => { sel = null; showCard(null); draw(); });
     card.querySelector('.go').addEventListener('click', () => { try { window.va && window.va('event', { name: 'map_card_open', data: { p: x.url } }); } catch (e) {} });
     card.querySelector('.pjwa').addEventListener('click', () => { try { window.va && window.va('event', { name: 'map_whatsapp', data: { p: x.url } }); } catch (e) {} });
@@ -2533,8 +2535,20 @@ function pjMap(el, card, items, key) {
     if (!E) return;
     marks.forEach(m => E.remove(m)); marks = [];
     const pts = list.map(x => ({ x, p: E.px(x.ll) })).filter(o => o.p);
-    const groups = [];
-    pts.forEach(o => { const g = groups.find(g => Math.hypot(g.p[0] - o.p[0], g.p[1] - o.p[1]) < (el.clientWidth < 640 ? 46 : 62) && !(sel && (g.m.some(z => z.x === sel) || o.x === sel))); if (g) { g.m.push(o); } else groups.push({ p: o.p, m: [o] }); });
+    const R = el.clientWidth < 640 ? 58 : 64;
+    let groups = pts.map(o => ({ p: o.p.slice(), m: [o] }));
+    const isSel = (g) => sel && g.m.some(z => z.x === sel);
+    for (let changed = true; changed;) {
+      changed = false;
+      outer: for (let i = 0; i < groups.length; i++) for (let j = i + 1; j < groups.length; j++) {
+        const a = groups[i], c = groups[j];
+        if (isSel(a) || isSel(c)) continue;
+        if (Math.hypot(a.p[0] - c.p[0], a.p[1] - c.p[1]) < R) {
+          const m = a.m.concat(c.m); a.m = m; a.p = [m.reduce((t, o) => t + o.p[0], 0) / m.length, m.reduce((t, o) => t + o.p[1], 0) / m.length];
+          groups.splice(j, 1); changed = true; break outer;
+        }
+      }
+    }
     groups.forEach(g => {
       if (g.m.length === 1) {
         const x = g.m[0].x, b = document.createElement('div'), btn = document.createElement('button');
